@@ -5,9 +5,8 @@ import { AppComponent } from './app.component';
 import { IndexComponent } from './view/usuario/index/index.component';
 import { LoginComponent } from './view/usuario/login/login.component';
 import { AdminComponent } from './view/adm/admin/admin.component';
-import { environments } from 'src/environments/environments';
 import { AuthService } from './model/services/auth.service';
-import { AuthGuard } from './shared/auth.guard';
+import { AuthGuard } from './view/shared/auth.guard';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire/compat';
@@ -18,6 +17,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
+import { environment } from 'src/environments/environment';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import { FIREBASE_OPTIONS } from '@angular/fire/compat';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    provideFirebaseApp(() => initializeApp(environments.firebase)),
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
     AngularFireDatabaseModule,
     AngularFirestoreModule,
@@ -38,9 +39,10 @@ import { FIREBASE_OPTIONS } from '@angular/fire/compat';
     ReactiveFormsModule,
     AngularFireAuthModule,
     provideAuth(() => getAuth()),
+    HttpClientModule
   ],
   providers: [
-    { provide: FIREBASE_OPTIONS, useValue: environments.firebase }
+    { provide: FIREBASE_OPTIONS, useValue: environment.firebase }
   ],
   bootstrap: [AppComponent]
 })

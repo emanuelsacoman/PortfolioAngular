@@ -17,4 +17,4 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_PORTFOLIO_EA378 }}'
           channelId: live
-          projectId: portfolio-ea378
+          projectId: portfolioemanuel
