@@ -219,8 +219,39 @@ body{
     font-size: 30px;
 }
 
-.wrap{
+.wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 3vh;
+    padding-inline: 1vh;
+    padding-block-end: 1vh;
+}
 
+.wrap p {
+    font-size: clamp(12px, 2vw, 20px);
+}
+
+.wrap h2 {
+    font-size: clamp(16px, 5vw, 30px);
+}
+
+.top{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 3vh;
+    
+}
+
+.top h1{
+    font-size: clamp(20px, 5vw, 40px);
+}
+
+.top .topbar{
+    background-color: #2e86dd;
+    width: 30%;
+    height: 4px;
+    border-radius: 4px;
 }
 
 /*MIDDLE*/
