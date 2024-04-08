@@ -89,7 +89,7 @@ body{
 }
 
 .itenspic img:hover{
-    background-color: #2e86dd;
+    filter: brightness(110%);
 }
 
 .info{
@@ -119,6 +119,7 @@ body{
 .itens{
     display: flex;
     flex-direction: row;
+    align-items: center;
     gap: 10px;
     width: 100%;
 }
@@ -133,9 +134,15 @@ body{
 .itens .img img{
     width: 1.5rem;
     background-color: #f7f6f8;
-    padding: 3px;
+    padding: 5px 3px;
     border-radius: 2px;
     filter: drop-shadow(0px 1px 1px black);
+}
+
+.lildesc{
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
 }
 
 
@@ -191,11 +198,19 @@ body{
 
 /*PROFILE*/
 
+/*MIDDLE*/
+
 .middle{
     width: 100%;
     min-height: 80%;
     font-size: 30px;
 }
+
+.wrap{
+
+}
+
+/*MIDDLE*/
 
 /* NAV */
 
