@@ -207,7 +207,7 @@ body{
     top: 10px;
     display: flex;
     flex-direction: column;
-    gap: 2vh;
+    gap: 1vh;
     padding: 1vh;
 }
 
@@ -243,6 +243,10 @@ body{
 
 .block p {
     font-size: x-small;
+}
+
+.selected {
+    background-color: #2e86dd;
 }
 
 /* NAV */

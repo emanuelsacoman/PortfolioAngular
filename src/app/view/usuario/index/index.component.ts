@@ -24,4 +24,15 @@ export class IndexComponent implements OnInit {
       this.profileImageUrl = data.avatar_url;
     });
   }
+
+  selectedOption: string = 'sobre';
+
+  selectOption(option: string) {
+    this.selectedOption = option;
+    console.log('Opção selecionada:', option);
+  }
+
+  isSelected(option: string) {
+    return this.selectedOption === option;
+  }
 }

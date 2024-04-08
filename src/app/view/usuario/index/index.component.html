@@ -67,38 +67,45 @@
         </div>
         </section>
         <main class="middle bloco">
-            <p>Lorem ipsum dolor sit amet consectet<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla nisi animi illo eius aliquam? Maxime velit perspiciatis, accusantium dolore facilis tempora nam itaque, illum quaerat, autem dicta. Dolores, molestias aspernatur!</p>
-            <p>Lorem ipsum dolor sit amet consectet<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla nisi animi illo eius aliquam? Maxime velit perspiciatis, accusantium dolore facilis tempora nam itaque, illum quaerat, autem dicta. Dolores, molestias aspernatur!</p>
-            <p>Lorem ipsum dolor sit amet consectet<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla nisi animi illo eius aliquam? Maxime velit perspiciatis, accusantium dolore facilis tempora nam itaque, illum quaerat, autem dicta. Dolores, molestias aspernatur!</p>
-            <p>Lorem ipsum dolor sit amet consectet<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla nisi animi illo eius aliquam? Maxime velit perspiciatis, accusantium dolore facilis tempora nam itaque, illum quaerat, autem dicta. Dolores, molestias aspernatur!</p>
-            <p>Lorem ipsum dolor sit amet consectet<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla nisi animi illo eius aliquam? Maxime velit perspiciatis, accusantium dolore facilis tempora nam itaque, illum quaerat, autem dicta. Dolores, molestias aspernatur!</p>
-            <p>Lorem ipsum dolor sit amet consectet<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla nisi animi illo eius aliquam? Maxime velit perspiciatis, accusantium dolore facilis tempora nam itaque, illum quaerat, autem dicta. Dolores, molestias aspernatur!</p>
-            <p>Lorem ipsum dolor sit amet consectet<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla nisi animi illo eius aliquam? Maxime velit perspiciatis, accusantium dolore facilis tempora nam itaque, illum quaerat, autem dicta. Dolores, molestias aspernatur!</p>
-            <p>Lorem ipsum dolor sit amet consectet<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla nisi animi illo eius aliquam? Maxime velit perspiciatis, accusantium dolore facilis tempora nam itaque, illum quaerat, autem dicta. Dolores, molestias aspernatur!</p>
-            <p>Lorem ipsum dolor sit amet consectet<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla nisi animi illo eius aliquam? Maxime velit perspiciatis, accusantium dolore facilis tempora nam itaque, illum quaerat, autem dicta. Dolores, molestias aspernatur!</p>
+            <div *ngIf="isSelected('sobre')">
+                <p>sobre</p>
+            </div>
+            <div *ngIf="isSelected('resumo')">
+                <p>resumo</p>
+            </div>
+            <div *ngIf="isSelected('projetos')">
+                <p>projetos</p>
+            </div>
+            <div *ngIf="isSelected('github')">
+                <p>github</p>
+            </div>
+            <div *ngIf="isSelected('contato')">
+                <p>contato</p>
+            </div>
         </main>
+        <!-- menu.component.html -->
         <nav class="desknav bloco">
-            <div class="block">
-                <img src="/assets/images/sobre.png" alt="Opção">
-                <p>Sobre</p>
+            <div class="block" (click)="selectOption('sobre')" [ngClass]="{selected: isSelected('sobre')}">
+            <img src="/assets/images/sobre.png" alt="Opção">
+            <p>Sobre</p>
             </div>
-            <div class="block">
-                <img src="/assets/images/resume.png" alt="Opção">
-                <p>Resumo</p>
+            <div class="block" (click)="selectOption('resumo')" [ngClass]="{selected: isSelected('resumo')}">
+            <img src="/assets/images/resume.png" alt="Opção">
+            <p>Resumo</p>
             </div>
-            <div class="block">
-                <img src="/assets/images/projeto.png" alt="Opção">
-                <p>Projetos</p>
+            <div class="block" (click)="selectOption('projetos')" [ngClass]="{selected: isSelected('projetos')}">
+            <img src="/assets/images/projeto.png" alt="Opção">
+            <p>Projetos</p>
             </div>
-            <div class="block">
-                <img src="/assets/images/github2.png" alt="Opção">
-                <p>Github</p>
+            <div class="block" (click)="selectOption('github')" [ngClass]="{selected: isSelected('github')}">
+            <img src="/assets/images/github2.png" alt="Opção">
+            <p>Github</p>
             </div>
-            <div class="block">
-                <img src="/assets/images/contato.png" alt="Opção">
-                <p>Contato</p>
+            <div class="block" (click)="selectOption('contato')" [ngClass]="{selected: isSelected('contato')}">
+            <img src="/assets/images/contato.png" alt="Opção">
+            <p>Contato</p>
             </div>
-        </nav>
+        </nav>                
     </div>
 </body>
 
