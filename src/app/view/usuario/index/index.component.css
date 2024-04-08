@@ -28,7 +28,7 @@ body{
 
 .profile{
     width: 30rem;
-    height: 65vh;
+    height: fit-content;
     top: 60px;
 }
 
@@ -42,8 +42,7 @@ body{
     align-items: center;
     justify-content: center;
     width: 100%;
-    position: absolute;
-    top: -50px;
+    margin-top: -50px;
     z-index: 1;
     gap: 1.2vh;
 }
@@ -76,14 +75,21 @@ body{
     display: flex;
     flex-direction: row;
     width: 100%;
-    justify-content: space-around;
+    justify-content: center;
+    cursor: pointer;
+    gap: 1rem;
 }
 
 .itenspic img {
-    height: 2rem;
+    height: clamp(15px, 2vw, 24px);
     width: auto;
     background-color: #e2e2e2;
     padding: 5px;
+    transition: all 0.1s ease;
+}
+
+.itenspic img:hover{
+    background-color: #2e86dd;
 }
 
 .info{
@@ -156,13 +162,32 @@ body{
     border-radius: 5px;
     padding: 5px 10px;
     font-size: 20px;
-    gap: 1vh;
+    gap: 0.5vh;
+    margin-bottom: 1.2vh;
+    transition: all 0.1s ease;
+    cursor: pointer;
+}
+
+.cv:hover{
+    background-color: transparent;
+    box-shadow: inset 0 0 5px #2e86dd;
+}
+
+.cv:hover p{
+    filter: invert(100%);
 }
 
 .cv img {
     height: 30px;
     width: auto;
+    filter: invert(100%);
+    transition: all 0.1s ease;
 }
+
+.cv:hover img {
+    background-color: #dd7d2e;
+}
+
 
 /*PROFILE*/
 
@@ -172,8 +197,52 @@ body{
     font-size: 30px;
 }
 
+/* NAV */
+
 .desknav{
-    width: 10rem;
-    height: 50vh;
+    width: 5rem;
+    height: fit-content;
+    align-items: center;
+    justify-content: center;
     top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+    padding: 1vh;
 }
+
+.block {
+    height: 5vh;
+    width: 100%;
+    background-color: #e2e2e2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-block: 0.7rem;
+    padding-inline: 0.2rem;
+    transition: all 0.1s ease;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.block:hover{
+    background-color: #2e86dd;
+    color: #fff;
+}
+
+.block:hover img{
+    filter: invert(100%);
+}
+
+.block img {
+    width: auto;
+    height: 100%;
+    transition: all 0.1s ease;
+}
+
+.block p {
+    font-size: x-small;
+}
+
+/* NAV */
