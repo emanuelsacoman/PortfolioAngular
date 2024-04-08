@@ -222,7 +222,7 @@ body{
 .wrap {
     display: flex;
     flex-direction: column;
-    gap: 3vh;
+    gap: 2vh;
     padding-inline: 1vh;
     padding-block-end: 1vh;
 }
@@ -252,6 +252,22 @@ body{
     width: 30%;
     height: 4px;
     border-radius: 4px;
+}
+
+.whatido{
+    display: flex;
+    flex-direction: row;
+    flex-basis: auto;
+    gap: 2vh;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.area {
+    display: flex;
+    background-color: #dddddd;
+    gap: 1rem;
+    flex: 1 1 33%;
 }
 
 /*MIDDLE*/
