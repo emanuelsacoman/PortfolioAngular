@@ -270,7 +270,56 @@ body{
     flex: 1 1 33%;
 }
 
+.resume{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 2vh;
+}
+
+.resumeitem{
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+    width: 100%;
+}
+
+.resumetop{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    gap: 0.7rem;
+}
+
+.resumetop img {
+    height: 3rem;
+    width: auto;
+}
+
+.resumebox{
+    border-radius: 5px;
+    background-color: #2e86dd23;
+    padding: 1vh;
+}
+
 /*MIDDLE*/
+
+/*FOOTER*/
+
+footer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding-block: 1vh;
+}
+
+footer p {
+    font-size: clamp(10px, 2vw, 16px);
+}
+
+/*FOOTER*/
 
 /* NAV */
 

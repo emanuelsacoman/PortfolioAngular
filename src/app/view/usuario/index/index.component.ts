@@ -25,7 +25,7 @@ export class IndexComponent implements OnInit {
     });
   }
 
-  selectedOption: string = 'sobre';
+  selectedOption: string = 'resumo';
 
   selectOption(option: string) {
     this.selectedOption = option;
