@@ -1,1 +1,34 @@
-<p>admin works!</p>
+<body>
+    <main>
+        <aside class="options">
+            <div class="option" (click)="selectOption('sobre')" [ngClass]="{selected: isSelected('sobre')}">SOBRE</div>
+            <div class="option" (click)="selectOption('resumo')" [ngClass]="{selected: isSelected('resumo')}">RESUMO</div>
+            <div class="option" (click)="selectOption('addprojetos')" [ngClass]="{selected: isSelected('addprojetos')}">
+                <p>ADD</p>
+                <P>PROJETOS</P>
+            </div>
+            <div class="option" (click)="selectOption('editprojetos')" [ngClass]="{selected: isSelected('editprojetos')}">
+                <p>EDIT</p>
+                <P>PROJETOS</P>
+            </div>
+            <div class="option" (click)="selectOption('github')" [ngClass]="{selected: isSelected('github')}">GITHUB ~talvezmudar~</div>
+        </aside>
+        <section class="formsection">
+            <div class="formall" *ngIf="isSelected('sobre')">
+             <p>sobre</p>       
+            </div>
+            <div class="formall" *ngIf="isSelected('resumo')">
+              <p>resumo</p>  
+            </div>
+            <div class="formall" *ngIf="isSelected('addprojetos')">
+              <p>addprojetos</p>  
+            </div>
+            <div class="formall" *ngIf="isSelected('editprojetos')">
+              <p>editprojetos</p>  
+            </div>
+            <div class="formall" *ngIf="isSelected('github')">
+              <p>github</p>  
+            </div>
+        </section>
+    </main>
+</body>

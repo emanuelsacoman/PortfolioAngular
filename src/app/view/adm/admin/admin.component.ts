@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -6,5 +7,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent {
+  selectedOption: string = 'sobre';
 
+  constructor(private route: Router,) {
+    
+  }
+
+  selectOption(option: string) {
+    this.selectedOption = option;
+    console.log('Opção selecionada:', option);
+  }
+
+  isSelected(option: string) {
+    return this.selectedOption === option;
+  }
 }
