@@ -3,12 +3,14 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { finalize } from 'rxjs';
 import { Sobre } from './interfaces/sobre';
+import { Sobrearea } from './interfaces/sobrearea';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseService {
-  private PATH : string = "Sobre";
+  private PATH : string = "sobre";
+  private PATH2 : string = "sobrearea";
 
   constructor(private firestore: AngularFirestore,
     private storage: AngularFireStorage) { }
@@ -65,9 +67,40 @@ export class FirebaseService {
     //     return task;
     //   }
       
-      excluirSobre(id: string) {
-        return this.firestore.collection(this.PATH).doc(id).delete();
-      }  
-    }
     
-    //Sobre
+        //SobreArea
+        obterTodosSobreArea() {
+          return this.firestore.collection(this.PATH2).snapshotChanges();
+        }
+
+        cadastrarSobreArea(sobrearea : Sobrearea) {
+          return this.firestore.collection(this.PATH2).add({
+            ctitle: sobrearea.ctitle,
+            
+            cdesc: sobrearea.cdesc,
+          });
+        }
+        
+        editarSobreArea(sobrearea : Sobrearea, id: string) {
+          return this.firestore.collection(this.PATH2).doc(id).update({
+            ctitle: sobrearea.ctitle,
+            cdesc: sobrearea.cdesc,
+            
+          });
+        }
+
+        excluirSobreArea(id: string) {
+          return this.firestore.collection(this.PATH2).doc(id).delete();
+        } 
+        //SobreArea
+
+      //Sobre
+  
+      //Resumo
+  
+  
+      
+      //Resumo
+    }
+
+    

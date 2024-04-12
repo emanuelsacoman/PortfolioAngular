@@ -31,7 +31,32 @@
                   </div>
                 </div>
                 <button class="sendButton" type="submit">Enviar</button>
-              </form>   
+              </form>  
+
+              <form class="formSobre" (ngSubmit)="editSobreArea()" [formGroup]="sobreareaEdit" #formDir="ngForm">
+                <section class="addArea">
+                  <div class="item" *ngFor="let item of sobrearea; let i = index">
+                    <div class="area">
+                      <div class="input">
+                        <input type="text" id="ctitle{{i}}" placeholder="Insira o titulo" formControlName="ctitle{{i}}" required>
+                      </div>
+                      <div class="input">
+                        <textarea type="text" id="cdesc{{i}}" placeholder="Insira a descrição" rows="5" cols="30" formControlName="cdesc{{i}}" required></textarea>
+                      </div>
+                      <div class="input">
+                        <div class="imageInput">
+                          <input class="img" type="file" id="imagem{{i}}" formControlName="imagem{{i}}" accept="image/*" (change)="uploadFile($event)">
+                          <div *ngIf="!imagem">
+                            <img class="preImage" [src]="" />
+                          </div>
+                        </div>
+                      </div>
+                      <button class="sendButton" type="submit">Enviar</button>
+                    </div>
+                  </div>
+                </section>
+              </form>
+              
             </div>
             <div class="formall" *ngIf="isSelected('resumo')">
               <p>resumo</p>  

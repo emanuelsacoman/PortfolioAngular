@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Sobre } from 'src/app/model/services/interfaces/sobre';
 import { FirebaseService } from 'src/app/model/services/firebase.service';
+import { AuthService } from 'src/app/model/services/auth.service';
+import { Sobrearea } from 'src/app/model/services/interfaces/sobrearea';
 
 @Component({
   selector: 'app-index',
@@ -16,11 +18,14 @@ export class IndexComponent implements OnInit {
   //DB
   public sobre: Sobre[] = [];
   public sobreLoaded = false;
+
+  public sobrearea: Sobrearea[] = [];
   //DB
   
   constructor(private http: HttpClient,
-    private route: Router,
-    private firebaseService: FirebaseService) {
+    private router: Router,
+    private firebaseService: FirebaseService,
+    private authService: AuthService) {
       this.firebaseService.obterTodosSobre().subscribe((res) => {
         this.sobre = res.map((sobre) => {
           return {
@@ -29,6 +34,15 @@ export class IndexComponent implements OnInit {
           } as Sobre;
         });
         this.sobreLoaded = true;
+      });
+
+      this.firebaseService.obterTodosSobreArea().subscribe((res) => {
+        this.sobrearea = res.map((sobre) => {
+          return {
+            id: sobre.payload.doc.id,
+            ...(sobre.payload.doc.data() as any),
+          } as Sobrearea;
+        });
       });
     }
 
@@ -52,5 +66,13 @@ export class IndexComponent implements OnInit {
 
   isSelected(option: string) {
     return this.selectedOption === option;
+  }
+
+  goToAdmin(sobre: Sobre) {
+    this.router.navigateByUrl('/admin', { state: { sobre: sobre } });
+  }  
+
+  isLoggedIn(): boolean {
+    return this.authService.isLoggedIn;
   }
 }

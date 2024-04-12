@@ -82,16 +82,16 @@
                     <h2>{{sobre.subtitle}}</h2>
                 </div>
                 <section class="whatido">
-                    <div class="area" *ngFor="let sobre of this.sobre;">
+                    <div class="area" *ngFor="let sobrearea of this.sobrearea; let i = index">
                         <div class="whaipic">
                             <img src="" alt="Pic">
                         </div>
                         <div class="content">
                             <div class="contenttitle">
-                                contenttitle
+                                {{sobrearea.ctitle}}
                             </div>
                             <div class="contentdesc">
-                                contentdesc
+                                {{sobrearea.cdesc}}
                             </div>
                         </div>
                     </div>
@@ -152,24 +152,30 @@
         <!-- menu.component.html -->
         <nav class="desknav bloco">
             <div class="block" (click)="selectOption('sobre')" [ngClass]="{selected: isSelected('sobre')}">
-            <img src="/assets/images/sobre.png" alt="Opção">
-            <p>Sobre</p>
+                <img src="/assets/images/sobre.png" alt="Opção">
+                <p>Sobre</p>
             </div>
             <div class="block" (click)="selectOption('resumo')" [ngClass]="{selected: isSelected('resumo')}">
-            <img src="/assets/images/resume.png" alt="Opção">
-            <p>Resumo</p>
+                <img src="/assets/images/resume.png" alt="Opção">
+                <p>Resumo</p>
             </div>
             <div class="block" (click)="selectOption('projetos')" [ngClass]="{selected: isSelected('projetos')}">
-            <img src="/assets/images/projeto.png" alt="Opção">
-            <p>Projetos</p>
+                <img src="/assets/images/projeto.png" alt="Opção">
+                <p>Projetos</p>
             </div>
             <div class="block" (click)="selectOption('github')" [ngClass]="{selected: isSelected('github')}">
-            <img src="/assets/images/github2.png" alt="Opção">
-            <p>Github</p>
+                <img src="/assets/images/github2.png" alt="Opção">
+                <p>Github</p>
             </div>
             <div class="block" (click)="selectOption('contato')" [ngClass]="{selected: isSelected('contato')}">
-            <img src="/assets/images/contato.png" alt="Opção">
-            <p>Contato</p>
+                <img src="/assets/images/contato.png" alt="Opção">
+                <p>Contato</p>
+            </div>
+            <div class="adm block" *ngFor="let sobre of this.sobre;">
+                <div class="block" *ngIf="isLoggedIn()" (click)="goToAdmin(sobre)">
+                    <img src="/assets/images/admin.png" alt="Opção">
+                    <p>Admin</p>
+                </div>
             </div>
         </nav>                
     </div>

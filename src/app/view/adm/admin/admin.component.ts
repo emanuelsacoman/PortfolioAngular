@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FirebaseService } from 'src/app/model/services/firebase.service';
 import { Sobre } from 'src/app/model/services/interfaces/sobre';
+import { Sobrearea } from 'src/app/model/services/interfaces/sobrearea';
 
 @Component({
   selector: 'app-admin',
@@ -18,15 +19,33 @@ export class AdminComponent {
   txt1!: string;
   txt2!: string;
   subtitle!: string;
+
+    //AREA
+    sobreareaEdit!: FormGroup;
+    sobreArea!: Sobrearea;
+    public sobrearea: Sobrearea[] = [];
+    ctitle!: string;
+    cdesc!: string;
+    imagem: any;
+    //AREA
+
   //SOBRE
 
   constructor(private router: Router,
     private formBuilder: FormBuilder,
     private firebase: FirebaseService) {
-    
+      this.firebase.obterTodosSobreArea().subscribe((res) => {
+        this.sobrearea = res.map((sobre) => {
+          return {
+            id: sobre.payload.doc.id,
+            ...(sobre.payload.doc.data() as any),
+          } as Sobrearea;
+        });
+      });
   }
 
   ngOnInit(){
+    this.initSobreArea();
     this.initSobre();
   }
 
@@ -46,15 +65,54 @@ export class AdminComponent {
     });
   }
 
-  editSobre(){
-    if (this.sobreEdit.valid){
-      const new_part: Sobre = {...this.sobreEdit.value,id: this.sobre.id};
-        this.firebase.editarSobre(new_part, this.sobre.id).then(() => this.router.navigate(['/webmanager'])).catch((error) =>{
-          console.log(error);
+  editSobre() {
+    if (this.sobreEdit.valid) {
+      const new_part: Sobre = {...this.sobreEdit.value, id: this.sobre.id};
+  
+      this.firebase.editarSobre(new_part, this.sobre.id)
+        .then(() => {
+          console.log('Sobre atualizado com sucesso');
+          this.router.navigate(['/']);
+        })
+        .catch((error) => {
+          console.log('Erro ao atualizar Sobre:', error);
         });
-      }else{
-      window.alert('Campos obrigatorios!');
+    } else {
+      window.alert('Campos obrigatórios!');
     }
+  }
+  
+  editSobreArea() {
+    if (this.sobreEdit.valid) {
+      const new_part: Sobrearea = {...this.sobreEdit.value, id: this.sobreArea.id};
+  
+      this.firebase.editarSobreArea(new_part, this.sobreArea.id)
+        .then(() => {
+          console.log('Sobrearea atualizado com sucesso');
+        })
+        .catch((error) => {
+          console.log('Erro ao atualizar Sobrearea:', error);
+        });
+    } else {
+      window.alert('Campos obrigatórios!');
+    }
+  }
+
+  initSobreArea(){
+    this.sobreArea = history.state.sobreArea;
+    console.log('Informações da sobre area:', this.sobreArea);
+    this.ctitle = this.sobreArea?.ctitle;
+    this.cdesc = this.sobreArea?.cdesc;
+  
+    this.sobreareaEdit = this.formBuilder.group({
+      ctitle: [this.ctitle, [Validators.required]],
+      cdesc: [this.cdesc, [Validators.required]],
+      imagem: [this.imagem, [Validators.required]],
+    });
+  }  
+
+  uploadFile(event: any){
+    this.imagem = event.target.files;
   }
   
   selectOption(option: string) {

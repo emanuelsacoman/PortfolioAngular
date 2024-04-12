@@ -91,3 +91,47 @@ input, textarea{
     font-size: clamp(1rem, 2vw, 1.3rem);
     border: solid black 1px;
 }
+
+.addArea{
+    background-color: #d5d4d6;
+    width: 100%;
+    min-height: 5vh;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    gap: 1vh;
+    padding: 1vh;
+}
+
+.area{
+    width: 20rem;
+    min-height: 20vh;
+    border: solid black 1px;
+    border-radius: 5px;
+
+    .input{
+        display: flex;
+        justify-content: center;
+        padding-block: 1vh;
+
+        input{
+            height: 2rem;
+            width: 90%;
+        }
+        textarea{
+            width: 90%;
+            height: 100%;
+        }
+        .imageInput {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            input{
+                height: 1rem;
+                font-size: 0.8rem;
+            }
+        }
+    }
+}
