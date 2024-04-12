@@ -10,7 +10,7 @@ body{
 
 .all {
     display: flex;
-    align-items: start;
+    align-items: flex-start;
     justify-content: space-around;
     padding-inline:3vw;
     padding-top: 10vh;
@@ -290,7 +290,7 @@ body{
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: start;
+    justify-content: flex-start;
     gap: 0.7rem;
 }
 

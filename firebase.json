@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "site": "portfolioemanuel",
+    "site": "emanuelsacoman",
     "public": "dist/portfolio",
     "ignore": [
       "firebase.json",
