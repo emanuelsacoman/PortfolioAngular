@@ -72,57 +72,17 @@
         </section>
         <main class="middle bloco">
             <div class="sobre wrap" *ngIf="isSelected('sobre')">
-                <div class="top">
-                    <h1>sobre</h1>
-                    <div class="topbar"></div>
+                <div class="txttop" *ngFor="let sobre of this.sobre;">
+                    <div class="top">
+                        <h1>{{sobre.title}}</h1>
+                        <div class="topbar"></div>
+                    </div>
+                    <p>{{sobre.txt1}}</p>
+                    <p>{{sobre.txt2}}</p>
+                    <h2>{{sobre.subtitle}}</h2>
                 </div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam quis magni ratione voluptate? Eius fugiat ab mollitia est unde velit odio repudiandae eos explicabo dolor, accusamus aliquam laudantium veniam deleniti!</p>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum ab repellendus inventore voluptatibus eaque sit doloribus dolore enim. Libero veniam inventore molestiae labore dolorem et voluptate dolorum eius quae blanditiis.</p>
-                <h2>O que eu faço!</h2>
                 <section class="whatido">
-                    <div class="area">
-                        <div class="whaipic">
-                            <img src="" alt="Pic">
-                        </div>
-                        <div class="content">
-                            <div class="contenttitle">
-                                contenttitle
-                            </div>
-                            <div class="contentdesc">
-                                contentdesc
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="area">
-                        <div class="whaipic">
-                            <img src="" alt="Pic">
-                        </div>
-                        <div class="content">
-                            <div class="contenttitle">
-                                contenttitle
-                            </div>
-                            <div class="contentdesc">
-                                contentdesc
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="area">
-                        <div class="whaipic">
-                            <img src="" alt="Pic">
-                        </div>
-                        <div class="content">
-                            <div class="contenttitle">
-                                contenttitle
-                            </div>
-                            <div class="contentdesc">
-                                contentdesc
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="area">
+                    <div class="area" *ngFor="let sobre of this.sobre;">
                         <div class="whaipic">
                             <img src="" alt="Pic">
                         </div>

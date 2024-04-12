@@ -55,10 +55,39 @@ main {
     color: #fff;
 }
 
-
 .formsection{
     background-color: #e2e2e2;
     width: 100%;
     border-radius: 5px;
     padding: 1vh;
+}
+
+.input-group{
+    display: flex;
+    flex-direction: row;
+    flex-basis: auto;
+    gap: 2vh;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.input{
+    flex: 1 1 33%;
+}
+
+input{
+    height: 3rem;
+}
+
+textarea{
+    height: 12rem;
+}
+
+input, textarea{
+    font-family: "Open Sans", sans-serif;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 5px;
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    border: solid black 1px;
 }

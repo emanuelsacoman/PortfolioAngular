@@ -15,7 +15,23 @@
         </aside>
         <section class="formsection">
             <div class="formall" *ngIf="isSelected('sobre')">
-             <p>sobre</p>       
+              <form class="formSobre" (ngSubmit)="editSobre()" [formGroup]="sobreEdit" #formDir="ngForm">
+                <div class="input-group">
+                  <div class="input">
+                    <input type="text" id="title" placeholder="Insira o titulo" formControlName="title" required/>
+                  </div>
+                  <div class="input">
+                    <input type="text" id="subtitle" placeholder="Insira o subtitulo" formControlName="subtitle" required/>
+                  </div>
+                  <div class="input">
+                    <textarea type="text" id="txt1" placeholder="Insira o txt1" formControlName="txt1" required rows="5" cols="30"></textarea>
+                  </div>
+                  <div class="input">
+                    <textarea type="text" id="txt2" placeholder="Insira o txt2" formControlName="txt2" required rows="5" cols="30"></textarea>
+                  </div>
+                </div>
+                <button class="sendButton" type="submit">Enviar</button>
+              </form>   
             </div>
             <div class="formall" *ngIf="isSelected('resumo')">
               <p>resumo</p>  

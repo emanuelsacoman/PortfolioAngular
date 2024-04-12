@@ -2,23 +2,24 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { finalize } from 'rxjs';
+import { Sobre } from './interfaces/sobre';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseService {
-  private PATH : string = "Conteudo";
+  private PATH : string = "Sobre";
 
   constructor(private firestore: AngularFirestore,
     private storage: AngularFireStorage) { }
 
-    //PATH
+    //Sobre
     
-    obterTodos() {
+    obterTodosSobre() {
       return this.firestore.collection(this.PATH).snapshotChanges();
     }
     
-    cadastrar() {
+    cadastrarSobre() {
       return this.firestore.collection(this.PATH).add({
         // nome: command.nome,
         // descricao: command.descricao,
@@ -28,18 +29,18 @@ export class FirebaseService {
       });
     }
     
-    editar(id: string) {
+    editarSobre(sobre : Sobre, id: string) {
       return this.firestore.collection(this.PATH).doc(id).update({
-        // nome: command.nome,
-        // descricao: command.descricao,
-        // imgUrl: command.imgUrl,
-        // alt: command.alt,
-        // cooldown: command.cooldown,
+         title: sobre.title,
+         txt1: sobre.txt1,
+         txt2: sobre.txt2,
+         subtitle: sobre.subtitle,
+        
       });
     }
     
     
-    // uploadImage(imagem: any){
+    // uploadImageSobre(imagem: any){
     //   const file = imagem.item(0);
     //   if(file.type.split('/')[0] !== 'image'){
     //     console.error("Tipo Não Suportado.");
@@ -64,9 +65,9 @@ export class FirebaseService {
     //     return task;
     //   }
       
-      excluir(id: string) {
+      excluirSobre(id: string) {
         return this.firestore.collection(this.PATH).doc(id).delete();
       }  
     }
     
-    //PATH
+    //Sobre
