@@ -219,6 +219,18 @@ body{
     font-size: 30px;
 }
 
+.txttop{
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+}
+
+.txttop2{
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+}
+
 .wrap {
     display: flex;
     flex-direction: column;
@@ -259,9 +271,10 @@ body{
     flex-direction: row;
     flex-basis: auto;
     gap: 2vh;
-    width: 100%;
+    backdrop-filter: red;
     flex-wrap: wrap;
 }
+
 
 .area {
     display: flex;
@@ -270,8 +283,23 @@ body{
     flex: 1 1 33%;
     padding: 1vh;
     border-radius: 5px;
+
+    .content{
+        
+        .contenttitle{
+            font-size: clamp(20px, 5vw, 34px);
+        }
+        .contentdesc{
+            font-size: clamp(16px, 5vw, 26px);
+        }
+    }
 }
 
+.whaipic img{
+    width: 3rem;
+}
+
+/*resume*/
 .resume{
     display: flex;
     flex-direction: row;

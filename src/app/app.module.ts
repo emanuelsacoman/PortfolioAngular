@@ -19,6 +19,7 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
 import { HttpClientModule } from '@angular/common/http';
+import { ItemeditComponent } from './view/adm/edit/itemedit/itemedit.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
     IndexComponent,
     LoginComponent,
     AdminComponent,
+    ItemeditComponent,
   ],
   imports: [
     BrowserModule,

@@ -13,7 +13,7 @@ import { Sobrearea } from 'src/app/model/services/interfaces/sobrearea';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent {
-  //SOBRE
+  // SOBRE
   sobreEdit!: FormGroup;
   sobre!: Sobre;
   selectedOption: string = 'sobre';
@@ -22,32 +22,30 @@ export class AdminComponent {
   txt2!: string;
   subtitle!: string;
 
-    //AREA
-    sobreareaEdit!: FormGroup;
-    sobreArea!: Sobrearea;
-    public sobrearea: Sobrearea[] = [];
-    ctitle!: string;
-    cdesc!: string;
-    imagem: any;
-    sobreareaCollection!: Observable<any[]>;
-    items:any;
-    //AREA
-
-  //SOBRE
+  // SOBRE AREA
+  sobreAreaEdit!: FormGroup;
+  sobrearea!: Sobrearea;
+  public sobreareaArray: Sobrearea[] = [];
+  ctitle!: string;
+  cdesc!: string;
+  imagem: any;
 
   constructor(private router: Router,
     private formBuilder: FormBuilder,
     private firebase: FirebaseService,
     private firestore: AngularFirestore) {
-      
+      this.firebase.obterTodosSobreArea().subscribe((res) => {
+        this.sobreareaArray = res.map((sobre) => {
+          return {
+            id: sobre.payload.doc.id,
+            ...(sobre.payload.doc.data() as any),
+          } as Sobrearea;
+        });
+      });
   }
 
   ngOnInit(){
     this.initSobre();
-  }
-
-  editSobreArea(){
-
   }
 
   initSobre(){
@@ -81,6 +79,17 @@ export class AdminComponent {
     } else {
       window.alert('Campos obrigatórios!');
     }
+  }
+
+  editar(sobrearea: Sobrearea){
+    console.log('Item clicado:', sobrearea);
+    
+    this.router.navigateByUrl("/itemedit", {state: { sobrearea: sobrearea } });
+  }
+
+  cadastrar(){
+    const create: Sobrearea = new Sobrearea("","","", null);
+    this.firebase.cadastrarSobreArea(create);
   }
   
   uploadFile(event: any){

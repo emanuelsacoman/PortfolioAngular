@@ -19,6 +19,7 @@ main {
     flex-direction: row;
     gap: 1vh;
     padding: 1vh;
+    position: absolute;
 }
 
 .options{
@@ -60,6 +61,7 @@ main {
     width: 100%;
     border-radius: 5px;
     padding: 1vh;
+    position: relative;
 }
 
 .input-group{
@@ -97,10 +99,12 @@ input, textarea{
     background-color: #d5d4d6;
     min-height: 5vh;
     border-radius: 5px;
-    display: flex;
-    flex-direction: row;
+    width: 95%;
     gap: 1vh;
     padding: 1vh;
+    overflow-x: auto;
+    display: flex;
+    position: absolute;
 }
 
 .area{
@@ -109,31 +113,58 @@ input, textarea{
     border: solid black 1px;
     border-radius: 5px;
     padding: 1vh;
+    cursor: pointer;
+    transition: all 0.1s ease;
+    flex-shrink: 0;
     
     .input{
         display: flex;
-        justify-content: center;
         padding-block: 1vh;
+        color: black;
 
-        input{
-            height: 2rem;
+        h2{
+            background-color: #c0c0c0;
             width: 100%;
+            border-radius: 5px;
+            padding: 5px;
+            overflow-wrap: break-word;
         }
-        textarea{
-            width: 100%;
-            height: 100%;
-            resize: none;
-        }
-        .imageInput {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
 
-            input{
-                height: 1rem;
-                font-size: 0.8rem;
-            }
+        p{
+            background-color: #c0c0c0;
+            width: 100%;
+            border-radius: 5px;
+            height: fit-content;
+            overflow-wrap: break-word;
         }
+        
     }
+}
+
+.formSobreArea:hover{
+    transform: scale(1.03);
+}
+
+.cadastro{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 1vh;
+}
+
+.cadastro img{
+    height: 3rem;
+    width: auto;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.cadastro img:hover{
+    scale: 1.1;
+    filter: brightness(120%);
+    z-index: 999;
+}
+
+.preImage{
+    height: 3.5rem;
 }

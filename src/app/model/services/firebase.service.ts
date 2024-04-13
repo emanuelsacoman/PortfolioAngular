@@ -44,30 +44,30 @@ export class FirebaseService {
     }
     
     
-    // uploadImageSobre(imagem: any, itens: Sobrearea){
-    //   const file = imagem.item(0);
-    //   if(file.type.split('/')[0] !== 'image'){
-    //     console.error("Tipo Não Suportado.");
-    //     return;
-    //   }
-    //   const path = `images/${itens.ctitle}_${file.name}`;
-    //   const fileRef = this.storage.ref(path);
-    //   let task = this.storage.upload(path,file);
-    //   task.snapshotChanges().pipe(
-    //     finalize(() =>{
-    //       let uploadFileURL = fileRef.getDownloadURL();
-    //       uploadFileURL.subscribe(resp => {
-    //         itens.cImg = resp;
-    //         if(!itens.id){
-    //           this.cadastrarSobreArea(itens);
-    //         }else {
-    //           this.editarSobreArea(itens, itens.id);
-    //         }
-    //       })
-    //     })
-    //     ).subscribe();
-    //     return task;
-    //   }
+    uploadImageSobre(imagem: any, itens: Sobrearea){
+      const file = imagem.item(0);
+      if(file.type.split('/')[0] !== 'image'){
+        console.error("Tipo Não Suportado.");
+        return;
+      }
+      const path = `images/${itens.ctitle}_${file.name}`;
+      const fileRef = this.storage.ref(path);
+      let task = this.storage.upload(path,file);
+      task.snapshotChanges().pipe(
+        finalize(() =>{
+          let uploadFileURL = fileRef.getDownloadURL();
+          uploadFileURL.subscribe(resp => {
+            itens.cImg = resp;
+            if(!itens.id){
+              this.cadastrarSobreArea(itens);
+            }else {
+              this.editarSobreArea(itens, itens.id);
+            }
+          })
+        })
+        ).subscribe();
+        return task;
+      }
       
     
         //SobreArea
@@ -79,7 +79,7 @@ export class FirebaseService {
           return this.firestore.collection(this.PATH2).add({
             ctitle: sobrearea.ctitle,
             cdesc: sobrearea.cdesc,
-            // cImg: sobrearea.cImg
+            cImg: sobrearea.cImg
           });
         }
         
@@ -87,7 +87,7 @@ export class FirebaseService {
           return this.firestore.collection(this.PATH2).doc(id).update({
             ctitle: sobrearea.ctitle,
             cdesc: sobrearea.cdesc,
-            // cImg: sobrearea.cImg
+            cImg: sobrearea.cImg
             
           });
         }

@@ -34,21 +34,28 @@
               </form>  
 
               <section class="addArea">
-                <form class="formSobre" *ngFor="let item of sobreareaCollection | async; let i = index" (ngSubmit)="editSobreArea()" [formGroup]="sobreareaEdit" #formDir="ngForm">
-                  <div class="item" [formGroupName]="'sobrearea_' + i">
-                    <div class="area">
-                      <div class="input">
-                        <input type="text" id="ctitle{{i}}" placeholder="Insira o título" formControlName="ctitle" required>
-                      </div>
-                      <div class="input">
-                        <textarea id="cdesc{{i}}" placeholder="Insira a descrição" rows="5" cols="30" formControlName="cdesc" required></textarea>
+                <div *ngFor="let area of sobreareaArray; let i = index">
+                  <div class="formSobreArea" (click)="editar(area)">
+                    <div class="item">
+                      <div class="area">
+                        <div class="input">
+                          <h2>{{area.ctitle}}</h2>
+                        </div>
+                        <div class="input">
+                          <p>{{area.cdesc}}</p>
+                        </div>
+                        <div class="input preImage">
+                          <img src="{{area.cImg}}" alt="{{area.ctitle}}">
+                        </div>
                       </div>
                     </div>
                   </div>
-                  <button class="sendButton" type="submit">Enviar</button>
-                </form>
-              </section>
-              
+                </div>
+              </section>          
+              <div class="cadastro">
+                <img (click)="cadastrar()" src="./assets/images/plus.png" alt="Cadastro">
+              </div>
+            
             </div>
             <div class="formall" *ngIf="isSelected('resumo')">
               <p>resumo</p>  

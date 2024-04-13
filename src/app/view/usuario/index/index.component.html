@@ -77,14 +77,16 @@
                         <h1>{{sobre.title}}</h1>
                         <div class="topbar"></div>
                     </div>
-                    <p>{{sobre.txt1}}</p>
-                    <p>{{sobre.txt2}}</p>
+                    <div class="txttop2">
+                        <p>{{sobre.txt1}}</p>
+                        <p>{{sobre.txt2}}</p>
+                    </div>
                     <h2>{{sobre.subtitle}}</h2>
                 </div>
                 <section class="whatido">
                     <div class="area" *ngFor="let sobrearea of this.sobrearea; let i = index">
                         <div class="whaipic">
-                            <img src="" alt="Pic">
+                            <img src="{{sobrearea.cImg}}" alt="Pic">
                         </div>
                         <div class="content">
                             <div class="contenttitle">
@@ -171,12 +173,16 @@
                 <img src="/assets/images/contato.png" alt="Opção">
                 <p>Contato</p>
             </div>
-            <div class="adm block" *ngFor="let sobre of this.sobre;">
-                <div class="block" *ngIf="isLoggedIn()" (click)="goToAdmin(sobre)">
-                    <img src="/assets/images/admin.png" alt="Opção">
-                    <p>Admin</p>
-                </div>
+            <div class="adm block" *ngFor="let sobre of sobre">
+                <ng-container *ngIf="isLoggedIn()">
+                    <div class="block" (click)="goToAdmin({sobre: sobre})">
+                        <img src="/assets/images/admin.png" alt="Opção">
+                        <p>Admin</p>
+                    </div>
+                </ng-container>
             </div>
+            
+            
         </nav>                
     </div>
 </body>

@@ -4,6 +4,7 @@ import { IndexComponent } from './view/usuario/index/index.component';
 import { LoginComponent } from './view/usuario/login/login.component';
 import { AdminComponent } from './view/adm/admin/admin.component';
 import { AuthGuard } from './model/shared/auth.guard';
+import { ItemeditComponent } from './view/adm/edit/itemedit/itemedit.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,11 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'itemedit',
+    component: ItemeditComponent,
     canActivate: [AuthGuard],
   }
 ];

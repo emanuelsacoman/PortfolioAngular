@@ -68,9 +68,9 @@ export class IndexComponent implements OnInit {
     return this.selectedOption === option;
   }
 
-  goToAdmin(sobre: Sobre) {
-    this.router.navigateByUrl('/admin', { state: { sobre: sobre } });
-  }  
+  goToAdmin(data: {sobre: Sobre}) {
+    this.router.navigateByUrl('/admin', { state: data });
+}
 
   isLoggedIn(): boolean {
     return this.authService.isLoggedIn;

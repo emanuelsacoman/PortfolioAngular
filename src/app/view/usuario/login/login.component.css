@@ -68,7 +68,7 @@ p, .alert {
     font-size: clamp(12px, 2vw, 20px);
     border-radius: 5px;
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
 }
 
 .formTrue{
