@@ -1,6 +1,9 @@
 <body>
     <main>
         <aside class="options">
+          <div class="option return" (click)="goBack()">
+            <img src="./assets/images/return.png" alt="Voltar">
+          </div>
             <div class="option" (click)="selectOption('sobre')" [ngClass]="{selected: isSelected('sobre')}">SOBRE</div>
             <div class="option" (click)="selectOption('resumo')" [ngClass]="{selected: isSelected('resumo')}">RESUMO</div>
             <div class="option" (click)="selectOption('addprojetos')" [ngClass]="{selected: isSelected('addprojetos')}">
@@ -69,6 +72,6 @@
             <div class="formall" *ngIf="isSelected('github')">
               <p>github</p>  
             </div>
-        </section>
-    </main>
+          </section>
+        </main>
 </body>

@@ -56,6 +56,15 @@ main {
     color: #fff;
 }
 
+.return img {
+    width: 5vw;
+    height: auto;
+}
+
+.return:hover img{
+    filter: invert(100%);
+}
+
 .formsection{
     background-color: #e2e2e2;
     width: 100%;

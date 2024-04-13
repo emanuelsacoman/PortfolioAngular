@@ -87,6 +87,10 @@ export class AdminComponent {
     this.router.navigateByUrl("/itemedit", {state: { sobrearea: sobrearea } });
   }
 
+  goBack(){
+    this.router.navigateByUrl('/');
+  }
+
   cadastrar(){
     const create: Sobrearea = new Sobrearea("","","", null);
     this.firebase.cadastrarSobreArea(create);

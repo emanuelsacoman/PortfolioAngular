@@ -56,7 +56,7 @@ export class ItemeditComponent implements OnInit {
         });
       }
     }else{
-      window.alert('Campos obrigatorios!');
+      
     }
   }
 
