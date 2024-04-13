@@ -11,7 +11,7 @@
                 <p>EDIT</p>
                 <P>PROJETOS</P>
             </div>
-            <div class="option" (click)="selectOption('github')" [ngClass]="{selected: isSelected('github')}">GITHUB ~talvezmudar~</div>
+            <div class="option" (click)="selectOption('github')" [ngClass]="{selected: isSelected('github')}">GITHUB</div>
         </aside>
         <section class="formsection">
             <div class="formall" *ngIf="isSelected('sobre')">
@@ -33,29 +33,21 @@
                 <button class="sendButton" type="submit">Enviar</button>
               </form>  
 
-              <form class="formSobre" (ngSubmit)="editSobreArea()" [formGroup]="sobreareaEdit" #formDir="ngForm">
-                <section class="addArea">
-                  <div class="item" *ngFor="let item of sobrearea; let i = index">
+              <section class="addArea">
+                <form class="formSobre" *ngFor="let item of sobreareaCollection | async; let i = index" (ngSubmit)="editSobreArea()" [formGroup]="sobreareaEdit" #formDir="ngForm">
+                  <div class="item" [formGroupName]="'sobrearea_' + i">
                     <div class="area">
                       <div class="input">
-                        <input type="text" id="ctitle{{i}}" placeholder="Insira o titulo" formControlName="ctitle{{i}}" required>
+                        <input type="text" id="ctitle{{i}}" placeholder="Insira o título" formControlName="ctitle" required>
                       </div>
                       <div class="input">
-                        <textarea type="text" id="cdesc{{i}}" placeholder="Insira a descrição" rows="5" cols="30" formControlName="cdesc{{i}}" required></textarea>
+                        <textarea id="cdesc{{i}}" placeholder="Insira a descrição" rows="5" cols="30" formControlName="cdesc" required></textarea>
                       </div>
-                      <div class="input">
-                        <div class="imageInput">
-                          <input class="img" type="file" id="imagem{{i}}" formControlName="imagem{{i}}" accept="image/*" (change)="uploadFile($event)">
-                          <div *ngIf="!imagem">
-                            <img class="preImage" [src]="" />
-                          </div>
-                        </div>
-                      </div>
-                      <button class="sendButton" type="submit">Enviar</button>
                     </div>
                   </div>
-                </section>
-              </form>
+                  <button class="sendButton" type="submit">Enviar</button>
+                </form>
+              </section>
               
             </div>
             <div class="formall" *ngIf="isSelected('resumo')">

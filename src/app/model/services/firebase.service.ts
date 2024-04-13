@@ -4,6 +4,7 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { finalize } from 'rxjs';
 import { Sobre } from './interfaces/sobre';
 import { Sobrearea } from './interfaces/sobrearea';
+import { AngularFireDatabase } from '@angular/fire/compat/database';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ export class FirebaseService {
   private PATH2 : string = "sobrearea";
 
   constructor(private firestore: AngularFirestore,
-    private storage: AngularFireStorage) { }
+    private storage: AngularFireStorage,
+    private db: AngularFireDatabase) { }
 
     //Sobre
     
@@ -42,24 +44,24 @@ export class FirebaseService {
     }
     
     
-    // uploadImageSobre(imagem: any){
+    // uploadImageSobre(imagem: any, itens: Sobrearea){
     //   const file = imagem.item(0);
     //   if(file.type.split('/')[0] !== 'image'){
     //     console.error("Tipo Não Suportado.");
     //     return;
     //   }
-    //   const path = `images/${itens.nome}_${file.name}`;
+    //   const path = `images/${itens.ctitle}_${file.name}`;
     //   const fileRef = this.storage.ref(path);
     //   let task = this.storage.upload(path,file);
     //   task.snapshotChanges().pipe(
     //     finalize(() =>{
     //       let uploadFileURL = fileRef.getDownloadURL();
     //       uploadFileURL.subscribe(resp => {
-    //         itens.imgUrl = resp;
+    //         itens.cImg = resp;
     //         if(!itens.id){
-    //           this.cadastrar(itens);
+    //           this.cadastrarSobreArea(itens);
     //         }else {
-    //           this.editar(itens, itens.id);
+    //           this.editarSobreArea(itens, itens.id);
     //         }
     //       })
     //     })
@@ -76,8 +78,8 @@ export class FirebaseService {
         cadastrarSobreArea(sobrearea : Sobrearea) {
           return this.firestore.collection(this.PATH2).add({
             ctitle: sobrearea.ctitle,
-            
             cdesc: sobrearea.cdesc,
+            // cImg: sobrearea.cImg
           });
         }
         
@@ -85,6 +87,7 @@ export class FirebaseService {
           return this.firestore.collection(this.PATH2).doc(id).update({
             ctitle: sobrearea.ctitle,
             cdesc: sobrearea.cdesc,
+            // cImg: sobrearea.cImg
             
           });
         }

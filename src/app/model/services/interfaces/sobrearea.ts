@@ -2,11 +2,13 @@ export class Sobrearea{
     private _id!: string;
     private _ctitle!: string;
     private _cdesc!: string;
+    // private _cImg!: any;
 
     constructor(id: string, ctitle: string, cdesc: string){
         this._ctitle = ctitle;
         this._cdesc = cdesc;
         this._id = id;
+        // this._cImg = cImg;
     }
 
     public get id(): string {
@@ -32,5 +34,13 @@ export class Sobrearea{
     public set cdesc(value: string) {
         this._cdesc = value;
     }
+
+    // get cImg(): any {
+    //     return this._cImg;
+    // }
+
+    // set cImg(cImg: any) {
+    //     this._cImg = cImg;
+    // }
 
 }
