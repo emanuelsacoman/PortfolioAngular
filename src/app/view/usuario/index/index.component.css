@@ -414,6 +414,10 @@ footer p {
     font-size: x-small;
 }
 
+.block p::first-letter{
+    text-transform: uppercase;
+}
+
 .selected {
     background-color: #2e86dd;
 }
