@@ -110,10 +110,11 @@ input, textarea{
     border-radius: 5px;
     width: 95%;
     gap: 1vh;
-    padding: 1vh;
+    padding: 1vw;
     overflow-x: auto;
     display: flex;
     position: absolute;
+    z-index: 2;
 }
 
 .area{
@@ -125,6 +126,7 @@ input, textarea{
     cursor: pointer;
     transition: all 0.1s ease;
     flex-shrink: 0;
+    z-index: -1;
     
     .input{
         display: flex;
@@ -154,11 +156,18 @@ input, textarea{
     transform: scale(1.03);
 }
 
+.sendButton{
+    background-color: #82dd55;
+    padding:  0.5vh;
+    border-radius: 5px;
+    width: 100%;
+    margin-block-end: 1vh;
+}
+
 .cadastro{
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    padding: 1vh;
+    position: sticky;
+    display: flex;
+    align-items: flex-end;
 }
 
 .cadastro img{
@@ -176,4 +185,10 @@ input, textarea{
 
 .preImage{
     height: 3.5rem;
+}
+
+.inputs-groups{
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
 }

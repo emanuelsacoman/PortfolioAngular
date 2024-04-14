@@ -5,6 +5,7 @@ import { finalize } from 'rxjs';
 import { Sobre } from './interfaces/sobre';
 import { Sobrearea } from './interfaces/sobrearea';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
+import { Resumo } from './interfaces/resumo';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ import { AngularFireDatabase } from '@angular/fire/compat/database';
 export class FirebaseService {
   private PATH : string = "sobre";
   private PATH2 : string = "sobrearea";
+  private PATH3 : string = "resumo";
 
   constructor(private firestore: AngularFirestore,
     private storage: AngularFireStorage,
@@ -101,7 +103,18 @@ export class FirebaseService {
   
       //Resumo
   
-  
+      obterTodosResumo() {
+        return this.firestore.collection(this.PATH3).snapshotChanges();
+      }
+
+      editarResumo(resumo : Resumo, id: string) {
+        return this.firestore.collection(this.PATH3).doc(id).update({
+          titleArea: resumo.titleArea,
+          lsub: resumo.lsub,
+          rsub: resumo.rsub,
+          
+        });
+      }
       
       //Resumo
     }

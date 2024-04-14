@@ -5,6 +5,7 @@ import { Sobre } from 'src/app/model/services/interfaces/sobre';
 import { FirebaseService } from 'src/app/model/services/firebase.service';
 import { AuthService } from 'src/app/model/services/auth.service';
 import { Sobrearea } from 'src/app/model/services/interfaces/sobrearea';
+import { Resumo } from 'src/app/model/services/interfaces/resumo';
 
 @Component({
   selector: 'app-index',
@@ -14,10 +15,11 @@ import { Sobrearea } from 'src/app/model/services/interfaces/sobrearea';
 export class IndexComponent implements OnInit {
   profileData: any;
   profileImageUrl!: string;
-
+  
   //DB
   public sobre: Sobre[] = [];
   public sobreLoaded = false;
+  public resumo: Resumo[] = [];
 
   public sobrearea: Sobrearea[] = [];
   //DB
@@ -44,6 +46,15 @@ export class IndexComponent implements OnInit {
           } as Sobrearea;
         });
       });
+
+      this.firebaseService.obterTodosResumo().subscribe((res) => {
+        this.resumo = res.map((resumo) => {
+          return {
+            id: resumo.payload.doc.id,
+            ...(resumo.payload.doc.data() as any),
+          } as Resumo;
+        });
+      });
     }
 
   ngOnInit() {
@@ -68,7 +79,7 @@ export class IndexComponent implements OnInit {
     return this.selectedOption === option;
   }
 
-  goToAdmin(data: {sobre: Sobre}) {
+  goToAdmin(data: {sobre: Sobre, resumo: Resumo}) {
     this.router.navigateByUrl('/admin', { state: data });
 }
 

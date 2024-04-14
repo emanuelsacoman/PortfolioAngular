@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { FirebaseService } from 'src/app/model/services/firebase.service';
+import { Resumo } from 'src/app/model/services/interfaces/resumo';
 import { Sobre } from 'src/app/model/services/interfaces/sobre';
 import { Sobrearea } from 'src/app/model/services/interfaces/sobrearea';
 
@@ -16,7 +17,7 @@ export class AdminComponent {
   // SOBRE
   sobreEdit!: FormGroup;
   sobre!: Sobre;
-  selectedOption: string = 'sobre';
+  selectedOption: string = 'resumo';
   title!: string;
   txt1!: string;
   txt2!: string;
@@ -29,6 +30,14 @@ export class AdminComponent {
   ctitle!: string;
   cdesc!: string;
   imagem: any;
+
+  // RESUMO
+  resumoEdit!: FormGroup;
+  imagemResumo: any;
+  resumo!: Resumo;
+  titleArea!: string;
+  lsub!: string;
+  rsub!: string;
 
   constructor(private router: Router,
     private formBuilder: FormBuilder,
@@ -46,6 +55,7 @@ export class AdminComponent {
 
   ngOnInit(){
     this.initSobre();
+    this.initResumo();
   }
 
   initSobre(){
@@ -87,6 +97,41 @@ export class AdminComponent {
     this.router.navigateByUrl("/itemedit", {state: { sobrearea: sobrearea } });
   }
 
+  //RESUMO
+  initResumo(){
+    this.resumo = history.state.resumo;
+    console.log('Informações da resumo:', this.resumo);
+    this.titleArea = this.resumo?.titleArea;
+    this.lsub = this.resumo?.lsub;
+    this.rsub = this.resumo?.rsub;
+
+    this.resumoEdit = this.formBuilder.group({
+      titleArea: [this.titleArea, [Validators.required]],
+      lsub: [this.lsub, [Validators.required]],
+      rsub: [this.rsub, [Validators.required]],
+      rImg: [null],
+      lImg: [null],
+    });
+  }
+
+  editResumo() {
+    if (this.resumoEdit.valid) {
+      const new_part: Resumo = {...this.resumoEdit.value, id: this.resumo.id};
+  
+      this.firebase.editarResumo(new_part, this.resumo.id)
+        .then(() => {
+          console.log('Resumo atualizado com sucesso');
+          this.router.navigate(['/']);
+        })
+        .catch((error) => {
+          console.log('Erro ao atualizar Resumo:', error);
+        });
+    } else {
+      window.alert('Campos obrigatórios!');
+    }
+  }
+
+
   goBack(){
     this.router.navigateByUrl('/');
   }
@@ -97,6 +142,13 @@ export class AdminComponent {
   }
   
   uploadFile(event: any){
+    this.imagem = event.target.files;
+  }
+
+  uploadFileL(event: any){
+    this.imagem = event.target.files;
+  }
+  uploadFileR(event: any){
     this.imagem = event.target.files;
   }
   

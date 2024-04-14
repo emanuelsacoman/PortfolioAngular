@@ -98,17 +98,23 @@
                         </div>
                     </div>
                 </section>
+
+                <!-- <section class="carousel">
+                    <h3 class="carouseltitle">Conhecimento</h3>
+                    
+                </section> -->
             </div>
             <div class="resumo wrap" *ngIf="isSelected('resumo')">
-                <div class="top">
-                    <h1>resumo</h1>
-                    <div class="topbar"></div>
-                </div>
-                <section class="resume">
-                    <div class="education resumeitem">
+                <div class="txttop" *ngFor="let resumo of resumo">
+                    <div class="top">
+                        <h1>{{resumo.titleArea}}</h1>
+                        <div class="topbar"></div>
+                    </div>
+                    <section class="resume">
+                        <div class="education resumeitem">
                         <div class="resumetop">
                             <img src="./assets/images/education.png" alt="Resume pic">           
-                            <h2>Educação</h2>
+                            <h2>{{resumo.lsub}}</h2>
                         </div>
                         <div class="resumebox"> 
                             <p class="title">title</p>
@@ -119,7 +125,7 @@
                     <div class="experience resumeitem">
                         <div class="resumetop">
                             <img src="./assets/images/pasta.png" alt="Resume pic">       
-                            <h2>Experiência</h2>
+                            <h2>{{resumo.rsub}}</h2>
                         </div>
                         <div class="resumebox">
                             <p class="title">title</p>
@@ -127,7 +133,8 @@
                             <p class="location">location</p>
                         </div>
                     </div>
-                </section>
+                    </section>
+                </div>
             </div>
             <div class="projetos wrap" *ngIf="isSelected('projetos')">
                 <div class="top">
@@ -155,11 +162,11 @@
         <nav class="desknav bloco">
             <div class="block" (click)="selectOption('sobre')" [ngClass]="{selected: isSelected('sobre')}">
                 <img src="/assets/images/sobre.png" alt="Opção">
-                <p>Sobre</p>
+                <p *ngFor="let sobre of sobre">{{sobre.title}}</p>
             </div>
             <div class="block" (click)="selectOption('resumo')" [ngClass]="{selected: isSelected('resumo')}">
                 <img src="/assets/images/resume.png" alt="Opção">
-                <p>Resumo</p>
+                <p *ngFor="let resumo of resumo">{{resumo.titleArea}}</p>
             </div>
             <div class="block" (click)="selectOption('projetos')" [ngClass]="{selected: isSelected('projetos')}">
                 <img src="/assets/images/projeto.png" alt="Opção">
@@ -174,12 +181,14 @@
                 <p>Contato</p>
             </div>
             <div class="adm block" *ngFor="let sobre of sobre">
-                <ng-container *ngIf="isLoggedIn()">
-                    <div class="block" (click)="goToAdmin({sobre: sobre})">
-                        <img src="/assets/images/admin.png" alt="Opção">
-                        <p>Admin</p>
-                    </div>
-                </ng-container>
+                <div *ngFor="let resumo of resumo">
+                    <ng-container *ngIf="isLoggedIn()">
+                        <div class="block" (click)="goToAdmin({sobre: sobre, resumo: resumo})">
+                            <img src="/assets/images/admin.png" alt="Opção">
+                            <p>Admin</p>
+                        </div>
+                    </ng-container>
+                </div>
             </div>
             
             

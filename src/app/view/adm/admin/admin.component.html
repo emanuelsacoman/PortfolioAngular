@@ -15,6 +15,7 @@
                 <P>PROJETOS</P>
             </div>
             <div class="option" (click)="selectOption('github')" [ngClass]="{selected: isSelected('github')}">GITHUB</div>
+            <div class="option" (click)="selectOption('profile')" [ngClass]="{selected: isSelected('profile')}">PROFILE</div>
         </aside>
         <section class="formsection">
             <div class="formall" *ngIf="isSelected('sobre')">
@@ -54,14 +55,32 @@
                     </div>
                   </div>
                 </div>
+                <div class="cadastro">
+                  <img (click)="cadastrar()" src="./assets/images/plus.png" alt="Cadastro">
+                </div>
               </section>          
-              <div class="cadastro">
-                <img (click)="cadastrar()" src="./assets/images/plus.png" alt="Cadastro">
-              </div>
             
             </div>
             <div class="formall" *ngIf="isSelected('resumo')">
-              <p>resumo</p>  
+              <form class="formResumo" (ngSubmit)="editResumo()" [formGroup]="resumoEdit" #formDir="ngForm">
+                <div class="inputs-groups">
+                  <div class="input-group">
+                    <div class="input">
+                      <input type="text" id="titleArea" placeholder="Insira o titulo" formControlName="titleArea" required/>
+                    </div>
+                  </div>
+                  <div class="input-group">
+                    
+                    <div class="input">
+                      <input type="text" id="lsub" placeholder="Insira o lsub" formControlName="lsub" required/>
+                    </div>
+                    <div class="input">
+                      <input type="text" id="rsub" placeholder="Insira o rsub" formControlName="rsub" required/>
+                    </div>
+                </div>
+              </div>
+                <button class="sendButton" type="submit">Enviar</button>
+              </form>   
             </div>
             <div class="formall" *ngIf="isSelected('addprojetos')">
               <p>addprojetos</p>  
@@ -71,6 +90,9 @@
             </div>
             <div class="formall" *ngIf="isSelected('github')">
               <p>github</p>  
+            </div>
+            <div class="formall" *ngIf="isSelected('profile')">
+              <p>profile</p>  
             </div>
           </section>
         </main>
