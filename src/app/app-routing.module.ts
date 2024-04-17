@@ -5,6 +5,8 @@ import { LoginComponent } from './view/usuario/login/login.component';
 import { AdminComponent } from './view/adm/admin/admin.component';
 import { AuthGuard } from './model/shared/auth.guard';
 import { ItemeditComponent } from './view/adm/edit/itemedit/itemedit.component';
+import { ResumoleditComponent } from './view/adm/edit/resumoledit/resumoledit.component';
+import { ResumoreditComponent } from './view/adm/edit/resumoredit/resumoredit.component';
 
 const routes: Routes = [
   {
@@ -24,7 +26,17 @@ const routes: Routes = [
     path: 'itemedit',
     component: ItemeditComponent,
     canActivate: [AuthGuard],
-  }
+  },
+  {
+    path: 'resumoledit',
+    component: ResumoleditComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'resumoredit',
+    component: ResumoreditComponent,
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({

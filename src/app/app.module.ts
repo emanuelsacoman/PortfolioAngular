@@ -20,6 +20,8 @@ import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
 import { HttpClientModule } from '@angular/common/http';
 import { ItemeditComponent } from './view/adm/edit/itemedit/itemedit.component';
+import { ResumoleditComponent } from './view/adm/edit/resumoledit/resumoledit.component';
+import { ResumoreditComponent } from './view/adm/edit/resumoredit/resumoredit.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { ItemeditComponent } from './view/adm/edit/itemedit/itemedit.component';
     LoginComponent,
     AdminComponent,
     ItemeditComponent,
+    ResumoleditComponent,
+    ResumoreditComponent,
   ],
   imports: [
     BrowserModule,

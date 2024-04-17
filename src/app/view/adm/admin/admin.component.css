@@ -161,7 +161,6 @@ input, textarea{
     padding:  0.5vh;
     border-radius: 5px;
     width: 100%;
-    margin-block-end: 1vh;
 }
 
 .cadastro{
@@ -191,4 +190,52 @@ input, textarea{
     display: flex;
     flex-direction: column;
     gap: 1vh;
+}
+
+.itensdisplay{
+    display: flex;
+    flex-direction: row;
+    gap: 2vh;
+    margin-top: 2vh;
+}
+
+.displayarea{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+}
+
+.display{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 5px;
+    border: solid black 1px;
+    width: 100%;
+    background-color: #d5d4d6;
+    cursor: pointer;
+    font-size: clamp(1rem, 2vw, 1.3rem);
+
+    p{
+        background-color: #c0c0c0;
+        width: fit-content;
+        border-radius: 5px;
+        padding: 1vh;
+        margin: 1vh;
+    }
+}
+
+.addbuton{
+    background-color: #2e86dd;
+    color: #fff;
+    border-radius: 5px;
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    padding: 1vh;
+    text-align: center;
+    cursor: pointer;
+}
+
+.display:hover, .addbuton:hover{
+    transform: scale(1.03);
 }

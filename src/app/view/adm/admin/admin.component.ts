@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { FirebaseService } from 'src/app/model/services/firebase.service';
 import { Resumo } from 'src/app/model/services/interfaces/resumo';
+import { ResumoL } from 'src/app/model/services/interfaces/resumoL';
+import { ResumoR } from 'src/app/model/services/interfaces/resumoR';
 import { Sobre } from 'src/app/model/services/interfaces/sobre';
 import { Sobrearea } from 'src/app/model/services/interfaces/sobrearea';
 
@@ -39,6 +41,18 @@ export class AdminComponent {
   lsub!: string;
   rsub!: string;
 
+  // RESUMOL
+  public resumol: ResumoL[] = [];
+  titlel!: string;
+  descl!: string;
+  locationl!: string;
+
+  // RESUMOR
+  public resumor: ResumoR[] = [];
+  titler!: string;
+  descr!: string;
+  locationr!: string;
+
   constructor(private router: Router,
     private formBuilder: FormBuilder,
     private firebase: FirebaseService,
@@ -49,6 +63,24 @@ export class AdminComponent {
             id: sobre.payload.doc.id,
             ...(sobre.payload.doc.data() as any),
           } as Sobrearea;
+        });
+      });
+
+      this.firebase.obterTodosResumoL().subscribe((res) => {
+        this.resumol = res.map((resumol) => {
+          return {
+            id: resumol.payload.doc.id,
+            ...(resumol.payload.doc.data() as any),
+          } as ResumoL;
+        });
+      });
+
+      this.firebase.obterTodosResumoR().subscribe((res) => {
+        this.resumor = res.map((resumor) => {
+          return {
+            id: resumor.payload.doc.id,
+            ...(resumor.payload.doc.data() as any),
+          } as ResumoR;
         });
       });
   }
@@ -131,6 +163,28 @@ export class AdminComponent {
     }
   }
 
+
+  addresumol(){
+    const create: ResumoL = new ResumoL("","","","");
+    this.firebase.cadastrarResumoL(create);
+  }
+
+  editarl(resumol: ResumoL){
+    console.log('Item clicado:', resumol);
+    
+    this.router.navigateByUrl("/resumoledit", {state: { resumol: resumol } });
+  }
+
+  addresumor(){
+    const create: ResumoR = new ResumoR("","","","");
+    this.firebase.cadastrarResumoR(create);
+  }
+
+  editarr(resumor: ResumoR){
+    console.log('Item clicado:', resumor);
+    
+    this.router.navigateByUrl("/resumoredit", {state: { resumor: resumor } });
+  }
 
   goBack(){
     this.router.navigateByUrl('/');

@@ -77,11 +77,36 @@
                     <div class="input">
                       <input type="text" id="rsub" placeholder="Insira o rsub" formControlName="rsub" required/>
                     </div>
+                  </div>
+                  <button class="sendButton" type="submit">Enviar</button>
                 </div>
-              </div>
-                <button class="sendButton" type="submit">Enviar</button>
-              </form>   
+                </form>   
+
+                <section class="itensdisplay">
+                  <div class="displayarea">
+                    <div class="display" *ngFor="let resumol of resumol; let i = index" (click)="editarl(resumol)">
+                      <p>{{resumol.titlel}}</p>
+                      <p>{{resumol.descl}}</p>
+                      <p>{{resumol.locationl}}</p>
+                    </div>
+                    <div class="addbuton" (click)="addresumol()">
+                      ADD
+                    </div>
+                  </div>
+                  <div class="displayarea">
+                    <div class="display" *ngFor="let resumor of resumor; let i = index" (click)="editarr(resumor)">
+                      <p>{{resumor.titler}}</p>
+                      <p>{{resumor.descr}}</p>
+                      <p>{{resumor.locationr}}</p>
+                    </div>
+                    <div class="addbuton" (click)="addresumor()">
+                      ADD
+                    </div>
+                  </div>
+                </section>
             </div>
+            
+            
             <div class="formall" *ngIf="isSelected('addprojetos')">
               <p>addprojetos</p>  
             </div>

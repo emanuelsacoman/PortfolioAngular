@@ -6,6 +6,8 @@ import { Sobre } from './interfaces/sobre';
 import { Sobrearea } from './interfaces/sobrearea';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { Resumo } from './interfaces/resumo';
+import { ResumoL } from './interfaces/resumoL';
+import { ResumoR } from './interfaces/resumoR';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +16,8 @@ export class FirebaseService {
   private PATH : string = "sobre";
   private PATH2 : string = "sobrearea";
   private PATH3 : string = "resumo";
+  private PATH4 : string = "resumol";
+  private PATH5 : string = "resumor";
 
   constructor(private firestore: AngularFirestore,
     private storage: AngularFireStorage,
@@ -115,6 +119,58 @@ export class FirebaseService {
           
         });
       }
+
+        //ResumoL
+        obterTodosResumoL() {
+          return this.firestore.collection(this.PATH4).snapshotChanges();
+        }
+
+        editarResumoL(resumo : ResumoL, id: string) {
+          return this.firestore.collection(this.PATH4).doc(id).update({
+            titlel: resumo.titlel,
+            descl: resumo.descl,
+            locationl: resumo.locationl,
+          });
+        }
+
+        excluirResumoL(id: string) {
+          return this.firestore.collection(this.PATH4).doc(id).delete();
+        } 
+
+        cadastrarResumoL(resumo : ResumoL) {
+          return this.firestore.collection(this.PATH4).add({
+            titlel: resumo.titlel,
+            descl: resumo.descl,
+            locationl: resumo.locationl,
+          });
+        }
+        //ResumoL
+
+        //ResumoR
+        obterTodosResumoR() {
+          return this.firestore.collection(this.PATH5).snapshotChanges();
+        }
+
+        editarResumoR(resumo : ResumoR, id: string) {
+          return this.firestore.collection(this.PATH5).doc(id).update({
+            titler: resumo.titler,
+            descr: resumo.descr,
+            locationr: resumo.locationr,
+          });
+        }
+
+        excluirResumoR(id: string) {
+          return this.firestore.collection(this.PATH5).doc(id).delete();
+        } 
+
+        cadastrarResumoR(resumo : ResumoR) {
+          return this.firestore.collection(this.PATH5).add({
+            titler: resumo.titler,
+            descr: resumo.descr,
+            locationr: resumo.locationr,
+          });
+        }
+        //ResumoR
       
       //Resumo
     }
