@@ -8,6 +8,7 @@ import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { Resumo } from './interfaces/resumo';
 import { ResumoL } from './interfaces/resumoL';
 import { ResumoR } from './interfaces/resumoR';
+import { Projetos } from './interfaces/projetos';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,7 @@ export class FirebaseService {
   private PATH3 : string = "resumo";
   private PATH4 : string = "resumol";
   private PATH5 : string = "resumor";
+  private PATH6 : string = "projetos";
 
   constructor(private firestore: AngularFirestore,
     private storage: AngularFireStorage,
@@ -173,6 +175,32 @@ export class FirebaseService {
         //ResumoR
       
       //Resumo
+
+      //Projetos
+      obterTodosProjetos() {
+        return this.firestore.collection(this.PATH6).snapshotChanges();
+      }
+
+      editarProjetos(projetos : Projetos, id: string) {
+        return this.firestore.collection(this.PATH6).doc(id).update({
+          titulo: projetos.titulo,
+          projectImg: projetos.projectImg,
+          badge: projetos.badge,
+        });
+      }
+
+      excluirProjetos(id: string) {
+        return this.firestore.collection(this.PATH6).doc(id).delete();
+      } 
+
+      cadastrarProjetos(projetos : Projetos) {
+        return this.firestore.collection(this.PATH6).add({
+          titulo: projetos.titulo,
+          projectImg: projetos.projectImg,
+          badge: projetos.badge,
+        });
+      }
+      //Projetos
     }
 
     
