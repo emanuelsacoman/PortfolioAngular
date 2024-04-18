@@ -6,6 +6,8 @@ import { FirebaseService } from 'src/app/model/services/firebase.service';
 import { AuthService } from 'src/app/model/services/auth.service';
 import { Sobrearea } from 'src/app/model/services/interfaces/sobrearea';
 import { Resumo } from 'src/app/model/services/interfaces/resumo';
+import { ResumoL } from 'src/app/model/services/interfaces/resumoL';
+import { ResumoR } from 'src/app/model/services/interfaces/resumoR';
 
 @Component({
   selector: 'app-index',
@@ -15,6 +17,7 @@ import { Resumo } from 'src/app/model/services/interfaces/resumo';
 export class IndexComponent implements OnInit {
   profileData: any;
   profileImageUrl!: string;
+  selectedOption: string = 'sobre';
   
   //DB
   public sobre: Sobre[] = [];
@@ -22,6 +25,9 @@ export class IndexComponent implements OnInit {
   public resumo: Resumo[] = [];
 
   public sobrearea: Sobrearea[] = [];
+
+  public resumol: ResumoL[] = [];
+  public resumor: ResumoR[] = [];
   //DB
   
   constructor(private http: HttpClient,
@@ -55,6 +61,25 @@ export class IndexComponent implements OnInit {
           } as Resumo;
         });
       });
+
+      this.firebaseService.obterTodosResumoL().subscribe((res) => {
+        this.resumol = res.map((resumol) => {
+          return {
+            id: resumol.payload.doc.id,
+            ...(resumol.payload.doc.data() as any),
+          } as ResumoL;
+        });
+      });
+
+      this.firebaseService.obterTodosResumoR().subscribe((res) => {
+        this.resumor = res.map((resumor) => {
+          return {
+            id: resumor.payload.doc.id,
+            ...(resumor.payload.doc.data() as any),
+          } as ResumoR;
+        });
+      });
+
     }
 
   ngOnInit() {
@@ -67,8 +92,6 @@ export class IndexComponent implements OnInit {
       this.profileImageUrl = data.avatar_url;
     });
   }
-
-  selectedOption: string = 'sobre';
 
   selectOption(option: string) {
     this.selectedOption = option;

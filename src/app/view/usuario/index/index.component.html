@@ -111,28 +111,28 @@
                         <div class="topbar"></div>
                     </div>
                     <section class="resume">
-                        <div class="education resumeitem">
-                        <div class="resumetop">
-                            <img src="./assets/images/education.png" alt="Resume pic">           
-                            <h2>{{resumo.lsub}}</h2>
+                        <div class="education resumeitem" >
+                            <div class="resumetop">
+                                <img src="./assets/images/education.png" alt="Resume pic">           
+                                <h2>{{resumo.lsub}}</h2>
+                            </div>
+                            <div class="resumebox" *ngFor="let resumol of resumol"> 
+                                <p class="title">{{resumol.titlel}}</p>
+                                <p class="desc">{{resumol.descl}}</p>
+                                <p class="location">{{resumol.locationl}}</p>
+                            </div>
                         </div>
-                        <div class="resumebox"> 
-                            <p class="title">title</p>
-                            <p class="desc">desc</p>
-                            <p class="location">location</p>
+                        <div class="experience resumeitem" >
+                            <div class="resumetop">
+                                <img src="./assets/images/pasta.png" alt="Resume pic">       
+                                <h2>{{resumo.rsub}}</h2>
+                            </div>
+                            <div class="resumebox" *ngFor="let resumor of resumor">
+                                <p class="title">{{resumor.titler}}</p>
+                                <p class="desc">{{resumor.descr}}</p>
+                                <p class="location">{{resumor.locationr}}</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="experience resumeitem">
-                        <div class="resumetop">
-                            <img src="./assets/images/pasta.png" alt="Resume pic">       
-                            <h2>{{resumo.rsub}}</h2>
-                        </div>
-                        <div class="resumebox">
-                            <p class="title">title</p>
-                            <p class="desc">desc</p>
-                            <p class="location">location</p>
-                        </div>
-                    </div>
                     </section>
                 </div>
             </div>
@@ -180,10 +180,10 @@
                 <img src="/assets/images/contato.png" alt="Opção">
                 <p>Contato</p>
             </div>
-            <div class="adm block" *ngFor="let sobre of sobre">
+            <div class="block" *ngFor="let sobre of sobre">
                 <div *ngFor="let resumo of resumo">
                     <ng-container *ngIf="isLoggedIn()">
-                        <div class="block" (click)="goToAdmin({sobre: sobre, resumo: resumo})">
+                        <div class="block2" (click)="goToAdmin({sobre: sobre, resumo: resumo})">
                             <img src="/assets/images/admin.png" alt="Opção">
                             <p>Admin</p>
                         </div>

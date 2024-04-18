@@ -1,1 +1,34 @@
-<p>resumoredit works!</p>
+<body>
+    <main>
+        <section class="formsection">
+             <form class="formItens" (ngSubmit)="editItem()" [formGroup]="editar" #formDir="ngForm">
+                <h1 class="title">EDITAR</h1>
+                <div class="formTop">
+
+                    <div class="form-group">
+                        <div class="input">
+                            <input type="text" id="titler" placeholder="Insira o titulo" formControlName="titler" required/>
+                            <p *ngIf="isInvalidControl('titler')">Erro no titulo</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input">
+                            <input type="text" id="descr" placeholder="Insira a descrição" formControlName="descr" required>
+                            <p *ngIf="isInvalidControl('descr')">Erro na descrição</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input">
+                            <input type="text" id="locationr" placeholder="Insira a localização" formControlName="locationr" required>
+                            <p *ngIf="isInvalidControl('locationr')">Erro na localização</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <button class="sendButton" type="submit">Enviar</button>
+                    <button class="delete" (click)="delete()">Excluir</button>
+                </div>
+             </form>
+        </section>
+    </main>
+</body>

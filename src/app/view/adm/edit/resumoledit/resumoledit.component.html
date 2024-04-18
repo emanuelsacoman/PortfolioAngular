@@ -1,1 +1,34 @@
-<p>resumoledit works!</p>
+<body>
+    <main>
+        <section class="formsection">
+             <form class="formItens" (ngSubmit)="editItem()" [formGroup]="editar" #formDir="ngForm">
+                <h1 class="title">EDITAR</h1>
+                <div class="formTop">
+
+                    <div class="form-group">
+                        <div class="input">
+                            <input type="text" id="titlel" placeholder="Insira o titulo" formControlName="titlel" required/>
+                            <p *ngIf="isInvalidControl('titlel')">Erro no titulo</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input">
+                            <input type="text" id="descl" placeholder="Insira a descrição" formControlName="descl" required>
+                            <p *ngIf="isInvalidControl('descl')">Erro na descrição</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input">
+                            <input type="text" id="locationl" placeholder="Insira a localização" formControlName="locationl" required>
+                            <p *ngIf="isInvalidControl('locationl')">Erro na localização</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <button class="sendButton" type="submit">Enviar</button>
+                    <button class="delete" (click)="delete()">Excluir</button>
+                </div>
+             </form>
+        </section>
+    </main>
+</body>
