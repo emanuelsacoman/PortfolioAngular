@@ -360,7 +360,7 @@ body{
 
 .project{
     border-radius: 5px;
-    flex: 1 1 20%;
+    flex: 1 1 33%;
     border: solid black 1px;
     cursor: pointer;
     background-size: cover;
@@ -403,7 +403,23 @@ body{
 }
 
 .project .title{
-    font-size: 3rem;
+    font-size: clamp(1rem, 5vw, 3rem);
+    font-weight: bold;
+    font-stretch: expanded;
+    border-radius: 5px;
+    padding: 5px;
+    transition: all 0.2s ease;
+    text-wrap: nowrap;
+    color: #e2e2e281;
+    mix-blend-mode: color-dodge;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke-width: 2px;
+}
+
+.project:hover .title{
+    color: #f7f6f8;
 }
 
 .projetosSection{

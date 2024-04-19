@@ -21,7 +21,7 @@ export class AdminComponent {
   // SOBRE
   sobreEdit!: FormGroup;
   sobre!: Sobre;
-  selectedOption: string = 'projetos';
+  selectedOption: string = 'sobre';
   title!: string;
   txt1!: string;
   txt2!: string;

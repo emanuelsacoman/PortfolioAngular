@@ -314,7 +314,8 @@ input, textarea{
 }
 
 .project .title{
-    font-size: 2rem;
+    font-size: clamp(1rem, 5vw, 3rem);
+    font-weight: bold;
 }
 
 .projetosSection{

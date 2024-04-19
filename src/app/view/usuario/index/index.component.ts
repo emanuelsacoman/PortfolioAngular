@@ -19,7 +19,7 @@ import { Projetos } from 'src/app/model/services/interfaces/projetos';
 export class IndexComponent implements OnInit {
   profileData: any;
   profileImageUrl!: string;
-  selectedOption: string = 'projetos';
+  selectedOption: string = 'sobre';
   
   //DB
   public sobre: Sobre[] = [];
