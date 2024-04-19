@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { FirebaseService } from 'src/app/model/services/firebase.service';
+import { Projeto } from 'src/app/model/services/interfaces/projeto';
+import { Projetos } from 'src/app/model/services/interfaces/projetos';
 import { Resumo } from 'src/app/model/services/interfaces/resumo';
 import { ResumoL } from 'src/app/model/services/interfaces/resumoL';
 import { ResumoR } from 'src/app/model/services/interfaces/resumoR';
@@ -19,7 +21,7 @@ export class AdminComponent {
   // SOBRE
   sobreEdit!: FormGroup;
   sobre!: Sobre;
-  selectedOption: string = 'sobre';
+  selectedOption: string = 'projetos';
   title!: string;
   txt1!: string;
   txt2!: string;
@@ -32,7 +34,7 @@ export class AdminComponent {
   ctitle!: string;
   cdesc!: string;
   imagem: any;
-
+  
   // RESUMO
   resumoEdit!: FormGroup;
   imagemResumo: any;
@@ -40,19 +42,28 @@ export class AdminComponent {
   titleArea!: string;
   lsub!: string;
   rsub!: string;
-
+  
   // RESUMOL
   public resumol: ResumoL[] = [];
   titlel!: string;
   descl!: string;
   locationl!: string;
-
+  
   // RESUMOR
   public resumor: ResumoR[] = [];
   titler!: string;
   descr!: string;
   locationr!: string;
-
+  
+  // PROJETOS
+  public projetos: Projetos[] = [];
+  
+  //PROJETO
+  projetoEdit!: FormGroup;
+  projeto!: Projeto;
+  titleProjeto!: string;
+  
+  
   constructor(private router: Router,
     private formBuilder: FormBuilder,
     private firebase: FirebaseService,
@@ -83,11 +94,49 @@ export class AdminComponent {
           } as ResumoR;
         });
       });
+
+      this.firebase.obterTodosProjetos().subscribe((res) => {
+        this.projetos = res.map((projeto) => {
+          return {
+            id: projeto.payload.doc.id,
+            ...(projeto.payload.doc.data() as any),
+          } as Projetos;
+        });
+      });
   }
 
   ngOnInit(){
     this.initSobre();
     this.initResumo();
+    this.initProjeto();
+  }
+
+  editProjeto() {
+    if (this.projetoEdit.valid) {
+      const new_part: Projeto = {...this.projetoEdit.value, id: this.projeto.id};
+  
+      this.firebase.editarProjeto(new_part, this.projeto.id)
+        .then(() => {
+          console.log('Projeto atualizado com sucesso');
+          this.router.navigate(['/']);
+        })
+        .catch((error) => {
+          console.log('Erro ao atualizar Projeto:', error);
+        });
+    } else {
+      window.alert('Campos obrigatórios!');
+    }
+  }
+  
+  initProjeto(){
+    this.projeto = history.state.projeto;
+    console.log('Informações de projeto:', this.projeto);
+    this.titleProjeto = this.projeto?.titleProjeto;
+
+    this.projetoEdit = this.formBuilder.group({
+      titleProjeto: [this.titleProjeto, [Validators.required]],
+
+    });
   }
 
   initSobre(){
@@ -194,6 +243,19 @@ export class AdminComponent {
     const create: Sobrearea = new Sobrearea("","","", null);
     this.firebase.cadastrarSobreArea(create);
   }
+
+  cadastrarProjeto(){
+    const create: Projetos = new Projetos("","","","","");
+    this.firebase.cadastrarProjetos(create);
+  }
+
+  editarProjeto(projeto: Projetos){
+    console.log('Item clicado:', projeto);
+    
+    this.router.navigateByUrl("/projetoedit", {state: { projeto: projeto } });
+  }
+
+  
   
   uploadFile(event: any){
     this.imagem = event.target.files;

@@ -22,6 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ItemeditComponent } from './view/adm/edit/itemedit/itemedit.component';
 import { ResumoleditComponent } from './view/adm/edit/resumoledit/resumoledit.component';
 import { ResumoreditComponent } from './view/adm/edit/resumoredit/resumoredit.component';
+import { ProjetoeditComponent } from './view/adm/edit/projetoedit/projetoedit.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { ResumoreditComponent } from './view/adm/edit/resumoredit/resumoredit.co
     ItemeditComponent,
     ResumoleditComponent,
     ResumoreditComponent,
+    ProjetoeditComponent,
   ],
   imports: [
     BrowserModule,

@@ -9,6 +9,7 @@ import { Resumo } from './interfaces/resumo';
 import { ResumoL } from './interfaces/resumoL';
 import { ResumoR } from './interfaces/resumoR';
 import { Projetos } from './interfaces/projetos';
+import { Projeto } from './interfaces/projeto';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,7 @@ export class FirebaseService {
   private PATH4 : string = "resumol";
   private PATH5 : string = "resumor";
   private PATH6 : string = "projetos";
+  private PATH7 : string = "projetosArea";
 
   constructor(private firestore: AngularFirestore,
     private storage: AngularFireStorage,
@@ -186,6 +188,7 @@ export class FirebaseService {
           titulo: projetos.titulo,
           projectImg: projetos.projectImg,
           badge: projetos.badge,
+          link: projetos.link,
         });
       }
 
@@ -198,8 +201,72 @@ export class FirebaseService {
           titulo: projetos.titulo,
           projectImg: projetos.projectImg,
           badge: projetos.badge,
+          link: projetos.link,
         });
       }
+
+      uploadImageProjeto1(imagem: any, itens: Projetos){
+        const file = imagem.item(0);
+        if(file.type.split('/')[0] !== 'image'){
+          console.error("Tipo Não Suportado.");
+          return;
+        }
+        const path = `images/${itens.titulo}_${file.name}`;
+        const fileRef = this.storage.ref(path);
+        let task = this.storage.upload(path,file);
+        task.snapshotChanges().pipe(
+          finalize(() =>{
+            let uploadFileURL = fileRef.getDownloadURL();
+            uploadFileURL.subscribe(resp => {
+              itens.projectImg = resp;
+              if(!itens.id){
+                this.cadastrarProjetos(itens);
+              }else {
+                this.editarProjetos(itens, itens.id);
+              }
+            })
+          })
+          ).subscribe();
+          return task;
+        }
+
+      uploadImageProjeto2(imagem: any, itens: Projetos){
+        const file = imagem.item(0);
+        if(file.type.split('/')[0] !== 'image'){
+          console.error("Tipo Não Suportado.");
+          return;
+        }
+        const path = `images/${itens.titulo}_${file.name}`;
+        const fileRef = this.storage.ref(path);
+        let task = this.storage.upload(path,file);
+        task.snapshotChanges().pipe(
+          finalize(() =>{
+            let uploadFileURL = fileRef.getDownloadURL();
+            uploadFileURL.subscribe(resp => {
+              itens.badge = resp;
+              if(!itens.id){
+                this.cadastrarProjetos(itens);
+              }else {
+                this.editarProjetos(itens, itens.id);
+              }
+            })
+          })
+          ).subscribe();
+          return task;
+        }
+
+        //Projeto
+        editarProjeto(projeto : Projeto, id: string) {
+          return this.firestore.collection(this.PATH7).doc(id).update({
+            titleProjeto: projeto.titleProjeto
+          });
+        }
+
+        obterTodosProjeto() {
+          return this.firestore.collection(this.PATH7).snapshotChanges();
+        }
+        
+        //Projeto
       //Projetos
     }
 

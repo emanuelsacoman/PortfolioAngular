@@ -3,12 +3,14 @@ export class Projetos {
     private _titulo!: string;
     private _projectImg!: any;
     private _badge!: any;
+    private _link!: string;
 
-    constructor(id: string, titulo: string, projectImg: any, badge: any) {
+    constructor(id: string, titulo: string, projectImg: any, badge: any, link: string) {
         this._id = id;
         this._titulo = titulo;
         this._projectImg = projectImg;
         this._badge = badge;
+        this._link = link;
     }
 
     public get id(): string {
@@ -41,5 +43,13 @@ export class Projetos {
 
     public set badge(value: any) {
         this._badge = value;
+    }
+
+    public get link(): any {
+        return this._link;
+    }
+
+    public set link(value: any) {
+        this._link = value;
     }
 }

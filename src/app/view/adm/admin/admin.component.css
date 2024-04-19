@@ -244,3 +244,83 @@ input, textarea{
 .display:hover, .addbuton:hover{
     transform: scale(1.03);
 }
+
+.botaoarea{
+    position: absolute;
+    right: 1vh;
+    bottom: 1vh;
+}
+
+.cadastroProject{
+    position: relative;
+    display: flex;  
+}
+
+.cadastroProject img{
+    height: 3rem;
+    width: auto;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.cadastroProject img:hover{
+    scale: 1.1;
+    filter: brightness(120%);
+    z-index: 999;
+}
+
+.projects{
+    display: flex;
+    flex-direction: row;
+    gap: 1vh;
+    flex-wrap: wrap;
+    flex-basis: auto;
+}
+
+.project{
+    border-radius: 5px;
+    flex: 1 1 20%;
+    border: solid black 1px;
+    cursor: pointer;
+    background-size: cover;
+    background-position: center;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.mark img {
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 4;
+    width: 4rem;
+}
+
+.project .badge img{
+    padding-right: 18px;
+    padding-top: 13px;
+    position: absolute;
+    width: 1.7rem;
+}
+
+.project:hover{
+    filter: brightness(120%);
+}
+
+.project .title{
+    font-size: 2rem;
+}
+
+.projetosSection{
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+}
+
+

@@ -102,9 +102,36 @@
                 </section>
             </div>
             
-            
-            <div class="formall" *ngIf="isSelected('projetos')">
-              <p>projetos</p>  
+            <div class="formall projetosSection" *ngIf="isSelected('projetos')">
+              <section class="projeto">
+                <form class="formProjeto" (ngSubmit)="editProjeto()" [formGroup]="projetoEdit" #formDir="ngForm">
+                  <div class="inputs-groups">
+                    <div class="input-group">
+                      <div class="input">
+                        <input type="text" id="titleProjeto" placeholder="Insira o titulo" formControlName="titleProjeto" required/>
+                      </div>
+                    </div>
+                    <button class="sendButton" type="submit">Enviar</button>
+                  </div>
+                </form>   
+              </section>
+              
+              <div class="projects">
+                <div class="project" style="background-image: url('{{projeto.projectImg}}');" *ngFor="let projeto of projetos" (click)="editarProjeto(projeto)">
+                  <div class="mark">
+                    <img src="./assets/images/bookmark.png" alt="Mark">
+                    <div class="badge">
+                      <img src="{{projeto.badge}}" alt="Badge">
+                    </div>
+                  </div>
+                  <div class="title">{{projeto.titulo}}</div>
+                </div>
+              </div>
+              <div class="botaoarea">
+                <div class="cadastroProject">
+                  <img (click)="cadastrarProjeto()" src="./assets/images/plus.png" alt="Cadastro">
+                </div>
+              </div>
             </div>
             <div class="formall" *ngIf="isSelected('github')">
               <p>github</p>  

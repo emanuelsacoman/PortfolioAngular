@@ -8,6 +8,8 @@ import { Sobrearea } from 'src/app/model/services/interfaces/sobrearea';
 import { Resumo } from 'src/app/model/services/interfaces/resumo';
 import { ResumoL } from 'src/app/model/services/interfaces/resumoL';
 import { ResumoR } from 'src/app/model/services/interfaces/resumoR';
+import { Projeto } from 'src/app/model/services/interfaces/projeto';
+import { Projetos } from 'src/app/model/services/interfaces/projetos';
 
 @Component({
   selector: 'app-index',
@@ -17,7 +19,7 @@ import { ResumoR } from 'src/app/model/services/interfaces/resumoR';
 export class IndexComponent implements OnInit {
   profileData: any;
   profileImageUrl!: string;
-  selectedOption: string = 'sobre';
+  selectedOption: string = 'projetos';
   
   //DB
   public sobre: Sobre[] = [];
@@ -28,6 +30,10 @@ export class IndexComponent implements OnInit {
 
   public resumol: ResumoL[] = [];
   public resumor: ResumoR[] = [];
+
+  public projeto: Projeto[] = [];
+
+  public projetos: Projetos[] = [];
   //DB
   
   constructor(private http: HttpClient,
@@ -80,6 +86,24 @@ export class IndexComponent implements OnInit {
         });
       });
 
+      this.firebaseService.obterTodosProjeto().subscribe((res) => {
+        this.projeto = res.map((projeto) => {
+          return {
+            id: projeto.payload.doc.id,
+            ...(projeto.payload.doc.data() as any),
+          } as Projeto;
+        });
+      });
+
+      this.firebaseService.obterTodosProjetos().subscribe((res) => {
+        this.projetos = res.map((projetos) => {
+          return {
+            id: projetos.payload.doc.id,
+            ...(projetos.payload.doc.data() as any),
+          } as Projetos;
+        });
+      });
+
     }
 
   ngOnInit() {
@@ -102,7 +126,7 @@ export class IndexComponent implements OnInit {
     return this.selectedOption === option;
   }
 
-  goToAdmin(data: {sobre: Sobre, resumo: Resumo}) {
+  goToAdmin(data: {sobre: Sobre, resumo: Resumo, projeto: Projeto}) {
     this.router.navigateByUrl('/admin', { state: data });
 }
 

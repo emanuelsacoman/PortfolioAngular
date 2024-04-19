@@ -138,8 +138,21 @@
             </div>
             <div class="projetos wrap" *ngIf="isSelected('projetos')">
                 <div class="top">
-                    <h1>projetos</h1>
+                    <h1 *ngFor="let projetos of projeto">{{projetos.titleProjeto}}</h1>
                     <div class="topbar"></div>
+                </div>
+                <div class="projects">
+                    <div class="project" style="background-image: url('{{projeto.projectImg}}');" *ngFor="let projeto of projetos">
+                        <a href="{{projeto.link}}" target="_blank">
+                            <div class="mark">
+                                <img src="./assets/images/bookmark.png" alt="Mark">
+                                <div class="badge">
+                                    <img src="{{projeto.badge}}" alt="Badge">
+                                </div>
+                            </div>
+                            <div class="title">{{projeto.titulo}}</div>
+                        </a>
+                    </div>
                 </div>
             </div>
             <div class="github wrap" *ngIf="isSelected('github')">
@@ -170,7 +183,7 @@
             </div>
             <div class="block" (click)="selectOption('projetos')" [ngClass]="{selected: isSelected('projetos')}">
                 <img src="/assets/images/projeto.png" alt="Opção">
-                <p>Projetos</p>
+                <p *ngFor="let projetos of projeto">{{projetos.titleProjeto}}</p>
             </div>
             <div class="block" (click)="selectOption('github')" [ngClass]="{selected: isSelected('github')}">
                 <img src="/assets/images/github2.png" alt="Opção">
@@ -182,12 +195,14 @@
             </div>
             <div class="block" *ngFor="let sobre of sobre">
                 <div *ngFor="let resumo of resumo">
-                    <ng-container *ngIf="isLoggedIn()">
-                        <div class="block2" (click)="goToAdmin({sobre: sobre, resumo: resumo})">
-                            <img src="/assets/images/admin.png" alt="Opção">
-                            <p>Admin</p>
-                        </div>
-                    </ng-container>
+                    <div *ngFor="let projeto of projeto">
+                        <ng-container *ngIf="isLoggedIn()">
+                            <div class="block2" (click)="goToAdmin({sobre: sobre, resumo: resumo, projeto: projeto})">
+                                <img src="/assets/images/admin.png" alt="Opção">
+                                <p>Admin</p>
+                            </div>
+                        </ng-container>
+                    </div>
                 </div>
             </div>
             
