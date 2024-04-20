@@ -10,7 +10,7 @@
                 <P>PROJETOS</P>
             </div>
             
-            <div class="option" (click)="selectOption('github')" [ngClass]="{selected: isSelected('github')}">GITHUB</div>
+            <div class="option" (click)="selectOption('contato')" [ngClass]="{selected: isSelected('contato')}">CONTATO</div>
             <div class="option" (click)="selectOption('profile')" [ngClass]="{selected: isSelected('profile')}">PROFILE</div>
         </aside>
         <section class="formsection">
@@ -133,8 +133,8 @@
                 </div>
               </div>
             </div>
-            <div class="formall" *ngIf="isSelected('github')">
-              <p>github</p>  
+            <div class="formall" *ngIf="isSelected('contato')">
+              <p>contato</p>  
             </div>
             <div class="formall" *ngIf="isSelected('profile')">
               <p>profile</p>  
