@@ -155,12 +155,7 @@
                     </div>
                 </div>
             </div>
-            <div class="github wrap" *ngIf="isSelected('github')">
-                <div class="top">
-                    <h1>github</h1>
-                    <div class="topbar"></div>
-                </div>
-            </div>
+            
             <div class="contato wrap" *ngIf="isSelected('contato')">
                 <div class="top">
                     <h1>contato</h1>
@@ -184,10 +179,6 @@
             <div class="block" (click)="selectOption('projetos')" [ngClass]="{selected: isSelected('projetos')}">
                 <img src="/assets/images/projeto.png" alt="Opção">
                 <p *ngFor="let projetos of projeto">{{projetos.titleProjeto}}</p>
-            </div>
-            <div class="block" (click)="selectOption('github')" [ngClass]="{selected: isSelected('github')}">
-                <img src="/assets/images/github2.png" alt="Opção">
-                <p>Github</p>
             </div>
             <div class="block" (click)="selectOption('contato')" [ngClass]="{selected: isSelected('contato')}">
                 <img src="/assets/images/contato.png" alt="Opção">

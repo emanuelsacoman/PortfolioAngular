@@ -128,7 +128,7 @@ export class IndexComponent implements OnInit {
 
   goToAdmin(data: {sobre: Sobre, resumo: Resumo, projeto: Projeto}) {
     this.router.navigateByUrl('/admin', { state: data });
-}
+  }
 
   isLoggedIn(): boolean {
     return this.authService.isLoggedIn;
