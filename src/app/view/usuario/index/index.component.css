@@ -89,7 +89,7 @@ body{
 }
 
 .itenspic img:hover{
-    filter: brightness(110%);
+    background-color: #2e86dd;
 }
 
 .info{
@@ -235,7 +235,7 @@ body{
     display: flex;
     flex-direction: column;
     gap: 2vh;
-    padding-inline: 1vh;
+    padding-inline: 3vh;
     padding-block-end: 1vh;
 }
 
@@ -271,7 +271,6 @@ body{
     flex-direction: row;
     flex-basis: auto;
     gap: 2vh;
-    backdrop-filter: red;
     flex-wrap: wrap;
 }
 
@@ -285,34 +284,23 @@ body{
     border-radius: 5px;
 
     .content{
-        
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
         .contenttitle{
-            font-size: clamp(20px, 5vw, 34px);
+            font-size: 1.3rem;
+            text-wrap: nowrap;
+            font-weight: bold;
         }
         .contentdesc{
-            font-size: clamp(16px, 5vw, 26px);
+            font-size: 1rem;
         }
     }
 }
 
 .whaipic img{
-    width: 3rem;
+    width: 2.5rem;
 }
-
-.carousel{
-    background-color: #e2e2e2;
-    width: 100%;
-    height: 20vh;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    h3{
-        font-size: clamp(14px, 5vw, 24px);
-    }
-}
-
 
 /*resume*/
 .resume{
