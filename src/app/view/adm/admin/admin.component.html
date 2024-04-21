@@ -134,7 +134,18 @@
               </div>
             </div>
             <div class="formall" *ngIf="isSelected('contato')">
-              <p>contato</p>  
+              <section class="contato">
+                <form class="formContato" (ngSubmit)="editContato()" [formGroup]="contatoEdit" #formDir="ngForm">
+                  <div class="inputs-groups">
+                    <div class="input-group">
+                      <div class="input">
+                        <input type="text" id="titleContato" placeholder="Insira o titulo" formControlName="titleContato" required/>
+                      </div>
+                    </div>
+                    <button class="sendButton" type="submit">Enviar</button>
+                  </div>
+                </form>   
+              </section>  
             </div>
             <div class="formall" *ngIf="isSelected('profile')">
               <p>profile</p>  

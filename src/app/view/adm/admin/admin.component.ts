@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { FirebaseService } from 'src/app/model/services/firebase.service';
+import { Contato } from 'src/app/model/services/interfaces/contato';
 import { Projeto } from 'src/app/model/services/interfaces/projeto';
 import { Projetos } from 'src/app/model/services/interfaces/projetos';
 import { Resumo } from 'src/app/model/services/interfaces/resumo';
@@ -18,10 +19,11 @@ import { Sobrearea } from 'src/app/model/services/interfaces/sobrearea';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent {
+  selectedOption: string = 'sobre';
+
   // SOBRE
   sobreEdit!: FormGroup;
   sobre!: Sobre;
-  selectedOption: string = 'sobre';
   title!: string;
   txt1!: string;
   txt2!: string;
@@ -62,6 +64,11 @@ export class AdminComponent {
   projetoEdit!: FormGroup;
   projeto!: Projeto;
   titleProjeto!: string;
+
+  //CONTATO
+  contatoEdit!: FormGroup;
+  contato!: Contato;
+  titleContato!: string;
   
   
   constructor(private router: Router,
@@ -109,6 +116,35 @@ export class AdminComponent {
     this.initSobre();
     this.initResumo();
     this.initProjeto();
+    this.initContato();
+  }
+
+  editContato() {
+    if (this.contatoEdit.valid) {
+      const new_part: Contato = {...this.contatoEdit.value, id: this.contato.id};
+  
+      this.firebase.editarContato(new_part, this.contato.id)
+        .then(() => {
+          console.log('Contato atualizado com sucesso');
+          this.router.navigate(['/']);
+        })
+        .catch((error) => {
+          console.log('Erro ao atualizar Contato:', error);
+        });
+    } else {
+      window.alert('Campos obrigatórios!');
+    }
+  }
+  
+  initContato(){
+    this.contato = history.state.contato;
+    console.log('Informações de contato:', this.contato);
+    this.titleContato = this.contato?.titleContato;
+
+    this.contatoEdit = this.formBuilder.group({
+      titleContato: [this.titleContato, [Validators.required]],
+
+    });
   }
 
   editProjeto() {

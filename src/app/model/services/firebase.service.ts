@@ -10,6 +10,7 @@ import { ResumoL } from './interfaces/resumoL';
 import { ResumoR } from './interfaces/resumoR';
 import { Projetos } from './interfaces/projetos';
 import { Projeto } from './interfaces/projeto';
+import { Contato } from './interfaces/contato';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,7 @@ export class FirebaseService {
   private PATH5 : string = "resumor";
   private PATH6 : string = "projetos";
   private PATH7 : string = "projetosArea";
+  private PATH8 : string = "contato";
 
   constructor(private firestore: AngularFirestore,
     private storage: AngularFireStorage,
@@ -268,6 +270,18 @@ export class FirebaseService {
         
         //Projeto
       //Projetos
+
+      //Contato
+      editarContato(contato : Contato, id: string) {
+        return this.firestore.collection(this.PATH8).doc(id).update({
+          titleContato: contato.titleContato
+        });
+      }
+
+      obterTodosContato() {
+        return this.firestore.collection(this.PATH8).snapshotChanges();
+      }
+      //Contato
     }
 
     

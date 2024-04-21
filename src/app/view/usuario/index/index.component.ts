@@ -10,6 +10,7 @@ import { ResumoL } from 'src/app/model/services/interfaces/resumoL';
 import { ResumoR } from 'src/app/model/services/interfaces/resumoR';
 import { Projeto } from 'src/app/model/services/interfaces/projeto';
 import { Projetos } from 'src/app/model/services/interfaces/projetos';
+import { Contato } from 'src/app/model/services/interfaces/contato';
 
 @Component({
   selector: 'app-index',
@@ -34,6 +35,7 @@ export class IndexComponent implements OnInit {
   public projeto: Projeto[] = [];
 
   public projetos: Projetos[] = [];
+  public contato: Contato[] = [];
   //DB
   
   constructor(private http: HttpClient,
@@ -104,6 +106,15 @@ export class IndexComponent implements OnInit {
         });
       });
 
+      this.firebaseService.obterTodosContato().subscribe((res) => {
+        this.contato = res.map((contato) => {
+          return {
+            id: contato.payload.doc.id,
+            ...(contato.payload.doc.data() as any),
+          } as Contato;
+        });
+      });
+
     }
 
   ngOnInit() {
@@ -126,7 +137,7 @@ export class IndexComponent implements OnInit {
     return this.selectedOption === option;
   }
 
-  goToAdmin(data: {sobre: Sobre, resumo: Resumo, projeto: Projeto}) {
+  goToAdmin(data: {sobre: Sobre, resumo: Resumo, projeto: Projeto, contato: Contato}) {
     this.router.navigateByUrl('/admin', { state: data });
   }
 
