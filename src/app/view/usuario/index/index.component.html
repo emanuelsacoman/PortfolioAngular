@@ -161,6 +161,35 @@
                     <h1 *ngFor="let contato of contato">{{contato.titleContato}}</h1>
                     <div class="topbar"></div>
                 </div>
+                <div class="formContact">
+                    <div class="formText" *ngFor="let contato of contato">
+                        <p>{{contato.descContato}}</p>
+                    </div>
+                    <div class="onlyForm">
+                        <div class="success" *ngIf="mensagemEnviada">
+                            <img src="./assets/images/check.png" alt="Sucesso!">
+                        </div>
+                        <form (ngSubmit)="submit()" [formGroup]="contactForm" #formDir="ngForm" class="formTrue">
+                            <div class="form-group">
+                                <label for="name">nome*</label>
+                                <input type="text" id="nome" class="item" formControlName="nome" required>
+                                <p class="error" *ngIf="isInvalidControl('nome')">Erro no nome</p>
+                                
+                            </div>
+                            <div class="form-group">
+                                <label for="email">e-mail*</label>
+                                <input type="text" id="email" class="item" formControlName="email" required>
+                                <p class="error" *ngIf="isInvalidControl('email')">Erro no e-mail</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="mensagem">mensagem*</label>
+                                <textarea type="text" id="mensagem" class="item" formControlName="mensagem" required rows="10" cols="30"></textarea>
+                                <p class="error" *ngIf="isInvalidControl('mensagem')">Erro na mensagem</p>
+                            </div>
+                            <button class="sendButton" type="submit">Enviar</button>
+                        </form>
+                    </div>
+                </div>
             </div>
             <footer>
                 <p>©️ 2024 Todos os Direitos Reservados por Emanuel</p>

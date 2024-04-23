@@ -274,7 +274,8 @@ export class FirebaseService {
       //Contato
       editarContato(contato : Contato, id: string) {
         return this.firestore.collection(this.PATH8).doc(id).update({
-          titleContato: contato.titleContato
+          titleContato: contato.titleContato,
+          descContato: contato.descContato,
         });
       }
 

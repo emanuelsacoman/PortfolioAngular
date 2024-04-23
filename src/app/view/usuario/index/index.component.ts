@@ -11,6 +11,8 @@ import { ResumoR } from 'src/app/model/services/interfaces/resumoR';
 import { Projeto } from 'src/app/model/services/interfaces/projeto';
 import { Projetos } from 'src/app/model/services/interfaces/projetos';
 import { Contato } from 'src/app/model/services/interfaces/contato';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-index',
@@ -20,7 +22,7 @@ import { Contato } from 'src/app/model/services/interfaces/contato';
 export class IndexComponent implements OnInit {
   profileData: any;
   profileImageUrl!: string;
-  selectedOption: string = 'sobre';
+  selectedOption: string = 'resumo';
   
   //DB
   public sobre: Sobre[] = [];
@@ -37,11 +39,18 @@ export class IndexComponent implements OnInit {
   public projetos: Projetos[] = [];
   public contato: Contato[] = [];
   //DB
+
+  //Form
+  contactForm!: FormGroup;
+  mensagemEnviada: boolean = false;
+  //Form
   
   constructor(private http: HttpClient,
     private router: Router,
     private firebaseService: FirebaseService,
-    private authService: AuthService) {
+    private authService: AuthService,
+    private formBuilder: FormBuilder,
+    private firestore: AngularFirestore) {
       this.firebaseService.obterTodosSobre().subscribe((res) => {
         this.sobre = res.map((sobre) => {
           return {
@@ -119,6 +128,15 @@ export class IndexComponent implements OnInit {
 
   ngOnInit() {
     this.getGitHubProfile();
+    this.initForm();
+  }
+
+  initForm() {
+    this.contactForm = new FormGroup({
+      nome: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.email]),
+      mensagem: new FormControl('', [Validators.required]),
+    });
   }
 
   getGitHubProfile() {
@@ -143,5 +161,27 @@ export class IndexComponent implements OnInit {
 
   isLoggedIn(): boolean {
     return this.authService.isLoggedIn;
+  }
+
+  submit(){
+    if (this.contactForm.valid) {
+      const dados = this.contactForm.value;
+      this.firestore.collection('mensagens').add(dados)
+        .then(() => {
+          console.log('Mensagem enviada com sucesso!');
+          this.contactForm.reset();
+          this.mensagemEnviada = true;
+          // Aqui você pode adicionar lógica para notificar o usuário sobre o envio bem-sucedido.
+        })
+        .catch(error => {
+          console.error('Erro ao enviar mensagem:', error);
+          // Aqui você pode adicionar lógica para lidar com erros no envio da mensagem.
+        });
+    }
+  }
+
+  isInvalidControl(controlName: string) {
+    const control = this.contactForm.get(controlName);
+    return control && control.invalid && (control.dirty || control.touched);
   }
 }

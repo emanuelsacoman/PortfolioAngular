@@ -69,6 +69,7 @@ export class AdminComponent {
   contatoEdit!: FormGroup;
   contato!: Contato;
   titleContato!: string;
+  descContato!: string;
   
   
   constructor(private router: Router,
@@ -140,9 +141,11 @@ export class AdminComponent {
     this.contato = history.state.contato;
     console.log('Informações de contato:', this.contato);
     this.titleContato = this.contato?.titleContato;
+    this.descContato = this.contato?.descContato;
 
     this.contatoEdit = this.formBuilder.group({
       titleContato: [this.titleContato, [Validators.required]],
+      descContato: [this.descContato, [Validators.required]],
 
     });
   }
