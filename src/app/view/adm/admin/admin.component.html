@@ -12,6 +12,7 @@
             
             <div class="option" (click)="selectOption('contato')" [ngClass]="{selected: isSelected('contato')}">CONTATO</div>
             <div class="option" (click)="selectOption('profile')" [ngClass]="{selected: isSelected('profile')}">PROFILE</div>
+            <div class="option" (click)="selectOption('email')" [ngClass]="{selected: isSelected('profile')}">EMAIL</div>
         </aside>
         <section class="formsection">
             <div class="formall" *ngIf="isSelected('sobre')">
@@ -147,14 +148,35 @@
                         <textarea type="text" id="descContato" placeholder="Insira a descrição" formControlName="descContato" required rows="5" cols="30"></textarea>
                       </div>
                     </div>
-                    
                     <button class="sendButton" type="submit">Enviar</button>
                   </div>
-                </form>   
+                </form> 
+                
               </section>  
             </div>
             <div class="formall" *ngIf="isSelected('profile')">
               <p>profile</p>  
+            </div>
+            <div class="formall" *ngIf="isSelected('email')">
+              <section class="lista" *ngFor="let item of items | async; let i = index">
+                <div class="mensagem" (click)="showDescription(item)">
+                  <p class="nome">{{ item.nome }}</p>
+                  <p class="motivo">{{item.titulo}}</p>
+                  <p class="time">{{ convertTimestampToDate(item.timestamp) | date: 'dd/MM/yyyy HH:mm:ss' }}</p>
+                </div>
+                <div class="expand" *ngIf="item.showDescription">
+                  <div class="areaMensagem">
+                    <div class="topMensagem">
+                      <p class="nomeMensagem">{{item.nome}}</p>
+                      <p class="emailMensagem">{{item.email}}</p>
+                    </div>
+                    <div class="allMensagem">
+                      <p class="motivoShow">{{item.titulo}}</p>
+                      <p class="mensagemShow">{{item.mensagem}}</p>
+                    </div>
+                  </div>
+                </div>
+              </section>              
             </div>
           </section>
         </main>

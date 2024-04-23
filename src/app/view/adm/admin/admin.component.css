@@ -324,4 +324,82 @@ input, textarea{
     gap: 2vh;
 }
 
+/*EMAIL*/
+.lista{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: fit-content;
+}
+
+.mensagem{
+    padding: 5px;
+    border-bottom: solid #c0c0c0 1px;
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+    justify-content: space-between;
+    position: relative;
+}
+
+.message{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 30%;
+}
+
+.nome{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 30%;
+}
+
+.time{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.9rem;
+}
+
+.view{
+   position: absolute; 
+   left: 0;
+   top: 0;
+}
+
+.view img {
+    height: 1rem;
+    width: auto;
+}
+
+.areaMensagem{
+    display: flex;
+    flex-direction: column;
+    background-color: #c0c0c0;
+    border-radius: 0px 0px 5px 5px;
+    gap: 3vh;
+    padding: 5px;
+}
+
+.topMensagem{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.mensagemShow{
+    max-height: 200px;
+    overflow-y: auto;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.allMensagem{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+/*EMAIL*/
+
 

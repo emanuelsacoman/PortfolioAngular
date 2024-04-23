@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Injector } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -19,7 +19,7 @@ import { Sobrearea } from 'src/app/model/services/interfaces/sobrearea';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent {
-  selectedOption: string = 'sobre';
+  selectedOption: string = 'email';
 
   // SOBRE
   sobreEdit!: FormGroup;
@@ -70,12 +70,19 @@ export class AdminComponent {
   contato!: Contato;
   titleContato!: string;
   descContato!: string;
-  
+
+  //EMAIL
+  items: Observable<any[]>;
+  showDescriptionFlag: boolean = false;
   
   constructor(private router: Router,
     private formBuilder: FormBuilder,
     private firebase: FirebaseService,
-    private firestore: AngularFirestore) {
+    private firestore: AngularFirestore,
+    private injector: Injector) {
+
+      this.items = this.firestore.collection('mensagens').valueChanges()
+
       this.firebase.obterTodosSobreArea().subscribe((res) => {
         this.sobreareaArray = res.map((sobre) => {
           return {
@@ -315,4 +322,14 @@ export class AdminComponent {
   isSelected(option: string) {
     return this.selectedOption === option;
   }
+
+  convertTimestampToDate(timestamp: any): Date {
+    return new Date(timestamp.seconds * 1000); 
+  }
+
+  showDescription(item: any): void {
+    item.showDescription = !item.showDescription;
+  }
+
+  
 }

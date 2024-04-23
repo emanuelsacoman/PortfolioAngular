@@ -136,6 +136,7 @@ export class IndexComponent implements OnInit {
       nome: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.email]),
       mensagem: new FormControl('', [Validators.required]),
+      titulo: new FormControl('', [Validators.required])
     });
   }
 
@@ -166,6 +167,10 @@ export class IndexComponent implements OnInit {
   submit(){
     if (this.contactForm.valid) {
       const dados = this.contactForm.value;
+      dados.timestamp = new Date();
+      dados.visualizado = false;
+      dados.showDescription = false;
+      
       this.firestore.collection('mensagens').add(dados)
         .then(() => {
           console.log('Mensagem enviada com sucesso!');

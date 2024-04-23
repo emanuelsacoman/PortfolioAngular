@@ -172,14 +172,18 @@
                         <form (ngSubmit)="submit()" [formGroup]="contactForm" #formDir="ngForm" class="formTrue">
                             <div class="form-group">
                                 <label for="name">nome*</label>
-                                <input type="text" id="nome" class="item" formControlName="nome" required>
+                                <input type="text" id="nome" class="item" formControlName="nome" required maxlength="50">
                                 <p class="error" *ngIf="isInvalidControl('nome')">Erro no nome</p>
-                                
                             </div>
                             <div class="form-group">
                                 <label for="email">e-mail*</label>
                                 <input type="text" id="email" class="item" formControlName="email" required>
                                 <p class="error" *ngIf="isInvalidControl('email')">Erro no e-mail</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="titulo">titulo/motivo*</label>
+                                <input type="text" id="titulo" class="item" formControlName="titulo" required maxlength="30">
+                                <p class="error" *ngIf="isInvalidControl('titulo')">Erro no titulo</p>
                             </div>
                             <div class="form-group">
                                 <label for="mensagem">mensagem*</label>

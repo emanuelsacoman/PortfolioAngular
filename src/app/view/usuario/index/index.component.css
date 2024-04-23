@@ -514,6 +514,10 @@ a{
     filter: brightness(110%);
 }
 
+.sendButton:active{
+    transform: scale(0.9);
+}
+
 .error{
     color: red;
     font-size: 0.1rem;
