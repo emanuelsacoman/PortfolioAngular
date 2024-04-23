@@ -22,7 +22,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 export class IndexComponent implements OnInit {
   profileData: any;
   profileImageUrl!: string;
-  selectedOption: string = 'resumo';
+  selectedOption: string = 'sobre';
   
   //DB
   public sobre: Sobre[] = [];
@@ -176,11 +176,11 @@ export class IndexComponent implements OnInit {
           console.log('Mensagem enviada com sucesso!');
           this.contactForm.reset();
           this.mensagemEnviada = true;
-          // Aqui você pode adicionar lógica para notificar o usuário sobre o envio bem-sucedido.
+          
         })
         .catch(error => {
           console.error('Erro ao enviar mensagem:', error);
-          // Aqui você pode adicionar lógica para lidar com erros no envio da mensagem.
+          
         });
     }
   }

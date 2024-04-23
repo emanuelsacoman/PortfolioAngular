@@ -314,7 +314,7 @@ input, textarea{
 }
 
 .project .title{
-    font-size: clamp(1rem, 5vw, 3rem);
+    font-size: clamp(20px, 5vw, 40px);
     font-weight: bold;
 }
 
@@ -378,7 +378,7 @@ input, textarea{
     flex-direction: column;
     background-color: #c0c0c0;
     border-radius: 0px 0px 5px 5px;
-    gap: 3vh;
+    gap: 2vh;
     padding: 5px;
 }
 
@@ -386,6 +386,12 @@ input, textarea{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+}
+
+.nomeMensagem, .emailMensagem{
+    font-size: clamp(12px, 2vw, 16px);
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .mensagemShow{
@@ -398,7 +404,16 @@ input, textarea{
 .allMensagem{
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1vh;
+}
+
+.motivoShow{
+    font-weight: bold;
+    font-size: clamp(16px, 2vw, 20px);
+}
+
+.mensagemShow{
+    font-size: clamp(14px, 2vw, 18px);
 }
 /*EMAIL*/
 
