@@ -70,8 +70,11 @@ export class ItemeditComponent implements OnInit {
   }
 
   delete(){
-    this.firebase.excluirSobreArea(this.sobrearea.id).then(() => {
-        this.router.navigate(['/admin']);
-      });
+    const confirmDelete = window.confirm('Tem certeza de que deseja excluir este item?');
+    if(confirmDelete){
+      this.firebase.excluirSobreArea(this.sobrearea.id).then(() => {
+          this.router.navigate(['/admin']);
+        });
+    }
   }
 }

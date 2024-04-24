@@ -163,8 +163,9 @@
                   <p class="nome">{{ item.nome }}</p>
                   <p class="motivo">{{item.titulo}}</p>
                   <p class="time">{{ convertTimestampToDate(item.timestamp) | date: 'dd/MM/yyyy HH:mm:ss' }}</p>
+                  <img src="./assets/images/delete.png" alt="Excluir" (click)="deleteemail(item.mensagem)">
                 </div>
-                <div class="expand" *ngIf="item.showDescription">
+                <div class="expand fadeInDown" *ngIf="item.showDescription">
                   <div class="areaMensagem">
                     <div class="topMensagem">
                       <p class="nomeMensagem">{{item.nome}}</p>
@@ -176,6 +177,7 @@
                     </div>
                   </div>
                 </div>
+
               </section>              
             </div>
           </section>

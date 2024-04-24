@@ -331,5 +331,20 @@ export class AdminComponent {
     item.showDescription = !item.showDescription;
   }
 
+  deleteemail(mensagem: string) {
+    const confirmDelete = window.confirm('Tem certeza de que deseja excluir este email?');
+    if (confirmDelete) {
+      this.firestore.collection('mensagens', ref => ref.where('mensagem', '==', mensagem))
+        .get()
+        .subscribe(querySnapshot => {
+          querySnapshot.forEach(doc => {
+            doc.ref.delete();
+          });
+        });
+    }
+  }
+  
+  
+
   
 }

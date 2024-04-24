@@ -113,8 +113,11 @@ export class ProjetoeditComponent {
   }
 
   delete(){
-    this.firebase.excluirProjetos(this.projeto.id).then(() => {
-        this.router.navigate(['/admin']);
-      });
+    const confirmDelete = window.confirm('Tem certeza de que deseja excluir este projeto?');
+    if (confirmDelete) {
+        this.firebase.excluirProjetos(this.projeto.id).then(() => {
+            this.router.navigate(['/admin']);
+          });
+    }
   }
 }

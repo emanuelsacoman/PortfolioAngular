@@ -60,8 +60,11 @@ export class ResumoreditComponent {
   }
 
   delete(){
-    this.firebase.excluirResumoR(this.resumor.id).then(() => {
-        this.router.navigate(['/admin']);
-      });
+    const confirmDelete = window.confirm('Tem certeza de que deseja excluir este resumor?');
+    if(confirmDelete){
+      this.firebase.excluirResumoR(this.resumor.id).then(() => {
+          this.router.navigate(['/admin']);
+        });
+    }
   }
 }

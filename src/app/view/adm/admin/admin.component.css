@@ -415,6 +415,32 @@ input, textarea{
 .mensagemShow{
     font-size: clamp(14px, 2vw, 18px);
 }
+
+.mensagem img{
+    width: auto;
+    height: 1rem;
+}
+
+.mensagem img:hover{
+    transform: scale(1.1);
+    filter: brightness(110%);
+}
+
+@keyframes fadeInDown {
+    0% {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .fadeInDown {
+    animation: fadeInDown 0.2s ease forwards;
+  }
+  
 /*EMAIL*/
 
 
