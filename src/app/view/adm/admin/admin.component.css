@@ -447,7 +447,16 @@ input, textarea{
   .fadeInDown {
     animation: fadeInDown 0.2s ease forwards;
   }
+
+  .preImage2{
+    height: 1.7rem;
+  }
   
 /*EMAIL*/
+
+/*PROFILE*/
+.profileForm input{
+    height: 2rem;
+}
 
 

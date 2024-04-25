@@ -13,6 +13,8 @@ import { Projetos } from 'src/app/model/services/interfaces/projetos';
 import { Contato } from 'src/app/model/services/interfaces/contato';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Profile } from 'src/app/model/services/interfaces/profile';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-index',
@@ -38,6 +40,10 @@ export class IndexComponent implements OnInit {
 
   public projetos: Projetos[] = [];
   public contato: Contato[] = [];
+
+  public profile: Profile[] = [];
+
+  perfil: Observable<any[]>;
   //DB
 
   //Form
@@ -51,6 +57,8 @@ export class IndexComponent implements OnInit {
     private authService: AuthService,
     private formBuilder: FormBuilder,
     private firestore: AngularFirestore) {
+      this.perfil = this.firestore.collection('profile').valueChanges();
+
       this.firebaseService.obterTodosSobre().subscribe((res) => {
         this.sobre = res.map((sobre) => {
           return {
@@ -124,6 +132,15 @@ export class IndexComponent implements OnInit {
         });
       });
 
+      this.firebaseService.obterTodosProfile().subscribe((res) => {
+        this.profile = res.map((profile) => {
+          return {
+            id: profile.payload.doc.id,
+            ...(profile.payload.doc.data() as any),
+          } as Profile;
+        });
+      });
+
     }
 
   ngOnInit() {
@@ -141,9 +158,13 @@ export class IndexComponent implements OnInit {
   }
 
   getGitHubProfile() {
-    this.http.get('https://api.github.com/users/emanuelsacoman').subscribe((data: any) => {
-      this.profileData = data;
-      this.profileImageUrl = data.avatar_url;
+    this.perfil.subscribe((data: any[]) => {
+      const githubUsername = data[0].github;
+      const githubApiUrl = `https://api.github.com/users/${githubUsername}`;
+      this.http.get(githubApiUrl).subscribe((githubData: any) => {
+        this.profileData = githubData;
+        this.profileImageUrl = githubData.avatar_url;
+      });
     });
   }
 
@@ -156,7 +177,7 @@ export class IndexComponent implements OnInit {
     return this.selectedOption === option;
   }
 
-  goToAdmin(data: {sobre: Sobre, resumo: Resumo, projeto: Projeto, contato: Contato}) {
+  goToAdmin(data: {sobre: Sobre, resumo: Resumo, projeto: Projeto, contato: Contato, profile: Profile}) {
     this.router.navigateByUrl('/admin', { state: data });
   }
 

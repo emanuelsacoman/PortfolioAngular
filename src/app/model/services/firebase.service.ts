@@ -304,7 +304,9 @@ export class FirebaseService {
             phone: profile.phone,
             email: profile.email,
             local: profile.local,
-            birth: profile.birth
+            birth: profile.birth,
+            cv: profile.cv,
+            text: profile.text,
         });
       }
 
@@ -325,7 +327,9 @@ export class FirebaseService {
             phone: profile.phone,
             email: profile.email,
             local: profile.local,
-            birth: profile.birth
+            birth: profile.birth,
+            cv: profile.cv,
+            text: profile.text,
           
         });
       }
@@ -334,67 +338,102 @@ export class FirebaseService {
         return this.firestore.collection(this.PATH9).snapshotChanges();
       }
 
-      // Função para carregar a imagem do telefone
-      uploadPhoneImage(imagem: any, itens: Profile) {
-        return this.uploadImage(imagem, itens, 'phoneImg');
-      }
-
-      // Função para carregar a imagem do e-mail
-      uploadEmailImage(imagem: any, itens: Profile) {
-        return this.uploadImage(imagem, itens, 'emailImg');
-      }
-
-      // Função para carregar a imagem do local
-      uploadLocalImage(imagem: any, itens: Profile) {
-        return this.uploadImage(imagem, itens, 'localImg');
-      }
-
-      // Função para carregar a imagem do nascimento
-      uploadBirthImage(imagem: any, itens: Profile) {
-        return this.uploadImage(imagem, itens, 'birthImg');
-      }
-
-      // Função genérica para carregar qualquer imagem
-      private uploadImage(imagem: any, itens: Profile, propertyName: string) {
+      uploadImageProfilePhone(imagem: any, itens: Profile){
         const file = imagem.item(0);
-        if (file.type.split('/')[0] !== 'image') {
-            console.error("Tipo Não Suportado.");
-            return;
+        if(file.type.split('/')[0] !== 'image'){
+          console.error("Tipo Não Suportado.");
+          return;
         }
-        const path = `images/${itens.id}_${file.name}`;
+        const path = `images/${itens.phone}_${file.name}`;
         const fileRef = this.storage.ref(path);
-        let task = this.storage.upload(path, file);
+        let task = this.storage.upload(path,file);
         task.snapshotChanges().pipe(
-            finalize(() => {
-                let uploadFileURL = fileRef.getDownloadURL();
-                uploadFileURL.subscribe(resp => {
-                    switch (propertyName) {
-                        case 'phoneImg':
-                            itens.phoneImg = resp;
-                            break;
-                        case 'emailImg':
-                            itens.emailImg = resp;
-                            break;
-                        case 'localImg':
-                            itens.localImg = resp;
-                            break;
-                        case 'birthImg':
-                            itens.birthImg = resp;
-                            break;
-                        default:
-                            break;
-                    }
-                    if (!itens.id) {
-                        this.cadastrarProfile(itens);
-                    } else {
-                        this.editarProfile(itens, itens.id);
-                    }
-                })
+          finalize(() =>{
+            let uploadFileURL = fileRef.getDownloadURL();
+            uploadFileURL.subscribe(resp => {
+              itens.phoneImg = resp;
+              if(!itens.id){
+                this.cadastrarProfile(itens);
+              }else {
+                this.editarProfile(itens, itens.id);
+              }
             })
-        ).subscribe();
-        return task;
-      }
-
+          })
+          ).subscribe();
+          return task;
+        }
+      uploadImageProfileEmail(imagem: any, itens: Profile){
+        const file = imagem.item(0);
+        if(file.type.split('/')[0] !== 'image'){
+          console.error("Tipo Não Suportado.");
+          return;
+        }
+        const path = `images/${itens.email}_${file.name}`;
+        const fileRef = this.storage.ref(path);
+        let task = this.storage.upload(path,file);
+        task.snapshotChanges().pipe(
+          finalize(() =>{
+            let uploadFileURL = fileRef.getDownloadURL();
+            uploadFileURL.subscribe(resp => {
+              itens.emailImg = resp;
+              if(!itens.id){
+                this.cadastrarProfile(itens);
+              }else {
+                this.editarProfile(itens, itens.id);
+              }
+            })
+          })
+          ).subscribe();
+          return task;
+        }
+      uploadImageProfileLocal(imagem: any, itens: Profile){
+        const file = imagem.item(0);
+        if(file.type.split('/')[0] !== 'image'){
+          console.error("Tipo Não Suportado.");
+          return;
+        }
+        const path = `images/${itens.local}_${file.name}`;
+        const fileRef = this.storage.ref(path);
+        let task = this.storage.upload(path,file);
+        task.snapshotChanges().pipe(
+          finalize(() =>{
+            let uploadFileURL = fileRef.getDownloadURL();
+            uploadFileURL.subscribe(resp => {
+              itens.localImg = resp;
+              if(!itens.id){
+                this.cadastrarProfile(itens);
+              }else {
+                this.editarProfile(itens, itens.id);
+              }
+            })
+          })
+          ).subscribe();
+          return task;
+        }
+      uploadImageProfileBirth(imagem: any, itens: Profile){
+        const file = imagem.item(0);
+        if(file.type.split('/')[0] !== 'image'){
+          console.error("Tipo Não Suportado.");
+          return;
+        }
+        const path = `images/${itens.birth}_${file.name}`;
+        const fileRef = this.storage.ref(path);
+        let task = this.storage.upload(path,file);
+        task.snapshotChanges().pipe(
+          finalize(() =>{
+            let uploadFileURL = fileRef.getDownloadURL();
+            uploadFileURL.subscribe(resp => {
+              itens.birthImg = resp;
+              if(!itens.id){
+                this.cadastrarProfile(itens);
+              }else {
+                this.editarProfile(itens, itens.id);
+              }
+            })
+          })
+          ).subscribe();
+          return task;
+        }
       //Profile
     }
 

@@ -1,17 +1,25 @@
 <body>
     <div class="all">
-        <section class="profile bloco">
+        <section class="profile bloco" *ngFor="let perfil of perfil | async;">
             <div class="alltop">
                 <div class="picture">
                     <img [src]="profileImageUrl" alt="Foto de perfil">
                     <section class="pictureBottom">
                         <div class="name">{{profileData.name}}</div>
-                        <div class="liltext">Front-end Dev</div>
+                        <div class="liltext">{{perfil.text}}</div>
                         <div class="itenspic">
-                            <img src="./assets/images/instagram.png" alt="Instagram">
-                            <img src="./assets/images/facebook.png" alt="Facebook">
-                            <img src="./assets/images/linkedin.png" alt="Linkedin">
-                            <img src="./assets/images/github.png" alt="Github">
+                            <a href="https://instagram.com/{{perfil.instagram}}" target="_blank">
+                                <img src="./assets/images/instagram.png" alt="Instagram">
+                            </a>
+                            <a href="{{perfil.facebook}}" target="_blank">
+                                <img src="./assets/images/facebook.png" alt="Facebook">
+                            </a>
+                            <a href="{{perfil.linkedin}}" target="_blank">
+                                <img src="./assets/images/linkedin.png" alt="Linkedin">
+                            </a>
+                            <a href="https://github.com/{{perfil.github}}" target="_blank">
+                                <img src="./assets/images/github.png" alt="Github">
+                            </a>
                         </div>
                     </section>
 
@@ -19,53 +27,55 @@
                         <div class="infoitem">
                             <div class="itens phone">
                                 <div class="img">
-                                    <img src="./assets/images/smartphone.png" alt="Telefone">
+                                    <img src="{{perfil.phoneImg}}" alt="Telefone">
                                 </div>
                                 <div class="lildesc">
-                                    <p class="title">Telefone</p>
-                                    <p class="desc">(42) 9809-9371</p>
+                                    <p class="title">{{perfil.phoneTXT}}</p>
+                                    <p class="desc">{{perfil.phone}}</p>
                                 </div>
                             </div>
                             <div class="bar"></div>
                             <div class="itens email">
                                 <div class="img">
-                                    <img src="./assets/images/email.png" alt="Telefone">
+                                    <img src="{{perfil.emailImg}}" alt="Telefone">
                                 </div>
                                 <div class="lildesc">
-                                    <p class="title">Email</p>
-                                    <p class="desc">emanuelsacomangmail.com</p>
+                                    <p class="title">{{perfil.emailTXT}}</p>
+                                    <p class="desc">{{perfil.email}}</p>
                                 </div>
                             </div>
                             <div class="bar"></div>
                             <div class="itens local">
                                 <div class="img">
-                                    <img src="./assets/images/location.png" alt="Telefone">
+                                    <img src="{{perfil.localImg}}" alt="Telefone">
                                 </div>
                                 <div class="lildesc">
-                                    <p class="title">Location</p>
-                                    <p class="desc">Turvo - PR</p>
+                                    <p class="title">{{perfil.localTXT}}</p>
+                                    <p class="desc">{{perfil.local}}</p>
                                 </div>
                             </div>
                             <div class="bar"></div>
                             <div class="itens birth">
                                 <div class="img">
-                                    <img src="./assets/images/calendar.png" alt="Telefone">
+                                    <img src="{{perfil.birthImg}}" alt="Telefone">
                                 </div>
                                 <div class="lildesc">
-                                    <p class="title">Data de Nascimento</p>
-                                    <p class="desc">03/11/2003</p>
+                                    <p class="title">{{perfil.birthTXT}}</p>
+                                    <p class="desc">{{perfil.birth}}</p>
                                 </div>
                             </div>
                             <div class="bar"></div>
                         </div>
                     </section>
                     <div class="cv">
-                        <div class="cvimg">
-                            <img src="./assets/images/baixar.png" alt="Download">
-                        </div>
-                        <div class="cvtext">
-                            <p>CURRÍCULO</p>
-                        </div>
+                        <a href="{{perfil.cv}}" target="_blank">
+                            <div class="cvimg">
+                                <img src="./assets/images/baixar.png" alt="Download">
+                            </div>
+                            <div class="cvtext">
+                                <p>CURRÍCULO</p>
+                            </div>
+                        </a>
                     </div>
                 </div>
         </div>
@@ -222,12 +232,14 @@
                     <div *ngFor="let resumo of resumo">
                         <div *ngFor="let projeto of projeto">
                             <div *ngFor="let contato of contato">
-                                <ng-container>
-                                    <div class="block2" (click)="goToAdmin({sobre: sobre, resumo: resumo, projeto: projeto, contato: contato})">
-                                        <img src="/assets/images/admin.png" alt="Opção">
-                                        <p>Admin</p>
-                                    </div>
-                                </ng-container>
+                                <div *ngFor="let profile of profile">
+                                    <ng-container>
+                                        <div class="block2" (click)="goToAdmin({sobre: sobre, resumo: resumo, projeto: projeto, contato: contato, profile: profile})">
+                                            <img src="/assets/images/admin.png" alt="Opção">
+                                            <p>Admin</p>
+                                        </div>
+                                    </ng-container>
+                                </div>
                             </div>
                         </div>
                     </div>

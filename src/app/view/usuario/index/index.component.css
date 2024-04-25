@@ -71,12 +71,16 @@ body{
     border-radius: 5px;
 }
 
-.itenspic{
+.itenspic {
     display: flex;
     flex-direction: row;
     width: 100%;
     justify-content: center;
     gap: 1rem;
+}
+
+.itenspic a {
+    width: 100%;
 }
 
 .itenspic img {
@@ -160,9 +164,6 @@ body{
 }
 
 .cv{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
     background-color: #2e86dd;
     color: #fff;
     border-radius: 5px;
@@ -172,6 +173,13 @@ body{
     transition: all 0.1s ease;
     cursor: pointer;
     border: solid 2px transparent;
+}
+
+.cv a{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: #fff;
 }
 
 .cv:hover{

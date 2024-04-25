@@ -16,6 +16,8 @@ export class Profile {
     private _email!: string;
     private _local!: string;
     private _birth!: string;
+    private _cv!: string;
+    private _text!: string;
 
     constructor(
         id: string,
@@ -34,7 +36,9 @@ export class Profile {
         phone: string,
         email: string,
         local: string,
-        birth: string
+        birth: string,
+        cv: string,
+        text: string,
     ) {
         this._id = id;
         this._instagram = instagram;
@@ -53,6 +57,8 @@ export class Profile {
         this._email = email;
         this._local = local;
         this._birth = birth;
+        this._cv = cv;
+        this._text = text;
     }
 
     public get id(): string {
@@ -205,5 +211,23 @@ export class Profile {
 
     public set birth(value: string) {
         this._birth = value;
+    }
+
+    // Cv
+    public get cv(): string {
+        return this._cv;
+    }
+
+    public set cv(value: string) {
+        this._cv = value;
+    }
+
+    // Text
+    public get text(): string {
+        return this._text;
+    }
+
+    public set text(value: string) {
+        this._text = value;
     }
 }

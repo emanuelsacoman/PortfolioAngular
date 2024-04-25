@@ -1,10 +1,11 @@
 import { Component, Injector } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { FirebaseService } from 'src/app/model/services/firebase.service';
 import { Contato } from 'src/app/model/services/interfaces/contato';
+import { Profile } from 'src/app/model/services/interfaces/profile';
 import { Projeto } from 'src/app/model/services/interfaces/projeto';
 import { Projetos } from 'src/app/model/services/interfaces/projetos';
 import { Resumo } from 'src/app/model/services/interfaces/resumo';
@@ -19,7 +20,7 @@ import { Sobrearea } from 'src/app/model/services/interfaces/sobrearea';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent {
-  selectedOption: string = 'sobre';
+  selectedOption: string = 'profile';
 
   // SOBRE
   sobreEdit!: FormGroup;
@@ -74,6 +75,35 @@ export class AdminComponent {
   //EMAIL
   items: Observable<any[]>;
   showDescriptionFlag: boolean = false;
+
+  //PROFILE
+  profileEdit!: FormGroup;
+  profile!: Profile;
+  instagram!: string;
+  facebook!: string;
+  linkedin!: string;
+  github!: string;
+  phoneImg!: any;
+  emailImg!: any;
+  localImg!: any;
+  birthImg!: any;
+  phoneTXT!: string;
+  emailTXT!: string;
+  localTXT!: string;
+  birthTXT!: string;
+  phone!: string;
+  email!: string;
+  local!: string;
+  birth!: string;
+  cv!: string;
+  text!: string;
+
+  imagem1: any;
+  imagem2: any;
+  imagem3: any;
+  imagem4: any;
+
+
   
   constructor(private router: Router,
     private formBuilder: FormBuilder,
@@ -81,7 +111,7 @@ export class AdminComponent {
     private firestore: AngularFirestore,
     private injector: Injector) {
 
-      this.items = this.firestore.collection('mensagens').valueChanges()
+      this.items = this.firestore.collection('mensagens').valueChanges();
 
       this.firebase.obterTodosSobreArea().subscribe((res) => {
         this.sobreareaArray = res.map((sobre) => {
@@ -125,6 +155,7 @@ export class AdminComponent {
     this.initResumo();
     this.initProjeto();
     this.initContato();
+    this.initProfile();
   }
 
   editContato() {
@@ -300,8 +331,6 @@ export class AdminComponent {
     
     this.router.navigateByUrl("/projetoedit", {state: { projeto: projeto } });
   }
-
-  
   
   uploadFile(event: any){
     this.imagem = event.target.files;
@@ -343,8 +372,117 @@ export class AdminComponent {
         });
     }
   }
-  
-  
 
+  //PROFILE
+  initProfile(){
+    this.profile = history.state.profile;
+    console.log('Informações da profile:', this.profile);
+    this.instagram = this.profile?.instagram;
+    this.facebook = this.profile?.facebook;
+    this.linkedin = this.profile?.linkedin;
+    this.github = this.profile?.github;
+    this.phone = this.profile?.phone;
+    this.email = this.profile?.email;
+    this.local = this.profile?.local;
+    this.birth = this.profile?.birth;
+    this.phoneTXT = this.profile?.phoneTXT;
+    this.emailTXT = this.profile?.emailTXT;
+    this.localTXT = this.profile?.localTXT;
+    this.birthTXT = this.profile?.birthTXT;
+    this.cv = this.profile?.cv;
+    this.text = this.profile?.text;
+
+    this.profileEdit = this.formBuilder.group({
+      instagram: [this.instagram, Validators.required],
+      facebook: [this.facebook, Validators.required],
+      linkedin: [this.linkedin, Validators.required],
+      github: [this.github, Validators.required],
+      phone: [this.phone, Validators.required],
+      email: [this.email, Validators.required],
+      local: [this.local, Validators.required],
+      birth: [this.birth, Validators.required],
+      phoneTXT: [this.phoneTXT, Validators.required],
+      emailTXT: [this.emailTXT, Validators.required],
+      localTXT: [this.localTXT, Validators.required],
+      birthTXT: [this.birthTXT, Validators.required],
+      cv: [this.cv, Validators.required],
+      text: [this.text, Validators.required],
+      imagem1: [null],
+      imagem2: [null],
+      imagem3: [null],
+      imagem4: [null]
+    });
+  }
+
+  editProfile() {
+    if (this.profileEdit.valid) {
+      const new_part: Profile = {
+        ...this.profileEdit.value,
+        id: this.profile.id,
+        phoneImg: this.profile.phoneImg,
+        emailImg: this.profile.emailImg,
+        localImg: this.profile.localImg,
+        birthImg: this.profile.birthImg
+      };
+  
+      // Verifica se imagem1 foi carregada
+      if (this.imagem1) {
+        this.firebase.uploadImageProfilePhone(this.imagem1, new_part)?.then(() => {
+          this.updateProfile(new_part);
+        }).catch((error) => {
+          console.log('Erro ao fazer upload da imagem de telefone:', error);
+        });
+      } else if (this.imagem2) { // Se imagem1 não foi carregada, verifica se imagem2 foi carregada
+        this.firebase.uploadImageProfileEmail(this.imagem2, new_part)?.then(() => {
+          this.updateProfile(new_part);
+        }).catch((error) => {
+          console.log('Erro ao fazer upload da imagem de e-mail:', error);
+        });
+      } else if (this.imagem3) { // Se imagem1 e imagem2 não foram carregadas, verifica se imagem3 foi carregada
+        this.firebase.uploadImageProfileLocal(this.imagem3, new_part)?.then(() => {
+          this.updateProfile(new_part);
+        }).catch((error) => {
+          console.log('Erro ao fazer upload da imagem de localização:', error);
+        });
+      } else if (this.imagem4) { // Se imagem1, imagem2 e imagem3 não foram carregadas, verifica se imagem4 foi carregada
+        this.firebase.uploadImageProfileBirth(this.imagem4, new_part)?.then(() => {
+          this.updateProfile(new_part);
+        }).catch((error) => {
+          console.log('Erro ao fazer upload da imagem de nascimento:', error);
+        });
+      } else {
+        // Se nenhuma imagem foi carregada, atualiza o perfil com as imagens existentes
+        this.updateProfile(new_part);
+      }
+    } else {
+      window.alert('Campos obrigatórios!');
+    }
+  }
+  
+  // Função para atualizar o perfil após o upload de todas as imagens
+  updateProfile(new_part: Profile) {
+    this.firebase.editarProfile(new_part, this.profile.id).then(() => {
+      console.log('Profile atualizado com sucesso');
+      this.router.navigate(['']);
+    }).catch((error) => {
+      console.log('Erro ao atualizar Profile:', error);
+    });
+  } 
+  
+  handlePhoneImageUpload(event: any){
+    this.imagem1 = event.target.files;
+  }
+
+  handleEmailImageUpload(event: any){
+    this.imagem2 = event.target.files;
+  }
+
+  handleLocalImageUpload(event: any){
+    this.imagem3 = event.target.files;
+  }
+
+  handleBirthImageUpload(event: any){
+    this.imagem4 = event.target.files;
+  }
   
 }

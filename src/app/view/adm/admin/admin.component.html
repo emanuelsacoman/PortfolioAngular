@@ -154,9 +154,137 @@
                 
               </section>  
             </div>
-            <div class="formall" *ngIf="isSelected('profile')">
-              <p>profile</p>  
-            </div>
+            <div class="formall profileForm" *ngIf="isSelected('profile')">
+              <section class="profile">
+                  <form class="formProfile" (ngSubmit)="editProfile()" [formGroup]="profileEdit" #formDir="ngForm">
+                      <div class="inputs-groups">
+                        <div class="input-group">
+                          <div class="input">
+                            <input type="text" id="text" placeholder="Insira o text" formControlName="text" required/>
+                          </div>
+                        </div>
+                          <!-- Área Instagram -->
+                          <div class="input-group">
+                              <div class="input">
+                                  <input type="text" id="instagram" placeholder="Insira o instagram" formControlName="instagram" required/>
+                              </div>
+                          
+                          <!-- Área Facebook -->
+                          
+                              <div class="input">
+                                  <input type="text" id="facebook" placeholder="Insira o Facebook" formControlName="facebook" required/>
+                              </div>
+                          
+                          <!-- Área LinkedIn -->
+                          
+                              <div class="input">
+                                  <input type="text" id="linkedin" placeholder="Insira o LinkedIn" formControlName="linkedin" required/>
+                              </div>
+                          
+                          <!-- Área GitHub -->
+                          
+                              <div class="input">
+                                  <input type="text" id="github" placeholder="Insira o GitHub" formControlName="github" required/>
+                              </div>
+                          
+                          <!-- Área Telefone -->
+                          
+                              <div class="input">
+                                  <input type="text" id="phone" placeholder="Insira o telefone" formControlName="phone" required/>
+                              </div>
+                          
+                          <!-- Área E-mail -->
+                          
+                              <div class="input">
+                                  <input type="email" id="email" placeholder="Insira o e-mail" formControlName="email" required/>
+                              </div>
+                          
+                          <!-- Área Local -->
+                          
+                              <div class="input">
+                                  <input type="text" id="local" placeholder="Insira o local" formControlName="local" required/>
+                              </div>
+                          
+                          <!-- Área Nascimento -->
+                          
+                              <div class="input">
+                                  <input type="text" id="birth" placeholder="Insira a data de nascimento" formControlName="birth" required/>
+                              </div>
+                          </div>
+
+                          <!-- Área TXT -->
+                          <div class="input-group">
+                            <div class="input">
+                              <input type="text" id="phoneTXT" placeholder="Insira o phoneTXT" formControlName="phoneTXT" required/>
+                            </div>
+
+                            <div class="input">
+                              <input type="text" id="emailTXT" placeholder="Insira o emailTXT" formControlName="emailTXT" required/>
+                            </div>
+
+                            <div class="input">
+                              <input type="text" id="localTXT" placeholder="Insira o localTXT" formControlName="localTXT" required/>
+                            </div>
+
+                            <div class="input">
+                              <input type="text" id="birthTXT" placeholder="Insira o birthTXT" formControlName="birthTXT" required/>
+                            </div>
+                          </div>
+          
+                          <!-- Área de upload de imagem para o telefone -->
+                          <div class="input-group">
+                              <div class="input">
+                                  <label for="phoneImg">Imagem do Telefone:</label>
+                                  <input type="file" id="phoneImg" formControlName="imagem1" (change)="handlePhoneImageUpload($event)" accept="image/*" required/>
+                                </div>
+                                <div *ngIf="!imagem1">
+                                  <img class="preImage2" [src]="this.profile.phoneImg" />
+                                </div>
+                          
+                          <!-- Área de upload de imagem para o e-mail -->
+                          
+                              <div class="input">
+                                  <label for="emailImg">Imagem do E-mail:</label>
+                                  <input type="file" id="emailImg" formControlName="imagem2" (change)="handleEmailImageUpload($event)" accept="image/*" required/>
+                                </div>
+                                <div *ngIf="!imagem2">
+                                  <img class="preImage2" [src]="this.profile.emailImg" />
+                                </div>
+                          
+                          <!-- Área de upload de imagem para o local -->
+                          
+                              <div class="input">
+                                  <label for="localImg">Imagem do Local:</label>
+                                  <input type="file" id="localImg" formControlName="imagem3" (change)="handleLocalImageUpload($event)" accept="image/*" required/>
+                                </div>
+                                <div *ngIf="!imagem3">
+                                  <img class="preImage2" [src]="this.profile.localImg" />
+                                </div>
+                          
+                          <!-- Área de upload de imagem para o nascimento -->
+                          
+                              <div class="input">
+                                  <label for="birthImg">Imagem do Nascimento:</label>
+                                  <input type="file" id="birthImg" formControlName="imagem4" (change)="handleBirthImageUpload($event)" accept="image/*" required/>
+                                </div>
+                                <div *ngIf="!imagem4">
+                                  <img class="preImage2" [src]="this.profile.birthImg" />
+                                </div>
+                          </div>
+
+                          <div class="input-group">
+                            <div class="input">
+                              <input type="text" id="cv" placeholder="Insira o link do CV" formControlName="cv" required/>
+                            </div>
+                          </div>
+                          
+                          <!-- Botão Enviar -->
+                          <button class="sendButton" type="submit">Enviar</button>
+                      </div>
+                  </form>
+              </section>
+          </div>
+          
             <div class="formall" *ngIf="isSelected('email')">
               <section class="lista" *ngFor="let item of items | async; let i = index">
                 <div class="mensagem" (click)="showDescription(item)">
