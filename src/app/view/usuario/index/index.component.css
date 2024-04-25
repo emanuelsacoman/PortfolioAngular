@@ -79,6 +79,27 @@ body{
     gap: 1rem;
 }
 
+.phone{
+    cursor: pointer;
+    border-radius: 5px;
+    animation: blink 2s infinite forwards;
+}
+
+@keyframes blink {
+    0%{
+        background-color: #e2e2e2;
+    }
+    70%{
+        background-color: #e2e2e2;
+    }
+    85% {
+        background-color: #c6e4c1;
+    }
+    100% {
+        background-color: #e2e2e2;
+    }
+}
+
 .itenspic a {
     width: fit-content;
 }

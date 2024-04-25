@@ -59,6 +59,12 @@ export class IndexComponent implements OnInit {
     private firestore: AngularFirestore) {
       this.perfil = this.firestore.collection('profile').valueChanges();
 
+      this.perfil.subscribe(perfis => {
+        perfis.forEach(perfil => {
+          const numero = perfil.numero;
+        })
+      })
+
       this.firebaseService.obterTodosSobre().subscribe((res) => {
         this.sobre = res.map((sobre) => {
           return {
@@ -210,4 +216,13 @@ export class IndexComponent implements OnInit {
     const control = this.contactForm.get(controlName);
     return control && control.invalid && (control.dirty || control.touched);
   }
+
+  goToZap(numero: string) {
+    const numeroLimpo = numero.replace(/\D/g, '');
+    const codigoPais = '55';
+    const numeroFormatado = numeroLimpo.startsWith(codigoPais) ? numeroLimpo : codigoPais + numeroLimpo;
+
+    window.open(`https://wa.me/${numeroFormatado}?text=Olá! Vim do seu Portfólio.`, '_blank');
+  }
+
 }
