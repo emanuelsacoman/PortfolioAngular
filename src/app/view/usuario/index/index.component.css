@@ -80,12 +80,12 @@ body{
 }
 
 .itenspic a {
-    width: 100%;
+    width: fit-content;
 }
 
 .itenspic img {
-    height: clamp(15px, 2vw, 24px);
-    width: auto;
+    width: clamp(16px, 2vw, 26px);
+    height: auto;
     background-color: #e2e2e2;
     padding: 5px;
     transition: all 0.1s ease;
