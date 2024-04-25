@@ -76,7 +76,6 @@ body{
     flex-direction: row;
     width: 100%;
     justify-content: center;
-    cursor: pointer;
     gap: 1rem;
 }
 
@@ -86,6 +85,7 @@ body{
     background-color: #e2e2e2;
     padding: 5px;
     transition: all 0.1s ease;
+    cursor: pointer;
 }
 
 .itenspic img:hover{
@@ -171,11 +171,12 @@ body{
     margin-bottom: 1.2vh;
     transition: all 0.1s ease;
     cursor: pointer;
+    border: solid 2px transparent;
 }
 
 .cv:hover{
     background-color: transparent;
-    box-shadow: inset 0 0 5px #2e86dd;
+    border: solid 2px #2e86dd;
 }
 
 .cv:hover p{
@@ -203,8 +204,8 @@ body{
     transition: all 0.1s ease;
 }
 
-.cv:hover img {
-    background-color: #dd7d2e;
+.cv:hover img{
+    filter: invert(0%);
 }
 
 

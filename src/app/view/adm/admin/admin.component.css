@@ -340,6 +340,11 @@ input, textarea{
     cursor: pointer;
     justify-content: space-between;
     position: relative;
+    transition: all 0.1s ease;
+}
+
+.mensagem:hover{
+    background-color: #c0c0c0;
 }
 
 .message{
@@ -376,7 +381,7 @@ input, textarea{
 .areaMensagem{
     display: flex;
     flex-direction: column;
-    background-color: #c0c0c0;
+    border: 1px solid #c0c0c0;
     border-radius: 0px 0px 5px 5px;
     gap: 2vh;
     padding: 5px;
@@ -385,7 +390,7 @@ input, textarea{
 .topMensagem{
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: flex-start;
 }
 
 .nomeMensagem, .emailMensagem{
@@ -405,6 +410,8 @@ input, textarea{
     display: flex;
     flex-direction: column;
     gap: 1vh;
+    background-color: #fff;
+    border-radius: 5px;
 }
 
 .motivoShow{

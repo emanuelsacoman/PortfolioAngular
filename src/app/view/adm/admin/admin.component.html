@@ -168,12 +168,12 @@
                 <div class="expand fadeInDown" *ngIf="item.showDescription">
                   <div class="areaMensagem">
                     <div class="topMensagem">
-                      <p class="nomeMensagem">{{item.nome}}</p>
                       <p class="emailMensagem">{{item.email}}</p>
                     </div>
                     <div class="allMensagem">
                       <p class="motivoShow">{{item.titulo}}</p>
                       <p class="mensagemShow">{{item.mensagem}}</p>
+                      <p class="time">{{ convertTimestampToDate(item.timestamp) | date: 'dd/MM/yyyy HH:mm:ss' }}</p>
                     </div>
                   </div>
                 </div>
