@@ -336,10 +336,8 @@ input, textarea{
     padding: 5px;
     border-bottom: solid #c0c0c0 1px;
     display: flex;
-    flex-direction: row;
+    align-items: center;
     cursor: pointer;
-    justify-content: space-between;
-    position: relative;
     transition: all 0.1s ease;
 }
 
@@ -347,25 +345,30 @@ input, textarea{
     background-color: #c0c0c0;
 }
 
-.message{
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    width: 30%;
+.mensagem p,
+.mensagem img {
+  margin: 0;
 }
 
-.nome{
+.nome {
+    flex: 1;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
-    width: 30%;
 }
 
-.time{
+.motivo {
+    flex: 1;
     overflow: hidden;
     text-overflow: ellipsis;
-    font-size: 0.9rem;
 }
+
+.time {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
 
 .view{
    position: absolute; 
@@ -387,10 +390,13 @@ input, textarea{
     padding: 5px;
 }
 
+.expand{
+    width: 100%;
+}
+
 .topMensagem{
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
 }
 
 .nomeMensagem, .emailMensagem{
@@ -424,8 +430,9 @@ input, textarea{
 }
 
 .mensagem img{
-    width: auto;
-    height: 1rem;
+    flex: 0.5;
+    max-width: 20px; 
+    cursor: pointer;
 }
 
 .mensagem img:hover{
@@ -458,5 +465,14 @@ input, textarea{
 .profileForm input{
     height: 2rem;
 }
+
+/*RESPONSIVIDADE*/
+
+@media screen and (max-width: 440px) {
+    
+}
+
+/*RESPONSIVIDADE*/
+
 
 

@@ -62,13 +62,14 @@ body{
 }
 
 .pictureBottom .name{
-    font-size: clamp(12px, 2vw, 20px);
+    font-size: clamp(1rem, 3vw, 20px);
 }
 
 .pictureBottom .liltext{
     background-color: #e2e2e2;
     padding: 5px;
     border-radius: 5px;
+    font-size: clamp(0.8rem, 3vw, 16px);
 }
 
 .itenspic {
@@ -356,15 +357,15 @@ body{
 }
 
 .resumebox .title{
-    font-size: clamp(10px, 2vw, 16px);
+    font-size: clamp(12px, 2vw, 16px);
 }
 
 .resumebox .desc{
-    font-size: clamp(12px, 2vw, 18px);
+    font-size: clamp(14px, 2vw, 18px);
 }
 
 .resumebox .location{
-    font-size: clamp(10px, 2vw, 16px);
+    font-size: clamp(12px, 2vw, 16px);
 }
 
 /*PROJETOS*/
@@ -686,7 +687,7 @@ footer p {
     }
 
     .block img, .block2 img{
-        width: 1.5rem;
+        width: 1.3rem;
         height: auto;
     }
 
