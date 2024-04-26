@@ -86,7 +86,7 @@ body{
 
 
 .itenspic a {
-    width: fit-content;
+    width: 2rem;
 }
 
 .itenspic img {
@@ -232,6 +232,7 @@ body{
     width: 100%;
     min-height: 80%;
     font-size: 30px;
+    margin-bottom: 1vh;
 }
 
 .txttop{
@@ -303,12 +304,12 @@ body{
         flex-direction: column;
         gap: 0.5rem;
         .contenttitle{
-            font-size: 1.3rem;
-            text-wrap: nowrap;
+            font-size: clamp(16px, 1vw, 26px);
+            text-wrap: wrap;
             font-weight: bold;
         }
         .contentdesc{
-            font-size: 1rem;
+            font-size: clamp(12px, 1vw, 20px);
         }
     }
 }
@@ -650,3 +651,62 @@ footer p {
 }
 
 /* NAV */
+
+/*RESPONSIVIDADE*/
+
+.response{
+    display: none;
+}
+
+@media screen and (max-width: 770px) {
+    .noResponse{
+        display: none;
+    }
+
+    .response{
+        display: block;
+    }
+
+    .all{
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .desknavResponse{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-between;
+        gap: 2vw;
+    }
+
+    .profile2{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .alltop{
+        position: relative;
+    }
+
+    .picture .profile2img {
+        width: 12rem;
+    }
+
+    .info{
+        width: 90%;
+    }
+    .itenspic {
+        gap: 0.5rem;
+    }
+    .itenspic img{
+        width: 2rem;
+    }
+    .itens .img img{
+        width: 2rem;
+    }
+}
+
+/*RESPONSIVIDADE*/

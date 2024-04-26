@@ -1,6 +1,6 @@
 <body>
     <div class="all">
-        <section class="profile bloco" *ngFor="let perfil of perfil | async;">
+        <section class="profile bloco noResponse" *ngFor="let perfil of perfil | async;">
             <div class="alltop">
                 <div class="picture">
                     <img [src]="profileImageUrl" alt="Foto de perfil">
@@ -78,8 +78,124 @@
                         </a>
                     </div>
                 </div>
-        </div>
+            </div>
         </section>
+        <section class="profile2 bloco response" *ngFor="let perfil of perfil | async;">
+            <div class="alltop">
+                <div class="picture">
+                    <img class="profile2img" [src]="profileImageUrl" alt="Foto de perfil">
+                    <section class="pictureBottom">
+                        <div class="name">{{profileData.name}}</div>
+                        <div class="liltext">{{perfil.text}}</div>
+                        <div class="itenspic">
+                            <a href="https://instagram.com/{{perfil.instagram}}" target="_blank">
+                                <img src="./assets/images/instagram.png" alt="Instagram">
+                            </a>
+                            <a href="{{perfil.facebook}}" target="_blank">
+                                <img src="./assets/images/facebook.png" alt="Facebook">
+                            </a>
+                            <a href="{{perfil.linkedin}}" target="_blank">
+                                <img src="./assets/images/linkedin.png" alt="Linkedin">
+                            </a>
+                            <a href="https://github.com/{{perfil.github}}" target="_blank">
+                                <img src="./assets/images/github.png" alt="Github">
+                            </a>
+                        </div>
+                    </section>
+
+                    <section class="info">
+                        <div class="infoitem">
+                            <div class="itens phone" (click)="goToZap(perfil.phone)">
+                                <div class="img">
+                                    <img src="{{perfil.phoneImg}}" alt="Telefone">
+                                </div>
+                                <div class="lildesc">
+                                    <p class="title">{{perfil.phoneTXT}}</p>
+                                    <p class="desc">{{perfil.phone}}</p>
+                                </div>
+                            </div>
+                            <div class="bar"></div>
+                            <div class="itens email">
+                                <div class="img">
+                                    <img src="{{perfil.emailImg}}" alt="Telefone">
+                                </div>
+                                <div class="lildesc">
+                                    <p class="title">{{perfil.emailTXT}}</p>
+                                    <p class="desc">{{perfil.email}}</p>
+                                </div>
+                            </div>
+                            <div class="bar"></div>
+                            <div class="itens local">
+                                <div class="img">
+                                    <img src="{{perfil.localImg}}" alt="Telefone">
+                                </div>
+                                <div class="lildesc">
+                                    <p class="title">{{perfil.localTXT}}</p>
+                                    <p class="desc">{{perfil.local}}</p>
+                                </div>
+                            </div>
+                            <div class="bar"></div>
+                            <div class="itens birth">
+                                <div class="img">
+                                    <img src="{{perfil.birthImg}}" alt="Telefone">
+                                </div>
+                                <div class="lildesc">
+                                    <p class="title">{{perfil.birthTXT}}</p>
+                                    <p class="desc">{{perfil.birth}}</p>
+                                </div>
+                            </div>
+                            <div class="bar"></div>
+                        </div>
+                    </section>
+                    <div class="cv">
+                        <a href="{{perfil.cv}}" target="_blank">
+                            <div class="cvimg">
+                                <img src="./assets/images/baixar.png" alt="Download">
+                            </div>
+                            <div class="cvtext">
+                                <p>CURRÍCULO</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <nav class="desknavResponse bloco response">
+            <div class="block" (click)="selectOption('sobre')" [ngClass]="{selected: isSelected('sobre')}">
+                <img src="/assets/images/sobre.png" alt="Opção">
+                <p *ngFor="let sobre of sobre">{{sobre.title}}</p>
+            </div>
+            <div class="block" (click)="selectOption('resumo')" [ngClass]="{selected: isSelected('resumo')}">
+                <img src="/assets/images/resume.png" alt="Opção">
+                <p *ngFor="let resumo of resumo">{{resumo.titleArea}}</p>
+            </div>
+            <div class="block" (click)="selectOption('projetos')" [ngClass]="{selected: isSelected('projetos')}">
+                <img src="/assets/images/projeto.png" alt="Opção">
+                <p *ngFor="let projetos of projeto">{{projetos.titleProjeto}}</p>
+            </div>
+            <div class="block" (click)="selectOption('contato')" [ngClass]="{selected: isSelected('contato')}">
+                <img src="/assets/images/contato.png" alt="Opção">
+                <p *ngFor="let contato of contato">{{contato.titleContato}}</p>
+            </div>
+            <div class="block" *ngIf="isLoggedIn()">
+                <div  *ngFor="let sobre of sobre">
+                    <div *ngFor="let resumo of resumo">
+                        <div *ngFor="let projeto of projeto">
+                            <div *ngFor="let contato of contato">
+                                <div *ngFor="let profile of profile">
+                                    <ng-container>
+                                        <div class="block2" (click)="goToAdmin({sobre: sobre, resumo: resumo, projeto: projeto, contato: contato, profile: profile})">
+                                            <img src="/assets/images/admin.png" alt="Opção">
+                                            <p>Admin</p>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
         <main class="middle bloco">
             <div class="sobre wrap" *ngIf="isSelected('sobre')">
                 <div class="txttop" *ngFor="let sobre of this.sobre;">
@@ -210,7 +326,7 @@
             </footer>
         </main>
         <!-- menu.component.html -->
-        <nav class="desknav bloco">
+        <nav class="desknav bloco noResponse">
             <div class="block" (click)="selectOption('sobre')" [ngClass]="{selected: isSelected('sobre')}">
                 <img src="/assets/images/sobre.png" alt="Opção">
                 <p *ngFor="let sobre of sobre">{{sobre.title}}</p>

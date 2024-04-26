@@ -20,7 +20,7 @@ import { Sobrearea } from 'src/app/model/services/interfaces/sobrearea';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent {
-  selectedOption: string = 'profile';
+  selectedOption: string = 'sobre';
 
   // SOBRE
   sobreEdit!: FormGroup;

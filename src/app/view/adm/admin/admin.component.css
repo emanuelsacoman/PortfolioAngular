@@ -43,7 +43,7 @@ main {
     transition: all 0.1s ease;
     font-size: clamp(10px, 2vw, 30px);
     flex-wrap: wrap;
-    padding: 1vh;
+
 }
 
 .options .selected {
