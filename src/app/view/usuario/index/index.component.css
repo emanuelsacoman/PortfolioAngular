@@ -251,7 +251,7 @@ body{
     display: flex;
     flex-direction: column;
     gap: 2vh;
-    padding-inline: 3vh;
+    padding-inline: 2vh;
     padding-block-end: 1vh;
 }
 
@@ -260,7 +260,7 @@ body{
 }
 
 .wrap h2 {
-    font-size: clamp(16px, 5vw, 30px);
+    font-size: clamp(14px, 5vw, 30px);
 }
 
 .top{
@@ -342,7 +342,7 @@ body{
 }
 
 .resumetop img {
-    height: 3rem;
+    height: 2.5rem;
     width: auto;
 }
 
@@ -678,7 +678,16 @@ footer p {
         flex-direction: row;
         width: 100%;
         justify-content: space-between;
-        gap: 2vw;
+        gap: 0vw;
+    }
+
+    .desknavResponse .block, .block2 {
+        padding: 0;
+    }
+
+    .block img, .block2 img{
+        width: 1.5rem;
+        height: auto;
     }
 
     .profile2{
@@ -707,6 +716,42 @@ footer p {
     .itens .img img{
         width: 2rem;
     }
+}
+
+@media screen and (max-width: 430px) {
+    .resume{
+        gap: 1vh;
+    }
+    .resumeitem{
+        gap: 1vh;
+    }
+    .whatido{
+        gap: 1vh;
+    }
+    .wrap{
+        padding-inline: 0.7vh;
+        padding-block-end: 0.5vh;
+    }
+    .form-group input, textarea {
+        padding-inline-start: 0px;
+    }
+    .wrap h2 {
+        font-size: clamp(10px, 5vw, 30px);
+    }
+    .resumetop img {
+        width: clamp(20px, 5vw, 30px);
+        height: auto;
+    }
+    .cv{
+        width: fit-content;
+        .cvtext{
+            font-size: clamp(14px, 5vw, 30px);
+        }
+        .cvimg{
+            display: none;
+        }
+    }
+    
 }
 
 /*RESPONSIVIDADE*/
