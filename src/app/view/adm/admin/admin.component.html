@@ -235,7 +235,7 @@
                           <div class="input-group">
                               <div class="input">
                                   <label for="phoneImg">Imagem do Telefone:</label>
-                                  <input type="file" id="phoneImg" formControlName="imagem1" (change)="handlePhoneImageUpload($event)" accept="image/*" required/>
+                                  <input type="file" id="phoneImg" formControlName="imagem1" (change)="handlePhoneImageUpload($event)" accept="image/*"/>
                                 </div>
                                 <div *ngIf="!imagem1">
                                   <img class="preImage2" [src]="this.profile.phoneImg" />
@@ -245,7 +245,7 @@
                           
                               <div class="input">
                                   <label for="emailImg">Imagem do E-mail:</label>
-                                  <input type="file" id="emailImg" formControlName="imagem2" (change)="handleEmailImageUpload($event)" accept="image/*" required/>
+                                  <input type="file" id="emailImg" formControlName="imagem2" (change)="handleEmailImageUpload($event)" accept="image/*"/>
                                 </div>
                                 <div *ngIf="!imagem2">
                                   <img class="preImage2" [src]="this.profile.emailImg" />
@@ -255,7 +255,7 @@
                           
                               <div class="input">
                                   <label for="localImg">Imagem do Local:</label>
-                                  <input type="file" id="localImg" formControlName="imagem3" (change)="handleLocalImageUpload($event)" accept="image/*" required/>
+                                  <input type="file" id="localImg" formControlName="imagem3" (change)="handleLocalImageUpload($event)" accept="image/*"/>
                                 </div>
                                 <div *ngIf="!imagem3">
                                   <img class="preImage2" [src]="this.profile.localImg" />
@@ -265,7 +265,7 @@
                           
                               <div class="input">
                                   <label for="birthImg">Imagem do Nascimento:</label>
-                                  <input type="file" id="birthImg" formControlName="imagem4" (change)="handleBirthImageUpload($event)" accept="image/*" required/>
+                                  <input type="file" id="birthImg" formControlName="imagem4" (change)="handleBirthImageUpload($event)" accept="image/*"/>
                                 </div>
                                 <div *ngIf="!imagem4">
                                   <img class="preImage2" [src]="this.profile.birthImg" />
