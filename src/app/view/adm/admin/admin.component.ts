@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { AuthService } from 'src/app/model/services/auth.service';
 import { FirebaseService } from 'src/app/model/services/firebase.service';
 import { Contato } from 'src/app/model/services/interfaces/contato';
 import { Profile } from 'src/app/model/services/interfaces/profile';
@@ -109,7 +110,8 @@ export class AdminComponent {
     private formBuilder: FormBuilder,
     private firebase: FirebaseService,
     private firestore: AngularFirestore,
-    private injector: Injector) {
+    private injector: Injector,
+    private authService: AuthService) {
 
       this.items = this.firestore.collection('mensagens').valueChanges();
 
@@ -148,6 +150,10 @@ export class AdminComponent {
           } as Projetos;
         });
       });
+  }
+
+  logouot(){
+    return this.authService.deslogar();
   }
 
   ngOnInit(){

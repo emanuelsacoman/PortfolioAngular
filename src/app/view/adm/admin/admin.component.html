@@ -6,13 +6,11 @@
           </div>
             <div class="option" (click)="selectOption('sobre')" [ngClass]="{selected: isSelected('sobre')}">SOBRE</div>
             <div class="option" (click)="selectOption('resumo')" [ngClass]="{selected: isSelected('resumo')}">RESUMO</div>
-            <div class="option" (click)="selectOption('projetos')" [ngClass]="{selected: isSelected('projetos')}">
-                <P>PROJETOS</P>
-            </div>
-            
+            <div class="option" (click)="selectOption('projetos')" [ngClass]="{selected: isSelected('projetos')}"><P>PROJETOS</P></div>
             <div class="option" (click)="selectOption('contato')" [ngClass]="{selected: isSelected('contato')}">CONTATO</div>
             <div class="option" (click)="selectOption('profile')" [ngClass]="{selected: isSelected('profile')}">PROFILE</div>
             <div class="option" (click)="selectOption('email')" [ngClass]="{selected: isSelected('email')}">EMAIL</div>
+            <div class="option logout" (click)="logouot()">LOGOUT</div>
         </aside>
         <section class="formsection">
             <div class="formall" *ngIf="isSelected('sobre')">

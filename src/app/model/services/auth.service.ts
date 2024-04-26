@@ -40,8 +40,7 @@ export class AuthService {
   }
 
   login({email, senha}: User){
-    return signInWithEmailAndPassword(this.auth,
-        email, senha);
+    return signInWithEmailAndPassword(this.auth, email, senha);
   }
 
   public deslogar(){

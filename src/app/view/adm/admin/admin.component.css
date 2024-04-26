@@ -43,7 +43,11 @@ main {
     transition: all 0.1s ease;
     font-size: clamp(10px, 2vw, 30px);
     flex-wrap: wrap;
+}
 
+.options .logout{
+    flex: 50%;
+    background-color: #e23636
 }
 
 .options .selected {
@@ -465,6 +469,7 @@ input, textarea{
 .profileForm input{
     height: 2rem;
 }
+
 
 /*RESPONSIVIDADE*/
 
