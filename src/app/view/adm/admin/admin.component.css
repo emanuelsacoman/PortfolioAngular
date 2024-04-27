@@ -60,6 +60,11 @@ main {
     color: #fff;
 }
 
+.options .logout:hover{
+    color: black;
+    background-color: #e62020;
+}
+
 .return img {
     width: 5vw;
     height: auto;
@@ -372,7 +377,9 @@ input, textarea{
     text-overflow: ellipsis;
 }
 
-
+.options .return{
+    flex: 0.5;
+}
 
 .view{
    position: absolute; 

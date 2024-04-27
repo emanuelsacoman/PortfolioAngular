@@ -1,0 +1,36 @@
+[debug] [2024-04-27T16:00:02.601Z] ----------------------------------------------------------------------
+[debug] [2024-04-27T16:00:02.602Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\emanu\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2024-04-27T16:00:02.603Z] CLI Version:   13.7.2
+[debug] [2024-04-27T16:00:02.603Z] Platform:      win32
+[debug] [2024-04-27T16:00:02.603Z] Node Version:  v18.20.1
+[debug] [2024-04-27T16:00:02.604Z] Time:          Sat Apr 27 2024 13:00:02 GMT-0300 (Horário Padrão de Brasília)
+[debug] [2024-04-27T16:00:02.604Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-04-27T16:00:02.671Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-04-27T16:00:02.672Z] > authorizing via signed-in user (emanuelsacoman@gmail.com)
+[debug] [2024-04-27T16:00:02.672Z] [iam] checking project portfolio-ea378 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2024-04-27T16:00:02.673Z] > refreshing access token with scopes: []
+[debug] [2024-04-27T16:00:02.675Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2024-04-27T16:00:02.675Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-04-27T16:00:02.963Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2024-04-27T16:00:02.963Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-04-27T16:00:02.971Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/portfolio-ea378:testIamPermissions [none]
+[debug] [2024-04-27T16:00:02.971Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/portfolio-ea378:testIamPermissions x-goog-quota-user=projects/portfolio-ea378
+[debug] [2024-04-27T16:00:02.971Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/portfolio-ea378:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2024-04-27T16:00:04.036Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/portfolio-ea378:testIamPermissions 200
+[debug] [2024-04-27T16:00:04.036Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/portfolio-ea378:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2024-04-27T16:00:04.037Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/portfolio-ea378 [none]
+[debug] [2024-04-27T16:00:04.487Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/portfolio-ea378 200
+[debug] [2024-04-27T16:00:04.487Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/portfolio-ea378 {"projectId":"portfolio-ea378","projectNumber":"406792267480","displayName":"Portfolio","name":"projects/portfolio-ea378","resources":{"hostingSite":"portfolio-ea378","storageBucket":"portfolio-ea378.appspot.com","locationId":"southamerica-east1"},"state":"DELETED","etag":"1_d7586886-e5a5-4d3b-80b2-99cf27128761"}
+[debug] [2024-04-27T16:00:04.488Z] Specified "public" directory "dist/portfolio" does not exist; Deploy to Hosting site "emanuelsacoman" may fail or be empty.
+[info] 
+[info] === Deploying to 'portfolio-ea378'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2024-04-27T16:00:04.491Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/emanuelsacoman/versions [none]
+[debug] [2024-04-27T16:00:04.491Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/emanuelsacoman/versions {"status":"CREATED","labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2024-04-27T16:00:06.277Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/emanuelsacoman/versions 200
+[debug] [2024-04-27T16:00:06.278Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/emanuelsacoman/versions {"name":"projects/264727699704/sites/emanuelsacoman/versions/91c267fffc97e27f","status":"CREATED","config":{},"labels":{"deployment-tool":"cli-firebase"}}
+[info] i  hosting[emanuelsacoman]: beginning deploy... 
+[error] 
+[error] Error: Directory 'dist/portfolio' for Hosting does not exist.
