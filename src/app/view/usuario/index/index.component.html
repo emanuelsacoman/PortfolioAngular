@@ -1,4 +1,9 @@
 <body>
+    <div class="loading" *ngIf="!this.sobreLoaded && !this.sobreAreaLoaded && !this.resumoLoaded && 
+    !this.resumolLoaded && !this.resumorLoaded && !this.projetoLoaded &&
+    !this.projetosLoaded && !this.contatoLoaded && !this.profileLoaded">
+        <img src="./assets/images/spinner.gif" alt="Carregando...">
+    </div>
     <div class="all">
         <section class="profile bloco noResponse" *ngFor="let perfil of perfil | async;">
             <div class="alltop">

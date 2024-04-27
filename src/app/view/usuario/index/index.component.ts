@@ -29,19 +29,30 @@ export class IndexComponent implements OnInit {
   //DB
   public sobre: Sobre[] = [];
   public sobreLoaded = false;
+
   public resumo: Resumo[] = [];
+  public resumoLoaded = false;
 
   public sobrearea: Sobrearea[] = [];
+  public sobreAreaLoaded = false;
 
   public resumol: ResumoL[] = [];
+  public resumolLoaded = false;
+
   public resumor: ResumoR[] = [];
+  public resumorLoaded = false;
 
   public projeto: Projeto[] = [];
+  public projetoLoaded = false;
 
   public projetos: Projetos[] = [];
+  public projetosLoaded = false;
+
   public contato: Contato[] = [];
+  public contatoLoaded = false;
 
   public profile: Profile[] = [];
+  public profileLoaded = false;
 
   perfil: Observable<any[]>;
   //DB
@@ -82,6 +93,7 @@ export class IndexComponent implements OnInit {
             ...(sobre.payload.doc.data() as any),
           } as Sobrearea;
         });
+        this.sobreAreaLoaded = true;
       });
 
       this.firebaseService.obterTodosResumo().subscribe((res) => {
@@ -91,6 +103,7 @@ export class IndexComponent implements OnInit {
             ...(resumo.payload.doc.data() as any),
           } as Resumo;
         });
+        this.resumoLoaded = true;
       });
 
       this.firebaseService.obterTodosResumoL().subscribe((res) => {
@@ -100,6 +113,7 @@ export class IndexComponent implements OnInit {
             ...(resumol.payload.doc.data() as any),
           } as ResumoL;
         });
+        this.resumolLoaded = true;
       });
 
       this.firebaseService.obterTodosResumoR().subscribe((res) => {
@@ -109,6 +123,7 @@ export class IndexComponent implements OnInit {
             ...(resumor.payload.doc.data() as any),
           } as ResumoR;
         });
+        this.resumorLoaded = true;
       });
 
       this.firebaseService.obterTodosProjeto().subscribe((res) => {
@@ -118,6 +133,7 @@ export class IndexComponent implements OnInit {
             ...(projeto.payload.doc.data() as any),
           } as Projeto;
         });
+        this.projetoLoaded = true;
       });
 
       this.firebaseService.obterTodosProjetos().subscribe((res) => {
@@ -127,6 +143,7 @@ export class IndexComponent implements OnInit {
             ...(projetos.payload.doc.data() as any),
           } as Projetos;
         });
+        this.projetosLoaded = true;
       });
 
       this.firebaseService.obterTodosContato().subscribe((res) => {
@@ -136,6 +153,7 @@ export class IndexComponent implements OnInit {
             ...(contato.payload.doc.data() as any),
           } as Contato;
         });
+        this.contatoLoaded = true;
       });
 
       this.firebaseService.obterTodosProfile().subscribe((res) => {
@@ -145,9 +163,10 @@ export class IndexComponent implements OnInit {
             ...(profile.payload.doc.data() as any),
           } as Profile;
         });
+        this.profileLoaded = true;
       });
-
     }
+
 
   ngOnInit() {
     this.getGitHubProfile();
