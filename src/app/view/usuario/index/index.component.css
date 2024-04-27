@@ -681,6 +681,15 @@ footer p {
     }
 }
 
+.fade-out {
+    opacity: 1;
+    transition: opacity 0.5s ease-out; /* Altere a duração conforme desejado */
+}
+
+.fade-out.ng-leave {
+    opacity: 0;
+}
+
 
 /*LOADING*/
 

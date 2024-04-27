@@ -23,6 +23,7 @@ import { ItemeditComponent } from './view/adm/edit/itemedit/itemedit.component';
 import { ResumoleditComponent } from './view/adm/edit/resumoledit/resumoledit.component';
 import { ResumoreditComponent } from './view/adm/edit/resumoredit/resumoredit.component';
 import { ProjetoeditComponent } from './view/adm/edit/projetoedit/projetoedit.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { ProjetoeditComponent } from './view/adm/edit/projetoedit/projetoedit.co
     ReactiveFormsModule,
     AngularFireAuthModule,
     provideAuth(() => getAuth()),
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
   providers: [
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase }

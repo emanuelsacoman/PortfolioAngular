@@ -15,11 +15,21 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Profile } from 'src/app/model/services/interfaces/profile';
 import { Observable } from 'rxjs';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-index',
   templateUrl: './index.component.html',
-  styleUrls: ['./index.component.css']
+  styleUrls: ['./index.component.css'],
+  animations: [
+    trigger('fadeOut', [
+      transition(':leave', [
+        animate('500ms ease-out', style({ opacity: 0 }))
+      ])
+    ])
+  ]
 })
 export class IndexComponent implements OnInit {
   profileData: any;

@@ -1,7 +1,7 @@
 <body>
-    <div class="loading" *ngIf="!this.sobreLoaded && !this.sobreAreaLoaded && !this.resumoLoaded && 
-    !this.resumolLoaded && !this.resumorLoaded && !this.projetoLoaded &&
-    !this.projetosLoaded && !this.contatoLoaded && !this.profileLoaded">
+    <div class="loading" *ngIf="!this.sobreLoaded || !this.sobreAreaLoaded || !this.resumoLoaded || 
+    !this.resumolLoaded || !this.resumorLoaded || !this.projetoLoaded ||
+    !this.projetosLoaded || !this.contatoLoaded || !this.profileLoaded" [@fadeOut]>
         <img src="./assets/images/spinner.gif" alt="Carregando...">
     </div>
     <div class="all">
