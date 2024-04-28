@@ -1,4 +1,4 @@
-# Meu Portfólio
+# Meu Portfólio 🌐
 
 Este é meu  portfólio pessoal, onde me apresento e demonstro meus projetos. Este site foi criado utilizando o framework Angular 16 e hospedado no Firebase. Este site foi projetado para ser eficiente na visão de um recrutador ou de alguém que apenas está curioso.
 
