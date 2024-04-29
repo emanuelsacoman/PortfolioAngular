@@ -164,7 +164,7 @@ body{
 
 .email .lildesc .desc{
     display: block;
-    font-size: clamp(8px, 1.3vw, 15px);
+    font-size: clamp(10px, 1vw, 15px);
 }
 
 .lildesc .title{
@@ -793,6 +793,12 @@ footer p {
         }
     }
     
+}
+
+@media screen and (max-width: 270px){
+    .infoitem img {
+        display: none;
+    }    
 }
 
 /*RESPONSIVIDADE*/
