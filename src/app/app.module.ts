@@ -24,6 +24,7 @@ import { ResumoleditComponent } from './view/adm/edit/resumoledit/resumoledit.co
 import { ResumoreditComponent } from './view/adm/edit/resumoredit/resumoredit.component';
 import { ProjetoeditComponent } from './view/adm/edit/projetoedit/projetoedit.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SlidereditComponent } from './view/adm/edit/slideredit/slideredit.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ResumoleditComponent,
     ResumoreditComponent,
     ProjetoeditComponent,
+    SlidereditComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,7 +51,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AngularFireAuthModule,
     provideAuth(() => getAuth()),
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
   providers: [
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase }

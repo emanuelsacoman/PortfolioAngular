@@ -12,6 +12,7 @@ import { Projetos } from 'src/app/model/services/interfaces/projetos';
 import { Resumo } from 'src/app/model/services/interfaces/resumo';
 import { ResumoL } from 'src/app/model/services/interfaces/resumoL';
 import { ResumoR } from 'src/app/model/services/interfaces/resumoR';
+import { Slider } from 'src/app/model/services/interfaces/slider';
 import { Sobre } from 'src/app/model/services/interfaces/sobre';
 import { Sobrearea } from 'src/app/model/services/interfaces/sobrearea';
 
@@ -104,6 +105,9 @@ export class AdminComponent {
   imagem3: any;
   imagem4: any;
 
+  //SLIDER
+  public slider: Slider[] = [];
+
 
   
   constructor(private router: Router,
@@ -148,6 +152,15 @@ export class AdminComponent {
             id: projeto.payload.doc.id,
             ...(projeto.payload.doc.data() as any),
           } as Projetos;
+        });
+      });
+
+      this.firebase.obterTodosSlider().subscribe((res) => {
+        this.slider = res.map((slider) => {
+          return {
+            id: slider.payload.doc.id,
+            ...(slider.payload.doc.data() as any),
+          } as Slider;
         });
       });
   }
@@ -489,6 +502,17 @@ export class AdminComponent {
 
   handleBirthImageUpload(event: any){
     this.imagem4 = event.target.files;
+  }
+
+  editSliderImg(slider: Slider){
+    console.log('Item clicado:', slider);
+    
+    this.router.navigateByUrl("/slideredit", {state: { slider: slider } });
+  }
+
+  cadastrarSlider(){
+    const create: Slider = new Slider("", null);
+    this.firebase.cadastrarSlider(create);
   }
   
 }

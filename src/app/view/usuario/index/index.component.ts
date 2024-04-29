@@ -18,6 +18,7 @@ import { Observable } from 'rxjs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { Slider } from 'src/app/model/services/interfaces/slider';
 
 @Component({
   selector: 'app-index',
@@ -63,6 +64,9 @@ export class IndexComponent implements OnInit {
 
   public profile: Profile[] = [];
   public profileLoaded = false;
+
+  public slider: Slider[] = [];
+  public sliderLoaded = false;
 
   perfil: Observable<any[]>;
   //DB
@@ -174,6 +178,16 @@ export class IndexComponent implements OnInit {
           } as Profile;
         });
         this.profileLoaded = true;
+      });
+
+      this.firebaseService.obterTodosSlider().subscribe((res) => {
+        this.slider = res.map((slider) => {
+          return {
+            id: slider.payload.doc.id,
+            ...(slider.payload.doc.data() as any),
+          } as Slider;
+        });
+        this.sliderLoaded = true;
       });
     }
 

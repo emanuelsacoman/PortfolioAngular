@@ -693,6 +693,38 @@ footer p {
 
 /*LOADING*/
 
+/*SLIDER*/
+
+#slider { 
+    overflow: hidden;
+    background-color: #e2e2e2;
+    border-radius: 5px;
+    position: relative;
+    width: 100%;
+    height: 10vh;
+
+}
+
+#slider figure{
+    display: block;
+    margin: 0;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#slider figure img {
+    width: clamp(50px, 1vw, 100px);
+    height: auto;
+    display: inline-block;
+}
+
+
+
+
+/*SLIDER*/
+
 /*RESPONSIVIDADE*/
 
 .response{

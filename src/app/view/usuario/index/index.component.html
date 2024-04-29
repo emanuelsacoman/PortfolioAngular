@@ -230,10 +230,14 @@
                     </div>
                 </section>
 
-                <!-- <section class="carousel">
-                    <h3 class="carouseltitle">Conhecimento</h3>
-                    
-                </section> -->
+                <div id="slider">
+                    <div *ngFor="let slider of slider">
+                        <figure>
+                            <img src="{{slider.Img}}">     
+                        </figure>
+                    </div>
+                </div>
+
             </div>
             <div class="resumo wrap" *ngIf="isSelected('resumo')">
                 <div class="txttop" *ngFor="let resumo of resumo">

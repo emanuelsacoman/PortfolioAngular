@@ -8,6 +8,7 @@ import { ItemeditComponent } from './view/adm/edit/itemedit/itemedit.component';
 import { ResumoleditComponent } from './view/adm/edit/resumoledit/resumoledit.component';
 import { ResumoreditComponent } from './view/adm/edit/resumoredit/resumoredit.component';
 import { ProjetoeditComponent } from './view/adm/edit/projetoedit/projetoedit.component';
+import { SlidereditComponent } from './view/adm/edit/slideredit/slideredit.component';
 
 const routes: Routes = [
   {
@@ -41,6 +42,11 @@ const routes: Routes = [
   {
     path: 'projetoedit',
     component: ProjetoeditComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'slideredit',
+    component: SlidereditComponent,
     canActivate: [AuthGuard],
   },
 ];

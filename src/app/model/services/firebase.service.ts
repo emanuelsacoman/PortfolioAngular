@@ -12,6 +12,7 @@ import { Projetos } from './interfaces/projetos';
 import { Projeto } from './interfaces/projeto';
 import { Contato } from './interfaces/contato';
 import { Profile } from './interfaces/profile';
+import { Slider } from './interfaces/slider';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,7 @@ export class FirebaseService {
   private PATH7 : string = "projetosArea";
   private PATH8 : string = "contato";
   private PATH9 : string = "profile";
+  private PATH10 : string = "slider";
 
   constructor(private firestore: AngularFirestore,
     private storage: AngularFireStorage,
@@ -435,6 +437,55 @@ export class FirebaseService {
           return task;
         }
       //Profile
+
+      //Slider
+      obterTodosSlider() {
+        return this.firestore.collection(this.PATH10).snapshotChanges();
+      }
+
+      excluirSlider(id: string) {
+        return this.firestore.collection(this.PATH10).doc(id).delete();
+      } 
+
+      cadastrarSlider(slider : Slider) {
+        return this.firestore.collection(this.PATH10).add({
+          Img: slider.Img,
+          
+        });
+      }
+
+      editarSlider(slider: Slider, id: string) {
+        return this.firestore.collection(this.PATH10).doc(id).update({
+          Img: slider.Img,
+            
+        });
+      }
+
+      uploadImageSlider(imagem: any, itens: Slider){
+        const file = imagem.item(0);
+        if(file.type.split('/')[0] !== 'image'){
+          console.error("Tipo Não Suportado.");
+          return;
+        }
+        const path = `images/${itens.id}_${file.name}`;
+        const fileRef = this.storage.ref(path);
+        let task = this.storage.upload(path,file);
+        task.snapshotChanges().pipe(
+          finalize(() =>{
+            let uploadFileURL = fileRef.getDownloadURL();
+            uploadFileURL.subscribe(resp => {
+              itens.Img = resp;
+              if(!itens.id){
+                this.cadastrarSlider(itens);
+              }else {
+                this.editarSlider(itens, itens.id);
+              }
+            })
+          })
+          ).subscribe();
+          return task;
+        }
+      //Slider
     }
 
     

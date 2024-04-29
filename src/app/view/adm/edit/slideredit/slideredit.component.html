@@ -1,0 +1,26 @@
+<body>
+    <main>
+        <section class="formsection">
+             <form class="formItens" (ngSubmit)="editItem()" [formGroup]="editar" #formDir="ngForm">
+                <h1 class="title">EDITAR</h1>
+                <div class="bottomAll">
+                    <div class="formBottom">
+                        <div class="form-group">
+                            <div class="input imageInput">
+                                <input class="img" type="file" id="imagem" formControlName="imagem" accept="image/*" (change)="uploadFile($event)">
+                            </div>
+                        </div>
+                    </div>
+                    
+                <div *ngIf="!imagem">
+                        <img class="preImage" [src]="this.slider.Img" />
+                    </div>
+                </div>
+                <div class="buttons">
+                    <button class="sendButton" type="submit">Enviar</button>
+                    <button class="delete" (click)="delete()">Excluir</button>
+                </div>
+             </form>
+        </section>
+    </main>
+</body>
