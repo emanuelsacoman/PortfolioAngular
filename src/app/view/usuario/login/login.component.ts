@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/model/services/auth.service';
 import { User } from 'src/app/model/services/interfaces/user';
@@ -12,10 +13,14 @@ import { User } from 'src/app/model/services/interfaces/user';
 export class LoginComponent {
   userForm!: FormGroup;
   loginError: string | null = null;
+
+  title = 'Faça login';
   
   constructor(private router: Router,
     private formBuilder: FormBuilder,
-    private authService: AuthService){
+    private authService: AuthService,
+    private titleService: Title){
+      this.setDocTitle(this.title);
   }
   ngOnInit(): void {
     this.userForm = new FormGroup({
@@ -43,4 +48,9 @@ export class LoginComponent {
     const control = this.userForm.get(controlName);
     return control && control.invalid && (control.dirty || control.touched);
   }
+
+  setDocTitle(title: string) {
+    console.log('current title:::::' + this.titleService.getTitle());
+    this.titleService.setTitle(title);
+ }
 }

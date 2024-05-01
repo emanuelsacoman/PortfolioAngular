@@ -165,8 +165,11 @@ export class AdminComponent {
       });
   }
 
-  logouot(){
-    return this.authService.deslogar();
+  logouot(): void{
+    const confirmLogout = window.confirm('Tem certeza de que deseja deslogar?');
+    if(confirmLogout){
+      this.authService.deslogar();
+    }
   }
 
   ngOnInit(){

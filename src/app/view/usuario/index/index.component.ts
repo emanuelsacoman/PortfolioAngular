@@ -19,6 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { Slider } from 'src/app/model/services/interfaces/slider';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-index',
@@ -75,13 +76,16 @@ export class IndexComponent implements OnInit {
   contactForm!: FormGroup;
   mensagemEnviada: boolean = false;
   //Form
+
+  title = 'Emanuel Vinícius Sacoman';
   
   constructor(private http: HttpClient,
     private router: Router,
     private firebaseService: FirebaseService,
     private authService: AuthService,
     private formBuilder: FormBuilder,
-    private firestore: AngularFirestore) {
+    private firestore: AngularFirestore,
+    private titleService: Title) {
       this.perfil = this.firestore.collection('profile').valueChanges();
 
       this.perfil.subscribe(perfis => {
@@ -189,6 +193,8 @@ export class IndexComponent implements OnInit {
         });
         this.sliderLoaded = true;
       });
+
+      this.setDocTitle(this.title);
     }
 
 
@@ -196,6 +202,11 @@ export class IndexComponent implements OnInit {
     this.getGitHubProfile();
     this.initForm();
   }
+
+  setDocTitle(title: string) {
+    console.log('current title:::::' + this.titleService.getTitle());
+    this.titleService.setTitle(title);
+ }
 
   initForm() {
     this.contactForm = new FormGroup({

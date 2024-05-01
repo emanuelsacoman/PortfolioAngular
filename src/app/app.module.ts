@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IndexComponent } from './view/usuario/index/index.component';
@@ -53,7 +53,7 @@ import { SlidereditComponent } from './view/adm/edit/slideredit/slideredit.compo
     HttpClientModule,
     BrowserAnimationsModule,
   ],
-  providers: [
+  providers: [Title,
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase }
   ],
   bootstrap: [AppComponent]

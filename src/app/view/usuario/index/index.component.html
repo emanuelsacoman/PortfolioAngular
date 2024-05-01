@@ -1,3 +1,7 @@
+<head>
+    <meta name="description" content="Portfólio do Desenvolvedor Emanuel Vinícius Sacoman!">
+</head>
+
 <body>
     <div class="loading" *ngIf="!this.sobreLoaded || !this.sobreAreaLoaded || !this.resumoLoaded || 
     !this.resumolLoaded || !this.resumorLoaded || !this.projetoLoaded ||
@@ -5,6 +9,7 @@
         <img src="./assets/images/spinner.gif" alt="Carregando...">
     </div>
     <div class="all">
+        <h1>{{profileData.name}}</h1>
         <section class="profile bloco noResponse" *ngFor="let perfil of perfil | async;">
             <div class="alltop">
                 <div class="picture">
@@ -205,7 +210,7 @@
             <div class="sobre wrap" *ngIf="isSelected('sobre')">
                 <div class="txttop" *ngFor="let sobre of this.sobre;">
                     <div class="top">
-                        <h1>{{sobre.title}}</h1>
+                        <div class="toph1">{{sobre.title}}</div>
                         <div class="topbar"></div>
                     </div>
                     <div class="txttop2">
@@ -245,7 +250,7 @@
             <div class="resumo wrap" *ngIf="isSelected('resumo')">
                 <div class="txttop" *ngFor="let resumo of resumo">
                     <div class="top">
-                        <h1>{{resumo.titleArea}}</h1>
+                        <div class="toph1">{{resumo.titleArea}}</div>
                         <div class="topbar"></div>
                     </div>
                     <section class="resume">
@@ -276,7 +281,7 @@
             </div>
             <div class="projetos wrap" *ngIf="isSelected('projetos')">
                 <div class="top">
-                    <h1 *ngFor="let projetos of projeto">{{projetos.titleProjeto}}</h1>
+                    <div class="toph1" *ngFor="let projetos of projeto">{{projetos.titleProjeto}}</div>
                     <div class="topbar"></div>
                 </div>
                 <div class="projects">
@@ -296,7 +301,7 @@
             
             <div class="contato wrap" *ngIf="isSelected('contato')">
                 <div class="top">
-                    <h1 *ngFor="let contato of contato">{{contato.titleContato}}</h1>
+                    <div class="toph1" *ngFor="let contato of contato">{{contato.titleContato}}</div>
                     <div class="topbar"></div>
                 </div>
                 <div class="formContact">
