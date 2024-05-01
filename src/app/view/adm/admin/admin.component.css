@@ -143,7 +143,7 @@ input, textarea{
         padding-block: 1vh;
         color: black;
 
-        h2{
+        :is(h2){
             background-color: #c0c0c0;
             width: 100%;
             border-radius: 5px;
@@ -151,7 +151,7 @@ input, textarea{
             overflow-wrap: break-word;
         }
 
-        p{
+        :is(p){
             background-color: #c0c0c0;
             width: 100%;
             border-radius: 5px;
@@ -231,7 +231,7 @@ input, textarea{
     cursor: pointer;
     font-size: clamp(1rem, 2vw, 1.3rem);
 
-    p{
+    :is(p){
         background-color: #c0c0c0;
         width: fit-content;
         border-radius: 5px;
