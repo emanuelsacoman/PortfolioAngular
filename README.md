@@ -10,6 +10,6 @@ Este é meu  portfólio pessoal, onde me apresento e demonstro meus projetos. Es
 
 Investi meu tempo para conseguir uma boa indexação no google! Com um bom ranqueamento, será mais fácil de encontrar meu site ao fazer uma pesquisa.
 
-![Pagespeed](./src/assets/images/pagespeed.png)
+![Pagespeed](./src/assets/images/pagespeed2.png)
 
 Não se esqueça de deixar uma ⭐ nesse repositório!
