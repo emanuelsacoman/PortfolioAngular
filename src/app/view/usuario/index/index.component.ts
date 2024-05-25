@@ -279,4 +279,8 @@ export class IndexComponent implements OnInit {
     window.open(`https://wa.me/${numeroFormatado}?text=Olá! Vim do seu Portfólio.`, '_blank');
   }
 
+  goToEmail(email: string){
+    window.open(`mailto:${email}`, '_blank');
+  }
+
 }
