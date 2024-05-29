@@ -10,7 +10,7 @@
             <div class="option" (click)="selectOption('contato')" [ngClass]="{selected: isSelected('contato')}">CONTATO</div>
             <div class="option" (click)="selectOption('profile')" [ngClass]="{selected: isSelected('profile')}">PROFILE</div>
             <div class="option" (click)="selectOption('email')" [ngClass]="{selected: isSelected('email')}">EMAIL</div>
-            <div class="option logout" (click)="logouot()">LOGOUT</div>
+            <div class="option logout" (click)="logout()">LOGOUT</div>
         </aside>
         <section class="formsection">
             <div class="formall" *ngIf="isSelected('sobre')">

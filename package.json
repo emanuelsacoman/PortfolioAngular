@@ -22,6 +22,7 @@
     "aos": "^2.3.4",
     "firebase": "^10.10.0",
     "jquery": "^3.7.1",
+    "ng-angular-popup": "^0.5.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"

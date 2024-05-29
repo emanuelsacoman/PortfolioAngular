@@ -25,6 +25,7 @@ import { ResumoreditComponent } from './view/adm/edit/resumoredit/resumoredit.co
 import { ProjetoeditComponent } from './view/adm/edit/projetoedit/projetoedit.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SlidereditComponent } from './view/adm/edit/slideredit/slideredit.component';
+import { NgToastModule } from 'ng-angular-popup';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { SlidereditComponent } from './view/adm/edit/slideredit/slideredit.compo
     provideAuth(() => getAuth()),
     HttpClientModule,
     BrowserAnimationsModule,
+    NgToastModule
   ],
   providers: [Title,
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase }

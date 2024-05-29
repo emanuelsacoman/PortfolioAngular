@@ -2,6 +2,7 @@ import { Component, Injector } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgToastService } from 'ng-angular-popup';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/model/services/auth.service';
 import { FirebaseService } from 'src/app/model/services/firebase.service';
@@ -115,7 +116,8 @@ export class AdminComponent {
     private firebase: FirebaseService,
     private firestore: AngularFirestore,
     private injector: Injector,
-    private authService: AuthService) {
+    private authService: AuthService,
+    private toast: NgToastService) {
 
       this.items = this.firestore.collection('mensagens').valueChanges();
 
@@ -165,10 +167,26 @@ export class AdminComponent {
       });
   }
 
-  logouot(): void{
+  logout(): void {
     const confirmLogout = window.confirm('Tem certeza de que deseja deslogar?');
-    if(confirmLogout){
-      this.authService.deslogar();
+    if (confirmLogout) {
+        this.authService.deslogar()
+            .then(() => {
+                this.router.navigate(['']);
+                this.toast.success({
+                    detail: "Sucesso!",
+                    summary: "Desconectado com sucesso",
+                    duration: 5000
+                });
+            })
+            .catch((error) => {
+                console.error('Error logging out:', error);
+                this.toast.error({
+                    detail: "Erro",
+                    summary: "Falha ao desconectar.",
+                    duration: 5000
+                });
+            });
     }
   }
 
@@ -182,21 +200,35 @@ export class AdminComponent {
 
   editContato() {
     if (this.contatoEdit.valid) {
-      const new_part: Contato = {...this.contatoEdit.value, id: this.contato.id};
-  
-      this.firebase.editarContato(new_part, this.contato.id)
-        .then(() => {
-          console.log('Contato atualizado com sucesso');
-          this.router.navigate(['/']);
-        })
-        .catch((error) => {
-          console.log('Erro ao atualizar Contato:', error);
-        });
+        const new_part: Contato = {...this.contatoEdit.value, id: this.contato.id};
+
+        this.firebase.editarContato(new_part, this.contato.id)
+            .then(() => {
+                console.log('Contato atualizado com sucesso');
+                this.router.navigate(['/']);
+                this.toast.success({
+                    detail: "Sucesso!",
+                    summary: "Contato atualizado com sucesso",
+                    duration: 5000
+                });
+            })
+            .catch((error) => {
+                console.error('Erro ao atualizar Contato:', error);
+                this.toast.error({
+                    detail: "Erro!",
+                    summary: "Falha ao atualizar Contato. Tente novamente mais tarde.",
+                    duration: 5000
+                });
+            });
     } else {
-      window.alert('Campos obrigatórios!');
+        this.toast.error({
+            detail: "Erro!",
+            summary: "Preencha todos os campos obrigatórios",
+            duration: 5000
+        });
     }
   }
-  
+
   initContato(){
     this.contato = history.state.contato;
     console.log('Informações de contato:', this.contato);
@@ -212,20 +244,35 @@ export class AdminComponent {
 
   editProjeto() {
     if (this.projetoEdit.valid) {
-      const new_part: Projeto = {...this.projetoEdit.value, id: this.projeto.id};
-  
-      this.firebase.editarProjeto(new_part, this.projeto.id)
-        .then(() => {
-          console.log('Projeto atualizado com sucesso');
-          this.router.navigate(['/']);
-        })
-        .catch((error) => {
-          console.log('Erro ao atualizar Projeto:', error);
-        });
+        const new_part: Projeto = {...this.projetoEdit.value, id: this.projeto.id};
+
+        this.firebase.editarProjeto(new_part, this.projeto.id)
+            .then(() => {
+                console.log('Projeto atualizado com sucesso');
+                this.router.navigate(['/']);
+                this.toast.success({
+                    detail: "Sucesso!",
+                    summary: "Projeto atualizado com sucesso",
+                    duration: 5000
+                });
+            })
+            .catch((error) => {
+                console.error('Erro ao atualizar Projeto:', error);
+                this.toast.error({
+                    detail: "Erro!",
+                    summary: "Falha ao atualizar Projeto. Tente novamente mais tarde.",
+                    duration: 5000
+                });
+            });
     } else {
-      window.alert('Campos obrigatórios!');
+        this.toast.error({
+            detail: "Erro!",
+            summary: "Preencha todos os campos obrigatórios",
+            duration: 5000
+        });
     }
   }
+
   
   initProjeto(){
     this.projeto = history.state.projeto;
@@ -256,20 +303,35 @@ export class AdminComponent {
 
   editSobre() {
     if (this.sobreEdit.valid) {
-      const new_part: Sobre = {...this.sobreEdit.value, id: this.sobre.id};
-  
-      this.firebase.editarSobre(new_part, this.sobre.id)
-        .then(() => {
-          console.log('Sobre atualizado com sucesso');
-          this.router.navigate(['/']);
-        })
-        .catch((error) => {
-          console.log('Erro ao atualizar Sobre:', error);
-        });
+        const new_part: Sobre = {...this.sobreEdit.value, id: this.sobre.id};
+
+        this.firebase.editarSobre(new_part, this.sobre.id)
+            .then(() => {
+                console.log('Sobre atualizado com sucesso');
+                this.router.navigate(['/']);
+                this.toast.success({
+                    detail: "Sucesso!",
+                    summary: "Sobre atualizado com sucesso",
+                    duration: 5000
+                });
+            })
+            .catch((error) => {
+                console.error('Erro ao atualizar Sobre:', error);
+                this.toast.error({
+                    detail: "Erro!",
+                    summary: "Falha ao atualizar Sobre. Tente novamente mais tarde.",
+                    duration: 5000
+                });
+            });
     } else {
-      window.alert('Campos obrigatórios!');
+        this.toast.error({
+            detail: "Erro!",
+            summary: "Preencha todos os campos obrigatórios",
+            duration: 5000
+        });
     }
   }
+
 
   editar(sobrearea: Sobrearea){
     console.log('Item clicado:', sobrearea);
@@ -296,20 +358,35 @@ export class AdminComponent {
 
   editResumo() {
     if (this.resumoEdit.valid) {
-      const new_part: Resumo = {...this.resumoEdit.value, id: this.resumo.id};
-  
-      this.firebase.editarResumo(new_part, this.resumo.id)
-        .then(() => {
-          console.log('Resumo atualizado com sucesso');
-          this.router.navigate(['/']);
-        })
-        .catch((error) => {
-          console.log('Erro ao atualizar Resumo:', error);
-        });
+        const new_part: Resumo = {...this.resumoEdit.value, id: this.resumo.id};
+
+        this.firebase.editarResumo(new_part, this.resumo.id)
+            .then(() => {
+                console.log('Resumo atualizado com sucesso');
+                this.router.navigate(['/']);
+                this.toast.success({
+                    detail: "Sucesso!",
+                    summary: "Resumo atualizado com sucesso",
+                    duration: 5000
+                });
+            })
+            .catch((error) => {
+                console.error('Erro ao atualizar Resumo:', error);
+                this.toast.error({
+                    detail: "Erro!",
+                    summary: "Falha ao atualizar Resumo. Tente novamente mais tarde.",
+                    duration: 5000
+                });
+            });
     } else {
-      window.alert('Campos obrigatórios!');
+        this.toast.error({
+            detail: "Erro!",
+            summary: "Preencha todos os campos obrigatórios",
+            duration: 5000
+        });
     }
   }
+
 
 
   addresumol(){
@@ -385,15 +462,41 @@ export class AdminComponent {
   deleteemail(mensagem: string) {
     const confirmDelete = window.confirm('Tem certeza de que deseja excluir este email?');
     if (confirmDelete) {
-      this.firestore.collection('mensagens', ref => ref.where('mensagem', '==', mensagem))
-        .get()
-        .subscribe(querySnapshot => {
-          querySnapshot.forEach(doc => {
-            doc.ref.delete();
-          });
-        });
+        this.firestore.collection('mensagens', ref => ref.where('mensagem', '==', mensagem))
+            .get()
+            .subscribe(querySnapshot => {
+                const batch = this.firestore.firestore.batch();
+                querySnapshot.forEach(doc => {
+                    batch.delete(doc.ref);
+                });
+
+                batch.commit()
+                    .then(() => {
+                        this.toast.success({
+                            detail: "Sucesso!",
+                            summary: "Email excluído com sucesso",
+                            duration: 5000
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Erro ao excluir email:', error);
+                        this.toast.error({
+                            detail: "Erro!",
+                            summary: "Falha ao excluir email. Tente novamente mais tarde.",
+                            duration: 5000
+                        });
+                    });
+            }, error => {
+                console.error('Erro ao buscar email:', error);
+                this.toast.error({
+                    detail: "Erro!",
+                    summary: "Falha ao buscar email. Tente novamente mais tarde.",
+                    duration: 5000
+                });
+            });
     }
   }
+
 
   //PROFILE
   initProfile(){
@@ -483,13 +586,26 @@ export class AdminComponent {
   
   // Função para atualizar o perfil após o upload de todas as imagens
   updateProfile(new_part: Profile) {
-    this.firebase.editarProfile(new_part, this.profile.id).then(() => {
-      console.log('Profile atualizado com sucesso');
-      this.router.navigate(['']);
-    }).catch((error) => {
-      console.log('Erro ao atualizar Profile:', error);
-    });
-  } 
+    this.firebase.editarProfile(new_part, this.profile.id)
+        .then(() => {
+            console.log('Profile atualizado com sucesso');
+            this.router.navigate(['']);
+            this.toast.success({
+                detail: "Sucesso!",
+                summary: "Perfil atualizado com sucesso",
+                duration: 5000
+            });
+        })
+        .catch((error) => {
+            console.error('Erro ao atualizar Profile:', error);
+            this.toast.error({
+                detail: "Erro!",
+                summary: "Falha ao atualizar Perfil. Tente novamente mais tarde.",
+                duration: 5000
+            });
+        });
+  }
+
   
   handlePhoneImageUpload(event: any){
     this.imagem1 = event.target.files;

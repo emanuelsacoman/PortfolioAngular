@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgToastService } from 'ng-angular-popup';
 import { FirebaseService } from 'src/app/model/services/firebase.service';
 import { Projetos } from 'src/app/model/services/interfaces/projetos';
 
@@ -21,7 +22,8 @@ export class ProjetoeditComponent {
 
   constructor(private router: Router,
     private formBuilder: FormBuilder,
-    private firebase: FirebaseService){
+    private firebase: FirebaseService,
+    private toast: NgToastService){
 
   }
 
@@ -56,48 +58,101 @@ export class ProjetoeditComponent {
             this.firebase.uploadImageProjeto1(this.imagem1, new_part)?.then(() => {
                 this.firebase.uploadImageProjeto2(this.imagem2, new_part)?.then(() => {
                     this.router.navigate(['/admin']);
+                    this.toast.success({
+                        detail: "Sucesso!",
+                        summary: "Projeto atualizado com sucesso",
+                        duration: 5000
+                    });
                 }).catch((error) => {
-                    console.log(error);
+                    console.error('Erro ao fazer upload da segunda imagem:', error);
+                    this.toast.error({
+                        detail: "Erro!",
+                        summary: "Falha ao atualizar projeto. Tente novamente mais tarde.",
+                        duration: 5000
+                    });
                 });
             }).catch((error) => {
-                console.log(error);
+                console.error('Erro ao fazer upload da primeira imagem:', error);
+                this.toast.error({
+                    detail: "Erro!",
+                    summary: "Falha ao atualizar projeto. Tente novamente mais tarde.",
+                    duration: 5000
+                });
             });
         } else {
             if (this.imagem1) {
                 this.firebase.uploadImageProjeto1(this.imagem1, new_part)?.then(() => {
                     this.firebase.editarProjetos(new_part, this.projeto.id).then(() => {
                         this.router.navigate(['/admin']);
+                        this.toast.success({
+                            detail: "Sucesso!",
+                            summary: "Projeto atualizado com sucesso",
+                            duration: 5000
+                        });
                     }).catch((error) => {
-                        console.log(error);
+                        console.error('Erro ao editar projeto:', error);
+                        this.toast.error({
+                            detail: "Erro!",
+                            summary: "Falha ao atualizar projeto. Tente novamente mais tarde.",
+                            duration: 5000
+                        });
                     });
                 }).catch((error) => {
-                    console.log(error);
+                    console.error('Erro ao fazer upload da primeira imagem:', error);
+                    this.toast.error({
+                        detail: "Erro!",
+                        summary: "Falha ao atualizar projeto. Tente novamente mais tarde.",
+                        duration: 5000
+                    });
                 });
             } else if (this.imagem2) {
                 this.firebase.uploadImageProjeto2(this.imagem2, new_part)?.then(() => {
                     this.firebase.editarProjetos(new_part, this.projeto.id).then(() => {
                         this.router.navigate(['/admin']);
+                        this.toast.success({
+                            detail: "Sucesso!",
+                            summary: "Projeto atualizado com sucesso",
+                            duration: 5000
+                        });
                     }).catch((error) => {
-                        console.log(error);
-                        
+                        console.error('Erro ao editar projeto:', error);
+                        this.toast.error({
+                            detail: "Erro!",
+                            summary: "Falha ao atualizar projeto. Tente novamente mais tarde.",
+                            duration: 5000
+                        });
                     });
                 }).catch((error) => {
-                    console.log(error);
-                   
+                    console.error('Erro ao fazer upload da segunda imagem:', error);
+                    this.toast.error({
+                        detail: "Erro!",
+                        summary: "Falha ao atualizar projeto. Tente novamente mais tarde.",
+                        duration: 5000
+                    });
                 });
             } else {
                 this.firebase.editarProjetos(new_part, this.projeto.id).then(() => {
                     this.router.navigate(['/admin']);
+                    this.toast.success({
+                        detail: "Sucesso!",
+                        summary: "Projeto atualizado com sucesso",
+                        duration: 5000
+                    });
                 }).catch((error) => {
-                    console.log(error);
-                   
+                    console.error('Erro ao editar projeto:', error);
+                    this.toast.error({
+                        detail: "Erro!",
+                        summary: "Falha ao atualizar projeto. Tente novamente mais tarde.",
+                        duration: 5000
+                    });
                 });
             }
         }
     } else {
         
     }
-}
+  }
+
 
   uploadFile1(event: any){
     this.imagem1 = event.target.files;
@@ -112,12 +167,28 @@ export class ProjetoeditComponent {
     return control && control.invalid && (control.dirty || control.touched);
   }
 
-  delete(){
+  delete() {
     const confirmDelete = window.confirm('Tem certeza de que deseja excluir este projeto?');
     if (confirmDelete) {
-        this.firebase.excluirProjetos(this.projeto.id).then(() => {
-            this.router.navigate(['/admin']);
-          });
+        this.firebase.excluirProjetos(this.projeto.id)
+            .then(() => {
+                console.log('Projeto excluído com sucesso');
+                this.router.navigate(['/admin']);
+                this.toast.success({
+                    detail: "Sucesso!",
+                    summary: "Projeto excluído com sucesso",
+                    duration: 5000
+                });
+            })
+            .catch((error) => {
+                console.error('Erro ao excluir projeto:', error);
+                this.toast.error({
+                    detail: "Erro!",
+                    summary: "Falha ao excluir projeto. Tente novamente mais tarde.",
+                    duration: 5000
+                });
+            });
     }
   }
+
 }

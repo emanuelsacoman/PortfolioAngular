@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { NgToastService } from 'ng-angular-popup';
 import { AuthService } from 'src/app/model/services/auth.service';
 import { User } from 'src/app/model/services/interfaces/user';
 
@@ -19,7 +20,8 @@ export class LoginComponent {
   constructor(private router: Router,
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private titleService: Title){
+    private titleService: Title,
+    private toast: NgToastService){
       this.setDocTitle(this.title);
   }
   ngOnInit(): void {
@@ -29,19 +31,29 @@ export class LoginComponent {
     });
   }
 
-  submit(){
+  submit() {
     const user: User = this.userForm.value;
 
     if (!user) {
         return;
     }
 
-    this.authService.login(user).then(() =>
-        this.router.navigate(['']))
-        .catch((e: any) => {
-          this.loginError = 'Email ou senha incorretos.';
-          this.userForm.reset()
+    this.authService.login(user).then(() => {
+        this.router.navigate(['']);
+        this.toast.success({
+            detail: "Sucesso!",
+            summary: "Login Efetuado com Sucesso.",
+            duration: 5000
         });
+    }).catch((e: any) => {
+        this.loginError = 'Email ou senha incorretos.';
+        this.toast.error({
+            detail: "Tente Novamente",
+            summary: "Email ou senha incorretos!",
+            duration: 5000
+        });
+        this.userForm.reset();
+    });
   }
 
   isInvalidControl(controlName: string) {
