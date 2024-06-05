@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Title } from '@angular/platform-browser';
+import { Meta, Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { AuthService } from 'src/app/model/services/auth.service';
@@ -16,13 +16,16 @@ export class LoginComponent {
   loginError: string | null = null;
 
   title = 'Faça login';
+  description = 'Página de login do portfolio do desenvolvedor Emanuel Vinícius Sacoman.';
   
   constructor(private router: Router,
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private titleService: Title,
+    private metaService: Meta,
     private toast: NgToastService){
       this.setDocTitle(this.title);
+      this.setMetaDescription(this.description);
   }
   ngOnInit(): void {
     this.userForm = new FormGroup({
@@ -65,4 +68,9 @@ export class LoginComponent {
     console.log('current title:::::' + this.titleService.getTitle());
     this.titleService.setTitle(title);
  }
+
+  setMetaDescription(description: string) {
+    console.log('Updating meta description:::::', description);
+    this.metaService.updateTag({ name: 'description', content: description });
+  }
 }

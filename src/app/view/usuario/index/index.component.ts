@@ -19,7 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { Slider } from 'src/app/model/services/interfaces/slider';
-import { Title } from '@angular/platform-browser';
+import { Meta, Title } from '@angular/platform-browser';
 import { NgToastService } from 'ng-angular-popup';
 
 @Component({
@@ -79,6 +79,7 @@ export class IndexComponent implements OnInit {
   //Form
 
   title = 'Emanuel Vinícius Sacoman';
+  description = 'Página principal do desenvolvedor Emanuel Vinícius Sacoman.';
   
   constructor(private http: HttpClient,
     private router: Router,
@@ -87,6 +88,7 @@ export class IndexComponent implements OnInit {
     private formBuilder: FormBuilder,
     private firestore: AngularFirestore,
     private titleService: Title,
+    private metaService: Meta,
     private toast: NgToastService) {
       this.perfil = this.firestore.collection('profile').valueChanges();
 
@@ -197,6 +199,7 @@ export class IndexComponent implements OnInit {
       });
 
       this.setDocTitle(this.title);
+      this.setMetaDescription(this.description);
     }
 
 
@@ -208,7 +211,12 @@ export class IndexComponent implements OnInit {
   setDocTitle(title: string) {
     console.log('current title:::::' + this.titleService.getTitle());
     this.titleService.setTitle(title);
- }
+  }
+
+  setMetaDescription(description: string) {
+    console.log('Updating meta description:::::', description);
+    this.metaService.updateTag({ name: 'description', content: description });
+  }
 
   initForm() {
     this.contactForm = new FormGroup({
