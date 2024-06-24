@@ -26,7 +26,6 @@ import { ProjetoeditComponent } from './view/adm/edit/projetoedit/projetoedit.co
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SlidereditComponent } from './view/adm/edit/slideredit/slideredit.component';
 import { NgToastModule } from 'ng-angular-popup';
-import { AngularFireMessagingModule } from '@angular/fire/compat/messaging';
 
 @NgModule({
   declarations: [
@@ -55,7 +54,6 @@ import { AngularFireMessagingModule } from '@angular/fire/compat/messaging';
     HttpClientModule,
     BrowserAnimationsModule,
     NgToastModule,
-    AngularFireMessagingModule
   ],
   providers: [Title,
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase }
