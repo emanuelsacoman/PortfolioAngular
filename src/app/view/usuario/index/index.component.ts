@@ -21,6 +21,7 @@ import { trigger, transition, style, animate } from '@angular/animations';
 import { Slider } from 'src/app/model/services/interfaces/slider';
 import { Meta, Title } from '@angular/platform-browser';
 import { NgToastService } from 'ng-angular-popup';
+import { NotificationService } from 'src/app/model/services/notification.service';
 
 @Component({
   selector: 'app-index',
@@ -89,7 +90,8 @@ export class IndexComponent implements OnInit {
     private firestore: AngularFirestore,
     private titleService: Title,
     private metaService: Meta,
-    private toast: NgToastService) {
+    private toast: NgToastService,
+    private notificationService: NotificationService) {
       this.perfil = this.firestore.collection('profile').valueChanges();
 
       this.perfil.subscribe(perfis => {
@@ -206,6 +208,7 @@ export class IndexComponent implements OnInit {
   ngOnInit() {
     this.getGitHubProfile();
     this.initForm();
+    this.notificationService.requestPermission();
   }
 
   setDocTitle(title: string) {
@@ -269,6 +272,7 @@ export class IndexComponent implements OnInit {
                 console.log('Mensagem enviada com sucesso!');
                 this.contactForm.reset();
                 this.mensagemEnviada = true;
+                this.notificationService.listen();
                 this.toast.success({
                     detail: "Sucesso!",
                     summary: "Mensagem enviada com sucesso",
