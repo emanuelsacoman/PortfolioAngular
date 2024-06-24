@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { FirebaseService } from 'src/app/model/services/firebase.service';
 import { Projetos } from 'src/app/model/services/interfaces/projetos';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-projetoedit',
@@ -168,27 +169,36 @@ export class ProjetoeditComponent {
   }
 
   delete() {
-    const confirmDelete = window.confirm('Tem certeza de que deseja excluir este projeto?');
-    if (confirmDelete) {
-        this.firebase.excluirProjetos(this.projeto.id)
-            .then(() => {
-                console.log('Projeto excluído com sucesso');
-                this.router.navigate(['/admin']);
-                this.toast.success({
-                    detail: "Sucesso!",
-                    summary: "Projeto excluído com sucesso",
-                    duration: 5000
+    Swal.fire({
+        title: 'Tem certeza de que deseja excluir este projeto?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sim, excluir',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            this.firebase.excluirProjetos(this.projeto.id)
+                .then(() => {
+                    console.log('Projeto excluído com sucesso');
+                    this.router.navigate(['/admin']);
+                    this.toast.success({
+                        detail: "Sucesso!",
+                        summary: "Projeto excluído com sucesso",
+                        duration: 5000
+                    });
+                })
+                .catch((error) => {
+                    console.error('Erro ao excluir projeto:', error);
+                    this.toast.error({
+                        detail: "Erro!",
+                        summary: "Falha ao excluir projeto. Tente novamente mais tarde.",
+                        duration: 5000
+                    });
                 });
-            })
-            .catch((error) => {
-                console.error('Erro ao excluir projeto:', error);
-                this.toast.error({
-                    detail: "Erro!",
-                    summary: "Falha ao excluir projeto. Tente novamente mais tarde.",
-                    duration: 5000
-                });
-            });
-    }
-  }
+        }
+    });
+}
 
 }

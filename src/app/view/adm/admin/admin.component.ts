@@ -16,6 +16,7 @@ import { ResumoR } from 'src/app/model/services/interfaces/resumoR';
 import { Slider } from 'src/app/model/services/interfaces/slider';
 import { Sobre } from 'src/app/model/services/interfaces/sobre';
 import { Sobrearea } from 'src/app/model/services/interfaces/sobrearea';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-admin',
@@ -168,27 +169,36 @@ export class AdminComponent {
   }
 
   logout(): void {
-    const confirmLogout = window.confirm('Tem certeza de que deseja deslogar?');
-    if (confirmLogout) {
-        this.authService.deslogar()
-            .then(() => {
-                this.router.navigate(['']);
-                this.toast.success({
-                    detail: "Sucesso!",
-                    summary: "Desconectado com sucesso",
-                    duration: 5000
+    Swal.fire({
+        title: 'Tem certeza de que deseja deslogar?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sim, deslogar',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            this.authService.deslogar()
+                .then(() => {
+                    this.router.navigate(['']);
+                    this.toast.success({
+                        detail: "Sucesso!",
+                        summary: "Desconectado com sucesso",
+                        duration: 5000
+                    });
+                })
+                .catch((error) => {
+                    console.error('Error logging out:', error);
+                    this.toast.error({
+                        detail: "Erro",
+                        summary: "Falha ao desconectar.",
+                        duration: 5000
+                    });
                 });
-            })
-            .catch((error) => {
-                console.error('Error logging out:', error);
-                this.toast.error({
-                    detail: "Erro",
-                    summary: "Falha ao desconectar.",
-                    duration: 5000
-                });
-            });
-    }
-  }
+        }
+    });
+}
 
   ngOnInit(){
     this.initSobre();
@@ -460,43 +470,51 @@ export class AdminComponent {
   }
 
   deleteemail(mensagem: string) {
-    const confirmDelete = window.confirm('Tem certeza de que deseja excluir este email?');
-    if (confirmDelete) {
-        this.firestore.collection('mensagens', ref => ref.where('mensagem', '==', mensagem))
-            .get()
-            .subscribe(querySnapshot => {
-                const batch = this.firestore.firestore.batch();
-                querySnapshot.forEach(doc => {
-                    batch.delete(doc.ref);
-                });
-
-                batch.commit()
-                    .then(() => {
-                        this.toast.success({
-                            detail: "Sucesso!",
-                            summary: "Email excluído com sucesso",
-                            duration: 5000
-                        });
-                    })
-                    .catch(error => {
-                        console.error('Erro ao excluir email:', error);
-                        this.toast.error({
-                            detail: "Erro!",
-                            summary: "Falha ao excluir email. Tente novamente mais tarde.",
-                            duration: 5000
-                        });
+    Swal.fire({
+        title: 'Tem certeza de que deseja excluir este email?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sim, excluir',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            this.firestore.collection('mensagens', ref => ref.where('mensagem', '==', mensagem))
+                .get()
+                .subscribe(querySnapshot => {
+                    const batch = this.firestore.firestore.batch();
+                    querySnapshot.forEach(doc => {
+                        batch.delete(doc.ref);
                     });
-            }, error => {
-                console.error('Erro ao buscar email:', error);
-                this.toast.error({
-                    detail: "Erro!",
-                    summary: "Falha ao buscar email. Tente novamente mais tarde.",
-                    duration: 5000
-                });
-            });
-    }
-  }
 
+                    batch.commit()
+                        .then(() => {
+                            this.toast.success({
+                                detail: "Sucesso!",
+                                summary: "Email excluído com sucesso",
+                                duration: 5000
+                            });
+                        })
+                        .catch(error => {
+                            console.error('Erro ao excluir email:', error);
+                            this.toast.error({
+                                detail: "Erro!",
+                                summary: "Falha ao excluir email. Tente novamente mais tarde.",
+                                duration: 5000
+                            });
+                        });
+                }, error => {
+                    console.error('Erro ao buscar email:', error);
+                    this.toast.error({
+                        detail: "Erro!",
+                        summary: "Falha ao buscar email. Tente novamente mais tarde.",
+                        duration: 5000
+                    });
+                });
+        }
+    });
+  }
 
   //PROFILE
   initProfile(){

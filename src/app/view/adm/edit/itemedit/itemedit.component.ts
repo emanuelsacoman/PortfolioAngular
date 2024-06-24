@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { FirebaseService } from 'src/app/model/services/firebase.service';
 import { Sobrearea } from 'src/app/model/services/interfaces/sobrearea';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-itemedit',
@@ -103,26 +104,35 @@ export class ItemeditComponent implements OnInit {
   }
 
   delete() {
-    const confirmDelete = window.confirm('Tem certeza de que deseja excluir este item?');
-    if (confirmDelete) {
-        this.firebase.excluirSobreArea(this.sobrearea.id)
-            .then(() => {
-                console.log('Item excluído com sucesso');
-                this.router.navigate(['/admin']);
-                this.toast.success({
-                    detail: "Sucesso!",
-                    summary: "Item excluído com sucesso",
-                    duration: 5000
+    Swal.fire({
+        title: 'Tem certeza de que deseja excluir este item?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sim, excluir',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            this.firebase.excluirSobreArea(this.sobrearea.id)
+                .then(() => {
+                    console.log('Item excluído com sucesso');
+                    this.router.navigate(['/admin']);
+                    this.toast.success({
+                        detail: "Sucesso!",
+                        summary: "Item excluído com sucesso",
+                        duration: 5000
+                    });
+                })
+                .catch((error) => {
+                    console.error('Erro ao excluir item:', error);
+                    this.toast.error({
+                        detail: "Erro!",
+                        summary: "Falha ao excluir item. Tente novamente mais tarde.",
+                        duration: 5000
+                    });
                 });
-            })
-            .catch((error) => {
-                console.error('Erro ao excluir item:', error);
-                this.toast.error({
-                    detail: "Erro!",
-                    summary: "Falha ao excluir item. Tente novamente mais tarde.",
-                    duration: 5000
-                });
-            });
-    }
+        }
+    });
   }
 }
