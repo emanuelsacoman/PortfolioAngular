@@ -52,9 +52,59 @@ body{
     gap: 1.2vh;
 }
 
+.picture .picarea{
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-self: center;
+    flex-direction: column;
+}
+
 .picture img {
     max-width: 60%;
     border-radius: 5px;
+    position: relative;
+}
+
+@property --gradient-angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+  }
+
+.picture .picback {
+    --gradient-angle: 0deg;
+    background: conic-gradient(
+      from var(--gradient-angle),
+      transparent,
+      #399cff
+    );
+    filter: blur(10px);
+    z-index: -1;
+    padding: 5px;
+    width: 60%;
+    height: 100%;
+    top: -5px;
+    position: absolute;
+    border-radius: 5px;
+    animation: none;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    animation: rotateGradient 5s linear infinite;
+  }
+  
+  @keyframes rotateGradient {
+    0% {
+      --gradient-angle: 0deg;
+    }
+    100% {
+      --gradient-angle: 360deg;
+    }
+  } 
+
+.picture:hover .picback{
+    opacity: 1;
 }
 
 .pictureBottom {

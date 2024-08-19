@@ -13,7 +13,10 @@
         <section class="profile bloco noResponse" *ngFor="let perfil of perfil | async;">
             <div class="alltop">
                 <div class="picture">
-                    <img [src]="profileImageUrl" alt="Foto de perfil">
+                    <div class="picarea">
+                        <img [src]="profileImageUrl" alt="Foto de perfil">
+                        <div class="picback"></div>
+                    </div>
                     <section class="pictureBottom">
                         <div class="name">{{profileData.name}}</div>
                         <div class="liltext">{{perfil.text}}</div>
@@ -93,7 +96,10 @@
         <section class="profile2 bloco response" *ngFor="let perfil of perfil | async;">
             <div class="alltop">
                 <div class="picture">
-                    <img class="profile2img" [src]="profileImageUrl" alt="Foto de perfil">
+                    <div class="picarea">
+                        <img class="profile2img" [src]="profileImageUrl" alt="Foto de perfil">
+                        <div class="picback"></div>
+                    </div>
                     <section class="pictureBottom">
                         <div class="name">{{profileData.name}}</div>
                         <div class="liltext">{{perfil.text}}</div>
