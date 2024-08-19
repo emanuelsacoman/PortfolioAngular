@@ -4,13 +4,15 @@ export class Projetos {
     private _projectImg!: any;
     private _badge!: any;
     private _link!: string;
+    private _inProgress!: boolean;
 
-    constructor(id: string, titulo: string, projectImg: any, badge: any, link: string) {
+    constructor(id: string, titulo: string, projectImg: any, badge: any, link: string, inProgress: boolean) {
         this._id = id;
         this._titulo = titulo;
         this._projectImg = projectImg;
         this._badge = badge;
         this._link = link;
+        this._inProgress = inProgress;
     }
 
     public get id(): string {
@@ -51,5 +53,13 @@ export class Projetos {
 
     public set link(value: any) {
         this._link = value;
+    }
+
+    public get inProgress(): boolean {
+        return this._inProgress;
+    }
+
+    public set inProgress(value: boolean) {
+        this._inProgress = value;
     }
 }

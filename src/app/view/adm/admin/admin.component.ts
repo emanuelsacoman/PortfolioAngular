@@ -431,7 +431,7 @@ export class AdminComponent {
   }
 
   cadastrarProjeto(){
-    const create: Projetos = new Projetos("","","","","");
+    const create: Projetos = new Projetos("","","","","", false);
     this.firebase.cadastrarProjetos(create);
   }
 

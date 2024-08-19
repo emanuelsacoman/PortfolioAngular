@@ -13,7 +13,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireStorageModule, } from '@angular/fire/compat/storage';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
@@ -26,6 +26,7 @@ import { ProjetoeditComponent } from './view/adm/edit/projetoedit/projetoedit.co
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SlidereditComponent } from './view/adm/edit/slideredit/slideredit.component';
 import { NgToastModule } from 'ng-angular-popup';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,8 @@ import { NgToastModule } from 'ng-angular-popup';
     HttpClientModule,
     BrowserAnimationsModule,
     NgToastModule,
+    MatSlideToggleModule,
+    FormsModule
   ],
   providers: [Title,
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase }

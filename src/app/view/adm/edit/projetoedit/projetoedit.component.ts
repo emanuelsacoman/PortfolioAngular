@@ -17,6 +17,7 @@ export class ProjetoeditComponent {
 
   titulo!: string;
   link!: string;
+  inProgress!: boolean;
 
   imagem1: any;
   imagem2: any;
@@ -34,13 +35,15 @@ export class ProjetoeditComponent {
 
   initProject(){
     this.projeto = history.state.projeto;
-    console.log('Informações da área sobre:', this.projeto);
+    console.log('Informações do projeto:', this.projeto);
     this.titulo = this.projeto?.titulo;
     this.link = this.projeto?.link;
+    this.inProgress = this.projeto?.inProgress;
 
     this.editar = this.formBuilder.group({
       titulo: [this.titulo, [Validators.required]],
       link: [this.link, [Validators.required]],
+      inProgress: [this.inProgress, [Validators.required]],
       imagem1: [null],
       imagem2: [null],
     });

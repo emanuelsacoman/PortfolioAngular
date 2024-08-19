@@ -290,19 +290,23 @@
                     <div class="toph1" *ngFor="let projetos of projeto">{{projetos.titleProjeto}}</div>
                     <div class="topbar"></div>
                 </div>
-                <div class="projects">
+                <div class="projects">  
                     <div class="project" style="background-image: url('{{projeto.projectImg}}');" *ngFor="let projeto of projetos">
-                        <a href="{{projeto.link}}" target="_blank">
+                        <a [href]="!projeto.inProgress ? '#' : projeto.link" target="_blank">
+                            <div class="wip" *ngIf="!projeto.inProgress">
+                                <img src="./assets/images/wip.gif" alt="Work in Progress">
+                            </div>
                             <div class="mark">
                                 <img src="./assets/images/bookmark.png" alt="Mark">
                                 <div class="badge">
                                     <img src="{{projeto.badge}}" alt="Badge">
                                 </div>
                             </div>
-                            <div class="title" >{{projeto.titulo}}</div>
+                            <div class="title">{{projeto.titulo}}</div>
                         </a>
                     </div>
                 </div>
+                
             </div>
             
             <div class="contato wrap" *ngIf="isSelected('contato')">
