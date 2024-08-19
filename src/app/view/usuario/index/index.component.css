@@ -91,7 +91,7 @@ body{
     animation: none;
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
-    animation: rotateGradient 5s linear infinite;
+    animation: rotateGradient 4s linear infinite;
   }
   
   @keyframes rotateGradient {
