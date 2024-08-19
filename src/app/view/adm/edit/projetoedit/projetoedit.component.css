@@ -92,9 +92,13 @@ input, textarea{
 }
 
 .imageInput{
-    color: gray;
+    color: black;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+}
+
+.imageInput label{
+    font-size: clamp(10px, 2vw, 18px); 
 }
 
 .preImage {

@@ -7,13 +7,13 @@
 
                     <div class="form-group">
                         <div class="input">
-                            <input type="text" id="titulo" placeholder="Insira o titulo" formControlName="titulo" required/>
+                            <input type="text" id="titulo" placeholder="Insira o titulo do projeto" formControlName="titulo" required/>
                             <p *ngIf="isInvalidControl('titulo')">Erro no titulo</p>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="input">
-                            <input type="text" id="link" placeholder="Insira o link" formControlName="link" required/>
+                            <input type="text" id="link" placeholder="Insira o link do projeto" formControlName="link" required/>
                             <p *ngIf="isInvalidControl('titulo')">Erro no link</p>
                         </div>
                     </div>
@@ -22,6 +22,7 @@
                     <div class="formBottom">
                         <div class="form-group">
                             <div class="input imageInput">
+                                <label for="imagem1">Imagem do projeto</label>
                                 <input class="img" type="file" id="imagem1" formControlName="imagem1" accept="image/*" (change)="uploadFile1($event)">
                             </div>
                             <div *ngIf="!imagem1">
@@ -30,6 +31,7 @@
                         </div>
                         <div class="form-group">
                             <div class="input imageInput">
+                                <label for="imagem1">Ícone da linguagem utilizada</label>
                                 <input class="img" type="file" id="imagem2" formControlName="imagem2" accept="image/*" (change)="uploadFile2($event)">
                             </div>
                             <div *ngIf="!imagem2">
