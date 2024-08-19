@@ -55,20 +55,6 @@
                 </div>
               </section> 
 
-              <!--                                SLIDER
-                <section class="addSlider">
-                  <div class="forSlider" *ngFor="let slider of slider; let i = index">
-                    <div class="sliderImg" (click)="editSliderImg(slider)">
-                      <img src="{{slider.Img}}">
-                  </div>
-                </div>
-                <div class="cadastro">
-                  <img (click)="cadastrarSlider()" src="./assets/images/plus.png" alt="Cadastro">
-                </div>
-              </section>
-            -->
-              
-            
             </div>
             <div class="formall" *ngIf="isSelected('resumo')">
               <form class="formResumo" (ngSubmit)="editResumo()" [formGroup]="resumoEdit" #formDir="ngForm">
