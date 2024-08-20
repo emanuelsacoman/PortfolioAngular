@@ -196,6 +196,7 @@ export class FirebaseService {
           badge: projetos.badge,
           link: projetos.link,
           inProgress: projetos.inProgress,
+          star: projetos.star,
         });
       }
 
@@ -210,6 +211,7 @@ export class FirebaseService {
           badge: projetos.badge,
           link: projetos.link,
           inProgress: projetos.inProgress,
+          star: projetos.star,
         });
       }
 

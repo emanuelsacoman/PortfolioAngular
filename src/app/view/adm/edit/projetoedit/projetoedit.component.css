@@ -92,6 +92,17 @@ input, textarea{
     flex-direction: column;
 }
 
+.icon{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: .3rem;
+}
+
+.icon img {
+    width: 1.5rem;
+}
+
 .imageBottom{
     width: auto;
     height: auto;

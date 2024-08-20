@@ -6,9 +6,24 @@
                 <div class="formTop">
                     <div class="form-group">
                         <div class="input">
-                            <label for="inProgress">Projeto finalizado?</label>
+                            <div class="icon">
+                                <label for="inProgress">Projeto finalizado?</label>
+                                <img src="./assets/images/wip.gif" alt="Wip gif">
+                            </div>
                             <mat-slide-toggle class="custom-slide-toggle" [(ngModel)]="inProgress" formControlName="inProgress" id="inProgress" name="inProgress">
                             {{ inProgress ? 'Atual: Sim' : 'Atual: Não' }}
+                            </mat-slide-toggle>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input">
+                            <div class="icon">
+                                <label for="star">Favorito?</label>
+                                <img src="./assets/images/star.gif" alt="Star gif">
+                            </div>
+                            <mat-slide-toggle class="custom-slide-toggle" [(ngModel)]="star" formControlName="star" id="star" name="star">
+                            {{ star ? 'Atual: Sim' : 'Atual: Não' }}
                             </mat-slide-toggle>
                         </div>
                     </div>

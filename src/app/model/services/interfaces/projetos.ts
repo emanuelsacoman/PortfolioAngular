@@ -5,14 +5,16 @@ export class Projetos {
     private _badge!: any;
     private _link!: string;
     private _inProgress!: boolean;
+    private _star!: boolean;
 
-    constructor(id: string, titulo: string, projectImg: any, badge: any, link: string, inProgress: boolean) {
+    constructor(id: string, titulo: string, projectImg: any, badge: any, link: string, inProgress: boolean, star: boolean) {
         this._id = id;
         this._titulo = titulo;
         this._projectImg = projectImg;
         this._badge = badge;
         this._link = link;
         this._inProgress = inProgress;
+        this._star = star;
     }
 
     public get id(): string {
@@ -61,5 +63,13 @@ export class Projetos {
 
     public set inProgress(value: boolean) {
         this._inProgress = value;
+    }
+
+    public get star(): boolean {
+        return this._star;
+    }
+
+    public set star(value: boolean) {
+        this._star = value;
     }
 }

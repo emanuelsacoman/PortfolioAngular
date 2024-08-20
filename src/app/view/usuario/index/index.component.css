@@ -512,14 +512,22 @@ a{
     color: black;
 }
 
-.wip img{
-    height: auto;
+.icon-right{
+    display: flex;
+    gap: .5rem;
     position: absolute;
-    left: 0;
     top: 0;
-    z-index: 4;
-    width: 4rem;
+    left: 0;
+    margin-top: 5px;
+    margin-left: 10px;
 }
+
+.icon-right img{
+    height: auto;
+    width: 2rem;
+    z-index: 4;
+}
+
 
 /*PROJETOS*/
 

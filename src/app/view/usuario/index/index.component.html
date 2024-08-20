@@ -293,8 +293,13 @@
                 <div class="projects">  
                     <div class="project" style="background-image: url('{{projeto.projectImg}}');" *ngFor="let projeto of projetos">
                         <a [href]="!projeto.inProgress ? '#' : projeto.link" target="_blank">
-                            <div class="wip" *ngIf="!projeto.inProgress">
-                                <img src="./assets/images/wip.gif" alt="Work in Progress">
+                            <div class="icon-right">
+                                <div class="star" *ngIf="projeto.star">
+                                    <img src="./assets/images/star.gif" alt="Star">
+                                </div>
+                                <div class="wip" *ngIf="!projeto.inProgress">
+                                    <img src="./assets/images/wip.gif" alt="Work in Progress">
+                                </div>
                             </div>
                             <div class="mark">
                                 <img src="./assets/images/bookmark.png" alt="Mark">
