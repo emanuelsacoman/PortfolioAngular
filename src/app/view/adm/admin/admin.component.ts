@@ -6,6 +6,7 @@ import { NgToastService } from 'ng-angular-popup';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/model/services/auth.service';
 import { FirebaseService } from 'src/app/model/services/firebase.service';
+import { Chip } from 'src/app/model/services/interfaces/chip';
 import { Contato } from 'src/app/model/services/interfaces/contato';
 import { Profile } from 'src/app/model/services/interfaces/profile';
 import { Projeto } from 'src/app/model/services/interfaces/projeto';
@@ -112,7 +113,12 @@ export class AdminComponent {
   //SLIDER
   public slider: Slider[] = [];
 
+  //CHIP
+  chipCreate!: FormGroup;
+  chipClass!: Chip;
+  chipname!: string;
 
+  public chipArray: Chip[] = [];
   
   constructor(private router: Router,
     private formBuilder: FormBuilder,
@@ -168,6 +174,15 @@ export class AdminComponent {
           } as Slider;
         });
       });
+
+      this.firebase.obterTodosChip().subscribe((res) => {
+        this.chipArray = res.map((chip) => {
+          return {
+            id: chip.payload.doc.id,
+            ...(chip.payload.doc.data() as any),
+          } as Chip;
+        });
+      });
   }
 
   logout(): void {
@@ -208,6 +223,13 @@ export class AdminComponent {
     this.initProjeto();
     this.initContato();
     this.initProfile();
+    this.initChip();
+  }
+
+  initChip(){
+    this.chipCreate = this.formBuilder.group({
+      chipname: ['', Validators.required] 
+    });
   }
 
   editContato() {
@@ -402,8 +424,6 @@ export class AdminComponent {
         });
     }
   }
-
-
 
   addresumol(){
     const create: ResumoL = new ResumoL("","","","");
@@ -657,5 +677,18 @@ export class AdminComponent {
     const create: Slider = new Slider("", null);
     this.firebase.cadastrarSlider(create);
   }
+
+  chipCreateForm() {
+    const chipValue = this.chipCreate.get('chipname')?.value;
+    const create: Chip = new Chip("", chipValue);
+  
+    this.firebase.cadastrarChip(create);
+    this.chipCreate.reset();
+  }
+
+  deleteChip(id: any){
+    this.firebase.excluirChip(id);
+  }
+  
   
 }

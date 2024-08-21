@@ -13,6 +13,7 @@ import { Projeto } from './interfaces/projeto';
 import { Contato } from './interfaces/contato';
 import { Profile } from './interfaces/profile';
 import { Slider } from './interfaces/slider';
+import { Chip } from './interfaces/chip';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,7 @@ export class FirebaseService {
   private PATH8 : string = "contato";
   private PATH9 : string = "profile";
   private PATH10 : string = "slider";
+  private PATH11 : string = "chip";
 
   constructor(private firestore: AngularFirestore,
     private storage: AngularFireStorage,
@@ -492,6 +494,23 @@ export class FirebaseService {
           return task;
         }
       //Slider
+
+      //Chip
+      obterTodosChip() {
+        return this.firestore.collection(this.PATH11).snapshotChanges();
+      }
+
+      cadastrarChip(chip : Chip) {
+        return this.firestore.collection(this.PATH11).add({
+          chipname: chip.chipname,
+          
+        });
+      }
+
+      excluirChip(id: string) {
+        return this.firestore.collection(this.PATH11).doc(id).delete();
+      }
+      //Chip
     }
 
     

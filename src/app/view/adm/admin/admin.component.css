@@ -209,8 +209,9 @@ input, textarea{
     margin-top: 2vh;
     overflow-y: auto;
     overflow-x: hidden;
-    height: clamp(50vh, 50vw, 40rem);
+    height: 20rem;
     width: 100%;
+    box-shadow: inset 0px 0px 15px rgba(0, 0, 0, 0.5), inset 0px 0px 5px rgba(0, 0, 0, 0.3);
 }
 
 .displayarea{
@@ -515,6 +516,51 @@ input, textarea{
 }
 
 /*Slider*/
+
+/*Chip*/
+
+.chiparea{
+    display: flex;
+    flex-direction: row;
+    margin-top: 1vh;
+    background-color: #d5d4d6;
+    border-radius: 5px;
+    
+    & .left{
+        display: flex;
+        flex-direction: column;
+    }
+
+    & .right{
+        display: flex;
+        flex-direction: row;
+    }
+}
+
+.chips{
+    display: flex;
+    gap: .5rem;
+    border-radius: 5px;
+    padding: 10px;
+    flex-wrap: wrap;
+
+    & .cardchip{
+        display: flex;
+        flex: 1;
+        padding: 0.3rem;
+        background-color: #2e86dd23;
+        border-radius: 10px;
+        transition: all 0.2s ease-in-out;
+        align-items: center;
+        justify-content: center;
+        height: 20px;
+
+        &:hover{
+            background-color: #ff3e3e62;
+        }
+    }
+}
+/*Chip*/
 
 
 /*RESPONSIVIDADE*/

@@ -84,7 +84,7 @@
                   
                   <button class="sendButton" type="submit">Enviar</button>
                 </div>
-                </form>   
+              </form>   
 
                 <section class="itensdisplay">
                   <div class="displayarea">
@@ -108,6 +108,29 @@
                     </div>
                   </div>
                 </section>
+
+                <section class="chiparea">
+                  <div class="left">
+                    <form class="formChip" (ngSubmit)="chipCreateForm()" [formGroup]="chipCreate" #formDir="ngForm">
+                      <div class="inputs-groups">
+                        <div class="input-group">
+                          <div class="input">
+                            <input type="text" id="chipname" placeholder="Insira o chip" formControlName="chipname" required/>
+                          </div>
+                        </div>
+                        <button class="addbuton" type="submit">ADD</button>
+                      </div>
+                    </form>  
+                  </div>
+                  <div class="right">
+                    <div class="chips" *ngFor="let chip of chipArray">
+                      <div class="cardchip" (click)="deleteChip(chip.id)">
+                        <p>{{ chip.chipname }}</p>
+                      </div>
+                    </div>
+                  </div>                  
+                </section>
+
             </div>
             
             <div class="formall projetosSection" *ngIf="isSelected('projetos')">

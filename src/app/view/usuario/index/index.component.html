@@ -288,24 +288,11 @@
                                 <img src="./assets/images/conhecimento.png" alt="Resume pic">
                                 <h2>{{resumo.chip}}</h2>
                             </div>
-                            <div class="chips">
-                                <div class="cardchip">
-                                    <p class="chiptext">
-                                        Angular
-                                    </p>
+                            <div class="chips" >
+                                <div class="cardchip" *ngFor="let chip of chipArray">
+                                  <p>{{ chip.chipname }}</p>
                                 </div>
-                                <div class="cardchip">
-                                    <p class="chiptext">
-                                        Ionic
-                                    </p>
-                                </div>
-                                <div class="cardchip">
-                                    <p class="chiptext">
-                                        Flutter
-                                    </p>
-                                </div>
-                                
-                            </div>
+                              </div>
                         </div>
                     </section>
 

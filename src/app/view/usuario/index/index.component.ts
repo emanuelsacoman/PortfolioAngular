@@ -21,6 +21,7 @@ import { trigger, transition, style, animate } from '@angular/animations';
 import { Slider } from 'src/app/model/services/interfaces/slider';
 import { Meta, Title } from '@angular/platform-browser';
 import { NgToastService } from 'ng-angular-popup';
+import { Chip } from 'src/app/model/services/interfaces/chip';
 
 @Component({
   selector: 'app-index',
@@ -82,6 +83,12 @@ export class IndexComponent implements OnInit {
   data: any;
   options: any;
   //Chart
+
+  //CHIP
+  chipCreate!: FormGroup;
+  chipClass!: Chip;
+  chipname!: string;
+  public chipArray: Chip[] = [];
 
   title = 'Emanuel Vinícius Sacoman';
   description = 'Página principal do desenvolvedor Emanuel Vinícius Sacoman.';
@@ -201,6 +208,15 @@ export class IndexComponent implements OnInit {
           } as Slider;
         });
         this.sliderLoaded = true;
+      });
+
+      this.firebaseService.obterTodosChip().subscribe((res) => {
+        this.chipArray = res.map((chip) => {
+          return {
+            id: chip.payload.doc.id,
+            ...(chip.payload.doc.data() as any),
+          } as Chip;
+        });
       });
 
       this.setDocTitle(this.title);
