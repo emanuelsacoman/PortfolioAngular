@@ -37,7 +37,7 @@ import { NgToastService } from 'ng-angular-popup';
 export class IndexComponent implements OnInit {
   profileData: any;
   profileImageUrl!: string;
-  selectedOption: string = 'resumo';
+  selectedOption: string = 'sobre';
   
   //DB
   public sobre: Sobre[] = [];

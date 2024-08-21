@@ -854,6 +854,12 @@ footer p {
     display: none;
 }
 
+@media screen and (max-width: 950px){
+    .resume{
+        flex-direction: column;
+    }
+}
+
 @media screen and (max-width: 770px) {
     .noResponse{
         display: none;
