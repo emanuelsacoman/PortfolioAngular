@@ -462,6 +462,7 @@ body{
     & .cardchip{
         display: flex;
         flex: 1;
+        flex-basis: 15%;
         padding: 0.3rem;
         background-color: #2e86dd23;
         border-radius: 10px;
