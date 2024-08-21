@@ -241,17 +241,6 @@
                     </div>
                 </section>
 
-                <!--                                    SLIDER
-                <div id="slider">
-                    <div *ngFor="let slider of slider">
-                        <figure>
-                            <img src="{{slider.Img}}">     
-                        </figure>
-                    </div>
-                </div>
-                -->
-                
-
             </div>
             <div class="resumo wrap" *ngIf="isSelected('resumo')">
                 <div class="txttop" *ngFor="let resumo of resumo">
@@ -283,6 +272,43 @@
                             </div>
                         </div>
                     </section>
+
+                    <section class="resume">
+                        <div class="resumeitemarea">
+                            <div class="resumetop">
+                                <img src="./assets/images/competencia.png" alt="Resume pic"> 
+                                <h3>{{resumo.chart}}</h3>
+                            </div>
+                            <div class="chart">
+                                <p-chart type="bar" [data]="data" [options]="options" />
+                            </div>
+                        </div>
+                        <div class="resumeitemarea">
+                            <div class="resumetop">
+                                <img src="./assets/images/conhecimento.png" alt="Resume pic">
+                                <h3>{{resumo.chip}}</h3>
+                            </div>
+                            <div class="chips">
+                                <div class="cardchip">
+                                    <p class="chiptext">
+                                        Angular
+                                    </p>
+                                </div>
+                                <div class="cardchip">
+                                    <p class="chiptext">
+                                        Ionic
+                                    </p>
+                                </div>
+                                <div class="cardchip">
+                                    <p class="chiptext">
+                                        Flutter
+                                    </p>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </section>
+
                 </div>
             </div>
             <div class="projetos wrap" *ngIf="isSelected('projetos')">

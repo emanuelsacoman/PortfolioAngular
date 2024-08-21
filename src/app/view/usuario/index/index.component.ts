@@ -37,7 +37,7 @@ import { NgToastService } from 'ng-angular-popup';
 export class IndexComponent implements OnInit {
   profileData: any;
   profileImageUrl!: string;
-  selectedOption: string = 'sobre';
+  selectedOption: string = 'resumo';
   
   //DB
   public sobre: Sobre[] = [];
@@ -77,6 +77,11 @@ export class IndexComponent implements OnInit {
   contactForm!: FormGroup;
   mensagemEnviada: boolean = false;
   //Form
+
+  //Chart
+  data: any;
+  options: any;
+  //Chart
 
   title = 'Emanuel Vinícius Sacoman';
   description = 'Página principal do desenvolvedor Emanuel Vinícius Sacoman.';
@@ -206,6 +211,7 @@ export class IndexComponent implements OnInit {
   ngOnInit() {
     this.getGitHubProfile();
     this.initForm();
+    this.chart();
   }
 
   setDocTitle(title: string) {
@@ -309,5 +315,67 @@ export class IndexComponent implements OnInit {
   goToEmail(email: string){
     window.open(`mailto:${email}`, '_blank');
   }
+
+  chart() {
+    this.data = {
+      labels: ['Front-end', 'Web design', 'Back-end', 'Game dev'],
+      datasets: [
+        {
+          label: 'Competências',
+          data: [88, 73, 58, 55],
+          backgroundColor: ['#2e86dd'],
+          borderColor: ['#1b4f72'],                          
+          borderWidth: 2,                                    
+          borderRadius: 5,                                   
+          barThickness: 20,                                  
+          borderSkipped: 'left',                        
+          hoverBackgroundColor: '#1b4f72', 
+        },
+      ],
+    };
+  
+    this.options = {
+      indexAxis: 'y',
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        x: {
+          beginAtZero: true,
+          grid: {
+            display: false,
+          },
+          ticks: {
+            display: false,
+          },
+        },
+        y: {
+          ticks: {
+            align: 'start',
+            display: true, 
+          }
+        }
+      },
+      plugins: {
+        legend: {
+          display: false,
+        },
+        tooltip: {
+          enabled: false,
+        },
+        datalabels: {
+          anchor: 'end',
+          align: 'top',
+          color: '#fff', 
+          font: {
+            weight: 'bold',
+          },
+          padding: {
+            top: 5, 
+          },
+          formatter: (value: number) => `${value}%`,
+        },
+      },
+    };
+  }  
 
 }

@@ -126,6 +126,8 @@ export class FirebaseService {
           titleArea: resumo.titleArea,
           lsub: resumo.lsub,
           rsub: resumo.rsub,
+          chart: resumo.chart,
+          chip: resumo.chip,
           
         });
       }

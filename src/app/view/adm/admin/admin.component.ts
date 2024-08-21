@@ -49,6 +49,8 @@ export class AdminComponent {
   titleArea!: string;
   lsub!: string;
   rsub!: string;
+  chart!: string;
+  chip!: string;
   
   // RESUMOL
   public resumol: ResumoL[] = [];
@@ -356,11 +358,15 @@ export class AdminComponent {
     this.titleArea = this.resumo?.titleArea;
     this.lsub = this.resumo?.lsub;
     this.rsub = this.resumo?.rsub;
+    this.chart = this.resumo?.chart;
+    this.chip = this.resumo?.chip;
 
     this.resumoEdit = this.formBuilder.group({
       titleArea: [this.titleArea, [Validators.required]],
       lsub: [this.lsub, [Validators.required]],
       rsub: [this.rsub, [Validators.required]],
+      chart: [this.chart, [Validators.required]],
+      chip: [this.chip, [Validators.required]],
       rImg: [null],
       lImg: [null],
     });

@@ -282,7 +282,6 @@ body{
 }
 
 
-
 /*PROFILE*/
 
 /*MIDDLE*/
@@ -425,6 +424,55 @@ body{
 
 .resumebox .location{
     font-size: clamp(12px, 2vw, 16px);
+}
+
+.resumeitemarea{
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+    width: 100%;
+
+    & h3{
+        font-size: clamp(14px, 5vw, 30px);
+    }
+}
+
+.chart {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 1rem;
+    background-color: #2e86dd23;
+    border-radius: 5px;
+}
+  
+.chart p-chart {
+    width: 90%;      
+    height: auto;
+} 
+
+.chips{
+    display: flex;
+    gap: .5rem;
+    border-radius: 5px;
+    background-color: #2e86dd23;
+    padding: 10px;
+    flex-wrap: wrap;
+
+    & .cardchip{
+        display: flex;
+        flex: 1;
+        padding: 0.3rem;
+        background-color: #2e86dd23;
+        border-radius: 10px;
+        transition: all 0.2s ease-in-out;
+        align-items: center;
+        justify-content: center;
+
+        &:hover{
+            background-color: #3e9eff62;
+        }
+    }
 }
 
 /*PROJETOS*/
@@ -898,6 +946,18 @@ footer p {
         .cvimg{
             display: none;
         }
+    }
+
+    .resume{
+        flex-direction: column;
+    }
+
+    .experience{
+        margin-bottom: 2vh;
+    }
+
+    .resume > *:not(:last-child) {
+        margin-bottom: 2vh;
     }
     
 }
