@@ -27,6 +27,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SlidereditComponent } from './view/adm/edit/slideredit/slideredit.component';
 import { NgToastModule } from 'ng-angular-popup';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { ChartModule } from 'primeng/chart';
 
 
 @NgModule({
@@ -58,6 +59,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     NgToastModule,
     MatSlideToggleModule,
     FormsModule,
+    ChartModule,
   ],
   providers: [Title,
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase }
