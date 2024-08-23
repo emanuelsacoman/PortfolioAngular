@@ -231,14 +231,19 @@ export class IndexComponent implements OnInit {
   
       this.responsiveOptions = [
         {
+          breakpoint: '1224px',
+          numVisible: 4,
+          numScroll: 1
+        },
+        {
           breakpoint: '1024px',
           numVisible: 3,
-          numScroll: 3
+          numScroll: 1
         },
         {
           breakpoint: '768px',
           numVisible: 2,
-          numScroll: 2
+          numScroll: 1
         },
         {
           breakpoint: '560px',

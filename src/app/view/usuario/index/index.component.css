@@ -402,7 +402,7 @@ body{
 }
   
 .carousel img {
-    width: 33%;
+    width: 25%;
     height: auto; 
     object-fit: cover; 
     border-radius: 5px;
