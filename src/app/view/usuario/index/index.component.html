@@ -241,6 +241,24 @@
                     </div>
                 </section>
 
+                <section class="carousel">
+                    <p-carousel
+                      [value]="slider"
+                      [numVisible]="3"
+                      [numScroll]="1"
+                      [circular]="true"
+                      [responsiveOptions]="responsiveOptions"
+                      [autoplayInterval]="5000"
+                      [showNavigators]="false"
+                      [showIndicators]="false">
+                      <ng-template let-item pTemplate="item">
+                        <div class="language-item">
+                          <img [src]="item.Carouselimg" alt="Carousel Image">
+                        </div>
+                      </ng-template>
+                    </p-carousel>
+                  </section>
+
             </div>
             <div class="resumo wrap" *ngIf="isSelected('resumo')">
                 <div class="txttop" *ngFor="let resumo of resumo">

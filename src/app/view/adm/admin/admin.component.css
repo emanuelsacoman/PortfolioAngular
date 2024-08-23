@@ -562,6 +562,35 @@ input, textarea{
 }
 /*Chip*/
 
+/*Carousel*/
+.rightcarousel{
+    display: flex;
+}
+
+.carouselarea{
+    position: absolute;
+    top: 550px;
+    display: flex;
+    flex-direction: row;
+}
+
+.carouselitens{
+    display: flex;
+    flex-direction: row;
+
+    & .carouselitem{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+
+        & img{
+            width: 100px;
+            height: 100px;
+        }
+    }
+}
+/*Carousel*/
+
 
 /*RESPONSIVIDADE*/
 

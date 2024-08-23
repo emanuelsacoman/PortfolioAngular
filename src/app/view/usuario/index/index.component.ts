@@ -84,11 +84,16 @@ export class IndexComponent implements OnInit {
   options: any;
   //Chart
 
-  //CHIP
+  //Chip
   chipCreate!: FormGroup;
   chipClass!: Chip;
   chipname!: string;
   public chipArray: Chip[] = [];
+
+  //Carousel
+  languages!: any[];
+  responsiveOptions!: any[];
+  imagemCarousel: any;
 
   title = 'Emanuel Vinícius Sacoman';
   description = 'Página principal do desenvolvedor Emanuel Vinícius Sacoman.';
@@ -221,6 +226,26 @@ export class IndexComponent implements OnInit {
 
       this.setDocTitle(this.title);
       this.setMetaDescription(this.description);
+
+      //Carousel
+  
+      this.responsiveOptions = [
+        {
+          breakpoint: '1024px',
+          numVisible: 3,
+          numScroll: 3
+        },
+        {
+          breakpoint: '768px',
+          numVisible: 2,
+          numScroll: 2
+        },
+        {
+          breakpoint: '560px',
+          numVisible: 1,
+          numScroll: 1
+        }
+      ];
     }
 
 

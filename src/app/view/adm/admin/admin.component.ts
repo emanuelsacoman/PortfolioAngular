@@ -112,6 +112,10 @@ export class AdminComponent {
 
   //SLIDER
   public slider: Slider[] = [];
+  Carouselimg!: any;
+  carouselCriar!: FormGroup;
+  carousel!: Slider;
+  imagemCarousel: any;
 
   //CHIP
   chipCreate!: FormGroup;
@@ -224,6 +228,13 @@ export class AdminComponent {
     this.initContato();
     this.initProfile();
     this.initChip();
+    this.initSlider();
+  }
+
+  initSlider(){
+    this.carouselCriar = this.formBuilder.group({
+      Carouselimg: ['', Validators.required] 
+    });
   }
 
   initChip(){
@@ -667,17 +678,6 @@ export class AdminComponent {
     this.imagem4 = event.target.files;
   }
 
-  editSliderImg(slider: Slider){
-    console.log('Item clicado:', slider);
-    
-    this.router.navigateByUrl("/slideredit", {state: { slider: slider } });
-  }
-
-  cadastrarSlider(){
-    const create: Slider = new Slider("", null);
-    this.firebase.cadastrarSlider(create);
-  }
-
   chipCreateForm() {
     const chipValue = this.chipCreate.get('chipname')?.value;
     const create: Chip = new Chip("", chipValue);
@@ -689,6 +689,27 @@ export class AdminComponent {
   deleteChip(id: any){
     this.firebase.excluirChip(id);
   }
+
+  editSliderImg(slider: Slider){
+    console.log('Item clicado:', slider);
+    
+    this.router.navigateByUrl("/slideredit", {state: { slider: slider } });
+  }
+
+  cadastrarSlider(){
+    if(this.carouselCriar.valid){
+      const create: Slider = new Slider("", null);
+      this.firebase.uploadImageSlider(this.imagemCarousel, create);
+        this.carouselCriar.reset();
+      }
+    }
   
+  uploadFileCarousel(event: any){
+    this.imagemCarousel = event.target.files;
+  }
+  
+  deletarCarousel(slider: Slider){
+    this.firebase.excluirSlider(slider.id);
+  }
   
 }

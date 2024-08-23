@@ -55,6 +55,28 @@
                 </div>
               </section> 
 
+              <section class="carouselarea">
+                <div class="left">
+                  <form class="formCarousel" (ngSubmit)="cadastrarSlider()" [formGroup]="carouselCriar" #formDir="ngForm">
+                    <div class="inputs-groups">
+                      <div class="input-group">
+                        <div class="input">
+                          <input type="file" id="Carouselimg" accept="img/*" required placeholder="Insira o Carouselimg" formControlName="Carouselimg" (change)="uploadFileCarousel($event)" />
+                        </div>
+                      </div>
+                      <button class="addbuton" type="submit">ADD</button>
+                    </div>
+                  </form>  
+                </div>
+                <div class="rightcarousel">
+                  <div class="carouselitens" *ngFor="let sliders of slider">
+                    <div class="carouselitem" (click)="deletarCarousel(sliders)">
+                      <img src="{{sliders.Carouselimg}}">
+                    </div>
+                  </div>
+                </div>                  
+              </section>
+
             </div>
             <div class="formall" *ngIf="isSelected('resumo')">
               <form class="formResumo" (ngSubmit)="editResumo()" [formGroup]="resumoEdit" #formDir="ngForm">

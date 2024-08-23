@@ -24,10 +24,10 @@ import { ResumoleditComponent } from './view/adm/edit/resumoledit/resumoledit.co
 import { ResumoreditComponent } from './view/adm/edit/resumoredit/resumoredit.component';
 import { ProjetoeditComponent } from './view/adm/edit/projetoedit/projetoedit.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SlidereditComponent } from './view/adm/edit/slideredit/slideredit.component';
 import { NgToastModule } from 'ng-angular-popup';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ChartModule } from 'primeng/chart';
+import { CarouselModule } from 'primeng/carousel';
 
 
 @NgModule({
@@ -40,7 +40,6 @@ import { ChartModule } from 'primeng/chart';
     ResumoleditComponent,
     ResumoreditComponent,
     ProjetoeditComponent,
-    SlidereditComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,6 +59,7 @@ import { ChartModule } from 'primeng/chart';
     MatSlideToggleModule,
     FormsModule,
     ChartModule,
+    CarouselModule,
   ],
   providers: [Title,
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase }

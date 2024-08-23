@@ -322,7 +322,7 @@ export class FirebaseService {
 
       cadastrarProfile(profile : Profile) {
         return this.firestore.collection(this.PATH9).add({
-          instagram: profile.instagram,
+            instagram: profile.instagram,
             facebook: profile.facebook,
             linkedin: profile.linkedin,
             github: profile.github,
@@ -457,14 +457,14 @@ export class FirebaseService {
 
       cadastrarSlider(slider : Slider) {
         return this.firestore.collection(this.PATH10).add({
-          Img: slider.Img,
+          Carouselimg: slider.Carouselimg
           
         });
       }
 
       editarSlider(slider: Slider, id: string) {
         return this.firestore.collection(this.PATH10).doc(id).update({
-          Img: slider.Img,
+          Carouselimg: slider.Carouselimg
             
         });
       }
@@ -482,7 +482,7 @@ export class FirebaseService {
           finalize(() =>{
             let uploadFileURL = fileRef.getDownloadURL();
             uploadFileURL.subscribe(resp => {
-              itens.Img = resp;
+              itens.Carouselimg = resp;
               if(!itens.id){
                 this.cadastrarSlider(itens);
               }else {
