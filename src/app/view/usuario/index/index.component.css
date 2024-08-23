@@ -381,16 +381,22 @@ body{
 .carousel {
     background-color: #2e86dd23;
     border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 .carousel .language-item {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
   
 .carousel img {
-    width: clamp(50px, 5vw, 70px);
-    height: auto;
+    height: clamp(50px, 5vw, 70px);
+    width: auto;
+    padding: 10px;
 }
   
 /*Carousel*/

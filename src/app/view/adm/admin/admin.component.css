@@ -565,27 +565,40 @@ input, textarea{
 /*Carousel*/
 .rightcarousel{
     display: flex;
+    max-width: 50vw;
+    flex-wrap: wrap;
 }
 
 .carouselarea{
     position: absolute;
-    top: 550px;
+    top: 600px;
     display: flex;
     flex-direction: row;
+    gap: 1rem;
 }
 
 .carouselitens{
     display: flex;
     flex-direction: row;
+    width: 100px;
 
     & .carouselitem{
-        width: 100%;
+        width: fit-content;
         display: flex;
         flex-direction: row;
+        flex-wrap: wrap;
 
         & img{
-            width: 100px;
-            height: 100px;
+            height: clamp(30px, 5vw, 60px);
+            width: auto;
+            cursor: pointer;
+            margin-right: clamp(5px, 5vw, 15px);
+
+            &:hover{
+                background-color: #ff3e3e62;
+                border-radius: 5px;
+                scale: 1.1;
+            }
         }
     }
 }
