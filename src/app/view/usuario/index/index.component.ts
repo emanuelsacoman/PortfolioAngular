@@ -212,6 +212,7 @@ export class IndexComponent implements OnInit {
             ...(slider.payload.doc.data() as any),
           } as Slider;
         });
+        this.shuffleSlider();
         this.sliderLoaded = true;
       });
 
@@ -258,6 +259,13 @@ export class IndexComponent implements OnInit {
     this.getGitHubProfile();
     this.initForm();
     this.chart();
+  }
+
+  shuffleSlider(){
+    for (let i = this.slider.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [this.slider[i], this.slider[j]] = [this.slider[j], this.slider[i]];
+    }
   }
 
   setDocTitle(title: string) {
