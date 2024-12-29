@@ -144,6 +144,12 @@ body{
     cursor: pointer;
 }
 
+.birth{
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 .itenspic a {
     width: 2rem;
     display: flex;

@@ -95,6 +95,14 @@ export class IndexComponent implements OnInit {
   responsiveOptions!: any[];
   imagemCarousel: any;
 
+  //Dates
+  public christmas: boolean = false;
+  public halloween: boolean = false;
+  public newYear: boolean = false;
+  public valentinesDay: boolean = false;
+  public easter: boolean = false;
+  public birthday: boolean = false;
+
   title = 'Emanuel Vinícius Sacoman';
   description = 'Página principal do desenvolvedor Emanuel Vinícius Sacoman.';
   
@@ -259,6 +267,7 @@ export class IndexComponent implements OnInit {
     this.getGitHubProfile();
     this.initForm();
     this.chart();
+    this.getDates();
   }
 
   shuffleSlider(){
@@ -435,5 +444,77 @@ export class IndexComponent implements OnInit {
       },
     };
   }  
+
+  getBirth(){
+    console.log('getBirth');
+    this.perfil.subscribe((data: any[]) => {
+      const dataNascimento = data[0].birth;
+      const [day, month, year] = dataNascimento.split('/');
+      const dataNascimentoFormatada = new Date(`${year}-${month}-${day}`);
+      const dataAtual = new Date();
+      const dataNascimentoMes = dataNascimentoFormatada.getMonth() + 1;
+      const dataNascimentoDia = dataNascimentoFormatada.getDate() + 1;
+      const dataAtualMes = dataAtual.getMonth() + 1;
+      const dataAtualDia = dataAtual.getDate();
+      console.log('dataNascimento:', dataNascimento);
+      console.log('dataNascimentoFormatada:', dataNascimentoFormatada);
+      console.log('dataAtual:', dataAtual);
+      console.log('dataNascimentoMes:', dataNascimentoMes);
+      console.log('dataNascimentoDia:', dataNascimentoDia);
+      console.log('dataAtualMes:', dataAtualMes);
+      console.log('dataAtualDia:', dataAtualDia);
+      if(dataNascimentoMes === dataAtualMes && dataNascimentoDia === dataAtualDia){
+        console.log('É aniversário!');
+        this.birthday = true;
+      };
+    });
+  }
+
+  getDates() {
+    const today = new Date();
+    const year = today.getFullYear();
+
+    const holidays = [
+      { name: 'christmas', date: new Date(year, 11, 25) },
+      { name: 'halloween', date: new Date(year, 9, 31) },
+      { name: 'newYear', date: new Date(year, 0, 1) },
+      { name: 'easter', date: this.calculateEasterDate(year) },
+      
+    ];
+
+    holidays.forEach(holiday => {
+      const timeDiff = holiday.date.getTime() - today.getTime();
+      const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+      
+      if (daysDiff === 0) {
+        (this as any)[holiday.name] = true; 
+      }
+      this.getBirth();
+    });
+    this.printHolidaysStatus();
+  }
+
+  calculateEasterDate(year: number): Date {
+    const f = Math.floor,
+      G = year % 19,
+      C = f(year / 100),
+      H = (C - f(C / 4) - f((8 * C + 13) / 25) + 19 * G + 15) % 30,
+      I = H - f(H / 28) * (1 - f(H / 28) * f(29 / (H + 1)) * f((21 - G) / 11)),
+      J = (year + f(year / 4) + I + 2 - C + f(C / 4)) % 7,
+      L = I - J,
+      month = 3 + f((L + 40) / 44),
+      day = L + 28 - 31 * f(month / 4);
+    return new Date(year, month - 1, day);
+  }
+
+  printHolidaysStatus() {
+    console.log("Holidays Status:");
+    console.log(`Christmas: ${this.christmas}`);
+    console.log(`Halloween: ${this.halloween}`);
+    console.log(`New Year: ${this.newYear}`);
+    console.log(`Easter: ${this.easter}`);
+    console.log(`Birthday: ${this.birthday}`);
+  }
+  
 
 }
