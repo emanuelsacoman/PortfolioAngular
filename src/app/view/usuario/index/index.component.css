@@ -140,7 +140,7 @@ body{
     border-radius: 5px;
 }
 
-.email{
+.email, .local{
     cursor: pointer;
 }
 

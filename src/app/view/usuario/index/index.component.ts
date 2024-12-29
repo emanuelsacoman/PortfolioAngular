@@ -368,6 +368,10 @@ export class IndexComponent implements OnInit {
 
   goToEmail(email: string){
     window.open(`mailto:${email}`, '_blank');
+  } 
+  
+  goToLocal(local: string){
+    window.open(`https://www.google.com/maps/search/${local}`, '_blank');
   }
 
   chart() {
