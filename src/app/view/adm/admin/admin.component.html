@@ -33,6 +33,9 @@
               </form>  
 
               <section class="addArea">
+                <div class="cadastro">
+                  <img (click)="cadastrar()" src="./assets/images/plus.png" alt="Cadastro">
+                </div>
                 <div *ngFor="let area of sobreareaArray; let i = index">
                   <div class="formSobreArea" (click)="editar(area)">
                     <div class="item">
@@ -49,9 +52,6 @@
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="cadastro">
-                  <img (click)="cadastrar()" src="./assets/images/plus.png" alt="Cadastro">
                 </div>
               </section> 
 
