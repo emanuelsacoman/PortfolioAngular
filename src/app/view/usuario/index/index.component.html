@@ -15,6 +15,13 @@
                 <div class="picture">
                     <div class="picarea">
                         <img [src]="profileImageUrl" alt="Foto de perfil">
+                        <div class="frame" [ngStyle]="{
+                            'background-image': this.halloween ? 'url(./assets/images/halloween.png)' : 
+                            this.easter ? 'url(./assets/images/easter.png)' : 
+                            this.christmas ? 'url(./assets/images/christmas.png)' : 
+                            this.newYear ? 'url(./assets/images/newyear.png)' :
+                            this.birthday ? 'url(./assets/images/birthdayFrame.png)' : 'none',
+                        }"></div>
                         <div class="picback"></div>
                     </div>
                     <section class="pictureBottom">
@@ -98,6 +105,13 @@
                 <div class="picture">
                     <div class="picarea">
                         <img class="profile2img" [src]="profileImageUrl" alt="Foto de perfil">
+                        <div class="frame" [ngStyle]="{
+                            'background-image': this.halloween ? 'url(./assets/images/halloween.png)' : 
+                            this.easter ? 'url(./assets/images/easter.png)' : 
+                            this.christmas ? 'url(./assets/images/christmas.png)' : 
+                            this.newYear ? 'url(./assets/images/newyear.png)' : 
+                            this.birthday ? 'url(./assets/images/birthdayFrame.png)' : 'none',
+                        }"></div>
                         <div class="picback"></div>
                     </div>
                     <section class="pictureBottom">
