@@ -686,8 +686,35 @@ export class AdminComponent {
     this.chipCreate.reset();
   }
 
-  deleteChip(id: any){
-    this.firebase.excluirChip(id);
+  deleteChip(id: any) {
+    Swal.fire({
+      title: 'Tem certeza de que deseja excluir este chip?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim, excluir',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.firebase.excluirChip(id)
+          .then(() => {
+            this.toast.success({
+              detail: "Sucesso!",
+              summary: "Chip excluído com sucesso",
+              duration: 5000
+            });
+          })
+          .catch((error) => {
+            console.error('Erro ao excluir chip:', error);
+            this.toast.error({
+              detail: "Erro!",
+              summary: "Falha ao excluir chip. Tente novamente mais tarde.",
+              duration: 5000
+            });
+          });
+      }
+    });
   }
 
   editSliderImg(slider: Slider){
@@ -708,8 +735,34 @@ export class AdminComponent {
     this.imagemCarousel = event.target.files;
   }
   
-  deletarCarousel(slider: Slider){
-    this.firebase.excluirSlider(slider.id);
+  deletarCarousel(slider: Slider) {
+    Swal.fire({
+      title: 'Tem certeza de que deseja excluir este slider?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim, excluir',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.firebase.excluirSlider(slider.id)
+          .then(() => {
+            this.toast.success({
+              detail: "Sucesso!",
+              summary: "Slider excluído com sucesso",
+              duration: 5000
+            });
+          })
+          .catch((error) => {
+            console.error('Erro ao excluir slider:', error);
+            this.toast.error({
+              detail: "Erro!",
+              summary: "Falha ao excluir slider. Tente novamente mais tarde.",
+              duration: 5000
+            });
+          });
+      }
+    });
   }
-  
 }
