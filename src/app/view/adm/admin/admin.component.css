@@ -518,7 +518,7 @@ input, textarea{
 
 .chiparea{
     display: flex;
-    flex-direction: row;
+    flex-direction: column-reverse;
     margin-top: 1vh;
     background-color: #d5d4d6;
     border-radius: 5px;
@@ -537,20 +537,20 @@ input, textarea{
 
 .chips{
     display: flex;
-    gap: .5rem;
     border-radius: 5px;
     padding: 10px;
 
     & .cardchip{
         display: flex;
         flex: 1;
-        padding: 0.3rem;
+        padding: clamp(0.1rem, 1vw, 0.3rem);
         background-color: #2e86dd23;
         border-radius: 10px;
         transition: all 0.2s ease-in-out;
         align-items: center;
         justify-content: center;
         height: 20px;
+        font-size: clamp(14px, 2vw, 20px);
 
         &:hover{
             background-color: #ff3e3e62;
