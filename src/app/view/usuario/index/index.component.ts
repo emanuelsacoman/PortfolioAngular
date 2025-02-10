@@ -21,6 +21,7 @@ import { trigger, transition, style, animate } from '@angular/animations';
 import { Slider } from 'src/app/model/services/interfaces/slider';
 import { Meta, Title } from '@angular/platform-browser';
 import { NgToastService } from 'ng-angular-popup';
+import { Chip } from 'src/app/model/services/interfaces/chip';
 
 @Component({
   selector: 'app-index',
@@ -77,6 +78,30 @@ export class IndexComponent implements OnInit {
   contactForm!: FormGroup;
   mensagemEnviada: boolean = false;
   //Form
+
+  //Chart
+  data: any;
+  options: any;
+  //Chart
+
+  //Chip
+  chipCreate!: FormGroup;
+  chipClass!: Chip;
+  chipname!: string;
+  public chipArray: Chip[] = [];
+
+  //Carousel
+  languages!: any[];
+  responsiveOptions!: any[];
+  imagemCarousel: any;
+
+  //Dates
+  public christmas: boolean = false;
+  public halloween: boolean = false;
+  public newYear: boolean = false;
+  public valentinesDay: boolean = false;
+  public easter: boolean = false;
+  public birthday: boolean = false;
 
   title = 'Emanuel Vinícius Sacoman';
   description = 'Página principal do desenvolvedor Emanuel Vinícius Sacoman.';
@@ -195,17 +220,61 @@ export class IndexComponent implements OnInit {
             ...(slider.payload.doc.data() as any),
           } as Slider;
         });
+        this.shuffleSlider();
         this.sliderLoaded = true;
+      });
+
+      this.firebaseService.obterTodosChip().subscribe((res) => {
+        this.chipArray = res.map((chip) => {
+          return {
+            id: chip.payload.doc.id,
+            ...(chip.payload.doc.data() as any),
+          } as Chip;
+        });
       });
 
       this.setDocTitle(this.title);
       this.setMetaDescription(this.description);
+
+      //Carousel
+  
+      this.responsiveOptions = [
+        {
+          breakpoint: '1224px',
+          numVisible: 4,
+          numScroll: 1
+        },
+        {
+          breakpoint: '1024px',
+          numVisible: 3,
+          numScroll: 1
+        },
+        {
+          breakpoint: '768px',
+          numVisible: 2,
+          numScroll: 1
+        },
+        {
+          breakpoint: '560px',
+          numVisible: 1,
+          numScroll: 1
+        }
+      ];
     }
 
 
   ngOnInit() {
     this.getGitHubProfile();
     this.initForm();
+    this.chart();
+    this.getDates();
+  }
+
+  shuffleSlider(){
+    for (let i = this.slider.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [this.slider[i], this.slider[j]] = [this.slider[j], this.slider[i]];
+    }
   }
 
   setDocTitle(title: string) {
@@ -308,6 +377,144 @@ export class IndexComponent implements OnInit {
 
   goToEmail(email: string){
     window.open(`mailto:${email}`, '_blank');
+  } 
+  
+  goToLocal(local: string){
+    window.open(`https://www.google.com/maps/search/${local}`, '_blank');
   }
+
+  chart() {
+    this.data = {
+      labels: ['Front-end', 'Web design', 'Back-end', 'Game dev'],
+      datasets: [
+        {
+          label: 'Competências',
+          data: [88, 73, 58, 55],
+          backgroundColor: ['#2e86dd'],
+          borderColor: ['#1b4f72'],                          
+          borderWidth: 2,                                    
+          borderRadius: 5,                                   
+          barThickness: 20,                                  
+          borderSkipped: 'left',                        
+          hoverBackgroundColor: '#1b4f72', 
+        },
+      ],
+    };
+  
+    this.options = {
+      indexAxis: 'y',
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        x: {
+          beginAtZero: true,
+          grid: {
+            display: false,
+          },
+          ticks: {
+            display: false,
+          },
+        },
+        y: {
+          ticks: {
+            align: 'start',
+            display: true, 
+          }
+        }
+      },
+      plugins: {
+        legend: {
+          display: false,
+        },
+        tooltip: {
+          enabled: false,
+        },
+        datalabels: {
+          anchor: 'end',
+          align: 'top',
+          color: '#fff', 
+          font: {
+            weight: 'bold',
+          },
+          padding: {
+            top: 5, 
+          },
+          formatter: (value: number) => `${value}%`,
+        },
+      },
+    };
+  }  
+
+  getBirth(){
+    console.log('getBirth');
+    this.perfil.subscribe((data: any[]) => {
+      const dataNascimento = data[0].birth;
+      const [day, month, year] = dataNascimento.split('/');
+      const dataNascimentoFormatada = new Date(`${year}-${month}-${day}`);
+      const dataAtual = new Date();
+      const dataNascimentoMes = dataNascimentoFormatada.getMonth() + 1;
+      const dataNascimentoDia = dataNascimentoFormatada.getDate() + 1;
+      const dataAtualMes = dataAtual.getMonth() + 1;
+      const dataAtualDia = dataAtual.getDate();
+      console.log('dataNascimento:', dataNascimento);
+      console.log('dataNascimentoFormatada:', dataNascimentoFormatada);
+      console.log('dataAtual:', dataAtual);
+      console.log('dataNascimentoMes:', dataNascimentoMes);
+      console.log('dataNascimentoDia:', dataNascimentoDia);
+      console.log('dataAtualMes:', dataAtualMes);
+      console.log('dataAtualDia:', dataAtualDia);
+      if(dataNascimentoMes === dataAtualMes && dataNascimentoDia === dataAtualDia){
+        console.log('É aniversário!');
+        this.birthday = true;
+      };
+    });
+  }
+
+  getDates() {
+    const today = new Date();
+    const year = today.getFullYear();
+
+    const holidays = [
+      { name: 'christmas', date: new Date(year, 11, 25) },
+      { name: 'halloween', date: new Date(year, 9, 31) },
+      { name: 'newYear', date: new Date(year, 0, 1) },
+      { name: 'easter', date: this.calculateEasterDate(year) },
+      
+    ];
+
+    holidays.forEach(holiday => {
+      const timeDiff = holiday.date.getTime() - today.getTime();
+      const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+      
+      if (daysDiff === 0) {
+        (this as any)[holiday.name] = true; 
+      }
+      this.getBirth();
+    });
+    this.printHolidaysStatus();
+  }
+
+  calculateEasterDate(year: number): Date {
+    const f = Math.floor,
+      G = year % 19,
+      C = f(year / 100),
+      H = (C - f(C / 4) - f((8 * C + 13) / 25) + 19 * G + 15) % 30,
+      I = H - f(H / 28) * (1 - f(H / 28) * f(29 / (H + 1)) * f((21 - G) / 11)),
+      J = (year + f(year / 4) + I + 2 - C + f(C / 4)) % 7,
+      L = I - J,
+      month = 3 + f((L + 40) / 44),
+      day = L + 28 - 31 * f(month / 4);
+    return new Date(year, month - 1, day);
+  }
+
+  printHolidaysStatus() {
+    console.log("Holidays Status:");
+    console.log(`Christmas: ${this.christmas}`);
+    console.log(`Halloween: ${this.halloween}`);
+    console.log(`New Year: ${this.newYear}`);
+    console.log(`Easter: ${this.easter}`);
+    console.log(`Birthday: ${this.birthday}`);
+  }
+  
 
 }

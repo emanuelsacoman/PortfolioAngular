@@ -52,9 +52,70 @@ body{
     gap: 1.2vh;
 }
 
+.frame{
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 5px;
+    position: absolute;
+    width: 60%;
+    height: 100%;
+    z-index: 2;
+}
+
+.picture .picarea{
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-self: center;
+    flex-direction: column;
+}
+
 .picture img {
     max-width: 60%;
     border-radius: 5px;
+    position: relative;
+}
+
+@property --gradient-angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+  }
+
+.picture .picback {
+    --gradient-angle: 0deg;
+    background: conic-gradient(
+      from var(--gradient-angle),
+      transparent,
+      #399cff
+    );
+    filter: blur(10px);
+    z-index: -1;
+    padding: 5px;
+    width: 60%;
+    height: 100%;
+    top: -5px;
+    position: absolute;
+    border-radius: 5px;
+    animation: none;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    animation: rotateGradient 4s linear infinite;
+  }
+  
+  @keyframes rotateGradient {
+    0% {
+      --gradient-angle: 0deg;
+    }
+    100% {
+      --gradient-angle: 360deg;
+    }
+  } 
+
+.picture:hover .picback{
+    opacity: 1;
 }
 
 .pictureBottom {
@@ -90,12 +151,23 @@ body{
     border-radius: 5px;
 }
 
-.email{
+.email, .local{
     cursor: pointer;
+}
+
+.birth{
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 5px;
 }
 
 .itenspic a {
     width: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
 }
 
 .itenspic img {
@@ -232,7 +304,6 @@ body{
 }
 
 
-
 /*PROFILE*/
 
 /*MIDDLE*/
@@ -328,6 +399,41 @@ body{
     width: 2.5rem;
 }
 
+/*Carousel*/
+.carousel {
+    width: 100%;
+    height: fit-content;
+    margin: 0 auto; 
+    overflow: hidden;
+    background-color: #2e86dd23;
+    border-radius: 5px;    
+}
+  
+.carousel .p-carousel-content {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+}
+  
+.carousel .language-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+  
+.carousel img {
+    width: 25%;
+    height: auto; 
+    object-fit: cover; 
+    border-radius: 5px;
+    padding: 10px;
+}
+  
+  
+/*Carousel*/
+
 /*resume*/
 .resume{
     display: flex;
@@ -375,6 +481,56 @@ body{
 
 .resumebox .location{
     font-size: clamp(12px, 2vw, 16px);
+}
+
+.resumeitemarea{
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+    width: 100%;
+
+    & h3{
+        font-size: clamp(14px, 5vw, 30px);
+    }
+}
+
+.chart {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 1rem;
+    background-color: #2e86dd23;
+    border-radius: 5px;
+}
+  
+.chart p-chart {
+    width: 90%;      
+    height: auto;
+} 
+
+.chips{
+    display: flex;
+    gap: .5rem;
+    border-radius: 5px;
+    background-color: #2e86dd23;
+    padding: 10px;
+    flex-wrap: wrap;
+
+    & .cardchip{
+        display: flex;
+        flex: 1;
+        flex-basis: 15%;
+        padding: 0.3rem;
+        background-color: #2e86dd23;
+        border-radius: 10px;
+        transition: all 0.2s ease-in-out;
+        align-items: center;
+        justify-content: center;
+
+        &:hover{
+            background-color: #3e9eff62;
+        }
+    }
 }
 
 /*PROJETOS*/
@@ -461,6 +617,23 @@ a{
     text-decoration: none;
     color: black;
 }
+
+.icon-right{
+    display: flex;
+    gap: .5rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
+.icon-right img{
+    height: auto;
+    width: 2rem;
+    z-index: 4;
+}
+
 
 /*PROJETOS*/
 
@@ -739,6 +912,12 @@ footer p {
     display: none;
 }
 
+@media screen and (max-width: 950px){
+    .resume{
+        flex-direction: column;
+    }
+}
+
 @media screen and (max-width: 770px) {
     .noResponse{
         display: none;
@@ -831,6 +1010,18 @@ footer p {
         .cvimg{
             display: none;
         }
+    }
+
+    .resume{
+        flex-direction: column;
+    }
+
+    .experience{
+        margin-bottom: 2vh;
+    }
+
+    .resume > *:not(:last-child) {
+        margin-bottom: 2vh;
     }
     
 }

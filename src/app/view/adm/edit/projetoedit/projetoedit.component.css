@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
 body {
     color: black;
@@ -86,15 +87,35 @@ input, textarea{
     color: black;
 }
 
+.input{
+    display: flex;
+    flex-direction: column;
+}
+
+.icon{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: .3rem;
+}
+
+.icon img {
+    width: 1.5rem;
+}
+
 .imageBottom{
     width: auto;
     height: auto;
 }
 
 .imageInput{
-    color: gray;
+    color: black;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+}
+
+.imageInput label, .form-group label{
+    font-size: clamp(10px, 2vw, 18px); 
 }
 
 .preImage {
@@ -138,4 +159,3 @@ p, .alert {
     padding-inline: 1%;
     border-radius: 5px;
 }
-

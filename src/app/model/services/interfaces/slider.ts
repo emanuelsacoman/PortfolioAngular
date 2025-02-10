@@ -1,10 +1,10 @@
 export class Slider{
     private _id!: string;
-    private _Img!: any;
+    private _Carouselimg!: any;
 
-    constructor(id: string, Img: any){
+    constructor(id: string, Carouselimg: any){
         this._id = id;
-        this._Img = Img;
+        this._Carouselimg = Carouselimg;
     }
 
     public get id(): string {
@@ -15,12 +15,13 @@ export class Slider{
         this._id = value;
     }
 
-    get Img(): any {
-        return this._Img;
+    get Carouselimg(): any {
+        return this._Carouselimg;
     }
 
-    set Img(Img: any) {
-        this._Img = Img;
+    set Carouselimg(Carouselimg: any) {
+        this._Carouselimg = Carouselimg;
     }
+
 
 }

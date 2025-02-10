@@ -4,16 +4,39 @@
              <form class="formItens" (ngSubmit)="editItem()" [formGroup]="editar" #formDir="ngForm">
                 <h1 class="title">EDITAR</h1>
                 <div class="formTop">
+                    <div class="form-group">
+                        <div class="input">
+                            <div class="icon">
+                                <label for="star">Favorito?</label>
+                                <img src="./assets/images/star.gif" alt="Star gif">
+                            </div>
+                            <mat-slide-toggle class="custom-slide-toggle" [(ngModel)]="star" formControlName="star" id="star" name="star">
+                            {{ star ? 'Atual: Sim' : 'Atual: Não' }}
+                            </mat-slide-toggle>
+                        </div>
+                    </div>
 
                     <div class="form-group">
                         <div class="input">
-                            <input type="text" id="titulo" placeholder="Insira o titulo" formControlName="titulo" required/>
+                            <div class="icon">
+                                <label for="inProgress">Projeto finalizado?</label>
+                                <img src="./assets/images/wip.gif" alt="Wip gif">
+                            </div>
+                            <mat-slide-toggle class="custom-slide-toggle" [(ngModel)]="inProgress" formControlName="inProgress" id="inProgress" name="inProgress">
+                            {{ inProgress ? 'Atual: Sim' : 'Atual: Não' }}
+                            </mat-slide-toggle>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input">
+                            <input type="text" id="titulo" placeholder="Insira o titulo do projeto" formControlName="titulo" required/>
                             <p *ngIf="isInvalidControl('titulo')">Erro no titulo</p>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="input">
-                            <input type="text" id="link" placeholder="Insira o link" formControlName="link" required/>
+                            <input type="text" id="link" placeholder="Insira o link do projeto" formControlName="link" required/>
                             <p *ngIf="isInvalidControl('titulo')">Erro no link</p>
                         </div>
                     </div>
@@ -22,6 +45,7 @@
                     <div class="formBottom">
                         <div class="form-group">
                             <div class="input imageInput">
+                                <label for="imagem1">Imagem do projeto</label>
                                 <input class="img" type="file" id="imagem1" formControlName="imagem1" accept="image/*" (change)="uploadFile1($event)">
                             </div>
                             <div *ngIf="!imagem1">
@@ -30,6 +54,7 @@
                         </div>
                         <div class="form-group">
                             <div class="input imageInput">
+                                <label for="imagem1">Ícone da linguagem utilizada</label>
                                 <input class="img" type="file" id="imagem2" formControlName="imagem2" accept="image/*" (change)="uploadFile2($event)">
                             </div>
                             <div *ngIf="!imagem2">

@@ -33,6 +33,9 @@
               </form>  
 
               <section class="addArea">
+                <div class="cadastro">
+                  <img (click)="cadastrar()" src="./assets/images/plus.png" alt="Cadastro">
+                </div>
                 <div *ngFor="let area of sobreareaArray; let i = index">
                   <div class="formSobreArea" (click)="editar(area)">
                     <div class="item">
@@ -50,25 +53,30 @@
                     </div>
                   </div>
                 </div>
-                <div class="cadastro">
-                  <img (click)="cadastrar()" src="./assets/images/plus.png" alt="Cadastro">
-                </div>
               </section> 
 
-              <!--                                SLIDER
-                <section class="addSlider">
-                  <div class="forSlider" *ngFor="let slider of slider; let i = index">
-                    <div class="sliderImg" (click)="editSliderImg(slider)">
-                      <img src="{{slider.Img}}">
+              <section class="carouselarea">
+                <div class="left">
+                  <form class="formCarousel" (ngSubmit)="cadastrarSlider()" [formGroup]="carouselCriar" #formDir="ngForm">
+                    <div class="inputs-groups">
+                      <div class="input-group">
+                        <div class="input">
+                          <input type="file" id="Carouselimg" accept="img/*" required placeholder="Insira o Carouselimg" formControlName="Carouselimg" (change)="uploadFileCarousel($event)" />
+                        </div>
+                      </div>
+                      <button class="addbuton" type="submit">ADD</button>
+                    </div>
+                  </form>  
+                </div>
+                <div class="rightcarousel">
+                  <div class="carouselitens" *ngFor="let sliders of slider">
+                    <div class="carouselitem" (click)="deletarCarousel(sliders)">
+                      <img src="{{sliders.Carouselimg}}">
+                    </div>
                   </div>
-                </div>
-                <div class="cadastro">
-                  <img (click)="cadastrarSlider()" src="./assets/images/plus.png" alt="Cadastro">
-                </div>
+                </div>                  
               </section>
-            -->
-              
-            
+
             </div>
             <div class="formall" *ngIf="isSelected('resumo')">
               <form class="formResumo" (ngSubmit)="editResumo()" [formGroup]="resumoEdit" #formDir="ngForm">
@@ -79,7 +87,6 @@
                     </div>
                   </div>
                   <div class="input-group">
-                    
                     <div class="input">
                       <input type="text" id="lsub" placeholder="Insira o lsub" formControlName="lsub" required/>
                     </div>
@@ -87,9 +94,19 @@
                       <input type="text" id="rsub" placeholder="Insira o rsub" formControlName="rsub" required/>
                     </div>
                   </div>
+
+                  <div class="input-group">
+                    <div class="input">
+                      <input type="text" id="chart" placeholder="Insira o título do chart" formControlName="chart" required/>
+                    </div>
+                    <div class="input">
+                      <input type="text" id="chip" placeholder="Insira o título do chip" formControlName="chip" required/>
+                    </div>
+                  </div>
+                  
                   <button class="sendButton" type="submit">Enviar</button>
                 </div>
-                </form>   
+              </form>   
 
                 <section class="itensdisplay">
                   <div class="displayarea">
@@ -113,6 +130,29 @@
                     </div>
                   </div>
                 </section>
+
+                <section class="chiparea">
+                  <div class="left">
+                    <form class="formChip" (ngSubmit)="chipCreateForm()" [formGroup]="chipCreate" #formDir="ngForm">
+                      <div class="inputs-groups">
+                        <div class="input-group">
+                          <div class="input">
+                            <input type="text" id="chipname" placeholder="Insira o chip" formControlName="chipname" required/>
+                          </div>
+                        </div>
+                        <button class="addbuton" type="submit">ADD</button>
+                      </div>
+                    </form>  
+                  </div>
+                  <div class="right">
+                    <div class="chips" *ngFor="let chip of chipArray">
+                      <div class="cardchip" (click)="deleteChip(chip.id)">
+                        <p>{{ chip.chipname }}</p>
+                      </div>
+                    </div>
+                  </div>                  
+                </section>
+
             </div>
             
             <div class="formall projetosSection" *ngIf="isSelected('projetos')">

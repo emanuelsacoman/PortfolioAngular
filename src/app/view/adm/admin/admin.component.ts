@@ -6,6 +6,7 @@ import { NgToastService } from 'ng-angular-popup';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/model/services/auth.service';
 import { FirebaseService } from 'src/app/model/services/firebase.service';
+import { Chip } from 'src/app/model/services/interfaces/chip';
 import { Contato } from 'src/app/model/services/interfaces/contato';
 import { Profile } from 'src/app/model/services/interfaces/profile';
 import { Projeto } from 'src/app/model/services/interfaces/projeto';
@@ -49,6 +50,8 @@ export class AdminComponent {
   titleArea!: string;
   lsub!: string;
   rsub!: string;
+  chart!: string;
+  chip!: string;
   
   // RESUMOL
   public resumol: ResumoL[] = [];
@@ -109,8 +112,17 @@ export class AdminComponent {
 
   //SLIDER
   public slider: Slider[] = [];
+  Carouselimg!: any;
+  carouselCriar!: FormGroup;
+  carousel!: Slider;
+  imagemCarousel: any;
 
+  //CHIP
+  chipCreate!: FormGroup;
+  chipClass!: Chip;
+  chipname!: string;
 
+  public chipArray: Chip[] = [];
   
   constructor(private router: Router,
     private formBuilder: FormBuilder,
@@ -166,6 +178,15 @@ export class AdminComponent {
           } as Slider;
         });
       });
+
+      this.firebase.obterTodosChip().subscribe((res) => {
+        this.chipArray = res.map((chip) => {
+          return {
+            id: chip.payload.doc.id,
+            ...(chip.payload.doc.data() as any),
+          } as Chip;
+        });
+      });
   }
 
   logout(): void {
@@ -206,6 +227,20 @@ export class AdminComponent {
     this.initProjeto();
     this.initContato();
     this.initProfile();
+    this.initChip();
+    this.initSlider();
+  }
+
+  initSlider(){
+    this.carouselCriar = this.formBuilder.group({
+      Carouselimg: ['', Validators.required] 
+    });
+  }
+
+  initChip(){
+    this.chipCreate = this.formBuilder.group({
+      chipname: ['', Validators.required] 
+    });
   }
 
   editContato() {
@@ -356,11 +391,15 @@ export class AdminComponent {
     this.titleArea = this.resumo?.titleArea;
     this.lsub = this.resumo?.lsub;
     this.rsub = this.resumo?.rsub;
+    this.chart = this.resumo?.chart;
+    this.chip = this.resumo?.chip;
 
     this.resumoEdit = this.formBuilder.group({
       titleArea: [this.titleArea, [Validators.required]],
       lsub: [this.lsub, [Validators.required]],
       rsub: [this.rsub, [Validators.required]],
+      chart: [this.chart, [Validators.required]],
+      chip: [this.chip, [Validators.required]],
       rImg: [null],
       lImg: [null],
     });
@@ -397,8 +436,6 @@ export class AdminComponent {
     }
   }
 
-
-
   addresumol(){
     const create: ResumoL = new ResumoL("","","","");
     this.firebase.cadastrarResumoL(create);
@@ -431,7 +468,7 @@ export class AdminComponent {
   }
 
   cadastrarProjeto(){
-    const create: Projetos = new Projetos("","","","","");
+    const create: Projetos = new Projetos("","","","","", false, false);
     this.firebase.cadastrarProjetos(create);
   }
 
@@ -641,6 +678,45 @@ export class AdminComponent {
     this.imagem4 = event.target.files;
   }
 
+  chipCreateForm() {
+    const chipValue = this.chipCreate.get('chipname')?.value;
+    const create: Chip = new Chip("", chipValue);
+  
+    this.firebase.cadastrarChip(create);
+    this.chipCreate.reset();
+  }
+
+  deleteChip(id: any) {
+    Swal.fire({
+      title: 'Tem certeza de que deseja excluir este chip?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim, excluir',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.firebase.excluirChip(id)
+          .then(() => {
+            this.toast.success({
+              detail: "Sucesso!",
+              summary: "Chip excluído com sucesso",
+              duration: 5000
+            });
+          })
+          .catch((error) => {
+            console.error('Erro ao excluir chip:', error);
+            this.toast.error({
+              detail: "Erro!",
+              summary: "Falha ao excluir chip. Tente novamente mais tarde.",
+              duration: 5000
+            });
+          });
+      }
+    });
+  }
+
   editSliderImg(slider: Slider){
     console.log('Item clicado:', slider);
     
@@ -648,8 +724,45 @@ export class AdminComponent {
   }
 
   cadastrarSlider(){
-    const create: Slider = new Slider("", null);
-    this.firebase.cadastrarSlider(create);
+    if(this.carouselCriar.valid){
+      const create: Slider = new Slider("", null);
+      this.firebase.uploadImageSlider(this.imagemCarousel, create);
+        this.carouselCriar.reset();
+      }
+    }
+  
+  uploadFileCarousel(event: any){
+    this.imagemCarousel = event.target.files;
   }
   
+  deletarCarousel(slider: Slider) {
+    Swal.fire({
+      title: 'Tem certeza de que deseja excluir este slider?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim, excluir',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.firebase.excluirSlider(slider.id)
+          .then(() => {
+            this.toast.success({
+              detail: "Sucesso!",
+              summary: "Slider excluído com sucesso",
+              duration: 5000
+            });
+          })
+          .catch((error) => {
+            console.error('Erro ao excluir slider:', error);
+            this.toast.error({
+              detail: "Erro!",
+              summary: "Falha ao excluir slider. Tente novamente mais tarde.",
+              duration: 5000
+            });
+          });
+      }
+    });
+  }
 }

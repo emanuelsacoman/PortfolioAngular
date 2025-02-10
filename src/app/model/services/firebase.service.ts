@@ -13,6 +13,7 @@ import { Projeto } from './interfaces/projeto';
 import { Contato } from './interfaces/contato';
 import { Profile } from './interfaces/profile';
 import { Slider } from './interfaces/slider';
+import { Chip } from './interfaces/chip';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,7 @@ export class FirebaseService {
   private PATH8 : string = "contato";
   private PATH9 : string = "profile";
   private PATH10 : string = "slider";
+  private PATH11 : string = "chip";
 
   constructor(private firestore: AngularFirestore,
     private storage: AngularFireStorage,
@@ -126,6 +128,8 @@ export class FirebaseService {
           titleArea: resumo.titleArea,
           lsub: resumo.lsub,
           rsub: resumo.rsub,
+          chart: resumo.chart,
+          chip: resumo.chip,
           
         });
       }
@@ -195,6 +199,8 @@ export class FirebaseService {
           projectImg: projetos.projectImg,
           badge: projetos.badge,
           link: projetos.link,
+          inProgress: projetos.inProgress,
+          star: projetos.star,
         });
       }
 
@@ -208,6 +214,8 @@ export class FirebaseService {
           projectImg: projetos.projectImg,
           badge: projetos.badge,
           link: projetos.link,
+          inProgress: projetos.inProgress,
+          star: projetos.star,
         });
       }
 
@@ -314,7 +322,7 @@ export class FirebaseService {
 
       cadastrarProfile(profile : Profile) {
         return this.firestore.collection(this.PATH9).add({
-          instagram: profile.instagram,
+            instagram: profile.instagram,
             facebook: profile.facebook,
             linkedin: profile.linkedin,
             github: profile.github,
@@ -449,14 +457,14 @@ export class FirebaseService {
 
       cadastrarSlider(slider : Slider) {
         return this.firestore.collection(this.PATH10).add({
-          Img: slider.Img,
+          Carouselimg: slider.Carouselimg
           
         });
       }
 
       editarSlider(slider: Slider, id: string) {
         return this.firestore.collection(this.PATH10).doc(id).update({
-          Img: slider.Img,
+          Carouselimg: slider.Carouselimg
             
         });
       }
@@ -474,7 +482,7 @@ export class FirebaseService {
           finalize(() =>{
             let uploadFileURL = fileRef.getDownloadURL();
             uploadFileURL.subscribe(resp => {
-              itens.Img = resp;
+              itens.Carouselimg = resp;
               if(!itens.id){
                 this.cadastrarSlider(itens);
               }else {
@@ -486,6 +494,23 @@ export class FirebaseService {
           return task;
         }
       //Slider
+
+      //Chip
+      obterTodosChip() {
+        return this.firestore.collection(this.PATH11).snapshotChanges();
+      }
+
+      cadastrarChip(chip : Chip) {
+        return this.firestore.collection(this.PATH11).add({
+          chipname: chip.chipname,
+          
+        });
+      }
+
+      excluirChip(id: string) {
+        return this.firestore.collection(this.PATH11).doc(id).delete();
+      }
+      //Chip
     }
 
     

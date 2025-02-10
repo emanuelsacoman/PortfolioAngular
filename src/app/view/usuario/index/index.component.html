@@ -13,7 +13,21 @@
         <section class="profile bloco noResponse" *ngFor="let perfil of perfil | async;">
             <div class="alltop">
                 <div class="picture">
+<<<<<<< HEAD
                     <img [src]="profileImageUrl" alt="Foto de perfil" loading="lazy">
+=======
+                    <div class="picarea">
+                        <img [src]="profileImageUrl" alt="Foto de perfil">
+                        <div class="frame" [ngStyle]="{
+                            'background-image': this.halloween ? 'url(./assets/images/halloween.png)' : 
+                            this.easter ? 'url(./assets/images/easter.png)' : 
+                            this.christmas ? 'url(./assets/images/christmas.png)' : 
+                            this.newYear ? 'url(./assets/images/newyear.png)' :
+                            this.birthday ? 'url(./assets/images/birthdayFrame.png)' : 'none',
+                        }"></div>
+                        <div class="picback"></div>
+                    </div>
+>>>>>>> a6da884f0518bbfe1b85793468337983254f965d
                     <section class="pictureBottom">
                         <div class="name">{{profileData.name}}</div>
                         <div class="liltext">{{perfil.text}}</div>
@@ -37,7 +51,11 @@
                         <div class="infoitem">
                             <div class="itens phone" (click)="goToZap(perfil.phone)">
                                 <div class="img">
+<<<<<<< HEAD
                                     <img src="{{perfil.phoneImg}}" alt="Telefone" loading="lazy">
+=======
+                                    <img src="{{perfil.phoneImg}}" alt="Phone">
+>>>>>>> a6da884f0518bbfe1b85793468337983254f965d
                                 </div>
                                 <div class="lildesc">
                                     <p class="title">{{perfil.phoneTXT}}</p>
@@ -47,7 +65,11 @@
                             <div class="bar"></div>
                             <div class="itens email" (click)="goToEmail(perfil.email)">
                                 <div class="img">
+<<<<<<< HEAD
                                     <img src="{{perfil.emailImg}}" alt="Telefone" loading="lazy">
+=======
+                                    <img src="{{perfil.emailImg}}" alt="Email">
+>>>>>>> a6da884f0518bbfe1b85793468337983254f965d
                                 </div>
                                 <div class="lildesc">
                                     <p class="title">{{perfil.emailTXT}}</p>
@@ -55,9 +77,13 @@
                                 </div>
                             </div>
                             <div class="bar"></div>
-                            <div class="itens local">
+                            <div class="itens local" (click)="goToLocal(perfil.local)">
                                 <div class="img">
+<<<<<<< HEAD
                                     <img src="{{perfil.localImg}}" alt="Telefone" loading="lazy">
+=======
+                                    <img src="{{perfil.localImg}}" alt="Local">
+>>>>>>> a6da884f0518bbfe1b85793468337983254f965d
                                 </div>
                                 <div class="lildesc">
                                     <p class="title">{{perfil.localTXT}}</p>
@@ -65,9 +91,13 @@
                                 </div>
                             </div>
                             <div class="bar"></div>
-                            <div class="itens birth">
+                            <div class="itens birth" [ngStyle]="{'background-image': this.birthday ? 'url(./assets/images/birthdayBackground.png' : 'none'}">
                                 <div class="img">
+<<<<<<< HEAD
                                     <img src="{{perfil.birthImg}}" alt="Telefone" loading="lazy">
+=======
+                                    <img src="{{perfil.birthImg}}" alt="Birth">
+>>>>>>> a6da884f0518bbfe1b85793468337983254f965d
                                 </div>
                                 <div class="lildesc">
                                     <p class="title">{{perfil.birthTXT}}</p>
@@ -93,7 +123,21 @@
         <section class="profile2 bloco response" *ngFor="let perfil of perfil | async;">
             <div class="alltop">
                 <div class="picture">
+<<<<<<< HEAD
                     <img loading="lazy" class="profile2img" [src]="profileImageUrl" alt="Foto de perfil">
+=======
+                    <div class="picarea">
+                        <img class="profile2img" [src]="profileImageUrl" alt="Foto de perfil">
+                        <div class="frame" [ngStyle]="{
+                            'background-image': this.halloween ? 'url(./assets/images/halloween.png)' : 
+                            this.easter ? 'url(./assets/images/easter.png)' : 
+                            this.christmas ? 'url(./assets/images/christmas.png)' : 
+                            this.newYear ? 'url(./assets/images/newyear.png)' : 
+                            this.birthday ? 'url(./assets/images/birthdayFrame.png)' : 'none',
+                        }"></div>
+                        <div class="picback"></div>
+                    </div>
+>>>>>>> a6da884f0518bbfe1b85793468337983254f965d
                     <section class="pictureBottom">
                         <div class="name">{{profileData.name}}</div>
                         <div class="liltext">{{perfil.text}}</div>
@@ -117,7 +161,11 @@
                         <div class="infoitem">
                             <div class="itens phone" (click)="goToZap(perfil.phone)">
                                 <div class="img">
+<<<<<<< HEAD
                                     <img loading="lazy" src="{{perfil.phoneImg}}" alt="Telefone">
+=======
+                                    <img src="{{perfil.phoneImg}}" alt="Phone">
+>>>>>>> a6da884f0518bbfe1b85793468337983254f965d
                                 </div>
                                 <div class="lildesc">
                                     <p class="title">{{perfil.phoneTXT}}</p>
@@ -127,7 +175,11 @@
                             <div class="bar"></div>
                             <div class="itens email" (click)="goToEmail(perfil.email)">
                                 <div class="img">
+<<<<<<< HEAD
                                     <img loading="lazy" src="{{perfil.emailImg}}" alt="Telefone">
+=======
+                                    <img src="{{perfil.emailImg}}" alt="Email">
+>>>>>>> a6da884f0518bbfe1b85793468337983254f965d
                                 </div>
                                 <div class="lildesc">
                                     <p class="title">{{perfil.emailTXT}}</p>
@@ -135,9 +187,13 @@
                                 </div>
                             </div>
                             <div class="bar"></div>
-                            <div class="itens local">
+                            <div class="itens local" (click)="goToLocal(perfil.local)">
                                 <div class="img">
+<<<<<<< HEAD
                                     <img loading="lazy" src="{{perfil.localImg}}" alt="Telefone">
+=======
+                                    <img src="{{perfil.localImg}}" alt="Local">
+>>>>>>> a6da884f0518bbfe1b85793468337983254f965d
                                 </div>
                                 <div class="lildesc">
                                     <p class="title">{{perfil.localTXT}}</p>
@@ -145,9 +201,13 @@
                                 </div>
                             </div>
                             <div class="bar"></div>
-                            <div class="itens birth">
+                            <div class="itens birth" [ngStyle]="{'background-image': this.birthday ? 'url(./assets/images/birthdayBackground.png' : 'none'}">
                                 <div class="img">
+<<<<<<< HEAD
                                     <img loading="lazy" src="{{perfil.birthImg}}" alt="Telefone">
+=======
+                                    <img src="{{perfil.birthImg}}" alt="Birth">
+>>>>>>> a6da884f0518bbfe1b85793468337983254f965d
                                 </div>
                                 <div class="lildesc">
                                     <p class="title">{{perfil.birthTXT}}</p>
@@ -235,6 +295,7 @@
                     </div>
                 </section>
 
+<<<<<<< HEAD
                 <!--                                    SLIDER
                 <div id="slider">
                     <div *ngFor="let slider of slider">
@@ -245,6 +306,25 @@
                 </div>
                 -->
                 
+=======
+                <section class="carousel">
+                    <p-carousel
+                      [value]="slider"
+                      [numVisible]="5"
+                      [numScroll]="1"
+                      [circular]="true"
+                      [responsiveOptions]="responsiveOptions"
+                      [autoplayInterval]="3000"
+                      [showNavigators]="false"
+                      [showIndicators]="false">
+                      <ng-template let-item pTemplate="item">
+                        <div class="language-item">
+                          <img [src]="item.Carouselimg" alt="Carousel Image">
+                        </div>
+                      </ng-template>
+                    </p-carousel>
+                  </section>
+>>>>>>> a6da884f0518bbfe1b85793468337983254f965d
 
             </div>
             <div class="resumo wrap" *ngIf="isSelected('resumo')">
@@ -277,6 +357,30 @@
                             </div>
                         </div>
                     </section>
+
+                    <section class="resume">
+                        <div class="resumeitem">
+                            <div class="resumetop">
+                                <img src="./assets/images/competencia.png" alt="Resume pic"> 
+                                <h2>{{resumo.chart}}</h2>
+                            </div>
+                            <div class="chart">
+                                <p-chart type="bar" [data]="data" [options]="options" />
+                            </div>
+                        </div>
+                        <div class="resumeitem">
+                            <div class="resumetop">
+                                <img src="./assets/images/conhecimento.png" alt="Resume pic">
+                                <h2>{{resumo.chip}}</h2>
+                            </div>
+                            <div class="chips" >
+                                <div class="cardchip" *ngFor="let chip of chipArray">
+                                  <p>{{ chip.chipname }}</p>
+                                </div>
+                              </div>
+                        </div>
+                    </section>
+
                 </div>
             </div>
             <div class="projetos wrap" *ngIf="isSelected('projetos')">
@@ -284,19 +388,28 @@
                     <div class="toph1" *ngFor="let projetos of projeto">{{projetos.titleProjeto}}</div>
                     <div class="topbar"></div>
                 </div>
-                <div class="projects">
+                <div class="projects">  
                     <div class="project" style="background-image: url('{{projeto.projectImg}}');" *ngFor="let projeto of projetos">
-                        <a href="{{projeto.link}}" target="_blank">
+                        <a [href]="!projeto.inProgress ? '#' : projeto.link" target="_blank">
+                            <div class="icon-right">
+                                <div class="star" *ngIf="projeto.star">
+                                    <img src="./assets/images/star.gif" alt="Star">
+                                </div>
+                                <div class="wip" *ngIf="!projeto.inProgress">
+                                    <img src="./assets/images/wip.gif" alt="Work in Progress">
+                                </div>
+                            </div>
                             <div class="mark">
                                 <img loading="lazy" src="./assets/images/bookmark.png" alt="Mark">
                                 <div class="badge">
                                     <img loading="lazy" src="{{projeto.badge}}" alt="Badge">
                                 </div>
                             </div>
-                            <div class="title" >{{projeto.titulo}}</div>
+                            <div class="title">{{projeto.titulo}}</div>
                         </a>
                     </div>
                 </div>
+                
             </div>
             
             <div class="contato wrap" *ngIf="isSelected('contato')">
@@ -339,7 +452,7 @@
                 </div>
             </div>
             <footer>
-                <p>©️ 2024 Todos os Direitos Reservados por Emanuel</p>
+                <p>©️ 2024 Todos os Direitos Reservados por {{profileData.name}}</p>
             </footer>
         </main>
         <!-- menu.component.html -->
