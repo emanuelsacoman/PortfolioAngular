@@ -6,13 +6,16 @@
     <div class="loading" *ngIf="!this.sobreLoaded || !this.sobreAreaLoaded || !this.resumoLoaded || 
     !this.resumolLoaded || !this.resumorLoaded || !this.projetoLoaded ||
     !this.projetosLoaded || !this.contatoLoaded || !this.profileLoaded" [@fadeOut]>
-        <img loading="lazy" src="./assets/images/spinner.gif" alt="Carregando...">
+        <img src="./assets/images/spinner.gif" alt="Carregando...">
     </div>
     <div class="all">
         <h1>{{profileData.name}}</h1>
         <section class="profile bloco noResponse" *ngFor="let perfil of perfil | async;">
             <div class="alltop">
                 <div class="picture">
+<<<<<<< HEAD
+                    <img [src]="profileImageUrl" alt="Foto de perfil" loading="lazy">
+=======
                     <div class="picarea">
                         <img loading="lazy" [src]="profileImageUrl" alt="Foto de perfil">
                         <div class="frame" [ngStyle]="{
@@ -24,21 +27,22 @@
                         }"></div>
                         <div class="picback"></div>
                     </div>
+>>>>>>> a6da884f0518bbfe1b85793468337983254f965d
                     <section class="pictureBottom">
                         <div class="name">{{profileData.name}}</div>
                         <div class="liltext">{{perfil.text}}</div>
                         <div class="itenspic">
                             <a href="https://instagram.com/{{perfil.instagram}}" target="_blank">
-                                <img loading="lazy" src="./assets/images/instagram.png" alt="Instagram">
+                                <img src="./assets/images/instagram.png" alt="Instagram">
                             </a>
                             <a href="{{perfil.facebook}}" target="_blank">
-                                <img loading="lazy" src="./assets/images/facebook.png" alt="Facebook">
+                                <img src="./assets/images/facebook.png" alt="Facebook">
                             </a>
                             <a href="{{perfil.linkedin}}" target="_blank">
-                                <img loading="lazy" src="./assets/images/linkedin.png" alt="Linkedin">
+                                <img src="./assets/images/linkedin.png" alt="Linkedin">
                             </a>
                             <a href="https://github.com/{{perfil.github}}" target="_blank">
-                                <img loading="lazy" src="./assets/images/github.png" alt="Github">
+                                <img src="./assets/images/github.png" alt="Github">
                             </a>
                         </div>
                     </section>
@@ -47,7 +51,7 @@
                         <div class="infoitem">
                             <div class="itens phone" (click)="goToZap(perfil.phone)">
                                 <div class="img">
-                                    <img loading="lazy" src="{{perfil.phoneImg}}" alt="Phone">
+                                    <img src="{{perfil.phoneImg}}" alt="Phone">
                                 </div>
                                 <div class="lildesc">
                                     <p class="title">{{perfil.phoneTXT}}</p>
@@ -57,7 +61,7 @@
                             <div class="bar"></div>
                             <div class="itens email" (click)="goToEmail(perfil.email)">
                                 <div class="img">
-                                    <img loading="lazy" src="{{perfil.emailImg}}" alt="Email">
+                                    <img src="{{perfil.emailImg}}" alt="Email">
                                 </div>
                                 <div class="lildesc">
                                     <p class="title">{{perfil.emailTXT}}</p>
@@ -67,7 +71,7 @@
                             <div class="bar"></div>
                             <div class="itens local" (click)="goToLocal(perfil.local)">
                                 <div class="img">
-                                    <img loading="lazy" src="{{perfil.localImg}}" alt="Local">
+                                    <img src="{{perfil.localImg}}" alt="Local">
                                 </div>
                                 <div class="lildesc">
                                     <p class="title">{{perfil.localTXT}}</p>
@@ -77,7 +81,7 @@
                             <div class="bar"></div>
                             <div class="itens birth" [ngStyle]="{'background-image': this.birthday ? 'url(./assets/images/birthdayBackground.png' : 'none'}">
                                 <div class="img">
-                                    <img loading="lazy" src="{{perfil.birthImg}}" alt="Birth">
+                                    <img src="{{perfil.birthImg}}" alt="Birth">
                                 </div>
                                 <div class="lildesc">
                                     <p class="title">{{perfil.birthTXT}}</p>
@@ -90,7 +94,7 @@
                     <div class="cv">
                         <a href="{{perfil.cv}}" target="_blank">
                             <div class="cvimg">
-                                <img loading="lazy" src="./assets/images/baixar.png" alt="Download">
+                                <img src="./assets/images/baixar.png" alt="Download">
                             </div>
                             <div class="cvtext">
                                 <p>CURRÍCULO</p>
@@ -103,6 +107,9 @@
         <section class="profile2 bloco response" *ngFor="let perfil of perfil | async;">
             <div class="alltop">
                 <div class="picture">
+<<<<<<< HEAD
+                    <img loading="lazy" class="profile2img" [src]="profileImageUrl" alt="Foto de perfil">
+=======
                     <div class="picarea">
                         <img loading="lazy" class="profile2img" [src]="profileImageUrl" alt="Foto de perfil">
                         <div class="frame" [ngStyle]="{
@@ -114,6 +121,7 @@
                         }"></div>
                         <div class="picback"></div>
                     </div>
+>>>>>>> a6da884f0518bbfe1b85793468337983254f965d
                     <section class="pictureBottom">
                         <div class="name">{{profileData.name}}</div>
                         <div class="liltext">{{perfil.text}}</div>
@@ -137,7 +145,7 @@
                         <div class="infoitem">
                             <div class="itens phone" (click)="goToZap(perfil.phone)">
                                 <div class="img">
-                                    <img loading="lazy" src="{{perfil.phoneImg}}" alt="Phone">
+                                    <img src="{{perfil.phoneImg}}" alt="Phone">
                                 </div>
                                 <div class="lildesc">
                                     <p class="title">{{perfil.phoneTXT}}</p>
@@ -147,7 +155,7 @@
                             <div class="bar"></div>
                             <div class="itens email" (click)="goToEmail(perfil.email)">
                                 <div class="img">
-                                    <img loading="lazy" src="{{perfil.emailImg}}" alt="Email">
+                                    <img src="{{perfil.emailImg}}" alt="Email">
                                 </div>
                                 <div class="lildesc">
                                     <p class="title">{{perfil.emailTXT}}</p>
@@ -157,7 +165,7 @@
                             <div class="bar"></div>
                             <div class="itens local" (click)="goToLocal(perfil.local)">
                                 <div class="img">
-                                    <img loading="lazy" src="{{perfil.localImg}}" alt="Local">
+                                    <img src="{{perfil.localImg}}" alt="Local">
                                 </div>
                                 <div class="lildesc">
                                     <p class="title">{{perfil.localTXT}}</p>
@@ -167,7 +175,7 @@
                             <div class="bar"></div>
                             <div class="itens birth" [ngStyle]="{'background-image': this.birthday ? 'url(./assets/images/birthdayBackground.png' : 'none'}">
                                 <div class="img">
-                                    <img loading="lazy" src="{{perfil.birthImg}}" alt="Birth">
+                                    <img src="{{perfil.birthImg}}" alt="Birth">
                                 </div>
                                 <div class="lildesc">
                                     <p class="title">{{perfil.birthTXT}}</p>
@@ -255,6 +263,18 @@
                     </div>
                 </section>
 
+<<<<<<< HEAD
+                <!--                                    SLIDER
+                <div id="slider">
+                    <div *ngFor="let slider of slider">
+                        <figure>
+                            <img loading="lazy" src="{{slider.Img}}">     
+                        </figure>
+                    </div>
+                </div>
+                -->
+                
+=======
                 <section class="carousel">
                     <p-carousel
                       [value]="slider"
@@ -272,6 +292,7 @@
                       </ng-template>
                     </p-carousel>
                   </section>
+>>>>>>> a6da884f0518bbfe1b85793468337983254f965d
 
             </div>
             <div class="resumo wrap" *ngIf="isSelected('resumo')">
