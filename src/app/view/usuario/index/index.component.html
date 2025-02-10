@@ -13,21 +13,7 @@
         <section class="profile bloco noResponse" *ngFor="let perfil of perfil | async;">
             <div class="alltop">
                 <div class="picture">
-<<<<<<< HEAD
                     <img [src]="profileImageUrl" alt="Foto de perfil" loading="lazy">
-=======
-                    <div class="picarea">
-                        <img loading="lazy" [src]="profileImageUrl" alt="Foto de perfil">
-                        <div class="frame" [ngStyle]="{
-                            'background-image': this.halloween ? 'url(./assets/images/halloween.png)' : 
-                            this.easter ? 'url(./assets/images/easter.png)' : 
-                            this.christmas ? 'url(./assets/images/christmas.png)' : 
-                            this.newYear ? 'url(./assets/images/newyear.png)' :
-                            this.birthday ? 'url(./assets/images/birthdayFrame.png)' : 'none',
-                        }"></div>
-                        <div class="picback"></div>
-                    </div>
->>>>>>> a6da884f0518bbfe1b85793468337983254f965d
                     <section class="pictureBottom">
                         <div class="name">{{profileData.name}}</div>
                         <div class="liltext">{{perfil.text}}</div>
@@ -107,21 +93,7 @@
         <section class="profile2 bloco response" *ngFor="let perfil of perfil | async;">
             <div class="alltop">
                 <div class="picture">
-<<<<<<< HEAD
                     <img loading="lazy" class="profile2img" [src]="profileImageUrl" alt="Foto de perfil">
-=======
-                    <div class="picarea">
-                        <img loading="lazy" class="profile2img" [src]="profileImageUrl" alt="Foto de perfil">
-                        <div class="frame" [ngStyle]="{
-                            'background-image': this.halloween ? 'url(./assets/images/halloween.png)' : 
-                            this.easter ? 'url(./assets/images/easter.png)' : 
-                            this.christmas ? 'url(./assets/images/christmas.png)' : 
-                            this.newYear ? 'url(./assets/images/newyear.png)' : 
-                            this.birthday ? 'url(./assets/images/birthdayFrame.png)' : 'none',
-                        }"></div>
-                        <div class="picback"></div>
-                    </div>
->>>>>>> a6da884f0518bbfe1b85793468337983254f965d
                     <section class="pictureBottom">
                         <div class="name">{{profileData.name}}</div>
                         <div class="liltext">{{perfil.text}}</div>
@@ -263,18 +235,6 @@
                     </div>
                 </section>
 
-<<<<<<< HEAD
-                <!--                                    SLIDER
-                <div id="slider">
-                    <div *ngFor="let slider of slider">
-                        <figure>
-                            <img loading="lazy" src="{{slider.Img}}">     
-                        </figure>
-                    </div>
-                </div>
-                -->
-                
-=======
                 <section class="carousel">
                     <p-carousel
                       [value]="slider"
@@ -287,12 +247,11 @@
                       [showIndicators]="false">
                       <ng-template let-item pTemplate="item">
                         <div class="language-item">
-                          <img loading="lazy" [src]="item.Carouselimg" alt="Carousel Image">
+                          <img [src]="item.Carouselimg" alt="Carousel Image">
                         </div>
                       </ng-template>
                     </p-carousel>
                   </section>
->>>>>>> a6da884f0518bbfe1b85793468337983254f965d
 
             </div>
             <div class="resumo wrap" *ngIf="isSelected('resumo')">
