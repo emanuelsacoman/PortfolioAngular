@@ -1,0 +1,68 @@
+[debug] [2025-02-10T16:58:17.925Z] ----------------------------------------------------------------------
+[debug] [2025-02-10T16:58:17.927Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\emanu\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2025-02-10T16:58:17.927Z] CLI Version:   13.18.0
+[debug] [2025-02-10T16:58:17.927Z] Platform:      win32
+[debug] [2025-02-10T16:58:17.927Z] Node Version:  v18.20.1
+[debug] [2025-02-10T16:58:17.928Z] Time:          Mon Feb 10 2025 13:58:17 GMT-0300 (Horário Padrão de Brasília)
+[debug] [2025-02-10T16:58:17.928Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-02-10T16:58:17.931Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2025-02-10T16:58:18.007Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-02-10T16:58:18.007Z] > authorizing via signed-in user (emanuelsacoman@gmail.com)
+[debug] [2025-02-10T16:58:18.007Z] [iam] checking project portfolio-ea378 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2025-02-10T16:58:18.008Z] > refreshing access token with scopes: []
+[debug] [2025-02-10T16:58:18.009Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-02-10T16:58:18.009Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-02-10T16:58:18.322Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-02-10T16:58:18.322Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-02-10T16:58:18.328Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/portfolio-ea378:testIamPermissions [none]
+[debug] [2025-02-10T16:58:18.328Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/portfolio-ea378:testIamPermissions x-goog-quota-user=projects/portfolio-ea378
+[debug] [2025-02-10T16:58:18.328Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/portfolio-ea378:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-02-10T16:58:18.388Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2025-02-10T16:58:18.388Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[debug] [2025-02-10T16:58:19.515Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/portfolio-ea378:testIamPermissions 200
+[debug] [2025-02-10T16:58:19.515Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/portfolio-ea378:testIamPermissions {}
+[debug] [2025-02-10T16:58:19.515Z] [iam] error while checking permissions, command may fail: FirebaseError: Authorization failed. This account is missing the following required permissions on project portfolio-ea378:
+
+  firebase.projects.get
+  firebasehosting.sites.update
+[debug] [2025-02-10T16:58:19.516Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/portfolio-ea378 [none]
+[debug] [2025-02-10T16:58:20.452Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/portfolio-ea378 403
+[debug] [2025-02-10T16:58:20.452Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/portfolio-ea378 {"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}}
+[debug] [2025-02-10T16:58:20.452Z] HTTP Error: 403, The caller does not have permission
+[debug] [2025-02-10T16:58:20.453Z] FirebaseError: HTTP Error: 403, The caller does not have permission
+    at responseToError (C:\Users\emanu\AppData\Roaming\npm\node_modules\firebase-tools\lib\responseToError.js:49:12)
+    at RetryOperation._fn (C:\Users\emanu\AppData\Roaming\npm\node_modules\firebase-tools\lib\apiv2.js:305:77)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[error] 
+[error] Error: Failed to get Firebase project portfolio-ea378. Please make sure the project exists and your account has permission to access it.
+[debug] [2025-02-10T17:02:35.426Z] ----------------------------------------------------------------------
+[debug] [2025-02-10T17:02:35.427Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\emanu\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2025-02-10T17:02:35.428Z] CLI Version:   13.18.0
+[debug] [2025-02-10T17:02:35.428Z] Platform:      win32
+[debug] [2025-02-10T17:02:35.428Z] Node Version:  v18.20.1
+[debug] [2025-02-10T17:02:35.428Z] Time:          Mon Feb 10 2025 14:02:35 GMT-0300 (Horário Padrão de Brasília)
+[debug] [2025-02-10T17:02:35.429Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-02-10T17:02:35.479Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-02-10T17:02:35.479Z] > authorizing via signed-in user (emanuelsacoman@gmail.com)
+[debug] [2025-02-10T17:02:35.479Z] [iam] checking project portfolio-ea378 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2025-02-10T17:02:35.481Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/portfolio-ea378:testIamPermissions [none]
+[debug] [2025-02-10T17:02:35.481Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/portfolio-ea378:testIamPermissions x-goog-quota-user=projects/portfolio-ea378
+[debug] [2025-02-10T17:02:35.481Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/portfolio-ea378:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-02-10T17:02:36.629Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/portfolio-ea378:testIamPermissions 200
+[debug] [2025-02-10T17:02:36.629Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/portfolio-ea378:testIamPermissions {}
+[debug] [2025-02-10T17:02:36.629Z] [iam] error while checking permissions, command may fail: FirebaseError: Authorization failed. This account is missing the following required permissions on project portfolio-ea378:
+
+  firebase.projects.get
+  firebasehosting.sites.update
+[debug] [2025-02-10T17:02:36.630Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/portfolio-ea378 [none]
+[debug] [2025-02-10T17:02:37.419Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/portfolio-ea378 403
+[debug] [2025-02-10T17:02:37.419Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/portfolio-ea378 {"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}}
+[debug] [2025-02-10T17:02:37.420Z] HTTP Error: 403, The caller does not have permission
+[debug] [2025-02-10T17:02:37.421Z] FirebaseError: HTTP Error: 403, The caller does not have permission
+    at responseToError (C:\Users\emanu\AppData\Roaming\npm\node_modules\firebase-tools\lib\responseToError.js:49:12)
+    at RetryOperation._fn (C:\Users\emanu\AppData\Roaming\npm\node_modules\firebase-tools\lib\apiv2.js:305:77)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[error] 
+[error] Error: Failed to get Firebase project portfolio-ea378. Please make sure the project exists and your account has permission to access it.
