@@ -105,6 +105,8 @@ export class IndexComponent implements OnInit {
 
   title = 'Emanuel Vinícius Sacoman';
   description = 'Página principal do desenvolvedor Emanuel Vinícius Sacoman.';
+
+  public yearNow: any;
   
   constructor(private http: HttpClient,
     private router: Router,
@@ -268,6 +270,7 @@ export class IndexComponent implements OnInit {
     this.initForm();
     this.chart();
     this.getDates();
+    this.getYearNow();
   }
 
   shuffleSlider(){
@@ -514,6 +517,11 @@ export class IndexComponent implements OnInit {
     console.log(`New Year: ${this.newYear}`);
     console.log(`Easter: ${this.easter}`);
     console.log(`Birthday: ${this.birthday}`);
+  }
+
+  getYearNow(){
+    const today = new Date();
+    this.yearNow = today.getFullYear();
   }
   
 
