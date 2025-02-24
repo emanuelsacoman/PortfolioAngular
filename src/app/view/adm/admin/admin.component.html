@@ -17,20 +17,24 @@
               <form class="formSobre" (ngSubmit)="editSobre()" [formGroup]="sobreEdit" #formDir="ngForm">
                 <div class="input-group">
                   <div class="input">
-                    <input type="text" id="title" placeholder="Insira o titulo" formControlName="title" required/>
+                    <label for="title">Título</label>
+                    <input type="text" id="title" placeholder="Insira o título" formControlName="title" required />
                   </div>
                   <div class="input">
-                    <input type="text" id="subtitle" placeholder="Insira o subtitulo" formControlName="subtitle" required/>
+                    <label for="subtitle">Subtítulo</label>
+                    <input type="text" id="subtitle" placeholder="Insira o subtítulo" formControlName="subtitle" required />
                   </div>
                   <div class="input">
-                    <textarea type="text" id="txt1" placeholder="Insira o txt1" formControlName="txt1" required rows="5" cols="30"></textarea>
+                    <label for="txt1">Texto 1</label>
+                    <textarea id="txt1" placeholder="Insira o primeiro texto" formControlName="txt1" required rows="5" cols="30"></textarea>
                   </div>
                   <div class="input">
-                    <textarea type="text" id="txt2" placeholder="Insira o txt2" formControlName="txt2" required rows="5" cols="30"></textarea>
+                    <label for="txt2">Texto 2</label>
+                    <textarea id="txt2" placeholder="Insira o segundo texto" formControlName="txt2" required rows="5" cols="30"></textarea>
                   </div>
                 </div>
                 <button class="sendButton" type="submit">Enviar</button>
-              </form>  
+              </form>
 
               <section class="addArea">
                 <div class="cadastro">
@@ -61,12 +65,13 @@
                     <div class="inputs-groups">
                       <div class="input-group">
                         <div class="input">
-                          <input type="file" id="Carouselimg" accept="img/*" required placeholder="Insira o Carouselimg" formControlName="Carouselimg" (change)="uploadFileCarousel($event)" />
+                          <label for="Carouselimg">Imagem do Carrossel</label>
+                          <input type="file" id="Carouselimg" accept="image/*" required formControlName="Carouselimg" (change)="uploadFileCarousel($event)" />
                         </div>
                       </div>
-                      <button class="addbuton" type="submit">ADD</button>
+                      <button class="addbuton" type="submit">Adicionar</button>
                     </div>
-                  </form>  
+                  </form>                   
                 </div>
                 <div class="rightcarousel">
                   <div class="carouselitens" *ngFor="let sliders of slider">
@@ -81,32 +86,39 @@
             <div class="formall" *ngIf="isSelected('resumo')">
               <form class="formResumo" (ngSubmit)="editResumo()" [formGroup]="resumoEdit" #formDir="ngForm">
                 <div class="inputs-groups">
+                  
                   <div class="input-group">
                     <div class="input">
-                      <input type="text" id="titleArea" placeholder="Insira o titulo" formControlName="titleArea" required/>
+                      <label for="titleArea">Título</label>
+                      <input type="text" id="titleArea" placeholder="Insira o título" formControlName="titleArea" required />
                     </div>
                   </div>
+                  
                   <div class="input-group">
                     <div class="input">
-                      <input type="text" id="lsub" placeholder="Insira o lsub" formControlName="lsub" required/>
+                      <label for="lsub">Legenda Esquerda</label>
+                      <input type="text" id="lsub" placeholder="Insira a legenda esquerda" formControlName="lsub" required />
                     </div>
                     <div class="input">
-                      <input type="text" id="rsub" placeholder="Insira o rsub" formControlName="rsub" required/>
+                      <label for="rsub">Legenda Direita</label>
+                      <input type="text" id="rsub" placeholder="Insira a legenda direita" formControlName="rsub" required />
                     </div>
                   </div>
-
+              
                   <div class="input-group">
                     <div class="input">
-                      <input type="text" id="chart" placeholder="Insira o título do chart" formControlName="chart" required/>
+                      <label for="chart">Título do Gráfico</label>
+                      <input type="text" id="chart" placeholder="Insira o título do gráfico" formControlName="chart" required />
                     </div>
                     <div class="input">
-                      <input type="text" id="chip" placeholder="Insira o título do chip" formControlName="chip" required/>
+                      <label for="chip">Título do Chip</label>
+                      <input type="text" id="chip" placeholder="Insira o título do chip" formControlName="chip" required />
                     </div>
                   </div>
                   
                   <button class="sendButton" type="submit">Enviar</button>
                 </div>
-              </form>   
+              </form>               
 
                 <section class="itensdisplay">
                   <div class="displayarea">
@@ -137,12 +149,13 @@
                       <div class="inputs-groups">
                         <div class="input-group">
                           <div class="input">
-                            <input type="text" id="chipname" placeholder="Insira o chip" formControlName="chipname" required/>
+                            <label for="chipname">Nome do Chip</label>
+                            <input type="text" id="chipname" placeholder="Insira o nome do chip" formControlName="chipname" required />
                           </div>
                         </div>
-                        <button class="addbuton" type="submit">ADD</button>
+                        <button class="addbuton" type="submit">Adicionar</button>
                       </div>
-                    </form>  
+                    </form>                     
                   </div>
                   <div class="right">
                     <div class="chips" *ngFor="let chip of chipArray">
@@ -161,12 +174,13 @@
                   <div class="inputs-groups">
                     <div class="input-group">
                       <div class="input">
-                        <input type="text" id="titleProjeto" placeholder="Insira o titulo" formControlName="titleProjeto" required/>
+                        <label for="titleProjeto">Título do Projeto</label>
+                        <input type="text" id="titleProjeto" placeholder="Insira o título do projeto" formControlName="titleProjeto" required />
                       </div>
                     </div>
                     <button class="sendButton" type="submit">Enviar</button>
                   </div>
-                </form>   
+                </form>                  
               </section>
               
               <div class="projects">
@@ -190,150 +204,148 @@
               <section class="contato">
                 <form class="formContato" (ngSubmit)="editContato()" [formGroup]="contatoEdit" #formDir="ngForm">
                   <div class="inputs-groups">
+                    
                     <div class="input-group">
                       <div class="input">
-                        <input type="text" id="titleContato" placeholder="Insira o titulo" formControlName="titleContato" required/>
+                        <label for="titleContato">Título do Contato</label>
+                        <input type="text" id="titleContato" placeholder="Insira o título" formControlName="titleContato" required />
                       </div>
                     </div>
+                    
                     <div class="input-group">
                       <div class="input">
-                        <textarea type="text" id="descContato" placeholder="Insira a descrição" formControlName="descContato" required rows="5" cols="30"></textarea>
+                        <label for="descContato">Descrição do Contato</label>
+                        <textarea id="descContato" placeholder="Insira a descrição" formControlName="descContato" required rows="5" cols="30"></textarea>
                       </div>
                     </div>
+                
                     <button class="sendButton" type="submit">Enviar</button>
+                    
                   </div>
-                </form> 
+                </form>                
                 
               </section>  
             </div>
             <div class="formall profileForm" *ngIf="isSelected('profile')">
               <section class="profile">
-                  <form class="formProfile" (ngSubmit)="editProfile()" [formGroup]="profileEdit" #formDir="ngForm">
-                      <div class="inputs-groups">
-                        <div class="input-group">
-                          <div class="input">
-                            <input type="text" id="text" placeholder="Insira o text" formControlName="text" required/>
-                          </div>
-                        </div>
-                          <!-- Área Instagram -->
-                          <div class="input-group">
-                              <div class="input">
-                                  <input type="text" id="instagram" placeholder="Insira o instagram" formControlName="instagram" required/>
-                              </div>
-                          
-                          <!-- Área Facebook -->
-                          
-                              <div class="input">
-                                  <input type="text" id="facebook" placeholder="Insira o Facebook" formControlName="facebook" required/>
-                              </div>
-                          
-                          <!-- Área LinkedIn -->
-                          
-                              <div class="input">
-                                  <input type="text" id="linkedin" placeholder="Insira o LinkedIn" formControlName="linkedin" required/>
-                              </div>
-                          
-                          <!-- Área GitHub -->
-                          
-                              <div class="input">
-                                  <input type="text" id="github" placeholder="Insira o GitHub" formControlName="github" required/>
-                              </div>
-                          
-                          <!-- Área Telefone -->
-                          
-                              <div class="input">
-                                  <input type="text" id="phone" placeholder="Insira o telefone" formControlName="phone" required/>
-                              </div>
-                          
-                          <!-- Área E-mail -->
-                          
-                              <div class="input">
-                                  <input type="email" id="email" placeholder="Insira o e-mail" formControlName="email" required/>
-                              </div>
-                          
-                          <!-- Área Local -->
-                          
-                              <div class="input">
-                                  <input type="text" id="local" placeholder="Insira o local" formControlName="local" required/>
-                              </div>
-                          
-                          <!-- Área Nascimento -->
-                          
-                              <div class="input">
-                                  <input type="text" id="birth" placeholder="Insira a data de nascimento" formControlName="birth" required/>
-                              </div>
-                          </div>
-
-                          <!-- Área TXT -->
-                          <div class="input-group">
-                            <div class="input">
-                              <input type="text" id="phoneTXT" placeholder="Insira o phoneTXT" formControlName="phoneTXT" required/>
-                            </div>
-
-                            <div class="input">
-                              <input type="text" id="emailTXT" placeholder="Insira o emailTXT" formControlName="emailTXT" required/>
-                            </div>
-
-                            <div class="input">
-                              <input type="text" id="localTXT" placeholder="Insira o localTXT" formControlName="localTXT" required/>
-                            </div>
-
-                            <div class="input">
-                              <input type="text" id="birthTXT" placeholder="Insira o birthTXT" formControlName="birthTXT" required/>
-                            </div>
-                          </div>
-          
-                          <!-- Área de upload de imagem para o telefone -->
-                          <div class="input-group">
-                              <div class="input">
-                                  <label for="phoneImg">Imagem do Telefone:</label>
-                                  <input type="file" id="phoneImg" formControlName="imagem1" (change)="handlePhoneImageUpload($event)" accept="image/*"/>
-                                </div>
-                                <div *ngIf="!imagem1">
-                                  <img class="preImage2" [src]="this.profile.phoneImg" />
-                                </div>
-                          
-                          <!-- Área de upload de imagem para o e-mail -->
-                          
-                              <div class="input">
-                                  <label for="emailImg">Imagem do E-mail:</label>
-                                  <input type="file" id="emailImg" formControlName="imagem2" (change)="handleEmailImageUpload($event)" accept="image/*"/>
-                                </div>
-                                <div *ngIf="!imagem2">
-                                  <img class="preImage2" [src]="this.profile.emailImg" />
-                                </div>
-                          
-                          <!-- Área de upload de imagem para o local -->
-                          
-                              <div class="input">
-                                  <label for="localImg">Imagem do Local:</label>
-                                  <input type="file" id="localImg" formControlName="imagem3" (change)="handleLocalImageUpload($event)" accept="image/*"/>
-                                </div>
-                                <div *ngIf="!imagem3">
-                                  <img class="preImage2" [src]="this.profile.localImg" />
-                                </div>
-                          
-                          <!-- Área de upload de imagem para o nascimento -->
-                          
-                              <div class="input">
-                                  <label for="birthImg">Imagem do Nascimento:</label>
-                                  <input type="file" id="birthImg" formControlName="imagem4" (change)="handleBirthImageUpload($event)" accept="image/*"/>
-                                </div>
-                                <div *ngIf="!imagem4">
-                                  <img class="preImage2" [src]="this.profile.birthImg" />
-                                </div>
-                          </div>
-
-                          <div class="input-group">
-                            <div class="input">
-                              <input type="text" id="cv" placeholder="Insira o link do CV" formControlName="cv" required/>
-                            </div>
-                          </div>
-                          
-                          <!-- Botão Enviar -->
-                          <button class="sendButton" type="submit">Enviar</button>
+                <form class="formProfile" (ngSubmit)="editProfile()" [formGroup]="profileEdit" #formDir="ngForm">
+                  <div class="inputs-groups">
+                
+                    <div class="input-group">
+                      <div class="input">
+                        <label for="text">Texto de Perfil</label>
+                        <input type="text" id="text" placeholder="Insira o texto" formControlName="text" required />
                       </div>
-                  </form>
+                    </div>
+                
+                    <!-- Redes Sociais -->
+                    <div class="input-group">
+                      <div class="input">
+                        <label for="instagram">Instagram</label>
+                        <input type="text" id="instagram" placeholder="Insira o Instagram" formControlName="instagram" required />
+                      </div>
+                      <div class="input">
+                        <label for="facebook">Facebook</label>
+                        <input type="text" id="facebook" placeholder="Insira o Facebook" formControlName="facebook" required />
+                      </div>
+                      <div class="input">
+                        <label for="linkedin">LinkedIn</label>
+                        <input type="text" id="linkedin" placeholder="Insira o LinkedIn" formControlName="linkedin" required />
+                      </div>
+                      <div class="input">
+                        <label for="github">GitHub</label>
+                        <input type="text" id="github" placeholder="Insira o GitHub" formControlName="github" required />
+                      </div>
+                    </div>
+                
+                    <!-- Contato -->
+                    <div class="input-group">
+                      <div class="input">
+                        <label for="phone">Telefone</label>
+                        <input type="text" id="phone" placeholder="Insira o telefone" formControlName="phone" required />
+                      </div>
+                      <div class="input">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" placeholder="Insira o e-mail" formControlName="email" required />
+                      </div>
+                      <div class="input">
+                        <label for="local">Localização</label>
+                        <input type="text" id="local" placeholder="Insira o local" formControlName="local" required />
+                      </div>
+                      <div class="input">
+                        <label for="birth">Data de Nascimento</label>
+                        <input type="text" id="birth" placeholder="Insira a data de nascimento" formControlName="birth" required />
+                      </div>
+                    </div>
+                
+                    <!-- Texto de informações -->
+                    <div class="input-group">
+                      <div class="input">
+                        <label for="phoneTXT">Texto do Telefone</label>
+                        <input type="text" id="phoneTXT" placeholder="Insira o texto do telefone" formControlName="phoneTXT" required />
+                      </div>
+                      <div class="input">
+                        <label for="emailTXT">Texto do E-mail</label>
+                        <input type="text" id="emailTXT" placeholder="Insira o texto do e-mail" formControlName="emailTXT" required />
+                      </div>
+                      <div class="input">
+                        <label for="localTXT">Texto do Local</label>
+                        <input type="text" id="localTXT" placeholder="Insira o texto do local" formControlName="localTXT" required />
+                      </div>
+                      <div class="input">
+                        <label for="birthTXT">Texto do Nascimento</label>
+                        <input type="text" id="birthTXT" placeholder="Insira o texto do nascimento" formControlName="birthTXT" required />
+                      </div>
+                    </div>
+                
+                    <!-- Upload de imagens -->
+                    <div class="input-group">
+                      <div class="input">
+                        <label for="phoneImg">Imagem do Telefone</label>
+                        <input type="file" id="phoneImg" formControlName="imagem1" (change)="handlePhoneImageUpload($event)" accept="image/*" />
+                        <div *ngIf="!imagem1">
+                          <img class="preImage2" [src]="this.profile.phoneImg" />
+                        </div>
+                      </div>
+                
+                      <div class="input">
+                        <label for="emailImg">Imagem do E-mail</label>
+                        <input type="file" id="emailImg" formControlName="imagem2" (change)="handleEmailImageUpload($event)" accept="image/*" />
+                        <div *ngIf="!imagem2">
+                          <img class="preImage2" [src]="this.profile.emailImg" />
+                        </div>
+                      </div>
+                
+                      <div class="input">
+                        <label for="localImg">Imagem do Local</label>
+                        <input type="file" id="localImg" formControlName="imagem3" (change)="handleLocalImageUpload($event)" accept="image/*" />
+                        <div *ngIf="!imagem3">
+                          <img class="preImage2" [src]="this.profile.localImg" />
+                        </div>
+                      </div>
+                
+                      <div class="input">
+                        <label for="birthImg">Imagem do Nascimento</label>
+                        <input type="file" id="birthImg" formControlName="imagem4" (change)="handleBirthImageUpload($event)" accept="image/*" />
+                        <div *ngIf="!imagem4">
+                          <img class="preImage2" [src]="this.profile.birthImg" />
+                        </div>
+                      </div>
+                    </div>
+                
+                    <!-- Link do CV -->
+                    <div class="input-group">
+                      <div class="input">
+                        <label for="cv">Link do Currículo</label>
+                        <input type="text" id="cv" placeholder="Insira o link do CV" formControlName="cv" required />
+                      </div>
+                    </div>
+                
+                    <!-- Botão Enviar -->
+                    <button class="sendButton" type="submit">Enviar</button>
+                
+                  </div>
+                </form>                
               </section>
           </div>
           

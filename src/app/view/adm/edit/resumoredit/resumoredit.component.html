@@ -1,34 +1,44 @@
 <body>
     <main>
         <section class="formsection">
-             <form class="formItens" (ngSubmit)="editItem()" [formGroup]="editar" #formDir="ngForm">
+            <form class="formItens" (ngSubmit)="editItem()" [formGroup]="editar" #formDir="ngForm">
                 <h1 class="title">EDITAR</h1>
+              
                 <div class="formTop">
-
-                    <div class="form-group">
-                        <div class="input">
-                            <input type="text" id="titler" placeholder="Ano Início - Ano Término" formControlName="titler" required/>
-                            <p *ngIf="isInvalidControl('titler')">Erro no texto de ano</p>
-                        </div>
+                  <!-- Campo Ano Início - Ano Término -->
+                  <div class="form-group">
+                    <div class="input">
+                      <label for="titler">Ano Início - Ano Término</label>
+                      <input type="text" id="titler" placeholder="Ex: 2020 - 2024" formControlName="titler" required />
+                      <p class="error-msg" *ngIf="isInvalidControl('titler')">Erro no texto de ano</p>
                     </div>
-                    <div class="form-group">
-                        <div class="input">
-                            <input type="text" id="descr" placeholder="Insira a descrição" formControlName="descr" required>
-                            <p *ngIf="isInvalidControl('descr')">Erro na descrição</p>
-                        </div>
+                  </div>
+              
+                  <!-- Campo Descrição -->
+                  <div class="form-group">
+                    <div class="input">
+                      <label for="descr">Descrição</label>
+                      <input type="text" id="descr" placeholder="Insira a descrição" formControlName="descr" required />
+                      <p class="error-msg" *ngIf="isInvalidControl('descr')">Erro na descrição</p>
                     </div>
-                    <div class="form-group">
-                        <div class="input">
-                            <input type="text" id="locationr" placeholder="Insira a localização" formControlName="locationr" required>
-                            <p *ngIf="isInvalidControl('locationr')">Erro na localização</p>
-                        </div>
+                  </div>
+              
+                  <!-- Campo Localização -->
+                  <div class="form-group">
+                    <div class="input">
+                      <label for="locationr">Localização</label>
+                      <input type="text" id="locationr" placeholder="Insira a localização" formControlName="locationr" required />
+                      <p class="error-msg" *ngIf="isInvalidControl('locationr')">Erro na localização</p>
                     </div>
+                  </div>
                 </div>
+              
+                <!-- Botões -->
                 <div class="buttons">
-                    <button class="sendButton" type="submit">Enviar</button>
-                    <button class="delete" (click)="delete()">Excluir</button>
+                  <button class="sendButton" type="submit">Enviar</button>
+                  <button class="delete" type="button" (click)="delete()">Excluir</button>
                 </div>
-             </form>
+              </form>              
         </section>
     </main>
 </body>

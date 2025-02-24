@@ -1,74 +1,88 @@
 <body>
     <main>
         <section class="formsection">
-             <form class="formItens" (ngSubmit)="editItem()" [formGroup]="editar" #formDir="ngForm">
+            <form class="formItens" (ngSubmit)="editItem()" [formGroup]="editar" #formDir="ngForm">
                 <h1 class="title">EDITAR</h1>
+              
                 <div class="formTop">
-                    <div class="form-group">
-                        <div class="input">
-                            <div class="icon">
-                                <label for="star">Favorito?</label>
-                                <img src="./assets/images/star.gif" alt="Star gif">
-                            </div>
-                            <mat-slide-toggle class="custom-slide-toggle" [(ngModel)]="star" formControlName="star" id="star" name="star">
-                            {{ star ? 'Atual: Sim' : 'Atual: Não' }}
-                            </mat-slide-toggle>
-                        </div>
+                  <!-- Toggle Favorito -->
+                  <div class="form-group">
+                    <div class="input">
+                      <div class="icon">
+                        <label for="star">Favorito?</label>
+                        <img src="./assets/images/star.gif" alt="Ícone de estrela">
+                      </div>
+                      <mat-slide-toggle class="custom-slide-toggle" [(ngModel)]="star" formControlName="star" id="star" name="star">
+                        {{ star ? 'Atual: Sim' : 'Atual: Não' }}
+                      </mat-slide-toggle>
                     </div>
-
-                    <div class="form-group">
-                        <div class="input">
-                            <div class="icon">
-                                <label for="inProgress">Projeto finalizado?</label>
-                                <img src="./assets/images/wip.gif" alt="Wip gif">
-                            </div>
-                            <mat-slide-toggle class="custom-slide-toggle" [(ngModel)]="inProgress" formControlName="inProgress" id="inProgress" name="inProgress">
-                            {{ inProgress ? 'Atual: Sim' : 'Atual: Não' }}
-                            </mat-slide-toggle>
-                        </div>
+                  </div>
+              
+                  <!-- Toggle Projeto Finalizado -->
+                  <div class="form-group">
+                    <div class="input">
+                      <div class="icon">
+                        <label for="inProgress">Projeto finalizado?</label>
+                        <img src="./assets/images/wip.gif" alt="Ícone de progresso">
+                      </div>
+                      <mat-slide-toggle class="custom-slide-toggle" [(ngModel)]="inProgress" formControlName="inProgress" id="inProgress" name="inProgress">
+                        {{ inProgress ? 'Atual: Sim' : 'Atual: Não' }}
+                      </mat-slide-toggle>
                     </div>
-
-                    <div class="form-group">
-                        <div class="input">
-                            <input type="text" id="titulo" placeholder="Insira o titulo do projeto" formControlName="titulo" required/>
-                            <p *ngIf="isInvalidControl('titulo')">Erro no titulo</p>
-                        </div>
+                  </div>
+              
+                  <!-- Campo Título -->
+                  <div class="form-group">
+                    <div class="input">
+                      <label for="titulo">Título do projeto</label>
+                      <input type="text" id="titulo" placeholder="Insira o título do projeto" formControlName="titulo" required />
+                      <p class="error-msg" *ngIf="isInvalidControl('titulo')">Erro no título</p>
                     </div>
-                    <div class="form-group">
-                        <div class="input">
-                            <input type="text" id="link" placeholder="Insira o link do projeto" formControlName="link" required/>
-                            <p *ngIf="isInvalidControl('titulo')">Erro no link</p>
-                        </div>
+                  </div>
+              
+                  <!-- Campo Link -->
+                  <div class="form-group">
+                    <div class="input">
+                      <label for="link">Link do projeto</label>
+                      <input type="text" id="link" placeholder="Insira o link do projeto" formControlName="link" required />
+                      <p class="error-msg" *ngIf="isInvalidControl('link')">Erro no link</p>
                     </div>
+                  </div>
                 </div>
+              
                 <div class="bottomAll">
-                    <div class="formBottom">
-                        <div class="form-group">
-                            <div class="input imageInput">
-                                <label for="imagem1">Imagem do projeto</label>
-                                <input class="img" type="file" id="imagem1" formControlName="imagem1" accept="image/*" (change)="uploadFile1($event)">
-                            </div>
-                            <div *ngIf="!imagem1">
-                                <img class="preImage" [src]="this.projeto.projectImg" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="input imageInput">
-                                <label for="imagem1">Ícone da linguagem utilizada</label>
-                                <input class="img" type="file" id="imagem2" formControlName="imagem2" accept="image/*" (change)="uploadFile2($event)">
-                            </div>
-                            <div *ngIf="!imagem2">
-                                <img class="preImage" [src]="this.projeto.badge" />
-                            </div>
-                        </div>
+                  <div class="formBottom">
+                    <!-- Upload de Imagem do Projeto -->
+                    <div class="form-group">
+                      <div class="input imageInput">
+                        <label for="imagem1">Imagem do projeto</label>
+                        <input class="img" type="file" id="imagem1" formControlName="imagem1" accept="image/*" (change)="uploadFile1($event)" />
+                      </div>
+                      <div *ngIf="!imagem1">
+                        <img class="preImage" [src]="this.projeto.projectImg" alt="Imagem do projeto" />
+                      </div>
                     </div>
-                    
+              
+                    <!-- Upload do Ícone da Linguagem -->
+                    <div class="form-group">
+                      <div class="input imageInput">
+                        <label for="imagem2">Ícone da linguagem utilizada</label>
+                        <input class="img" type="file" id="imagem2" formControlName="imagem2" accept="image/*" (change)="uploadFile2($event)" />
+                      </div>
+                      <div *ngIf="!imagem2">
+                        <img class="preImage" [src]="this.projeto.badge" alt="Ícone da linguagem utilizada" />
+                      </div>
+                    </div>
+                  </div>
                 </div>
+              
+                <!-- Botões -->
                 <div class="buttons">
-                    <button class="sendButton" type="submit">Enviar</button>
-                    <button class="delete" (click)="delete()">Excluir</button>
+                  <button class="sendButton" type="submit">Enviar</button>
+                  <button class="delete" type="button" (click)="delete()">Excluir</button>
                 </div>
-             </form>
+              </form>
+              
         </section>
     </main>
 </body>
