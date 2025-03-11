@@ -186,14 +186,22 @@ export class IndexComponent implements OnInit {
       });
 
       this.firebaseService.obterTodosProjetos().subscribe((res) => {
-        this.projetos = res.map((projetos) => {
-          return {
-            id: projetos.payload.doc.id,
-            ...(projetos.payload.doc.data() as any),
-          } as Projetos;
-        });
+        this.projetos = res
+          .map((projetos) => {
+            return {
+              id: projetos.payload.doc.id,
+              ...(projetos.payload.doc.data() as any),
+            } as Projetos;
+          })
+          .sort((a, b) => {
+            if (a.star === b.star) {
+              if (!a.titulo || !b.titulo) return 0;
+              return a.titulo.toLowerCase().localeCompare(b.titulo.toLowerCase());
+            }
+            return a.star ? -1 : 1;
+          });
         this.projetosLoaded = true;
-      });
+      });      
 
       this.firebaseService.obterTodosContato().subscribe((res) => {
         this.contato = res.map((contato) => {
