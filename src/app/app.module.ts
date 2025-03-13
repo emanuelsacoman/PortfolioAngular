@@ -28,7 +28,7 @@ import { NgToastModule } from 'ng-angular-popup';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ChartModule } from 'primeng/chart';
 import { CarouselModule } from 'primeng/carousel';
-
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -60,6 +60,7 @@ import { CarouselModule } from 'primeng/carousel';
     MatSlideToggleModule,
     ChartModule,
     CarouselModule,
+    MatIconModule
   ],
   providers: [Title,
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase }

@@ -81,7 +81,6 @@ export class AdminComponent {
 
   //EMAIL
   items: Observable<any[]>;
-  showDescriptionFlag: boolean = false;
 
   //PROFILE
   profileEdit!: FormGroup;
@@ -511,8 +510,29 @@ export class AdminComponent {
   }
 
   showDescription(item: any): void {
-    item.showDescription = !item.showDescription;
+    item.showDescription = !item.showDescription; 
+    this.updateShowDescription(item);
   }
+
+  updateShowDescription(item: any): void {
+      this.firestore.collection('mensagens', ref => ref.where('mensagem', '==', item.mensagem))
+          .get()
+          .subscribe(querySnapshot => {
+              const batch = this.firestore.firestore.batch();
+              querySnapshot.forEach(doc => {
+                  batch.update(doc.ref, { 
+                      showDescription: item.showDescription, 
+                      visualizado: true 
+                  });
+              });
+
+              batch.commit().catch(error => {
+                  console.error('Erro ao atualizar showDescription:', error);
+              });
+          }, error => {
+              console.error('Erro ao buscar email:', error);
+          });
+  } 
 
   deleteemail(mensagem: string) {
     Swal.fire({

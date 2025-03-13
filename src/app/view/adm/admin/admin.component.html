@@ -352,6 +352,7 @@
             <div class="formall" *ngIf="isSelected('email')">
               <section class="lista" *ngFor="let item of items | async; let i = index">
                 <div class="mensagem" (click)="showDescription(item)">
+                  <mat-icon>{{ item.visualizado ? 'drafts' : 'mail' }}</mat-icon>
                   <p class="nome">{{ item.nome }}</p>
                   <p class="motivo">{{item.titulo}}</p>
                   <p class="time">{{ convertTimestampToDate(item.timestamp) | date: 'dd/MM/yyyy HH:mm:ss' }}</p>
