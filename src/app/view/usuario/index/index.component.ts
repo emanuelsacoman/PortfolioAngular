@@ -106,6 +106,8 @@ export class IndexComponent implements OnInit {
 
   title = 'Emanuel Vinícius Sacoman';
   description = 'Página principal do desenvolvedor Emanuel Vinícius Sacoman.';
+
+  public yearNow: any;
   
   constructor(private http: HttpClient,
     private router: Router,
@@ -185,14 +187,22 @@ export class IndexComponent implements OnInit {
       });
 
       this.firebaseService.obterTodosProjetos().subscribe((res) => {
-        this.projetos = res.map((projetos) => {
-          return {
-            id: projetos.payload.doc.id,
-            ...(projetos.payload.doc.data() as any),
-          } as Projetos;
-        });
+        this.projetos = res
+          .map((projetos) => {
+            return {
+              id: projetos.payload.doc.id,
+              ...(projetos.payload.doc.data() as any),
+            } as Projetos;
+          })
+          .sort((a, b) => {
+            if (a.star === b.star) {
+              if (!a.titulo || !b.titulo) return 0;
+              return a.titulo.toLowerCase().localeCompare(b.titulo.toLowerCase());
+            }
+            return a.star ? -1 : 1;
+          });
         this.projetosLoaded = true;
-      });
+      });      
 
       this.firebaseService.obterTodosContato().subscribe((res) => {
         this.contato = res.map((contato) => {
@@ -269,6 +279,7 @@ export class IndexComponent implements OnInit {
     this.initForm();
     this.chart();
     this.getDates();
+    this.getYearNow();
   }
 
   shuffleSlider(){
@@ -520,6 +531,11 @@ export class IndexComponent implements OnInit {
     console.log(`New Year: ${this.newYear}`);
     console.log(`Easter: ${this.easter}`);
     console.log(`Birthday: ${this.birthday}`);
+  }
+
+  getYearNow(){
+    const today = new Date();
+    this.yearNow = today.getFullYear();
   }
   
 

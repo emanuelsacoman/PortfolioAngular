@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "portfolio-ea378"
-  }
+    "default": "portfolioemanuel-7ab45"
+  },
+  "targets": {},
+  "etags": {},
+  "dataconnectEmulatorConfig": {}
 }

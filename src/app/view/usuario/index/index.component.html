@@ -1,5 +1,6 @@
 <head>
     <meta name="description" content="Portfólio do Desenvolvedor Emanuel Vinícius Sacoman!">
+    <link rel="preconnect" href="https://avatars.githubusercontent.com">
 </head>
 
 <body>
@@ -13,17 +14,7 @@
         <section class="profile bloco noResponse" *ngFor="let perfil of perfil | async;">
             <div class="alltop">
                 <div class="picture">
-                    <div class="picarea">
-                        <img [src]="profileImageUrl" alt="Foto de perfil">
-                        <div class="frame" [ngStyle]="{
-                            'background-image': this.halloween ? 'url(./assets/images/halloween.png)' : 
-                            this.easter ? 'url(./assets/images/easter.png)' : 
-                            this.christmas ? 'url(./assets/images/christmas.png)' : 
-                            this.newYear ? 'url(./assets/images/newyear.png)' :
-                            this.birthday ? 'url(./assets/images/birthdayFrame.png)' : 'none',
-                        }"></div>
-                        <div class="picback"></div>
-                    </div>
+                    <img [src]="profileImageUrl" alt="Foto de perfil" loading="lazy">
                     <section class="pictureBottom">
                         <div class="name">{{profileData.name}}</div>
                         <div class="liltext">{{perfil.text}}</div>
@@ -103,32 +94,22 @@
         <section class="profile2 bloco response" *ngFor="let perfil of perfil | async;">
             <div class="alltop">
                 <div class="picture">
-                    <div class="picarea">
-                        <img class="profile2img" [src]="profileImageUrl" alt="Foto de perfil">
-                        <div class="frame" [ngStyle]="{
-                            'background-image': this.halloween ? 'url(./assets/images/halloween.png)' : 
-                            this.easter ? 'url(./assets/images/easter.png)' : 
-                            this.christmas ? 'url(./assets/images/christmas.png)' : 
-                            this.newYear ? 'url(./assets/images/newyear.png)' : 
-                            this.birthday ? 'url(./assets/images/birthdayFrame.png)' : 'none',
-                        }"></div>
-                        <div class="picback"></div>
-                    </div>
+                    <img loading="lazy" class="profile2img" [src]="profileImageUrl" alt="Foto de perfil">
                     <section class="pictureBottom">
                         <div class="name">{{profileData.name}}</div>
                         <div class="liltext">{{perfil.text}}</div>
                         <div class="itenspic">
                             <a href="https://instagram.com/{{perfil.instagram}}" target="_blank">
-                                <img src="./assets/images/instagram.png" alt="Instagram">
+                                <img loading="lazy" src="./assets/images/instagram.png" alt="Instagram">
                             </a>
                             <a href="{{perfil.facebook}}" target="_blank">
-                                <img src="./assets/images/facebook.png" alt="Facebook">
+                                <img loading="lazy" src="./assets/images/facebook.png" alt="Facebook">
                             </a>
                             <a href="{{perfil.linkedin}}" target="_blank">
-                                <img src="./assets/images/linkedin.png" alt="Linkedin">
+                                <img loading="lazy" src="./assets/images/linkedin.png" alt="Linkedin">
                             </a>
                             <a href="https://github.com/{{perfil.github}}" target="_blank">
-                                <img src="./assets/images/github.png" alt="Github">
+                                <img loading="lazy" src="./assets/images/github.png" alt="Github">
                             </a>
                         </div>
                     </section>
@@ -180,7 +161,7 @@
                     <div class="cv">
                         <a href="{{perfil.cv}}" target="_blank">
                             <div class="cvimg">
-                                <img src="./assets/images/baixar.png" alt="Download">
+                                <img loading="lazy" src="./assets/images/baixar.png" alt="Download">
                             </div>
                             <div class="cvtext">
                                 <p>CURRÍCULO</p>
@@ -192,19 +173,19 @@
         </section>
         <nav class="desknavResponse bloco response">
             <div class="block" (click)="selectOption('sobre')" [ngClass]="{selected: isSelected('sobre')}">
-                <img src="/assets/images/sobre.png" alt="Opção">
+                <img loading="lazy" src="/assets/images/sobre.png" alt="Opção">
                 <p *ngFor="let sobre of sobre">{{sobre.title}}</p>
             </div>
             <div class="block" (click)="selectOption('resumo')" [ngClass]="{selected: isSelected('resumo')}">
-                <img src="/assets/images/resume.png" alt="Opção">
+                <img loading="lazy" src="/assets/images/resume.png" alt="Opção">
                 <p *ngFor="let resumo of resumo">{{resumo.titleArea}}</p>
             </div>
             <div class="block" (click)="selectOption('projetos')" [ngClass]="{selected: isSelected('projetos')}">
-                <img src="/assets/images/projeto.png" alt="Opção">
+                <img loading="lazy" src="/assets/images/projeto.png" alt="Opção">
                 <p *ngFor="let projetos of projeto">{{projetos.titleProjeto}}</p>
             </div>
             <div class="block" (click)="selectOption('contato')" [ngClass]="{selected: isSelected('contato')}">
-                <img src="/assets/images/contato.png" alt="Opção">
+                <img loading="lazy" src="/assets/images/contato.png" alt="Opção">
                 <p *ngFor="let contato of contato">{{contato.titleContato}}</p>
             </div>
             <div class="block" *ngIf="isLoggedIn()">
@@ -215,7 +196,7 @@
                                 <div *ngFor="let profile of profile">
                                     <ng-container>
                                         <div class="block2" (click)="goToAdmin({sobre: sobre, resumo: resumo, projeto: projeto, contato: contato, profile: profile})">
-                                            <img src="/assets/images/admin.png" alt="Opção">
+                                            <img loading="lazy" src="/assets/images/admin.png" alt="Opção">
                                             <p>Admin</p>
                                         </div>
                                     </ng-container>
@@ -242,7 +223,7 @@
                 <section class="whatido">
                     <div class="area" *ngFor="let sobrearea of this.sobrearea; let i = index">
                         <div class="whaipic">
-                            <img src="{{sobrearea.cImg}}" alt="Pic">
+                            <img loading="lazy" src="{{sobrearea.cImg}}" alt="Pic">
                         </div>
                         <div class="content">
                             <div class="contenttitle">
@@ -283,7 +264,7 @@
                     <section class="resume">
                         <div class="education resumeitem" >
                             <div class="resumetop">
-                                <img src="./assets/images/education.png" alt="Resume pic">           
+                                <img loading="lazy" src="./assets/images/education.png" alt="Resume pic">           
                                 <h2>{{resumo.lsub}}</h2>
                             </div>
                             <div class="resumebox" *ngFor="let resumol of resumol"> 
@@ -294,7 +275,7 @@
                         </div>
                         <div class="experience resumeitem" >
                             <div class="resumetop">
-                                <img src="./assets/images/pasta.png" alt="Resume pic">       
+                                <img loading="lazy" src="./assets/images/pasta.png" alt="Resume pic">       
                                 <h2>{{resumo.rsub}}</h2>
                             </div>
                             <div class="resumebox" *ngFor="let resumor of resumor">
@@ -308,7 +289,7 @@
                     <section class="resume">
                         <div class="resumeitem">
                             <div class="resumetop">
-                                <img src="./assets/images/competencia.png" alt="Resume pic"> 
+                                <img loading="lazy" src="./assets/images/competencia.png" alt="Resume pic"> 
                                 <h2>{{resumo.chart}}</h2>
                             </div>
                             <div class="chart">
@@ -317,7 +298,7 @@
                         </div>
                         <div class="resumeitem">
                             <div class="resumetop">
-                                <img src="./assets/images/conhecimento.png" alt="Resume pic">
+                                <img loading="lazy" src="./assets/images/conhecimento.png" alt="Resume pic">
                                 <h2>{{resumo.chip}}</h2>
                             </div>
                             <div class="chips" >
@@ -340,16 +321,16 @@
                         <a [href]="!projeto.inProgress ? '#' : projeto.link" target="_blank">
                             <div class="icon-right">
                                 <div class="star" *ngIf="projeto.star">
-                                    <img src="./assets/images/star.gif" alt="Star">
+                                    <img loading="lazy" src="./assets/images/star.gif" alt="Star">
                                 </div>
                                 <div class="wip" *ngIf="!projeto.inProgress">
-                                    <img src="./assets/images/wip.gif" alt="Work in Progress">
+                                    <img loading="lazy" src="./assets/images/wip.gif" alt="Work in Progress">
                                 </div>
                             </div>
                             <div class="mark">
-                                <img src="./assets/images/bookmark.png" alt="Mark">
+                                <img loading="lazy" src="./assets/images/bookmark.png" alt="Mark">
                                 <div class="badge">
-                                    <img src="{{projeto.badge}}" alt="Badge">
+                                    <img loading="lazy" src="{{projeto.badge}}" alt="Badge">
                                 </div>
                             </div>
                             <div class="title">{{projeto.titulo}}</div>
@@ -370,7 +351,7 @@
                     </div>
                     <div class="onlyForm">
                         <div class="success" *ngIf="mensagemEnviada">
-                            <img src="./assets/images/check.png" alt="Sucesso!">
+                            <img loading="lazy" src="./assets/images/check.png" alt="Sucesso!">
                         </div>
                         <form (ngSubmit)="submit()" [formGroup]="contactForm" #formDir="ngForm" class="formTrue">
                             <div class="form-group">
@@ -399,25 +380,25 @@
                 </div>
             </div>
             <footer>
-                <p>©️ 2024 Todos os Direitos Reservados por {{profileData.name}}</p>
+                <p>©️ {{this.yearNow}} Todos os Direitos Reservados por {{profileData.name}}</p>
             </footer>
         </main>
         <!-- menu.component.html -->
         <nav class="desknav bloco noResponse">
             <div class="block" (click)="selectOption('sobre')" [ngClass]="{selected: isSelected('sobre')}">
-                <img src="/assets/images/sobre.png" alt="Opção">
+                <img loading="lazy" src="/assets/images/sobre.png" alt="Opção">
                 <p *ngFor="let sobre of sobre">{{sobre.title}}</p>
             </div>
             <div class="block" (click)="selectOption('resumo')" [ngClass]="{selected: isSelected('resumo')}">
-                <img src="/assets/images/resume.png" alt="Opção">
+                <img loading="lazy" src="/assets/images/resume.png" alt="Opção">
                 <p *ngFor="let resumo of resumo">{{resumo.titleArea}}</p>
             </div>
             <div class="block" (click)="selectOption('projetos')" [ngClass]="{selected: isSelected('projetos')}">
-                <img src="/assets/images/projeto.png" alt="Opção">
+                <img loading="lazy" src="/assets/images/projeto.png" alt="Opção">
                 <p *ngFor="let projetos of projeto">{{projetos.titleProjeto}}</p>
             </div>
             <div class="block" (click)="selectOption('contato')" [ngClass]="{selected: isSelected('contato')}">
-                <img src="/assets/images/contato.png" alt="Opção">
+                <img loading="lazy" src="/assets/images/contato.png" alt="Opção">
                 <p *ngFor="let contato of contato">{{contato.titleContato}}</p>
             </div>
             <div class="block" *ngIf="isLoggedIn()">
@@ -428,7 +409,7 @@
                                 <div *ngFor="let profile of profile">
                                     <ng-container>
                                         <div class="block2" (click)="goToAdmin({sobre: sobre, resumo: resumo, projeto: projeto, contato: contato, profile: profile})">
-                                            <img src="/assets/images/admin.png" alt="Opção">
+                                            <img loading="lazy" src="/assets/images/admin.png" alt="Opção">
                                             <p>Admin</p>
                                         </div>
                                     </ng-container>

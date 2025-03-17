@@ -161,13 +161,21 @@ export class AdminComponent {
       });
 
       this.firebase.obterTodosProjetos().subscribe((res) => {
-        this.projetos = res.map((projeto) => {
-          return {
-            id: projeto.payload.doc.id,
-            ...(projeto.payload.doc.data() as any),
-          } as Projetos;
-        });
-      });
+        this.projetos = res
+          .map((projeto) => {
+            return {
+              id: projeto.payload.doc.id,
+              ...(projeto.payload.doc.data() as any),
+            } as Projetos;
+          })
+          .sort((a, b) => {
+            if (a.star === b.star) {
+              if (!a.titulo || !b.titulo) return 0;
+              return a.titulo.toLowerCase().localeCompare(b.titulo.toLowerCase());
+            }
+            return a.star ? -1 : 1;
+          });
+      });      
 
       this.firebase.obterTodosSlider().subscribe((res) => {
         this.slider = res.map((slider) => {
@@ -502,10 +510,29 @@ export class AdminComponent {
   }
 
   showDescription(item: any): void {
-    item.showDescription = !item.showDescription;
-
-    this.firebase.editarMensagemParaVisualizado(item.mensagem);
+    item.showDescription = !item.showDescription; 
+    this.updateShowDescription(item);
   }
+
+  updateShowDescription(item: any): void {
+      this.firestore.collection('mensagens', ref => ref.where('mensagem', '==', item.mensagem))
+          .get()
+          .subscribe(querySnapshot => {
+              const batch = this.firestore.firestore.batch();
+              querySnapshot.forEach(doc => {
+                  batch.update(doc.ref, { 
+                      showDescription: item.showDescription, 
+                      visualizado: true 
+                  });
+              });
+
+              batch.commit().catch(error => {
+                  console.error('Erro ao atualizar showDescription:', error);
+              });
+          }, error => {
+              console.error('Erro ao buscar email:', error);
+          });
+  } 
 
   deleteEmail(mensagem: string) {
     Swal.fire({

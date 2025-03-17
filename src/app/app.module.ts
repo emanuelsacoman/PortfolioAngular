@@ -18,7 +18,7 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ItemeditComponent } from './view/adm/edit/itemedit/itemedit.component';
 import { ResumoleditComponent } from './view/adm/edit/resumoledit/resumoledit.component';
 import { ResumoreditComponent } from './view/adm/edit/resumoredit/resumoredit.component';
@@ -30,42 +30,39 @@ import { ChartModule } from 'primeng/chart';
 import { CarouselModule } from 'primeng/carousel';
 import { MatIconModule } from '@angular/material/icon';
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    IndexComponent,
-    LoginComponent,
-    AdminComponent,
-    ItemeditComponent,
-    ResumoleditComponent,
-    ResumoreditComponent,
-    ProjetoeditComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideFirestore(() => getFirestore()),
-    provideAuth(() => getAuth()),
-    AngularFireDatabaseModule,
-    AngularFirestoreModule,
-    AngularFireStorageModule,
-    AngularFireModule,
-    ReactiveFormsModule,
-    AngularFireAuthModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    NgToastModule,
-    MatSlideToggleModule,
-    FormsModule,
-    ChartModule,
-    CarouselModule,
-    MatIconModule
-  ],
-  providers: [Title,
-    { provide: FIREBASE_OPTIONS, useValue: environment.firebase }
-  ],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        IndexComponent,
+        LoginComponent,
+        AdminComponent,
+        ItemeditComponent,
+        ResumoleditComponent,
+        ResumoreditComponent,
+        ProjetoeditComponent,
+    ],
+    bootstrap: [AppComponent], 
+    
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        AngularFireDatabaseModule,
+        AngularFirestoreModule,
+        AngularFireStorageModule,
+        AngularFireModule,
+        ReactiveFormsModule,
+        AngularFireAuthModule,
+        BrowserAnimationsModule,
+        NgToastModule,
+        FormsModule,
+        MatSlideToggleModule,
+        ChartModule,
+        CarouselModule,
+        MatIconModule], 
+    providers: [
+        Title,
+        { provide: FIREBASE_OPTIONS, useValue: environment.firebase }, 
+        provideFirebaseApp(() => initializeApp(environment.firebase)),
+        provideAuth(() => getAuth()),
+        provideFirestore(() => getFirestore()),
+        provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule { }
-
