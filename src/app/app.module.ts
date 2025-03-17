@@ -40,24 +40,29 @@ import { MatIconModule } from '@angular/material/icon';
         ResumoreditComponent,
         ProjetoeditComponent,
     ],
-    bootstrap: [AppComponent], imports: [BrowserModule,
+    bootstrap: [AppComponent], 
+    
+    imports: [
+        BrowserModule,
         AppRoutingModule,
-        provideFirebaseApp(() => initializeApp(environment.firebase)),
-        provideFirestore(() => getFirestore()),
         AngularFireDatabaseModule,
         AngularFirestoreModule,
         AngularFireStorageModule,
         AngularFireModule,
         ReactiveFormsModule,
         AngularFireAuthModule,
-        provideAuth(() => getAuth()),
         BrowserAnimationsModule,
         NgToastModule,
         FormsModule,
         MatSlideToggleModule,
         ChartModule,
         CarouselModule,
-        MatIconModule], providers: [Title,
-        { provide: FIREBASE_OPTIONS, useValue: environment.firebase }, provideHttpClient(withInterceptorsFromDi())] })
+        MatIconModule], 
+    providers: [
+        Title,
+        { provide: FIREBASE_OPTIONS, useValue: environment.firebase }, 
+        provideFirebaseApp(() => initializeApp(environment.firebase)),
+        provideAuth(() => getAuth()),
+        provideFirestore(() => getFirestore()),
+        provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule { }
-
