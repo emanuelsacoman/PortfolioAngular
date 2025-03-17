@@ -22,6 +22,7 @@ import { Slider } from 'src/app/model/services/interfaces/slider';
 import { Meta, Title } from '@angular/platform-browser';
 import { NgToastService } from 'ng-angular-popup';
 import { Chip } from 'src/app/model/services/interfaces/chip';
+import { Mensagem } from 'src/app/model/services/interfaces/mensagem';
 
 @Component({
   selector: 'app-index',
@@ -326,38 +327,43 @@ export class IndexComponent implements OnInit {
 
   submit() {
     if (this.contactForm.valid) {
-        const dados = {
-            ...this.contactForm.value,
-            timestamp: new Date(),
-            visualizado: false,
-            showDescription: false
-        };
+      const formValues = this.contactForm.value;
+      
+      const novaMensagem = new Mensagem(
+        "", 
+        formValues.mensagem,
+        false,        
+        new Date(),    
+        formValues.nome,
+        formValues.titulo,
+        formValues.email
+      );
 
-        this.firestore.collection('mensagens').add(dados)
-            .then(() => {
-                console.log('Mensagem enviada com sucesso!');
-                this.contactForm.reset();
-                this.mensagemEnviada = true;
-                this.toast.success({
-                    detail: "Sucesso!",
-                    summary: "Mensagem enviada com sucesso",
-                    duration: 5000
-                });
-            })
-            .catch((error) => {
-                console.error('Erro ao enviar mensagem:', error);
-                this.toast.error({
-                    detail: "Erro!",
-                    summary: "Falha ao enviar mensagem. Tente novamente mais tarde.",
-                    duration: 5000
-                });
-            });
-    } else {
-        this.toast.error({
-            detail: "Erro!",
-            summary: "Preencha todos os campos obrigatórios",
+      this.firebaseService.cadastrarMensagem(novaMensagem)
+        .then(() => {
+          console.log('Mensagem enviada com sucesso!');
+          this.contactForm.reset();
+          this.mensagemEnviada = true;
+          this.toast.success({
+            detail: "Sucesso!",
+            summary: "Mensagem enviada com sucesso",
             duration: 5000
+          });
+        })
+        .catch((error) => {
+          console.error('Erro ao enviar mensagem:', error);
+          this.toast.error({
+            detail: "Erro!",
+            summary: "Falha ao enviar mensagem. Tente novamente mais tarde.",
+            duration: 5000
+          });
         });
+    } else {
+      this.toast.error({
+        detail: "Erro!",
+        summary: "Preencha todos os campos obrigatórios",
+        duration: 5000
+      });
     }
   }
 

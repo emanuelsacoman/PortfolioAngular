@@ -81,7 +81,6 @@ export class AdminComponent {
 
   //EMAIL
   items: Observable<any[]>;
-  showDescriptionFlag: boolean = false;
 
   //PROFILE
   profileEdit!: FormGroup;
@@ -504,9 +503,11 @@ export class AdminComponent {
 
   showDescription(item: any): void {
     item.showDescription = !item.showDescription;
+
+    this.firebase.editarMensagemParaVisualizado(item.mensagem);
   }
 
-  deleteemail(mensagem: string) {
+  deleteEmail(mensagem: string) {
     Swal.fire({
         title: 'Tem certeza de que deseja excluir este email?',
         icon: 'warning',

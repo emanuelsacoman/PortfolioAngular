@@ -1,7 +1,7 @@
 export class Contato{
     private _id!: string;
     private _titleContato!: string;
-    private _descContato!: string
+    private _descContato!: string;
 
     constructor(id: string, titleContato: string, descContato: string){
         this._titleContato = titleContato;

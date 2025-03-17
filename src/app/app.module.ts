@@ -28,7 +28,7 @@ import { NgToastModule } from 'ng-angular-popup';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ChartModule } from 'primeng/chart';
 import { CarouselModule } from 'primeng/carousel';
-
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -46,13 +46,13 @@ import { CarouselModule } from 'primeng/carousel';
     AppRoutingModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
+    provideAuth(() => getAuth()),
     AngularFireDatabaseModule,
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireModule,
     ReactiveFormsModule,
     AngularFireAuthModule,
-    provideAuth(() => getAuth()),
     HttpClientModule,
     BrowserAnimationsModule,
     NgToastModule,
@@ -60,6 +60,7 @@ import { CarouselModule } from 'primeng/carousel';
     FormsModule,
     ChartModule,
     CarouselModule,
+    MatIconModule
   ],
   providers: [Title,
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase }

@@ -340,10 +340,15 @@
             <div class="formall" *ngIf="isSelected('email')">
               <section class="lista" *ngFor="let item of items | async; let i = index">
                 <div class="mensagem" (click)="showDescription(item)">
+                  <div class="visualizado">
+                    <div class="imageView">
+                      <mat-icon>{{ item.visualizado ? 'drafts' : 'mail' }}</mat-icon>
+                    </div>
+                  </div>           
                   <p class="nome">{{ item.nome }}</p>
                   <p class="motivo">{{item.titulo}}</p>
                   <p class="time">{{ convertTimestampToDate(item.timestamp) | date: 'dd/MM/yyyy HH:mm:ss' }}</p>
-                  <img src="./assets/images/delete.png" alt="Excluir" (click)="deleteemail(item.mensagem)">
+                  <img src="./assets/images/delete.png" alt="Excluir" (click)="deleteEmail(item.mensagem)">
                 </div>
                 <div class="expand fadeInDown" *ngIf="item.showDescription">
                   <div class="areaMensagem">
