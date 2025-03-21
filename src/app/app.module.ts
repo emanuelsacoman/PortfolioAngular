@@ -57,7 +57,8 @@ import { MatIconModule } from '@angular/material/icon';
         MatSlideToggleModule,
         ChartModule,
         CarouselModule,
-        MatIconModule], 
+        MatIconModule
+    ], 
     providers: [
         Title,
         { provide: FIREBASE_OPTIONS, useValue: environment.firebase }, 
