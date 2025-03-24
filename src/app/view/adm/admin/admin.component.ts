@@ -24,6 +24,7 @@ import Swal from 'sweetalert2';
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css']
 })
+
 export class AdminComponent {
   selectedOption: string = 'sobre';
 
