@@ -104,7 +104,7 @@ export class IndexComponent implements OnInit {
   public birthday: boolean = false;
 
   title = 'Emanuel Vinícius Sacoman';
-  description = 'Página principal do desenvolvedor Emanuel Vinícius Sacoman.';
+  description = 'Portfólio do desenvolvedor Emanuel Vinícius Sacoman.';
 
   public yearNow: any;
   
