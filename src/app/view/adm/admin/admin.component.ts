@@ -535,7 +535,7 @@ export class AdminComponent {
           });
   } 
 
-  deleteemail(mensagem: string) {
+  deleteEmail(mensagem: string) {
     Swal.fire({
         title: 'Tem certeza de que deseja excluir este email?',
         icon: 'warning',

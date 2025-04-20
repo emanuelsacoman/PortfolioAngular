@@ -1,0 +1,39 @@
+[debug] [2025-04-20T21:49:18.594Z] ----------------------------------------------------------------------
+[debug] [2025-04-20T21:49:18.595Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\emanu\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2025-04-20T21:49:18.596Z] CLI Version:   13.34.0
+[debug] [2025-04-20T21:49:18.596Z] Platform:      win32
+[debug] [2025-04-20T21:49:18.596Z] Node Version:  v18.20.1
+[debug] [2025-04-20T21:49:18.597Z] Time:          Sun Apr 20 2025 18:49:18 GMT-0300 (Horário Padrão de Brasília)
+[debug] [2025-04-20T21:49:18.597Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-04-20T21:49:18.599Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2025-04-20T21:49:18.764Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-04-20T21:49:18.764Z] > authorizing via signed-in user (emanuelsacoman@gmail.com)
+[debug] [2025-04-20T21:49:18.765Z] [iam] checking project portfolioemanuel-7ab45 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2025-04-20T21:49:18.765Z] Checked if tokens are valid: false, expires at: 1742787448098
+[debug] [2025-04-20T21:49:18.765Z] Checked if tokens are valid: false, expires at: 1742787448098
+[debug] [2025-04-20T21:49:18.766Z] > refreshing access token with scopes: []
+[debug] [2025-04-20T21:49:18.766Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-04-20T21:49:18.766Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-04-20T21:49:19.172Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-04-20T21:49:19.172Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-04-20T21:49:19.180Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/portfolioemanuel-7ab45:testIamPermissions [none]
+[debug] [2025-04-20T21:49:19.180Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/portfolioemanuel-7ab45:testIamPermissions x-goog-quota-user=projects/portfolioemanuel-7ab45
+[debug] [2025-04-20T21:49:19.180Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/portfolioemanuel-7ab45:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-04-20T21:49:19.207Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2025-04-20T21:49:19.207Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[debug] [2025-04-20T21:49:20.127Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/portfolioemanuel-7ab45:testIamPermissions 200
+[debug] [2025-04-20T21:49:20.127Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/portfolioemanuel-7ab45:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-04-20T21:49:20.127Z] Checked if tokens are valid: true, expires at: 1745189358172
+[debug] [2025-04-20T21:49:20.127Z] Checked if tokens are valid: true, expires at: 1745189358172
+[debug] [2025-04-20T21:49:20.128Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/portfolioemanuel-7ab45 [none]
+[debug] [2025-04-20T21:49:20.613Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/portfolioemanuel-7ab45 200
+[debug] [2025-04-20T21:49:20.613Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/portfolioemanuel-7ab45 {"projectId":"portfolioemanuel-7ab45","projectNumber":"264727699704","displayName":"portfolioemanuel","name":"projects/portfolioemanuel-7ab45","resources":{"hostingSite":"portfolioemanuel-7ab45","locationId":"southamerica-east1"},"state":"ACTIVE","etag":"1_26ff5c30-7a88-408e-8efb-de2d80c86726"}
+[info] 
+[info] === Deploying to 'portfolioemanuel-7ab45'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2025-04-20T21:49:20.617Z] Checked if tokens are valid: true, expires at: 1745189358172
+[debug] [2025-04-20T21:49:20.617Z] Checked if tokens are valid: true, expires at: 1745189358172
+[debug] [2025-04-20T21:49:20.617Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/emanuelsacoman/versions [none]
+[debug] [2025-04-20T21:49:20.617Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/emanuelsacoman/versions {"status":"CREATED","labels":{"deployment-tool":"cli-firebase"}}

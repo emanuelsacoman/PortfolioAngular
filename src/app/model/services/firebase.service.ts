@@ -14,6 +14,7 @@ import { Contato } from './interfaces/contato';
 import { Profile } from './interfaces/profile';
 import { Slider } from './interfaces/slider';
 import { Chip } from './interfaces/chip';
+import { Mensagem } from './interfaces/mensagem';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,7 @@ export class FirebaseService {
   private PATH9 : string = "profile";
   private PATH10 : string = "slider";
   private PATH11 : string = "chip";
+  private PATH12 : string = "mensagens";
 
   constructor(private firestore: AngularFirestore,
     private storage: AngularFireStorage,
@@ -511,6 +513,43 @@ export class FirebaseService {
         return this.firestore.collection(this.PATH11).doc(id).delete();
       }
       //Chip
+
+      //Mensagens
+
+      obterTodasMensagens() {
+        return this.firestore.collection(this.PATH12).snapshotChanges();
+      }
+
+      cadastrarMensagem(mensagem: Mensagem) {
+        return this.firestore.collection(this.PATH12).add({
+          mensagem: mensagem.mensagem,
+          visualizado: mensagem.visualizado,
+          timestamp: mensagem.timestamp,
+          nome: mensagem.nome,
+          titulo: mensagem.titulo,
+          email: mensagem.email
+        });
+      }
+
+      excluirMensagem(id: string) {
+        return this.firestore.collection(this.PATH12).doc(id).delete();
+      }
+
+      editarMensagemParaVisualizado(mensagem: string) {
+        this.firestore.collection(this.PATH12, ref => ref.where('mensagem', '==', mensagem))
+          .snapshotChanges()
+          .subscribe(snapshot => {
+            snapshot.forEach(docChange => {
+              const id = docChange.payload.doc.id;
+              this.firestore.collection(this.PATH12).doc(id).update({
+                visualizado: true
+              });
+            });
+          });
+      }               
+
+      //Mensagens
+
     }
 
     
