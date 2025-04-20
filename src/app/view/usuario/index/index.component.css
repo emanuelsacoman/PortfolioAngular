@@ -346,6 +346,10 @@ body{
     gap: 1vh;
 }
 
+.txttop2 p {
+    text-align: justify;
+}
+
 .wrap {
     display: flex;
     flex-direction: column;
@@ -410,6 +414,7 @@ body{
         }
         .contentdesc{
             font-size: clamp(12px, 1vw, 20px);
+            text-align: justify;
         }
     }
 }
@@ -743,6 +748,7 @@ a{
 
 .formText p{
     font-size: clamp(12px, 2vw, 20px);
+    text-align: justify;
 }
 
 /*CONTATO*/
