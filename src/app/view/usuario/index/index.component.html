@@ -94,7 +94,16 @@
         <section class="profile2 bloco response" *ngFor="let perfil of perfil | async;">
             <div class="alltop">
                 <div class="picture">
-                    <img loading="lazy" class="profile2img" [src]="profileImageUrl" alt="Foto de perfil">
+                    <div class="imgSpace">
+                        <img [src]="profileImageUrl" class="profile2img" alt="Foto de perfil" loading="lazy">
+                        <div class="frame">
+                            <img *ngIf="christmas" src="./assets/images/christmas.png">
+                            <img *ngIf="halloween" src="./assets/images/halloween.png">
+                            <img *ngIf="newYear" src="./assets/images/newyear.png">
+                            <img *ngIf="easter" src="./assets/images/easter.png">
+                            <img *ngIf="birthday" src="./assets/images/birthdayFrame.png">
+                        </div>                      
+                    </div>      
                     <section class="pictureBottom">
                         <div class="name">{{profileData.name}}</div>
                         <div class="liltext">{{perfil.text}}</div>
