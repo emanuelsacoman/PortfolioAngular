@@ -348,6 +348,8 @@ body{
 
 .txttop2 p {
     text-align: justify;
+    text-indent: .5em;
+    line-height: 1;
 }
 
 .wrap {
