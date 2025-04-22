@@ -612,6 +612,7 @@ body{
 
 .project:hover{
     filter: brightness(120%);
+    flex: 2 1 33%;
 }
 
 .project .title{
