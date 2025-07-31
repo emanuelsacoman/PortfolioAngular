@@ -1,0 +1,102 @@
+[debug] [2025-07-31T13:51:17.377Z] ----------------------------------------------------------------------
+[debug] [2025-07-31T13:51:17.378Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\emanu\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2025-07-31T13:51:17.379Z] CLI Version:   13.35.1
+[debug] [2025-07-31T13:51:17.379Z] Platform:      win32
+[debug] [2025-07-31T13:51:17.379Z] Node Version:  v18.20.1
+[debug] [2025-07-31T13:51:17.380Z] Time:          Thu Jul 31 2025 10:51:17 GMT-0300 (Horário Padrão de Brasília)
+[debug] [2025-07-31T13:51:17.380Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-07-31T13:51:17.513Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-07-31T13:51:17.514Z] > authorizing via signed-in user (emanuelsacoman@gmail.com)
+[debug] [2025-07-31T13:51:17.514Z] [iam] checking project emanuelsacoman for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2025-07-31T13:51:17.515Z] Checked if tokens are valid: true, expires at: 1753972742652
+[debug] [2025-07-31T13:51:17.515Z] Checked if tokens are valid: true, expires at: 1753972742652
+[debug] [2025-07-31T13:51:17.516Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/emanuelsacoman:testIamPermissions [none]
+[debug] [2025-07-31T13:51:17.516Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/emanuelsacoman:testIamPermissions x-goog-quota-user=projects/emanuelsacoman
+[debug] [2025-07-31T13:51:17.516Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/emanuelsacoman:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-07-31T13:51:18.693Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/emanuelsacoman:testIamPermissions 200
+[debug] [2025-07-31T13:51:18.693Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/emanuelsacoman:testIamPermissions {}
+[debug] [2025-07-31T13:51:18.693Z] [iam] error while checking permissions, command may fail: Authorization failed. This account is missing the following required permissions on project emanuelsacoman:
+
+  firebase.projects.get
+  firebasehosting.sites.update
+[debug] [2025-07-31T13:51:18.693Z] Checked if tokens are valid: true, expires at: 1753972742652
+[debug] [2025-07-31T13:51:18.694Z] Checked if tokens are valid: true, expires at: 1753972742652
+[debug] [2025-07-31T13:51:18.694Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/emanuelsacoman [none]
+[debug] [2025-07-31T13:51:19.336Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/emanuelsacoman 403
+[debug] [2025-07-31T13:51:19.337Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/emanuelsacoman {"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}}
+[debug] [2025-07-31T13:51:19.337Z] Request to https://firebase.googleapis.com/v1beta1/projects/emanuelsacoman had HTTP Error: 403, The caller does not have permission
+[debug] [2025-07-31T13:51:19.338Z] FirebaseError: Request to https://firebase.googleapis.com/v1beta1/projects/emanuelsacoman had HTTP Error: 403, The caller does not have permission
+    at responseToError (C:\Users\emanu\AppData\Roaming\npm\node_modules\firebase-tools\lib\responseToError.js:52:12)
+    at RetryOperation._fn (C:\Users\emanu\AppData\Roaming\npm\node_modules\firebase-tools\lib\apiv2.js:312:77)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[error] 
+[error] Error: Failed to get Firebase project emanuelsacoman. Please make sure the project exists and your account has permission to access it.
+[debug] [2025-07-31T13:54:03.654Z] ----------------------------------------------------------------------
+[debug] [2025-07-31T13:54:03.655Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\emanu\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2025-07-31T13:54:03.655Z] CLI Version:   13.35.1
+[debug] [2025-07-31T13:54:03.656Z] Platform:      win32
+[debug] [2025-07-31T13:54:03.656Z] Node Version:  v18.20.1
+[debug] [2025-07-31T13:54:03.656Z] Time:          Thu Jul 31 2025 10:54:03 GMT-0300 (Horário Padrão de Brasília)
+[debug] [2025-07-31T13:54:03.657Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-07-31T13:54:03.797Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-07-31T13:54:03.798Z] > authorizing via signed-in user (emanuelsacoman@gmail.com)
+[debug] [2025-07-31T13:54:03.798Z] [iam] checking project emanuelsacoman for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2025-07-31T13:54:03.799Z] Checked if tokens are valid: true, expires at: 1753972742652
+[debug] [2025-07-31T13:54:03.799Z] Checked if tokens are valid: true, expires at: 1753972742652
+[debug] [2025-07-31T13:54:03.800Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/emanuelsacoman:testIamPermissions [none]
+[debug] [2025-07-31T13:54:03.800Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/emanuelsacoman:testIamPermissions x-goog-quota-user=projects/emanuelsacoman
+[debug] [2025-07-31T13:54:03.800Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/emanuelsacoman:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-07-31T13:54:04.980Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/emanuelsacoman:testIamPermissions 200
+[debug] [2025-07-31T13:54:04.980Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/emanuelsacoman:testIamPermissions {}
+[debug] [2025-07-31T13:54:04.981Z] [iam] error while checking permissions, command may fail: Authorization failed. This account is missing the following required permissions on project emanuelsacoman:
+
+  firebase.projects.get
+  firebasehosting.sites.update
+[debug] [2025-07-31T13:54:04.981Z] Checked if tokens are valid: true, expires at: 1753972742652
+[debug] [2025-07-31T13:54:04.981Z] Checked if tokens are valid: true, expires at: 1753972742652
+[debug] [2025-07-31T13:54:04.982Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/emanuelsacoman [none]
+[debug] [2025-07-31T13:54:05.629Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/emanuelsacoman 403
+[debug] [2025-07-31T13:54:05.629Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/emanuelsacoman {"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}}
+[debug] [2025-07-31T13:54:05.630Z] Request to https://firebase.googleapis.com/v1beta1/projects/emanuelsacoman had HTTP Error: 403, The caller does not have permission
+[debug] [2025-07-31T13:54:05.630Z] FirebaseError: Request to https://firebase.googleapis.com/v1beta1/projects/emanuelsacoman had HTTP Error: 403, The caller does not have permission
+    at responseToError (C:\Users\emanu\AppData\Roaming\npm\node_modules\firebase-tools\lib\responseToError.js:52:12)
+    at RetryOperation._fn (C:\Users\emanu\AppData\Roaming\npm\node_modules\firebase-tools\lib\apiv2.js:312:77)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[error] 
+[error] Error: Failed to get Firebase project emanuelsacoman. Please make sure the project exists and your account has permission to access it.
+[debug] [2025-07-31T13:55:04.658Z] ----------------------------------------------------------------------
+[debug] [2025-07-31T13:55:04.659Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\emanu\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2025-07-31T13:55:04.660Z] CLI Version:   13.35.1
+[debug] [2025-07-31T13:55:04.660Z] Platform:      win32
+[debug] [2025-07-31T13:55:04.660Z] Node Version:  v18.20.1
+[debug] [2025-07-31T13:55:04.661Z] Time:          Thu Jul 31 2025 10:55:04 GMT-0300 (Horário Padrão de Brasília)
+[debug] [2025-07-31T13:55:04.661Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-07-31T13:55:04.808Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-07-31T13:55:04.808Z] > authorizing via signed-in user (emanuelsacoman@gmail.com)
+[debug] [2025-07-31T13:55:04.808Z] [iam] checking project emanuelsacoman for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2025-07-31T13:55:04.809Z] Checked if tokens are valid: true, expires at: 1753972742652
+[debug] [2025-07-31T13:55:04.810Z] Checked if tokens are valid: true, expires at: 1753972742652
+[debug] [2025-07-31T13:55:04.810Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/emanuelsacoman:testIamPermissions [none]
+[debug] [2025-07-31T13:55:04.810Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/emanuelsacoman:testIamPermissions x-goog-quota-user=projects/emanuelsacoman
+[debug] [2025-07-31T13:55:04.811Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/emanuelsacoman:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-07-31T13:55:05.888Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/emanuelsacoman:testIamPermissions 200
+[debug] [2025-07-31T13:55:05.888Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/emanuelsacoman:testIamPermissions {}
+[debug] [2025-07-31T13:55:05.889Z] [iam] error while checking permissions, command may fail: Authorization failed. This account is missing the following required permissions on project emanuelsacoman:
+
+  firebase.projects.get
+  firebasehosting.sites.update
+[debug] [2025-07-31T13:55:05.889Z] Checked if tokens are valid: true, expires at: 1753972742652
+[debug] [2025-07-31T13:55:05.889Z] Checked if tokens are valid: true, expires at: 1753972742652
+[debug] [2025-07-31T13:55:05.889Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/emanuelsacoman [none]
+[debug] [2025-07-31T13:55:06.495Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/emanuelsacoman 403
+[debug] [2025-07-31T13:55:06.495Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/emanuelsacoman {"error":{"code":403,"message":"The caller does not have permission","status":"PERMISSION_DENIED"}}
+[debug] [2025-07-31T13:55:06.496Z] Request to https://firebase.googleapis.com/v1beta1/projects/emanuelsacoman had HTTP Error: 403, The caller does not have permission
+[debug] [2025-07-31T13:55:06.497Z] FirebaseError: Request to https://firebase.googleapis.com/v1beta1/projects/emanuelsacoman had HTTP Error: 403, The caller does not have permission
+    at responseToError (C:\Users\emanu\AppData\Roaming\npm\node_modules\firebase-tools\lib\responseToError.js:52:12)
+    at RetryOperation._fn (C:\Users\emanu\AppData\Roaming\npm\node_modules\firebase-tools\lib\apiv2.js:312:77)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[error] 
+[error] Error: Failed to get Firebase project emanuelsacoman. Please make sure the project exists and your account has permission to access it.

@@ -1,4 +1,4 @@
-Sitemap: https://codebucketweb.web.app/sitemap.xml
+Sitemap: https://emanuelsacoman.web.app/sitemap.xml
 
 User-agent: *
 User-agent: Googlebot
