@@ -101,6 +101,7 @@
                 </div>
             </div>
         </section>
+
         <section class="profile2 bloco response" *ngFor="let perfil of perfil | async;">
             <div class="alltop">
                 <div class="picture">
@@ -178,6 +179,7 @@
                             <div class="bar"></div>
                         </div>
                     </section>
+
                     <div class="cv">
                         <a href="{{perfil.cv}}" target="_blank">
                             <div class="cvimg">
@@ -191,6 +193,7 @@
                 </div>
             </div>
         </section>
+
         <nav class="desknavResponse bloco response">
             <div class="block" (click)="selectOption('sobre')" [ngClass]="{selected: isSelected('sobre')}">
                 <img loading="lazy" src="/assets/images/sobre.png" alt="Opção">
@@ -227,6 +230,7 @@
                 </div>
             </div>
         </nav>
+
         <main class="middle bloco">
             <div class="sobre wrap" *ngIf="isSelected('sobre')">
                 <div class="txttop" *ngFor="let sobre of this.sobre;">
@@ -442,4 +446,3 @@
         </nav>                
     </div>
 </body>
-
