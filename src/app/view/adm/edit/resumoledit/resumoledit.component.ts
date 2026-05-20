@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { FirebaseService } from 'src/app/model/services/firebase.service';
 import { ResumoL } from 'src/app/model/services/interfaces/resumoL';
+import { MaterialIconsLoaderService } from 'src/app/model/shared/material-icons-loader.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -22,8 +23,9 @@ export class ResumoleditComponent {
   constructor(private router: Router,
     private formBuilder: FormBuilder,
     private firebase: FirebaseService,
-    private toast: NgToastService){
-
+    private toast: NgToastService,
+    private materialIcons: MaterialIconsLoaderService){
+    this.materialIcons.load();
   }
 
   ngOnInit(){

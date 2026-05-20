@@ -1,0 +1,36 @@
+<div class="sobre wrap">
+  <div class="txttop" *ngFor="let item of sobre">
+    <div class="top">
+      <div class="toph1">{{ item.title }}</div>
+      <div class="topbar"></div>
+    </div>
+    <div class="txttop2">
+      <p>{{ item.txt1 }}</p>
+      <p>{{ item.txt2 }}</p>
+    </div>
+    <h2>{{ item.subtitle }}</h2>
+  </div>
+
+  <section class="whatido">
+    <div class="area" *ngFor="let item of sobrearea">
+      <div class="whaipic">
+        <img loading="lazy" src="{{ item.cImg }}" alt="Pic">
+      </div>
+      <div class="content">
+        <div class="contenttitle">{{ item.ctitle }}</div>
+        <div class="contentdesc">{{ item.cdesc }}</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="carousel">
+    <div class="carousel-track" aria-label="Tecnologias" *ngIf="slider.length">
+      <div class="language-item" *ngFor="let item of slider">
+        <img [src]="item.Carouselimg" alt="Tecnologia" loading="lazy">
+      </div>
+      <div class="language-item" *ngFor="let item of slider" aria-hidden="true">
+        <img [src]="item.Carouselimg" alt="" loading="lazy">
+      </div>
+    </div>
+  </section>
+</div>

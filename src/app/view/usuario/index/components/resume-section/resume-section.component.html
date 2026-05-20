@@ -1,0 +1,68 @@
+<div class="resumo wrap">
+  <div class="txttop" *ngFor="let item of resumo">
+    <div class="top">
+      <div class="toph1">{{ item.titleArea }}</div>
+      <div class="topbar"></div>
+    </div>
+
+    <section class="resume">
+      <div class="education resumeitem">
+        <div class="resumetop">
+          <img loading="lazy" src="./assets/images/education.png" alt="Resume pic">
+          <h2>{{ item.lsub }}</h2>
+        </div>
+        <div class="resumebox" *ngFor="let education of resumol">
+          <p class="title">{{ education.titlel }}</p>
+          <p class="desc">{{ education.descl }}</p>
+          <p class="location">{{ education.locationl }}</p>
+        </div>
+      </div>
+
+      <div class="experience resumeitem">
+        <div class="resumetop">
+          <img loading="lazy" src="./assets/images/pasta.png" alt="Resume pic">
+          <h2>{{ item.rsub }}</h2>
+        </div>
+        <div class="resumebox" *ngFor="let experience of resumor">
+          <p class="title">{{ experience.titler }}</p>
+          <p class="desc">{{ experience.descr }}</p>
+          <p class="location">{{ experience.locationr }}</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="resume">
+      <div class="resumeitem">
+        <div class="resumetop">
+          <img loading="lazy" src="./assets/images/competencia.png" alt="Resume pic">
+          <h2>{{ item.chart }}</h2>
+        </div>
+        <div class="chart">
+          <div class="skill-bars">
+            <div class="skill-row" *ngFor="let skill of skillBars">
+              <div class="skill-label">
+                <span>{{ skill.label }}</span>
+                <strong>{{ skill.value }}%</strong>
+              </div>
+              <div class="skill-meter" aria-hidden="true">
+                <span [style.width.%]="skill.value"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="resumeitem">
+        <div class="resumetop">
+          <img loading="lazy" src="./assets/images/conhecimento.png" alt="Resume pic">
+          <h2>{{ item.chip }}</h2>
+        </div>
+        <div class="chips">
+          <div class="cardchip" *ngFor="let chip of chipArray">
+            <p>{{ chip.chipname }}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

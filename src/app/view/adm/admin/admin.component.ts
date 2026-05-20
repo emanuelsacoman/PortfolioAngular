@@ -1,6 +1,6 @@
-import { Component, Injector } from '@angular/core';
+import { Component } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { Observable } from 'rxjs';
@@ -17,6 +17,7 @@ import { ResumoR } from 'src/app/model/services/interfaces/resumoR';
 import { Slider } from 'src/app/model/services/interfaces/slider';
 import { Sobre } from 'src/app/model/services/interfaces/sobre';
 import { Sobrearea } from 'src/app/model/services/interfaces/sobrearea';
+import { MaterialIconsLoaderService } from 'src/app/model/shared/material-icons-loader.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -26,7 +27,7 @@ import Swal from 'sweetalert2';
 })
 
 export class AdminComponent {
-  selectedOption: string = 'sobre';
+  selectedOption: string = 'dashboard';
 
   // SOBRE
   sobreEdit!: FormGroup;
@@ -128,9 +129,10 @@ export class AdminComponent {
     private formBuilder: FormBuilder,
     private firebase: FirebaseService,
     private firestore: AngularFirestore,
-    private injector: Injector,
     private authService: AuthService,
-    private toast: NgToastService) {
+    private toast: NgToastService,
+    private materialIcons: MaterialIconsLoaderService) {
+      this.materialIcons.load();
 
       this.items = this.firestore.collection('mensagens').valueChanges();
 

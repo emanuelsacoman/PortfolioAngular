@@ -1,44 +1,45 @@
-<body>
-    <main>
-        <section class="formsection">
-            <form class="formItens" (ngSubmit)="editItem()" [formGroup]="editar" #formDir="ngForm">
-                <h1 class="title">EDITAR</h1>
-              
-                <div class="formTop">
-                  <!-- Campo Ano Início - Ano Término -->
-                  <div class="form-group">
-                    <div class="input">
-                      <label for="titler">Ano Início - Ano Término</label>
-                      <input type="text" id="titler" placeholder="Ex: 2020 - 2024" formControlName="titler" required />
-                      <p class="error-msg" *ngIf="isInvalidControl('titler')">Erro no texto de ano</p>
-                    </div>
-                  </div>
-              
-                  <!-- Campo Descrição -->
-                  <div class="form-group">
-                    <div class="input">
-                      <label for="descr">Descrição</label>
-                      <input type="text" id="descr" placeholder="Insira a descrição" formControlName="descr" required />
-                      <p class="error-msg" *ngIf="isInvalidControl('descr')">Erro na descrição</p>
-                    </div>
-                  </div>
-              
-                  <!-- Campo Localização -->
-                  <div class="form-group">
-                    <div class="input">
-                      <label for="locationr">Localização</label>
-                      <input type="text" id="locationr" placeholder="Insira a localização" formControlName="locationr" required />
-                      <p class="error-msg" *ngIf="isInvalidControl('locationr')">Erro na localização</p>
-                    </div>
-                  </div>
-                </div>
-              
-                <!-- Botões -->
-                <div class="buttons">
-                  <button class="sendButton" type="submit">Enviar</button>
-                  <button class="delete" type="button" (click)="delete()">Excluir</button>
-                </div>
-              </form>              
-        </section>
-    </main>
-</body>
+<main class="edit-shell">
+  <section class="edit-panel">
+    <header class="edit-header">
+      <div>
+        <p class="eyebrow">Resumo</p>
+        <h1>Editar experiencia</h1>
+      </div>
+      <button class="ghost-action" type="button" routerLink="/admin">
+        <mat-icon>arrow_back</mat-icon>
+        Voltar
+      </button>
+    </header>
+
+    <form class="edit-form" (ngSubmit)="editItem()" [formGroup]="editar" #formDir="ngForm">
+      <label>
+        <span>Periodo</span>
+        <input type="text" id="titler" placeholder="Ex: 2020 - 2024" formControlName="titler" required>
+        <small *ngIf="isInvalidControl('titler')">Informe o periodo.</small>
+      </label>
+
+      <label>
+        <span>Descricao</span>
+        <input type="text" id="descr" placeholder="Insira a descricao" formControlName="descr" required>
+        <small *ngIf="isInvalidControl('descr')">Informe a descricao.</small>
+      </label>
+
+      <label>
+        <span>Localizacao</span>
+        <input type="text" id="locationr" placeholder="Insira a localizacao" formControlName="locationr" required>
+        <small *ngIf="isInvalidControl('locationr')">Informe a localizacao.</small>
+      </label>
+
+      <div class="form-actions">
+        <button class="save-action" type="submit">
+          <mat-icon>save</mat-icon>
+          Salvar
+        </button>
+        <button class="delete-action" type="button" (click)="delete()">
+          <mat-icon>delete</mat-icon>
+          Excluir
+        </button>
+      </div>
+    </form>
+  </section>
+</main>

@@ -1,51 +1,53 @@
-<body>
-    <main>
-        <section class="formsection">
-            <form class="formItens" (ngSubmit)="editItem()" [formGroup]="editar" #formDir="ngForm">
-                <h1 class="title">EDITAR</h1>
-              
-                <div class="formTop">
-                  <!-- Campo Título -->
-                  <div class="form-group">
-                    <div class="input">
-                      <label for="ctitle">Título</label>
-                      <input type="text" id="ctitle" placeholder="Insira o título" formControlName="ctitle" required />
-                      <p class="error-msg" *ngIf="isInvalidControl('ctitle')">Erro no título</p>
-                    </div>
-                  </div>
-              
-                  <!-- Campo Descrição -->
-                  <div class="form-group">
-                    <div class="input">
-                      <label for="cdesc">Descrição</label>
-                      <textarea id="cdesc" placeholder="Insira a descrição" formControlName="cdesc" required rows="5" cols="30"></textarea>
-                      <p class="error-msg" *ngIf="isInvalidControl('cdesc')">Erro na descrição</p>
-                    </div>
-                  </div>
-                </div>
-              
-                <div class="bottomAll">
-                  <div class="formBottom">
-                    <!-- Upload de Imagem -->
-                    <div class="form-group">
-                      <div class="input imageInput">
-                        <input class="img" type="file" id="imagem" formControlName="imagem" accept="image/*" (change)="uploadFile($event)" />
-                      </div>
-                    </div>
-                  </div>
-              
-                  <!-- Pré-visualização da Imagem -->
-                  <div *ngIf="!imagem">
-                    <img class="preImage" [src]="this.sobrearea.cImg" alt="Pré-visualização da imagem" />
-                  </div>
-                </div>
-              
-                <!-- Botões -->
-                <div class="buttons">
-                  <button class="sendButton" type="submit">Enviar</button>
-                  <button class="delete" type="button" (click)="delete()">Excluir</button>
-                </div>
-              </form>              
-        </section>
-    </main>
-</body>
+<main class="edit-shell">
+  <section class="edit-panel">
+    <header class="edit-header">
+      <div>
+        <p class="eyebrow">Area sobre</p>
+        <h1>Editar servico</h1>
+      </div>
+      <button class="ghost-action" type="button" routerLink="/admin">
+        <mat-icon>arrow_back</mat-icon>
+        Voltar
+      </button>
+    </header>
+
+    <form class="edit-form" (ngSubmit)="editItem()" [formGroup]="editar" #formDir="ngForm">
+      <div class="form-grid">
+        <label>
+          <span>Titulo</span>
+          <input type="text" id="ctitle" placeholder="Insira o titulo" formControlName="ctitle" required>
+          <small *ngIf="isInvalidControl('ctitle')">Informe um titulo valido.</small>
+        </label>
+
+        <label>
+          <span>Descricao</span>
+          <textarea id="cdesc" placeholder="Insira a descricao" formControlName="cdesc" required rows="6"></textarea>
+          <small *ngIf="isInvalidControl('cdesc')">Informe uma descricao valida.</small>
+        </label>
+      </div>
+
+      <section class="asset-panel">
+        <label class="file-field">
+          <span>Imagem</span>
+          <input type="file" id="imagem" formControlName="imagem" accept="image/*" (change)="uploadFile($event)">
+        </label>
+
+        <div class="preview-card" *ngIf="!imagem">
+          <span>Imagem atual</span>
+          <img [src]="sobrearea && sobrearea.cImg" alt="Pre-visualizacao da imagem">
+        </div>
+      </section>
+
+      <div class="form-actions">
+        <button class="save-action" type="submit">
+          <mat-icon>save</mat-icon>
+          Salvar
+        </button>
+        <button class="delete-action" type="button" (click)="delete()">
+          <mat-icon>delete</mat-icon>
+          Excluir
+        </button>
+      </div>
+    </form>
+  </section>
+</main>

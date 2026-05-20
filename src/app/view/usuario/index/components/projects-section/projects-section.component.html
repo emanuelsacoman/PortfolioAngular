@@ -1,0 +1,39 @@
+<div class="projetos wrap">
+  <div class="top">
+    <div class="toph1">{{ title }}</div>
+    <div class="topbar"></div>
+  </div>
+
+  <div class="projects">
+    <div
+      class="project"
+      *ngFor="let project of projetos"
+      [style.background-image]="'url(' + project.projectImg + ')'">
+      <a
+        [href]="getProjectLink(project)"
+        [attr.target]="project.inProgress ? '_blank' : null"
+        [attr.rel]="project.inProgress ? 'noopener noreferrer' : null"
+        [attr.aria-disabled]="!project.inProgress"
+        [attr.aria-label]="project.titulo"
+        (click)="preventUnavailableProject($event, project)">
+        <div class="icon-right">
+          <div class="star" *ngIf="project.star">
+            <img loading="lazy" src="./assets/images/star.gif" alt="Star">
+          </div>
+          <div class="wip" *ngIf="!project.inProgress">
+            <img loading="lazy" src="./assets/images/wip.gif" alt="Work in Progress">
+          </div>
+        </div>
+
+        <div class="mark">
+          <img loading="lazy" src="./assets/images/bookmark.png" alt="Mark">
+          <div class="badge">
+            <img loading="lazy" src="{{ project.badge }}" alt="Badge">
+          </div>
+        </div>
+
+        <div class="title">{{ project.titulo }}</div>
+      </a>
+    </div>
+  </div>
+</div>

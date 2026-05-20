@@ -1,52 +1,45 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { IndexComponent } from './view/usuario/index/index.component';
-import { LoginComponent } from './view/usuario/login/login.component';
-import { AdminComponent } from './view/adm/admin/admin.component';
 import { AuthGuard } from './model/shared/auth.guard';
-import { ItemeditComponent } from './view/adm/edit/itemedit/itemedit.component';
-import { ResumoleditComponent } from './view/adm/edit/resumoledit/resumoledit.component';
-import { ResumoreditComponent } from './view/adm/edit/resumoredit/resumoredit.component';
-import { ProjetoeditComponent } from './view/adm/edit/projetoedit/projetoedit.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: IndexComponent,
+    loadChildren: () => import('./view/usuario/index/index.module').then((m) => m.IndexModule),
   },
   {
     path: 'login',
-    component: LoginComponent,
+    loadChildren: () => import('./view/usuario/login/login.module').then((m) => m.LoginModule),
   },
   {
     path: 'admin',
-    component: AdminComponent,
     canActivate: [AuthGuard],
+    loadChildren: () => import('./view/adm/admin/admin.module').then((m) => m.AdminModule),
   },
   {
     path: 'itemedit',
-    component: ItemeditComponent,
     canActivate: [AuthGuard],
+    loadChildren: () => import('./view/adm/edit/itemedit/itemedit.module').then((m) => m.ItemeditModule),
   },
   {
     path: 'resumoledit',
-    component: ResumoleditComponent,
     canActivate: [AuthGuard],
+    loadChildren: () => import('./view/adm/edit/resumoledit/resumoledit.module').then((m) => m.ResumoleditModule),
   },
   {
     path: 'resumoredit',
-    component: ResumoreditComponent,
     canActivate: [AuthGuard],
+    loadChildren: () => import('./view/adm/edit/resumoredit/resumoredit.module').then((m) => m.ResumoreditModule),
   },
   {
     path: 'projetoedit',
-    component: ProjetoeditComponent,
     canActivate: [AuthGuard],
+    loadChildren: () => import('./view/adm/edit/projetoedit/projetoedit.module').then((m) => m.ProjetoeditModule),
   },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

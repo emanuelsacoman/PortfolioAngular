@@ -1,0 +1,71 @@
+<nav
+  class="bloco"
+  [class.desknavResponse]="responsive"
+  [class.response]="responsive"
+  [class.desknav]="!responsive"
+  [class.noResponse]="!responsive">
+  <div
+    class="block"
+    role="button"
+    tabindex="0"
+    (click)="select('sobre')"
+    (keydown.enter)="select('sobre')"
+    (keydown.space)="$event.preventDefault(); select('sobre')"
+    [attr.aria-pressed]="isSelected('sobre')"
+    [ngClass]="{ selected: isSelected('sobre') }">
+    <img loading="lazy" src="/assets/images/sobre.png" alt="Opcao">
+    <p>{{ aboutLabel }}</p>
+  </div>
+
+  <div
+    class="block"
+    role="button"
+    tabindex="0"
+    (click)="select('resumo')"
+    (keydown.enter)="select('resumo')"
+    (keydown.space)="$event.preventDefault(); select('resumo')"
+    [attr.aria-pressed]="isSelected('resumo')"
+    [ngClass]="{ selected: isSelected('resumo') }">
+    <img loading="lazy" src="/assets/images/resume.png" alt="Opcao">
+    <p>{{ resumeLabel }}</p>
+  </div>
+
+  <div
+    class="block"
+    role="button"
+    tabindex="0"
+    (click)="select('projetos')"
+    (keydown.enter)="select('projetos')"
+    (keydown.space)="$event.preventDefault(); select('projetos')"
+    [attr.aria-pressed]="isSelected('projetos')"
+    [ngClass]="{ selected: isSelected('projetos') }">
+    <img loading="lazy" src="/assets/images/projeto.png" alt="Opcao">
+    <p>{{ projectsLabel }}</p>
+  </div>
+
+  <div
+    class="block"
+    role="button"
+    tabindex="0"
+    (click)="select('contato')"
+    (keydown.enter)="select('contato')"
+    (keydown.space)="$event.preventDefault(); select('contato')"
+    [attr.aria-pressed]="isSelected('contato')"
+    [ngClass]="{ selected: isSelected('contato') }">
+    <img loading="lazy" src="/assets/images/contato.png" alt="Opcao">
+    <p>{{ contactLabel }}</p>
+  </div>
+
+  <div class="block" *ngIf="isLoggedIn && adminData">
+    <div
+      class="block2"
+      role="button"
+      tabindex="0"
+      (click)="selectAdmin()"
+      (keydown.enter)="selectAdmin()"
+      (keydown.space)="$event.preventDefault(); selectAdmin()">
+      <img loading="lazy" src="/assets/images/admin.png" alt="Opcao">
+      <p>Admin</p>
+    </div>
+  </div>
+</nav>

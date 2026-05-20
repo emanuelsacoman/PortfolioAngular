@@ -1,15 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
-
 body{
     min-height: 100dvh;
     color: black;
     background-color: #505050;
     position: sticky;
-    font-family: "Open Sans", sans-serif;
+    font-family: Arial, "Helvetica Neue", sans-serif;
 }
 
 input{
-    font-family: 'Open Sans', sans-serif;
+    font-family: Arial, "Helvetica Neue", sans-serif;
 }
 
 .all {
