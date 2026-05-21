@@ -7,7 +7,8 @@
 }
 
 button,
-input {
+input,
+textarea {
   font: inherit;
 }
 
@@ -19,7 +20,7 @@ input {
 }
 
 .edit-panel {
-  width: min(900px, 100%);
+  width: min(1040px, 100%);
   border: 1px solid #dce3ea;
   border-radius: 8px;
   padding: 22px;
@@ -27,18 +28,31 @@ input {
   box-shadow: 0 14px 36px rgba(21, 26, 33, 0.08);
 }
 
-.edit-header {
+.edit-header,
+.section-heading,
+.form-actions {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
+}
+
+.edit-header {
   margin-bottom: 22px;
 }
 
-.edit-header h1 {
+.edit-header h1,
+.section-heading h2 {
   margin: 0;
-  font-size: clamp(1.5rem, 3vw, 2.2rem);
   letter-spacing: 0;
+}
+
+.edit-header h1 {
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+}
+
+.section-heading h2 {
+  font-size: 1.05rem;
 }
 
 .eyebrow {
@@ -51,11 +65,20 @@ input {
 }
 
 .edit-form,
+.form-section,
 .form-grid,
 .asset-grid,
-.toggle-row {
+.toggle-row,
+label {
   display: grid;
   gap: 16px;
+}
+
+.form-section {
+  border: 1px solid #dce3ea;
+  border-radius: 8px;
+  padding: 16px;
+  background: #fbfcfe;
 }
 
 .form-grid,
@@ -64,8 +87,11 @@ input {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.compact-meta {
+  max-width: 260px;
+}
+
 label {
-  display: grid;
   gap: 8px;
 }
 
@@ -77,7 +103,8 @@ label span,
   font-weight: 800;
 }
 
-input {
+input,
+textarea {
   width: 100%;
   border: 1px solid #cfd8e3;
   border-radius: 8px;
@@ -87,7 +114,12 @@ input {
   outline: none;
 }
 
-input:focus {
+textarea {
+  resize: vertical;
+}
+
+input:focus,
+textarea:focus {
   border-color: #2e86dd;
   box-shadow: 0 0 0 3px rgba(46, 134, 221, 0.12);
 }
@@ -112,17 +144,30 @@ small {
 
 .asset-upload img {
   width: 100%;
-  max-height: 150px;
+  max-height: 160px;
   object-fit: contain;
   border-radius: 8px;
   background: #fff;
   padding: 8px;
 }
 
-.form-actions {
-  display: flex;
-  justify-content: flex-end;
+.gallery-preview {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
   gap: 10px;
+}
+
+.gallery-preview img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border: 1px solid #dce3ea;
+  border-radius: 8px;
+  object-fit: cover;
+  background: #edf2f7;
+}
+
+.form-actions {
+  justify-content: flex-end;
   flex-wrap: wrap;
 }
 
@@ -162,10 +207,15 @@ small {
   }
 
   .edit-header,
+  .section-heading,
   .form-grid,
   .asset-grid,
   .toggle-row {
     grid-template-columns: 1fr;
     display: grid;
+  }
+
+  .compact-meta {
+    max-width: none;
   }
 }

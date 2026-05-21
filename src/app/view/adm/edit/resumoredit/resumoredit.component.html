@@ -12,22 +12,64 @@
     </header>
 
     <form class="edit-form" (ngSubmit)="editItem()" [formGroup]="editar" #formDir="ngForm">
-      <label>
-        <span>Periodo</span>
-        <input type="text" id="titler" placeholder="Ex: 2020 - 2024" formControlName="titler" required>
-        <small *ngIf="isInvalidControl('titler')">Informe o periodo.</small>
-      </label>
+      <section class="form-grid">
+        <label>
+          <span>Periodo</span>
+          <input type="text" id="titler" placeholder="Ex: 2020 - 2024" formControlName="titler" required>
+          <small *ngIf="isInvalidControl('titler')">Informe o periodo.</small>
+        </label>
+
+        <label>
+          <span>Ordem</span>
+          <input type="number" id="orderr" formControlName="orderr">
+        </label>
+      </section>
+
+      <section class="form-grid">
+        <label>
+          <span>Experiencia</span>
+          <input type="text" id="descr" placeholder="Nome da experiencia" formControlName="descr" required>
+          <small *ngIf="isInvalidControl('descr')">Informe a descricao.</small>
+        </label>
+
+        <label>
+          <span>Empresa ou contexto</span>
+          <input type="text" id="companyr" placeholder="Empresa, projeto ou cliente" formControlName="companyr">
+        </label>
+      </section>
+
+      <section class="form-grid">
+        <label>
+          <span>Localizacao</span>
+          <input type="text" id="locationr" placeholder="Cidade, remoto ou pais" formControlName="locationr">
+        </label>
+
+        <label>
+          <span>Cargo ou papel</span>
+          <input type="text" id="roler" placeholder="Front-end, full-stack, designer..." formControlName="roler">
+        </label>
+      </section>
 
       <label>
-        <span>Descricao</span>
-        <input type="text" id="descr" placeholder="Insira a descricao" formControlName="descr" required>
-        <small *ngIf="isInvalidControl('descr')">Informe a descricao.</small>
+        <span>Detalhes</span>
+        <textarea id="detailr" placeholder="Responsabilidades, entregas, stack e resultados" formControlName="detailr" rows="5"></textarea>
       </label>
 
-      <label>
-        <span>Localizacao</span>
-        <input type="text" id="locationr" placeholder="Insira a localizacao" formControlName="locationr" required>
-        <small *ngIf="isInvalidControl('locationr')">Informe a localizacao.</small>
+      <section class="form-grid">
+        <label>
+          <span>Tags</span>
+          <textarea id="tagsText" placeholder="Angular&#10;Firebase&#10;Performance" formControlName="tagsText" rows="4"></textarea>
+        </label>
+
+        <label>
+          <span>Referencia</span>
+          <input type="text" id="linkr" placeholder="https://..." formControlName="linkr">
+        </label>
+      </section>
+
+      <label class="check-card">
+        <input type="checkbox" id="highlightr" formControlName="highlightr">
+        <span>Marcar como destaque na timeline</span>
       </label>
 
       <div class="form-actions">

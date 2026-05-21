@@ -5,28 +5,54 @@
       <div class="topbar"></div>
     </div>
 
-    <section class="resume">
-      <div class="education resumeitem">
+    <section class="resume-timeline">
+      <div class="timeline-lane">
         <div class="resumetop">
           <img loading="lazy" src="./assets/images/education.png" alt="Resume pic">
           <h2>{{ item.lsub }}</h2>
         </div>
-        <div class="resumebox" *ngFor="let education of resumol">
-          <p class="title">{{ education.titlel }}</p>
-          <p class="desc">{{ education.descl }}</p>
-          <p class="location">{{ education.locationl }}</p>
+
+        <div class="timeline-list">
+          <article class="timeline-card" *ngFor="let education of resumol" [ngClass]="{ featured: education.highlightl }">
+            <span class="timeline-dot" aria-hidden="true"></span>
+            <div class="timeline-period">{{ education.titlel }}</div>
+            <h3>{{ education.descl }}</h3>
+            <p class="timeline-meta" *ngIf="getEducationMeta(education).length">
+              {{ getEducationMeta(education).join(' / ') }}
+            </p>
+            <p class="timeline-detail" *ngIf="education.detaill">{{ education.detaill }}</p>
+            <div class="timeline-tags" *ngIf="getTags(education.tagsl).length">
+              <span *ngFor="let tag of getTags(education.tagsl)">{{ tag }}</span>
+            </div>
+            <a *ngIf="education.linkl" [href]="education.linkl" target="_blank" rel="noopener noreferrer">
+              Ver referencia
+            </a>
+          </article>
         </div>
       </div>
 
-      <div class="experience resumeitem">
+      <div class="timeline-lane">
         <div class="resumetop">
           <img loading="lazy" src="./assets/images/pasta.png" alt="Resume pic">
           <h2>{{ item.rsub }}</h2>
         </div>
-        <div class="resumebox" *ngFor="let experience of resumor">
-          <p class="title">{{ experience.titler }}</p>
-          <p class="desc">{{ experience.descr }}</p>
-          <p class="location">{{ experience.locationr }}</p>
+
+        <div class="timeline-list">
+          <article class="timeline-card work" *ngFor="let experience of resumor" [ngClass]="{ featured: experience.highlightr }">
+            <span class="timeline-dot" aria-hidden="true"></span>
+            <div class="timeline-period">{{ experience.titler }}</div>
+            <h3>{{ experience.descr }}</h3>
+            <p class="timeline-meta" *ngIf="getExperienceMeta(experience).length">
+              {{ getExperienceMeta(experience).join(' / ') }}
+            </p>
+            <p class="timeline-detail" *ngIf="experience.detailr">{{ experience.detailr }}</p>
+            <div class="timeline-tags" *ngIf="getTags(experience.tagsr).length">
+              <span *ngFor="let tag of getTags(experience.tagsr)">{{ tag }}</span>
+            </div>
+            <a *ngIf="experience.linkr" [href]="experience.linkr" target="_blank" rel="noopener noreferrer">
+              Ver referencia
+            </a>
+          </article>
         </div>
       </div>
     </section>

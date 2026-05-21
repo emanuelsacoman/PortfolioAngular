@@ -16,7 +16,7 @@
         <label class="toggle-card">
           <span>
             <mat-icon>star</mat-icon>
-            Favorito
+            Destaque na lista
           </span>
           <mat-slide-toggle class="custom-slide-toggle" formControlName="star" id="star" name="star">
             {{ editar.get('star')?.value ? 'Sim' : 'Nao' }}
@@ -26,7 +26,7 @@
         <label class="toggle-card">
           <span>
             <mat-icon>task_alt</mat-icon>
-            Projeto finalizado
+            Projeto publicado
           </span>
           <mat-slide-toggle class="custom-slide-toggle" formControlName="inProgress" id="inProgress" name="inProgress">
             {{ editar.get('inProgress')?.value ? 'Sim' : 'Nao' }}
@@ -34,31 +34,133 @@
         </label>
       </section>
 
-      <div class="form-grid">
-        <label>
-          <span>Titulo do projeto</span>
-          <input type="text" id="titulo" placeholder="Insira o titulo do projeto" formControlName="titulo" required>
-          <small *ngIf="isInvalidControl('titulo')">Informe o titulo.</small>
-        </label>
+      <section class="form-section">
+        <div class="section-heading">
+          <p class="eyebrow">Base</p>
+          <h2>Identidade do projeto</h2>
+        </div>
+
+        <div class="form-grid">
+          <label>
+            <span>Titulo do projeto</span>
+            <input type="text" id="titulo" placeholder="Nome do projeto" formControlName="titulo" required>
+            <small *ngIf="isInvalidControl('titulo')">Informe o titulo.</small>
+          </label>
+
+          <label>
+            <span>Subtitulo curto</span>
+            <input type="text" id="subtitulo" placeholder="Uma frase de impacto" formControlName="subtitulo">
+          </label>
+
+          <label>
+            <span>Tipo</span>
+            <input type="text" id="tipo" placeholder="Web app, landing page, game..." formControlName="tipo">
+          </label>
+
+          <label>
+            <span>Periodo</span>
+            <input type="text" id="periodo" placeholder="2024, 2023 - 2024..." formControlName="periodo">
+          </label>
+
+          <label>
+            <span>Funcao</span>
+            <input type="text" id="funcao" placeholder="Front-end, Full-stack..." formControlName="funcao">
+          </label>
+
+          <label>
+            <span>Cliente ou contexto</span>
+            <input type="text" id="cliente" placeholder="Pessoal, freelance, estudo..." formControlName="cliente">
+          </label>
+        </div>
+      </section>
+
+      <section class="form-section">
+        <div class="section-heading">
+          <p class="eyebrow">Historia</p>
+          <h2>Leitura na home</h2>
+        </div>
 
         <label>
-          <span>Link do projeto</span>
-          <input type="text" id="link" placeholder="https://..." formControlName="link" required>
-          <small *ngIf="isInvalidControl('link')">Informe o link.</small>
-        </label>
-      </div>
-
-      <section class="asset-grid">
-        <label class="asset-upload">
-          <span>Imagem do projeto</span>
-          <input type="file" id="imagem1" formControlName="imagem1" accept="image/*" (change)="uploadFile1($event)">
-          <img *ngIf="!imagem1" [src]="projeto && projeto.projectImg" alt="Imagem do projeto">
+          <span>Descricao completa</span>
+          <textarea id="descricao" placeholder="Problema, solucao, escolhas tecnicas e resultado" formControlName="descricao" rows="6"></textarea>
         </label>
 
-        <label class="asset-upload">
-          <span>Icone da tecnologia</span>
-          <input type="file" id="imagem2" formControlName="imagem2" accept="image/*" (change)="uploadFile2($event)">
-          <img *ngIf="!imagem2" [src]="projeto && projeto.badge" alt="Icone da tecnologia">
+        <div class="form-grid">
+          <label>
+            <span>Tecnologias</span>
+            <textarea id="tecnologiasText" placeholder="Angular&#10;Firebase&#10;CSS" formControlName="tecnologiasText" rows="5"></textarea>
+          </label>
+
+          <label>
+            <span>Destaques</span>
+            <textarea id="destaquesText" placeholder="Autenticacao&#10;Painel administrativo&#10;SEO tecnico" formControlName="destaquesText" rows="5"></textarea>
+          </label>
+        </div>
+      </section>
+
+      <section class="form-section">
+        <div class="section-heading">
+          <p class="eyebrow">Links</p>
+          <h2>Acoes do popup</h2>
+        </div>
+
+        <div class="form-grid">
+          <label>
+            <span>Link principal</span>
+            <input type="text" id="link" placeholder="https://..." formControlName="link">
+          </label>
+
+          <label>
+            <span>Texto do botao principal</span>
+            <input type="text" id="ctaLabel" placeholder="Abrir projeto" formControlName="ctaLabel">
+          </label>
+
+          <label>
+            <span>Repositorio</span>
+            <input type="text" id="repositorio" placeholder="https://github.com/..." formControlName="repositorio">
+          </label>
+
+          <label>
+            <span>Case ou documentacao</span>
+            <input type="text" id="caseStudy" placeholder="https://..." formControlName="caseStudy">
+          </label>
+        </div>
+      </section>
+
+      <section class="form-section">
+        <div class="section-heading">
+          <p class="eyebrow">Midia</p>
+          <h2>Card e galeria</h2>
+        </div>
+
+        <section class="asset-grid">
+          <label class="asset-upload">
+            <span>Imagem do projeto</span>
+            <input type="file" id="imagem1" formControlName="imagem1" accept="image/*" (change)="uploadFile1($event)">
+            <img *ngIf="!imagem1" [src]="projeto && projeto.projectImg" alt="Imagem do projeto">
+          </label>
+
+          <label class="asset-upload">
+            <span>Icone da tecnologia</span>
+            <input type="file" id="imagem2" formControlName="imagem2" accept="image/*" (change)="uploadFile2($event)">
+            <img *ngIf="!imagem2" [src]="projeto && projeto.badge" alt="Icone da tecnologia">
+          </label>
+        </section>
+
+        <label>
+          <span>Galeria por URL</span>
+          <textarea id="galeriaText" placeholder="https://..." formControlName="galeriaText" rows="5"></textarea>
+        </label>
+
+        <div class="gallery-preview" *ngIf="getGalleryPreview().length">
+          <img *ngFor="let image of getGalleryPreview()" [src]="image" alt="Preview da galeria">
+        </div>
+      </section>
+
+      <section class="form-section compact-meta">
+        <label>
+          <span>Ordem de exibicao</span>
+          <input type="number" id="ordem" formControlName="ordem">
         </label>
       </section>
 

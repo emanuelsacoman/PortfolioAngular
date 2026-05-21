@@ -231,8 +231,8 @@ export class IndexComponent implements OnInit, OnDestroy {
     this.loadCollection(this.firebaseService.obterTodosSobre(), (items: Sobre[]) => this.sobre = items, () => this.sobreLoaded = true);
     this.loadCollection(this.firebaseService.obterTodosSobreArea(), (items: Sobrearea[]) => this.sobrearea = items, () => this.sobreAreaLoaded = true);
     this.loadCollection(this.firebaseService.obterTodosResumo(), (items: Resumo[]) => this.resumo = items, () => this.resumoLoaded = true);
-    this.loadCollection(this.firebaseService.obterTodosResumoL(), (items: ResumoL[]) => this.resumol = items, () => this.resumolLoaded = true);
-    this.loadCollection(this.firebaseService.obterTodosResumoR(), (items: ResumoR[]) => this.resumor = items, () => this.resumorLoaded = true);
+    this.loadCollection(this.firebaseService.obterTodosResumoL(), (items: ResumoL[]) => this.resumol = this.sortResumoL(items), () => this.resumolLoaded = true);
+    this.loadCollection(this.firebaseService.obterTodosResumoR(), (items: ResumoR[]) => this.resumor = this.sortResumoR(items), () => this.resumorLoaded = true);
     this.loadCollection(this.firebaseService.obterTodosProjeto(), (items: Projeto[]) => this.projeto = items, () => this.projetoLoaded = true);
     this.loadCollection(this.firebaseService.obterTodosContato(), (items: Contato[]) => this.contato = items, () => this.contatoLoaded = true);
     this.loadCollection(this.firebaseService.obterTodosChip(), (items: Chip[]) => this.chipArray = items, () => this.chipLoaded = true);
@@ -306,12 +306,51 @@ export class IndexComponent implements OnInit, OnDestroy {
 
   private sortProjects(projects: Projetos[]): Projetos[] {
     return [...projects].sort((a, b) => {
+      const orderComparison = this.compareByOrder(a.ordem, b.ordem);
+
+      if (orderComparison !== 0) {
+        return orderComparison;
+      }
+
       if (a.star !== b.star) {
         return a.star ? -1 : 1;
       }
 
       return (a.titulo ?? '').toLowerCase().localeCompare((b.titulo ?? '').toLowerCase());
     });
+  }
+
+  private sortResumoL(items: ResumoL[]): ResumoL[] {
+    return [...items].sort((a, b) => (
+      this.compareByOrder(a.orderl, b.orderl) ||
+      (a.titlel ?? '').toLowerCase().localeCompare((b.titlel ?? '').toLowerCase())
+    ));
+  }
+
+  private sortResumoR(items: ResumoR[]): ResumoR[] {
+    return [...items].sort((a, b) => (
+      this.compareByOrder(a.orderr, b.orderr) ||
+      (a.titler ?? '').toLowerCase().localeCompare((b.titler ?? '').toLowerCase())
+    ));
+  }
+
+  private compareByOrder(a?: number, b?: number): number {
+    const left = Number(a) || 0;
+    const right = Number(b) || 0;
+
+    if (left === 0 && right === 0) {
+      return 0;
+    }
+
+    if (left === 0) {
+      return 1;
+    }
+
+    if (right === 0) {
+      return -1;
+    }
+
+    return left - right;
   }
 
   private shuffle<T>(items: T[]): T[] {

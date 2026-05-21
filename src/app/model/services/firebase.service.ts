@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { finalize } from 'rxjs';
+import { finalize, firstValueFrom } from 'rxjs';
 import { Sobre } from './interfaces/sobre';
 import { Sobrearea } from './interfaces/sobrearea';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
@@ -36,6 +36,12 @@ export class FirebaseService {
   constructor(private firestore: AngularFirestore,
     private storage: AngularFireStorage,
     private db: AngularFireDatabase) { }
+
+    private cleanPayload(payload: Record<string, unknown>): Record<string, unknown> {
+      return Object.fromEntries(
+        Object.entries(payload).filter(([, value]) => value !== undefined)
+      );
+    }
 
     //Sobre
     
@@ -88,8 +94,6 @@ export class FirebaseService {
         ).subscribe();
         return task;
       }
-      
-    
         //SobreArea
         obterTodosSobreArea() {
           return this.firestore.collection(this.PATH2).snapshotChanges();
@@ -142,11 +146,18 @@ export class FirebaseService {
         }
 
         editarResumoL(resumo : ResumoL, id: string) {
-          return this.firestore.collection(this.PATH4).doc(id).update({
+          return this.firestore.collection(this.PATH4).doc(id).update(this.cleanPayload({
             titlel: resumo.titlel,
             descl: resumo.descl,
             locationl: resumo.locationl,
-          });
+            organizationl: resumo.organizationl,
+            levell: resumo.levell,
+            linkl: resumo.linkl,
+            tagsl: resumo.tagsl,
+            detaill: resumo.detaill,
+            orderl: resumo.orderl,
+            highlightl: resumo.highlightl,
+          }));
         }
 
         excluirResumoL(id: string) {
@@ -154,11 +165,18 @@ export class FirebaseService {
         } 
 
         cadastrarResumoL(resumo : ResumoL) {
-          return this.firestore.collection(this.PATH4).add({
+          return this.firestore.collection(this.PATH4).add(this.cleanPayload({
             titlel: resumo.titlel,
             descl: resumo.descl,
             locationl: resumo.locationl,
-          });
+            organizationl: resumo.organizationl,
+            levell: resumo.levell,
+            linkl: resumo.linkl,
+            tagsl: resumo.tagsl,
+            detaill: resumo.detaill,
+            orderl: resumo.orderl,
+            highlightl: resumo.highlightl,
+          }));
         }
         //ResumoL
 
@@ -168,11 +186,18 @@ export class FirebaseService {
         }
 
         editarResumoR(resumo : ResumoR, id: string) {
-          return this.firestore.collection(this.PATH5).doc(id).update({
+          return this.firestore.collection(this.PATH5).doc(id).update(this.cleanPayload({
             titler: resumo.titler,
             descr: resumo.descr,
             locationr: resumo.locationr,
-          });
+            companyr: resumo.companyr,
+            roler: resumo.roler,
+            linkr: resumo.linkr,
+            tagsr: resumo.tagsr,
+            detailr: resumo.detailr,
+            orderr: resumo.orderr,
+            highlightr: resumo.highlightr,
+          }));
         }
 
         excluirResumoR(id: string) {
@@ -180,11 +205,18 @@ export class FirebaseService {
         } 
 
         cadastrarResumoR(resumo : ResumoR) {
-          return this.firestore.collection(this.PATH5).add({
+          return this.firestore.collection(this.PATH5).add(this.cleanPayload({
             titler: resumo.titler,
             descr: resumo.descr,
             locationr: resumo.locationr,
-          });
+            companyr: resumo.companyr,
+            roler: resumo.roler,
+            linkr: resumo.linkr,
+            tagsr: resumo.tagsr,
+            detailr: resumo.detailr,
+            orderr: resumo.orderr,
+            highlightr: resumo.highlightr,
+          }));
         }
         //ResumoR
       
@@ -196,14 +228,27 @@ export class FirebaseService {
       }
 
       editarProjetos(projetos : Projetos, id: string) {
-        return this.firestore.collection(this.PATH6).doc(id).update({
+        return this.firestore.collection(this.PATH6).doc(id).update(this.cleanPayload({
           titulo: projetos.titulo,
           projectImg: projetos.projectImg,
           badge: projetos.badge,
           link: projetos.link,
           inProgress: projetos.inProgress,
           star: projetos.star,
-        });
+          subtitulo: projetos.subtitulo,
+          descricao: projetos.descricao,
+          tecnologias: projetos.tecnologias,
+          galeria: projetos.galeria,
+          repositorio: projetos.repositorio,
+          caseStudy: projetos.caseStudy,
+          periodo: projetos.periodo,
+          tipo: projetos.tipo,
+          funcao: projetos.funcao,
+          cliente: projetos.cliente,
+          destaques: projetos.destaques,
+          ordem: projetos.ordem,
+          ctaLabel: projetos.ctaLabel,
+        }));
       }
 
       excluirProjetos(id: string) {
@@ -211,14 +256,27 @@ export class FirebaseService {
       } 
 
       cadastrarProjetos(projetos : Projetos) {
-        return this.firestore.collection(this.PATH6).add({
+        return this.firestore.collection(this.PATH6).add(this.cleanPayload({
           titulo: projetos.titulo,
           projectImg: projetos.projectImg,
           badge: projetos.badge,
           link: projetos.link,
           inProgress: projetos.inProgress,
           star: projetos.star,
-        });
+          subtitulo: projetos.subtitulo,
+          descricao: projetos.descricao,
+          tecnologias: projetos.tecnologias,
+          galeria: projetos.galeria,
+          repositorio: projetos.repositorio,
+          caseStudy: projetos.caseStudy,
+          periodo: projetos.periodo,
+          tipo: projetos.tipo,
+          funcao: projetos.funcao,
+          cliente: projetos.cliente,
+          destaques: projetos.destaques,
+          ordem: projetos.ordem,
+          ctaLabel: projetos.ctaLabel,
+        }));
       }
 
       uploadImageProjeto1(imagem: any, itens: Projetos){
@@ -270,6 +328,31 @@ export class FirebaseService {
           ).subscribe();
           return task;
         }
+
+      async uploadProjectAsset(imagem: any, itens: Projetos, field: 'projectImg' | 'badge'): Promise<void> {
+        const file = imagem?.item(0);
+
+        if (!file || file.type.split('/')[0] !== 'image') {
+          throw new Error('Tipo de arquivo nao suportado.');
+        }
+
+        const path = `images/${itens.titulo}_${field}_${file.name}`;
+        const fileRef = this.storage.ref(path);
+        await this.storage.upload(path, file);
+        const uploadFileURL = await firstValueFrom(fileRef.getDownloadURL());
+
+        if (field === 'projectImg') {
+          itens.projectImg = uploadFileURL;
+        } else {
+          itens.badge = uploadFileURL;
+        }
+
+        if (!itens.id) {
+          await this.cadastrarProjetos(itens);
+        } else {
+          await this.editarProjetos(itens, itens.id);
+        }
+      }
 
         //Projeto
         editarProjeto(projeto : Projeto, id: string) {
@@ -552,4 +635,3 @@ export class FirebaseService {
 
     }
 
-    

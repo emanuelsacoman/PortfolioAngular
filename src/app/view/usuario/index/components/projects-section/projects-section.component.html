@@ -5,17 +5,15 @@
   </div>
 
   <div class="projects">
-    <div
+    <article
       class="project"
       *ngFor="let project of projetos"
       [style.background-image]="'url(' + project.projectImg + ')'">
-      <a
-        [href]="getProjectLink(project)"
-        [attr.target]="project.inProgress ? '_blank' : null"
-        [attr.rel]="project.inProgress ? 'noopener noreferrer' : null"
-        [attr.aria-disabled]="!project.inProgress"
-        [attr.aria-label]="project.titulo"
-        (click)="preventUnavailableProject($event, project)">
+      <button
+        type="button"
+        class="project-open"
+        [attr.aria-label]="'Abrir detalhes de ' + project.titulo"
+        (click)="openProject(project)">
         <div class="icon-right">
           <div class="star" *ngIf="project.star">
             <img loading="lazy" src="./assets/images/star.gif" alt="Star">
@@ -32,8 +30,103 @@
           </div>
         </div>
 
-        <div class="title">{{ project.titulo }}</div>
-      </a>
-    </div>
+        <div class="project-card-copy">
+          <div class="title">{{ project.titulo }}</div>
+          <p *ngIf="project.subtitulo">{{ project.subtitulo }}</p>
+          <span *ngIf="project.tipo || project.periodo">
+            {{ project.tipo }}<ng-container *ngIf="project.tipo && project.periodo"> / </ng-container>{{ project.periodo }}
+          </span>
+        </div>
+      </button>
+    </article>
   </div>
+</div>
+
+<div class="project-modal-backdrop" *ngIf="selectedProject as project" (click)="closeProject()">
+  <section
+    class="project-modal"
+    role="dialog"
+    aria-modal="true"
+    [attr.aria-label]="project.titulo"
+    (click)="$event.stopPropagation()">
+    <button type="button" class="project-modal-close" aria-label="Fechar detalhes" (click)="closeProject()">x</button>
+
+    <div class="project-modal-hero" [style.background-image]="'url(' + project.projectImg + ')'">
+      <div class="project-modal-title">
+        <img *ngIf="project.badge" [src]="project.badge" alt="Badge">
+        <div>
+          <p>{{ project.tipo || 'Projeto' }}</p>
+          <h2>{{ project.titulo }}</h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-modal-body" [ngClass]="{ 'without-meta': !hasProjectMeta(project) }">
+      <div class="project-modal-main">
+        <p class="project-summary">{{ getProjectSummary(project) }}</p>
+        <p class="project-description" *ngIf="project.descricao">{{ project.descricao }}</p>
+
+        <div class="project-highlight-list" *ngIf="getList(project.destaques).length">
+          <strong>Destaques</strong>
+          <ul>
+            <li *ngFor="let item of getList(project.destaques)">{{ item }}</li>
+          </ul>
+        </div>
+
+        <div class="project-techs" *ngIf="getList(project.tecnologias).length">
+          <span *ngFor="let tech of getList(project.tecnologias)">{{ tech }}</span>
+        </div>
+      </div>
+
+      <aside class="project-modal-aside" *ngIf="hasProjectMeta(project)">
+        <dl>
+          <div *ngIf="project.periodo">
+            <dt>Periodo</dt>
+            <dd>{{ project.periodo }}</dd>
+          </div>
+          <div *ngIf="project.funcao">
+            <dt>Funcao</dt>
+            <dd>{{ project.funcao }}</dd>
+          </div>
+          <div *ngIf="project.cliente">
+            <dt>Contexto</dt>
+            <dd>{{ project.cliente }}</dd>
+          </div>
+          <div *ngIf="project.tipo">
+            <dt>Tipo</dt>
+            <dd>{{ project.tipo }}</dd>
+          </div>
+        </dl>
+      </aside>
+
+      <div class="project-gallery" *ngIf="getProjectGallery(project).length">
+        <img *ngFor="let image of getProjectGallery(project)" [src]="image" [alt]="project.titulo">
+      </div>
+
+      <div class="project-actions">
+        <a
+          *ngIf="getProjectLink(project) as projectLink"
+          [href]="projectLink"
+          target="_blank"
+          rel="noopener noreferrer">
+          {{ getPrimaryActionLabel(project) }}
+        </a>
+        <a
+          *ngIf="project.repositorio"
+          [href]="project.repositorio"
+          target="_blank"
+          rel="noopener noreferrer">
+          Repositorio
+        </a>
+        <a
+          *ngIf="project.caseStudy"
+          [href]="project.caseStudy"
+          target="_blank"
+          rel="noopener noreferrer">
+          Case
+        </a>
+        <span class="project-unavailable" *ngIf="!project.inProgress">Em progresso</span>
+      </div>
+    </div>
+  </section>
 </div>

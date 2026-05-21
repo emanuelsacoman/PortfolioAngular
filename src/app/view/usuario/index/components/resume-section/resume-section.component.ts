@@ -17,4 +17,27 @@ export class ResumeSectionComponent {
   @Input() resumor: ResumoR[] = [];
   @Input() chipArray: Chip[] = [];
   @Input() skillBars: SkillBar[] = [];
+
+  getEducationMeta(item: ResumoL): string[] {
+    return [item.organizationl, item.locationl, item.levell].filter(Boolean);
+  }
+
+  getExperienceMeta(item: ResumoR): string[] {
+    return [item.companyr, item.locationr, item.roler].filter(Boolean);
+  }
+
+  getTags(tags?: string[] | string): string[] {
+    if (Array.isArray(tags)) {
+      return tags.filter(Boolean);
+    }
+
+    if (!tags) {
+      return [];
+    }
+
+    return tags
+      .split(/\r?\n|,/)
+      .map((tag) => tag.trim())
+      .filter(Boolean);
+  }
 }

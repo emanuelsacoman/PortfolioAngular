@@ -503,6 +503,17 @@ button {
   color: #718096;
 }
 
+.timeline-item em {
+  justify-self: flex-start;
+  border-radius: 999px;
+  padding: 3px 8px;
+  background: #e7f7ef;
+  color: #14714c;
+  font-size: 0.72rem;
+  font-style: normal;
+  font-weight: 800;
+}
+
 .chip-list button {
   display: inline-flex;
   align-items: center;
@@ -550,6 +561,7 @@ button {
   background: linear-gradient(180deg, rgba(9, 14, 20, 0.12), rgba(9, 14, 20, 0.78));
 }
 
+.project-admin-copy,
 .project-admin-card strong,
 .project-admin-card .status-pill,
 .project-admin-card .project-badge {
@@ -557,10 +569,40 @@ button {
   z-index: 1;
 }
 
-.project-admin-card strong {
+.project-admin-copy {
+  display: grid;
+  gap: 6px;
   max-width: calc(100% - 44px);
+}
+
+.project-admin-card strong {
   font-size: 1.1rem;
   overflow-wrap: anywhere;
+}
+
+.project-admin-copy small {
+  color: rgba(255, 255, 255, 0.84);
+  line-height: 1.35;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.project-admin-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.project-admin-meta em {
+  border-radius: 999px;
+  padding: 3px 8px;
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+  font-size: 0.72rem;
+  font-style: normal;
+  font-weight: 800;
 }
 
 .status-pill {

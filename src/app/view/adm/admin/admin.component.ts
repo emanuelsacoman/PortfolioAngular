@@ -146,21 +146,25 @@ export class AdminComponent {
       });
 
       this.firebase.obterTodosResumoL().subscribe((res) => {
-        this.resumol = res.map((resumol) => {
-          return {
-            id: resumol.payload.doc.id,
-            ...(resumol.payload.doc.data() as any),
-          } as ResumoL;
-        });
+        this.resumol = res
+          .map((resumol) => {
+            return {
+              id: resumol.payload.doc.id,
+              ...(resumol.payload.doc.data() as any),
+            } as ResumoL;
+          })
+          .sort((a, b) => this.compareResumoL(a, b));
       });
 
       this.firebase.obterTodosResumoR().subscribe((res) => {
-        this.resumor = res.map((resumor) => {
-          return {
-            id: resumor.payload.doc.id,
-            ...(resumor.payload.doc.data() as any),
-          } as ResumoR;
-        });
+        this.resumor = res
+          .map((resumor) => {
+            return {
+              id: resumor.payload.doc.id,
+              ...(resumor.payload.doc.data() as any),
+            } as ResumoR;
+          })
+          .sort((a, b) => this.compareResumoR(a, b));
       });
 
       this.firebase.obterTodosProjetos().subscribe((res) => {
@@ -171,13 +175,7 @@ export class AdminComponent {
               ...(projeto.payload.doc.data() as any),
             } as Projetos;
           })
-          .sort((a, b) => {
-            if (a.star === b.star) {
-              if (!a.titulo || !b.titulo) return 0;
-              return a.titulo.toLowerCase().localeCompare(b.titulo.toLowerCase());
-            }
-            return a.star ? -1 : 1;
-          });
+          .sort((a, b) => this.compareProjetos(a, b));
       });      
 
       this.firebase.obterTodosSlider().subscribe((res) => {
@@ -448,6 +446,7 @@ export class AdminComponent {
 
   addresumol(){
     const create: ResumoL = new ResumoL("","","","");
+    create.orderl = this.resumol.length + 1;
     this.firebase.cadastrarResumoL(create);
   }
 
@@ -459,6 +458,7 @@ export class AdminComponent {
 
   addresumor(){
     const create: ResumoR = new ResumoR("","","","");
+    create.orderr = this.resumor.length + 1;
     this.firebase.cadastrarResumoR(create);
   }
 
@@ -479,6 +479,7 @@ export class AdminComponent {
 
   cadastrarProjeto(){
     const create: Projetos = new Projetos("","","","","", false, false);
+    create.ordem = this.projetos.length + 1;
     this.firebase.cadastrarProjetos(create);
   }
 
@@ -795,5 +796,48 @@ export class AdminComponent {
           });
       }
     });
+  }
+
+  private compareResumoL(a: ResumoL, b: ResumoL): number {
+    return this.compareByOrder(a.orderl, b.orderl) ||
+      (a.titlel ?? '').toLowerCase().localeCompare((b.titlel ?? '').toLowerCase());
+  }
+
+  private compareResumoR(a: ResumoR, b: ResumoR): number {
+    return this.compareByOrder(a.orderr, b.orderr) ||
+      (a.titler ?? '').toLowerCase().localeCompare((b.titler ?? '').toLowerCase());
+  }
+
+  private compareProjetos(a: Projetos, b: Projetos): number {
+    const orderComparison = this.compareByOrder(a.ordem, b.ordem);
+
+    if (orderComparison !== 0) {
+      return orderComparison;
+    }
+
+    if (a.star !== b.star) {
+      return a.star ? -1 : 1;
+    }
+
+    return (a.titulo ?? '').toLowerCase().localeCompare((b.titulo ?? '').toLowerCase());
+  }
+
+  private compareByOrder(a?: number, b?: number): number {
+    const left = Number(a) || 0;
+    const right = Number(b) || 0;
+
+    if (left === 0 && right === 0) {
+      return 0;
+    }
+
+    if (left === 0) {
+      return 1;
+    }
+
+    if (right === 0) {
+      return -1;
+    }
+
+    return left - right;
   }
 }
