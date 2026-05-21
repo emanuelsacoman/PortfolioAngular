@@ -114,6 +114,7 @@ export class IndexComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.setPageMetadata();
     this.applyHolidayFlags();
+    this.registerProfileVisit();
     this.loadPortfolioData();
   }
 
@@ -229,13 +230,13 @@ export class IndexComponent implements OnInit, OnDestroy {
 
   private loadPortfolioData(): void {
     this.loadCollection(this.firebaseService.obterTodosSobre(), (items: Sobre[]) => this.sobre = items, () => this.sobreLoaded = true);
-    this.loadCollection(this.firebaseService.obterTodosSobreArea(), (items: Sobrearea[]) => this.sobrearea = items, () => this.sobreAreaLoaded = true);
+    this.loadCollection(this.firebaseService.obterTodosSobreArea(), (items: Sobrearea[]) => this.sobrearea = this.sortSobreArea(items), () => this.sobreAreaLoaded = true);
     this.loadCollection(this.firebaseService.obterTodosResumo(), (items: Resumo[]) => this.resumo = items, () => this.resumoLoaded = true);
     this.loadCollection(this.firebaseService.obterTodosResumoL(), (items: ResumoL[]) => this.resumol = this.sortResumoL(items), () => this.resumolLoaded = true);
     this.loadCollection(this.firebaseService.obterTodosResumoR(), (items: ResumoR[]) => this.resumor = this.sortResumoR(items), () => this.resumorLoaded = true);
     this.loadCollection(this.firebaseService.obterTodosProjeto(), (items: Projeto[]) => this.projeto = items, () => this.projetoLoaded = true);
     this.loadCollection(this.firebaseService.obterTodosContato(), (items: Contato[]) => this.contato = items, () => this.contatoLoaded = true);
-    this.loadCollection(this.firebaseService.obterTodosChip(), (items: Chip[]) => this.chipArray = items, () => this.chipLoaded = true);
+    this.loadCollection(this.firebaseService.obterTodosChip(), (items: Chip[]) => this.chipArray = this.sortChip(items), () => this.chipLoaded = true);
     this.loadCollection(
       this.firebaseService.obterTodosProjetos(),
       (items: Projetos[]) => this.projetos = this.sortProjects(items),
@@ -243,10 +244,16 @@ export class IndexComponent implements OnInit, OnDestroy {
     );
     this.loadCollection(
       this.firebaseService.obterTodosSlider(),
-      (items: Slider[]) => this.slider = this.shuffle(items),
+      (items: Slider[]) => this.slider = this.sortSlider(items),
       () => this.sliderLoaded = true,
     );
     this.loadProfileCollection();
+  }
+
+  private registerProfileVisit(): void {
+    this.firebaseService.registrarVisitaPerfil().catch((error) => {
+      console.error('Erro ao registrar visita ao perfil:', error);
+    });
   }
 
   private loadCollection<T>(
@@ -320,6 +327,13 @@ export class IndexComponent implements OnInit, OnDestroy {
     });
   }
 
+  private sortSobreArea(items: Sobrearea[]): Sobrearea[] {
+    return [...items].sort((a, b) => (
+      this.compareByOrder(a.ordem, b.ordem) ||
+      (a.ctitle ?? '').toLowerCase().localeCompare((b.ctitle ?? '').toLowerCase())
+    ));
+  }
+
   private sortResumoL(items: ResumoL[]): ResumoL[] {
     return [...items].sort((a, b) => (
       this.compareByOrder(a.orderl, b.orderl) ||
@@ -331,6 +345,17 @@ export class IndexComponent implements OnInit, OnDestroy {
     return [...items].sort((a, b) => (
       this.compareByOrder(a.orderr, b.orderr) ||
       (a.titler ?? '').toLowerCase().localeCompare((b.titler ?? '').toLowerCase())
+    ));
+  }
+
+  private sortSlider(items: Slider[]): Slider[] {
+    return [...items].sort((a, b) => this.compareByOrder(a.ordem, b.ordem));
+  }
+
+  private sortChip(items: Chip[]): Chip[] {
+    return [...items].sort((a, b) => (
+      this.compareByOrder(a.ordem, b.ordem) ||
+      (a.chipname ?? '').toLowerCase().localeCompare((b.chipname ?? '').toLowerCase())
     ));
   }
 
@@ -351,17 +376,6 @@ export class IndexComponent implements OnInit, OnDestroy {
     }
 
     return left - right;
-  }
-
-  private shuffle<T>(items: T[]): T[] {
-    const shuffled = [...items];
-
-    for (let i = shuffled.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
-
-    return shuffled;
   }
 
   private setPageMetadata(): void {

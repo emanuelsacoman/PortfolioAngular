@@ -33,6 +33,10 @@
         <mat-icon>account_circle</mat-icon>
         <span>Perfil</span>
       </button>
+      <button type="button" class="nav-item" (click)="selectOption('theme')" [ngClass]="{ selected: isSelected('theme') }">
+        <mat-icon>palette</mat-icon>
+        <span>Aparencia</span>
+      </button>
       <button type="button" class="nav-item" (click)="selectOption('email')" [ngClass]="{ selected: isSelected('email') }">
         <mat-icon>mail</mat-icon>
         <span>Mensagens</span>
@@ -61,6 +65,7 @@
         <h2 *ngIf="isSelected('projetos')">Catalogo de projetos</h2>
         <h2 *ngIf="isSelected('contato')">Area de contato</h2>
         <h2 *ngIf="isSelected('profile')">Perfil publico</h2>
+        <h2 *ngIf="isSelected('theme')">Aparencia do site</h2>
         <h2 *ngIf="isSelected('email')">Caixa de mensagens</h2>
       </div>
       <div class="header-meta">
@@ -69,64 +74,158 @@
       </div>
     </header>
 
-    <section class="dashboard-grid" *ngIf="isSelected('dashboard')" aria-label="Resumo do admin">
-      <article class="metric-card">
-        <span class="metric-icon blue"><mat-icon>folder_open</mat-icon></span>
-        <p>Projetos</p>
-        <strong>{{ projetos.length }}</strong>
-        <small>{{ (projeto && projeto.titleProjeto) || 'Projetos publicados' }}</small>
-      </article>
+    <section class="dashboard-shell" *ngIf="isSelected('dashboard') && (items | async) as dashboardMessages" aria-label="Resumo do admin">
+      <section class="dashboard-hero panel-card">
+        <div>
+          <p class="eyebrow">Visao geral</p>
+          <h3>{{ profileDataTitle }}</h3>
+          <p>Conteudo publicado, mensagens recebidas e pontos de atencao do portfolio.</p>
+        </div>
+        <div class="dashboard-score" [attr.aria-label]="'Saude do conteudo ' + contentHealthScore + '%'">
+          <strong>{{ contentHealthScore }}%</strong>
+          <span>Saude do conteudo</span>
+        </div>
+      </section>
 
-      <article class="metric-card">
-        <span class="metric-icon green"><mat-icon>design_services</mat-icon></span>
-        <p>Areas sobre</p>
-        <strong>{{ sobreareaArray.length }}</strong>
-        <small>Blocos exibidos na home</small>
-      </article>
+      <section class="dashboard-metrics">
+        <article class="metric-card">
+          <span class="metric-icon blue"><mat-icon>folder_open</mat-icon></span>
+          <p>Projetos</p>
+          <strong>{{ projetos.length }}</strong>
+          <small>{{ publishedProjectsCount }} publicados, {{ draftProjectsCount }} em progresso</small>
+        </article>
 
-      <article class="metric-card">
-        <span class="metric-icon amber"><mat-icon>sell</mat-icon></span>
-        <p>Conhecimentos</p>
-        <strong>{{ chipArray.length }}</strong>
-        <small>Chips de tecnologia</small>
-      </article>
+        <article class="metric-card">
+          <span class="metric-icon green"><mat-icon>home_repair_service</mat-icon></span>
+          <p>Home</p>
+          <strong>{{ homeBlocksCount }}</strong>
+          <small>{{ sobreParagraphCount }} paragrafos e {{ slider.length }} imagens</small>
+        </article>
 
-      <article class="metric-card" *ngIf="items | async as dashboardMessages">
-        <span class="metric-icon red"><mat-icon>mail</mat-icon></span>
-        <p>Mensagens</p>
-        <strong>{{ dashboardMessages.length }}</strong>
-        <small>Recebidas pelo formulario</small>
-      </article>
+        <article class="metric-card">
+          <span class="metric-icon amber"><mat-icon>psychology</mat-icon></span>
+          <p>Curriculo</p>
+          <strong>{{ resumol.length + resumor.length }}</strong>
+          <small>{{ chipArray.length }} conhecimentos cadastrados</small>
+        </article>
 
-      <article class="panel-card wide">
+        <article class="metric-card urgent" (click)="selectOption('email')" tabindex="0" role="button">
+          <span class="metric-icon red"><mat-icon>mark_email_unread</mat-icon></span>
+          <p>Mensagens</p>
+          <strong>{{ unreadMessagesCount(dashboardMessages) }}</strong>
+          <small>{{ dashboardMessages.length }} no total</small>
+        </article>
+      </section>
+
+      <article class="panel-card dashboard-chart-panel">
         <div class="panel-title">
           <div>
-            <p class="eyebrow">Atalhos</p>
-            <h3>Editar conteudo principal</h3>
+            <p class="eyebrow">Audiencia</p>
+            <h3>Visitantes do perfil</h3>
+          </div>
+          <div class="chart-summary">
+            <span><strong>{{ todayProfileVisitors }}</strong> hoje</span>
+            <span><strong>{{ totalProfileVisitors }}</strong> nos ultimos dias</span>
           </div>
         </div>
-        <div class="quick-actions">
-          <button type="button" (click)="selectOption('sobre')"><mat-icon>article</mat-icon>Sobre</button>
-          <button type="button" (click)="selectOption('resumo')"><mat-icon>work_history</mat-icon>Resumo</button>
-          <button type="button" (click)="selectOption('projetos')"><mat-icon>inventory_2</mat-icon>Projetos</button>
-          <button type="button" (click)="selectOption('email')"><mat-icon>mail</mat-icon>Mensagens</button>
+        <div class="visit-chart" *ngIf="profileVisitStats.length; else emptyVisits">
+          <p-chart type="line" [data]="visitChartData" [options]="visitChartOptions"></p-chart>
         </div>
+        <ng-template #emptyVisits>
+          <p class="empty-state">As visitas comecam a aparecer depois que alguem acessar a home.</p>
+        </ng-template>
       </article>
 
-      <article class="panel-card">
-        <div class="panel-title">
-          <div>
-            <p class="eyebrow">Destaques</p>
-            <h3>Projetos favoritos</h3>
+      <section class="dashboard-panels">
+        <article class="panel-card dashboard-main-panel">
+          <div class="panel-title">
+            <div>
+              <p class="eyebrow">Atalhos</p>
+              <h3>Editar conteudo principal</h3>
+            </div>
           </div>
-        </div>
-        <div class="compact-list">
-          <button type="button" *ngFor="let item of projetos | slice:0:5" (click)="editarProjeto(item)">
-            <span>{{ item.titulo || 'Projeto sem titulo' }}</span>
-            <mat-icon *ngIf="item.star">star</mat-icon>
-          </button>
-        </div>
-      </article>
+          <div class="quick-actions">
+            <button type="button" (click)="selectOption('sobre')"><mat-icon>article</mat-icon>Sobre</button>
+            <button type="button" (click)="selectOption('resumo')"><mat-icon>work_history</mat-icon>Resumo</button>
+            <button type="button" (click)="selectOption('projetos')"><mat-icon>inventory_2</mat-icon>Projetos</button>
+            <button type="button" (click)="selectOption('profile')"><mat-icon>account_circle</mat-icon>Perfil</button>
+          </div>
+
+          <div class="dashboard-status-grid">
+            <button type="button" class="status-card" (click)="selectOption('projetos')">
+              <span><mat-icon>star</mat-icon>Projetos em destaque</span>
+              <strong>{{ featuredProjectsCount }}</strong>
+            </button>
+            <button type="button" class="status-card" (click)="selectOption('sobre')">
+              <span><mat-icon>design_services</mat-icon>Servicos na home</span>
+              <strong>{{ sobreareaArray.length }}</strong>
+            </button>
+            <button type="button" class="status-card" (click)="selectOption('contato')">
+              <span><mat-icon>alternate_email</mat-icon>Paragrafos de contato</span>
+              <strong>{{ contactParagraphCount }}</strong>
+            </button>
+          </div>
+        </article>
+
+        <article class="panel-card">
+          <div class="panel-title">
+            <div>
+              <p class="eyebrow">Inbox</p>
+              <h3>Mensagens recentes</h3>
+            </div>
+            <button class="icon-action" type="button" (click)="selectOption('email')"><mat-icon>open_in_new</mat-icon></button>
+          </div>
+          <div class="message-mini-list" *ngIf="recentMessages(dashboardMessages).length; else emptyInbox">
+            <button type="button" *ngFor="let item of recentMessages(dashboardMessages)" (click)="selectOption('email')">
+              <mat-icon>{{ item.visualizado ? 'drafts' : 'mail' }}</mat-icon>
+              <span>
+                <strong>{{ item.nome || 'Sem nome' }}</strong>
+                <small>{{ item.titulo || 'Sem assunto' }}</small>
+              </span>
+              <time>{{ convertTimestampToDate(item.timestamp) | date: 'dd/MM' }}</time>
+            </button>
+          </div>
+          <ng-template #emptyInbox>
+            <p class="empty-state">Nenhuma mensagem recebida ainda.</p>
+          </ng-template>
+        </article>
+      </section>
+
+      <section class="dashboard-panels secondary">
+        <article class="panel-card">
+          <div class="panel-title">
+            <div>
+              <p class="eyebrow">Portfolio</p>
+              <h3>Projetos prioritarios</h3>
+            </div>
+          </div>
+          <div class="project-health-list">
+            <button type="button" *ngFor="let item of priorityProjects" (click)="editarProjeto(item)">
+              <span>
+                <strong>{{ item.titulo || 'Projeto sem titulo' }}</strong>
+                <small>{{ item.tipo || 'Sem tipo' }}<ng-container *ngIf="item.periodo"> / {{ item.periodo }}</ng-container></small>
+              </span>
+              <em [ngClass]="{ active: item.inProgress }">{{ item.inProgress ? 'Publicado' : 'Em progresso' }}</em>
+            </button>
+          </div>
+        </article>
+
+        <article class="panel-card">
+          <div class="panel-title">
+            <div>
+              <p class="eyebrow">Checklist</p>
+              <h3>Pontos importantes</h3>
+            </div>
+          </div>
+          <div class="checklist">
+            <span [ngClass]="{ done: projetos.length > 0 }"><mat-icon>{{ projetos.length > 0 ? 'check_circle' : 'radio_button_unchecked' }}</mat-icon>Projetos cadastrados</span>
+            <span [ngClass]="{ done: featuredProjectsCount > 0 }"><mat-icon>{{ featuredProjectsCount > 0 ? 'check_circle' : 'radio_button_unchecked' }}</mat-icon>Destaques definidos</span>
+            <span [ngClass]="{ done: sobreParagraphCount > 0 }"><mat-icon>{{ sobreParagraphCount > 0 ? 'check_circle' : 'radio_button_unchecked' }}</mat-icon>Texto Sobre preenchido</span>
+            <span [ngClass]="{ done: contactParagraphCount > 0 }"><mat-icon>{{ contactParagraphCount > 0 ? 'check_circle' : 'radio_button_unchecked' }}</mat-icon>Contato com texto publico</span>
+            <span [ngClass]="{ done: chipArray.length >= 4 }"><mat-icon>{{ chipArray.length >= 4 ? 'check_circle' : 'radio_button_unchecked' }}</mat-icon>Conhecimentos suficientes</span>
+          </div>
+        </article>
+      </section>
     </section>
 
     <section class="panel-card" *ngIf="isSelected('sobre')">
@@ -152,14 +251,17 @@
             <input type="text" id="subtitle" placeholder="Insira o subtitulo" formControlName="subtitle" required>
           </label>
         </div>
-        <div class="form-grid two">
-          <label>
-            <span>Texto 1</span>
-            <textarea id="txt1" placeholder="Insira o primeiro texto" formControlName="txt1" required rows="5"></textarea>
-          </label>
-          <label>
-            <span>Texto 2</span>
-            <textarea id="txt2" placeholder="Insira o segundo texto" formControlName="txt2" required rows="5"></textarea>
+        <div class="paragraph-manager" formArrayName="paragrafos">
+          <div class="panel-title compact">
+            <h3>Paragrafos</h3>
+            <button class="icon-action" type="button" (click)="addSobreParagraph()"><mat-icon>add</mat-icon></button>
+          </div>
+          <label *ngFor="let paragraph of sobreParagraphs.controls; let i = index">
+            <span>Paragrafo {{ i + 1 }}</span>
+            <textarea [id]="'sobre-paragrafo-' + i" placeholder="Insira o texto" [formControlName]="i" required rows="5"></textarea>
+            <button class="remove-inline-action" type="button" aria-label="Remover paragrafo" (click)="removeSobreParagraph(i)">
+              <mat-icon>delete</mat-icon>
+            </button>
           </label>
         </div>
         <button class="save-action" type="submit"><mat-icon>save</mat-icon>Salvar sobre</button>
@@ -173,8 +275,9 @@
           <h3>Areas exibidas na home</h3>
         </div>
       </div>
-      <div class="service-grid">
-        <button type="button" class="service-card" *ngFor="let area of sobreareaArray" (click)="editar(area)">
+      <div class="service-grid" cdkDropList cdkDropListOrientation="mixed" [cdkDropListData]="sobreareaArray" (cdkDropListDropped)="dropSobreArea($event)">
+        <button type="button" class="service-card" *ngFor="let area of sobreareaArray" cdkDrag (click)="editar(area)">
+          <mat-icon class="drag-handle" cdkDragHandle (click)="$event.stopPropagation()">drag_indicator</mat-icon>
           <img src="{{ area.cImg }}" alt="{{ area.ctitle }}">
           <span>{{ area.ctitle || 'Area sem titulo' }}</span>
           <small>{{ area.cdesc }}</small>
@@ -197,8 +300,9 @@
           </label>
           <button class="primary-action" type="submit"><mat-icon>add_photo_alternate</mat-icon>Adicionar</button>
         </form>
-        <div class="media-strip">
-          <button type="button" *ngFor="let sliders of slider" (click)="deletarCarousel(sliders)">
+        <div class="media-strip" cdkDropList cdkDropListOrientation="mixed" [cdkDropListData]="slider" (cdkDropListDropped)="dropSlider($event)">
+          <button type="button" *ngFor="let sliders of slider" cdkDrag (click)="deletarCarousel(sliders)">
+            <mat-icon class="drag-handle" cdkDragHandle (click)="$event.stopPropagation()">drag_indicator</mat-icon>
             <img src="{{ sliders.Carouselimg }}" alt="Imagem do carrossel">
             <mat-icon>delete</mat-icon>
           </button>
@@ -243,24 +347,26 @@
       <div class="section-divider"></div>
 
       <section class="timeline-board">
-        <div class="timeline-column">
+        <div class="timeline-column" cdkDropList [cdkDropListData]="resumol" (cdkDropListDropped)="dropResumoL($event)">
           <div class="panel-title compact">
             <h3>Formacao</h3>
             <button class="icon-action" type="button" (click)="addresumol()"><mat-icon>add</mat-icon></button>
           </div>
-          <button class="timeline-item" type="button" *ngFor="let item of resumol" (click)="editarl(item)">
+          <button class="timeline-item" type="button" *ngFor="let item of resumol" cdkDrag (click)="editarl(item)">
+            <mat-icon class="drag-handle" cdkDragHandle (click)="$event.stopPropagation()">drag_indicator</mat-icon>
             <strong>{{ item.descl || 'Formacao sem titulo' }}</strong>
             <span>{{ item.titlel }}<ng-container *ngIf="item.organizationl"> · {{ item.organizationl }}</ng-container></span>
             <small>{{ item.locationl }}<ng-container *ngIf="item.levell"> · {{ item.levell }}</ng-container></small>
             <em *ngIf="item.highlightl">Destaque</em>
           </button>
         </div>
-        <div class="timeline-column">
+        <div class="timeline-column" cdkDropList [cdkDropListData]="resumor" (cdkDropListDropped)="dropResumoR($event)">
           <div class="panel-title compact">
             <h3>Experiencia</h3>
             <button class="icon-action" type="button" (click)="addresumor()"><mat-icon>add</mat-icon></button>
           </div>
-          <button class="timeline-item" type="button" *ngFor="let item of resumor" (click)="editarr(item)">
+          <button class="timeline-item" type="button" *ngFor="let item of resumor" cdkDrag (click)="editarr(item)">
+            <mat-icon class="drag-handle" cdkDragHandle (click)="$event.stopPropagation()">drag_indicator</mat-icon>
             <strong>{{ item.descr || 'Experiencia sem titulo' }}</strong>
             <span>{{ item.titler }}<ng-container *ngIf="item.companyr"> · {{ item.companyr }}</ng-container></span>
             <small>{{ item.locationr }}<ng-container *ngIf="item.roler"> · {{ item.roler }}</ng-container></small>
@@ -279,11 +385,14 @@
           </label>
           <button class="primary-action" type="submit"><mat-icon>add</mat-icon>Adicionar</button>
         </form>
-        <div class="chip-list">
-          <button type="button" *ngFor="let chip of chipArray" (click)="deleteChip(chip.id)">
+        <div class="chip-list" cdkDropList cdkDropListOrientation="mixed" [cdkDropListData]="chipArray" (cdkDropListDropped)="dropChip($event)">
+          <span class="chip-item" *ngFor="let chip of chipArray" cdkDrag>
+            <mat-icon class="drag-handle" cdkDragHandle>drag_indicator</mat-icon>
             {{ chip.chipname }}
-            <mat-icon>close</mat-icon>
-          </button>
+            <button type="button" aria-label="Excluir conhecimento" (click)="deleteChip(chip.id)">
+              <mat-icon>close</mat-icon>
+            </button>
+          </span>
         </div>
       </section>
     </section>
@@ -308,24 +417,33 @@
         <button class="save-action" type="submit"><mat-icon>save</mat-icon>Salvar titulo</button>
       </form>
 
-      <div class="projects-admin-grid">
+      <div class="projects-admin-grid" cdkDropList cdkDropListOrientation="mixed" [cdkDropListData]="projetos" (cdkDropListDropped)="dropProjetos($event)">
         <button
           type="button"
           class="project-admin-card"
-          [style.background-image]="'url(' + item.projectImg + ')'"
           *ngFor="let item of projetos"
+          cdkDrag
           (click)="editarProjeto(item)">
-          <span class="status-pill" *ngIf="item.star"><mat-icon>star</mat-icon>Destaque</span>
-          <span class="status-pill muted" *ngIf="!item.inProgress"><mat-icon>construction</mat-icon>Em progresso</span>
+          <mat-icon class="drag-handle" cdkDragHandle (click)="$event.stopPropagation()">drag_indicator</mat-icon>
+          <span class="project-admin-thumb">
+            <img [src]="item.projectImg" alt="">
+          </span>
           <span class="project-admin-copy">
-            <strong>{{ item.titulo || 'Projeto sem titulo' }}</strong>
+            <span class="project-admin-title-row">
+              <strong>{{ item.titulo || 'Projeto sem titulo' }}</strong>
+              <img class="project-badge" src="{{ item.badge }}" alt="Badge">
+            </span>
             <small *ngIf="item.subtitulo">{{ item.subtitulo }}</small>
             <span class="project-admin-meta">
               <em *ngIf="item.tipo">{{ item.tipo }}</em>
               <em *ngIf="item.periodo">{{ item.periodo }}</em>
             </span>
+            <span class="project-admin-status">
+              <span class="status-pill" *ngIf="item.star"><mat-icon>star</mat-icon>Destaque</span>
+              <span class="status-pill muted" *ngIf="!item.inProgress"><mat-icon>construction</mat-icon>Em progresso</span>
+              <span class="status-pill active" *ngIf="item.inProgress"><mat-icon>public</mat-icon>Publicado</span>
+            </span>
           </span>
-          <img class="project-badge" src="{{ item.badge }}" alt="Badge">
         </button>
       </div>
     </section>
@@ -343,10 +461,19 @@
           <span>Titulo</span>
           <input type="text" id="titleContato" placeholder="Insira o titulo" formControlName="titleContato" required>
         </label>
-        <label>
-          <span>Descricao</span>
-          <textarea id="descContato" placeholder="Insira a descricao" formControlName="descContato" required rows="6"></textarea>
-        </label>
+        <div class="paragraph-manager" formArrayName="paragrafosContato">
+          <div class="panel-title compact">
+            <h3>Paragrafos</h3>
+            <button class="icon-action" type="button" (click)="addContatoParagraph()"><mat-icon>add</mat-icon></button>
+          </div>
+          <label *ngFor="let paragraph of contatoParagraphs.controls; let i = index">
+            <span>Paragrafo {{ i + 1 }}</span>
+            <textarea [id]="'contato-paragrafo-' + i" placeholder="Insira a descricao" [formControlName]="i" required rows="5"></textarea>
+            <button class="remove-inline-action" type="button" aria-label="Remover paragrafo" (click)="removeContatoParagraph(i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </label>
+        </div>
         <button class="save-action" type="submit"><mat-icon>save</mat-icon>Salvar contato</button>
       </form>
     </section>
@@ -365,23 +492,34 @@
           <input type="text" id="text" placeholder="Insira o texto" formControlName="text" required>
         </label>
 
-        <div class="form-grid four">
-          <label>
-            <span>Instagram</span>
-            <input type="text" id="instagram" placeholder="Usuario do Instagram" formControlName="instagram" required>
-          </label>
-          <label>
-            <span>Facebook</span>
-            <input type="text" id="facebook" placeholder="Link do Facebook" formControlName="facebook" required>
-          </label>
-          <label>
-            <span>LinkedIn</span>
-            <input type="text" id="linkedin" placeholder="Link do LinkedIn" formControlName="linkedin" required>
-          </label>
-          <label>
-            <span>GitHub</span>
-            <input type="text" id="github" placeholder="Usuario do GitHub" formControlName="github" required>
-          </label>
+        <div class="social-manager" formArrayName="socialLinks">
+          <div class="panel-title compact">
+            <div>
+              <p class="eyebrow">Redes sociais</p>
+              <h3>Links exibidos no card</h3>
+            </div>
+            <button class="icon-action" type="button" (click)="addSocialLink()"><mat-icon>add</mat-icon></button>
+          </div>
+
+          <div class="social-link-row" *ngFor="let social of socialLinks.controls; let i = index" [formGroupName]="i">
+            <label>
+              <span>Rede</span>
+              <select formControlName="network" (change)="onSocialNetworkChange(i)">
+                <option *ngFor="let option of socialNetworkOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </label>
+            <label>
+              <span>Nome exibido</span>
+              <input type="text" placeholder="Ex: GitHub" formControlName="label" required>
+            </label>
+            <label>
+              <span>Link ou usuario</span>
+              <input type="text" placeholder="https://... ou usuario" formControlName="value" required>
+            </label>
+            <button class="remove-inline-action social-remove" type="button" aria-label="Remover rede social" (click)="removeSocialLink(i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
         </div>
 
         <div class="form-grid four">
@@ -451,6 +589,78 @@
         </label>
 
         <button class="save-action" type="submit"><mat-icon>save</mat-icon>Salvar perfil</button>
+      </form>
+    </section>
+
+    <section class="panel-card theme-panel" *ngIf="isSelected('theme') && themeEdit">
+      <div class="panel-title">
+        <div>
+          <p class="eyebrow">Design system</p>
+          <h3>Cores globais do site</h3>
+        </div>
+        <button class="ghost-action" type="button" (click)="resetTheme()">
+          <mat-icon>restart_alt</mat-icon>
+          Restaurar padrao
+        </button>
+      </div>
+
+      <form class="admin-form theme-form" [formGroup]="themeEdit" (ngSubmit)="editTheme()">
+        <label>
+          <span>Nome do tema</span>
+          <input type="text" formControlName="name" placeholder="Ex: Azul profissional">
+        </label>
+
+        <section class="theme-editor-layout">
+          <div class="theme-sections">
+            <section class="theme-color-group" *ngFor="let section of themeSections">
+              <div class="panel-title compact">
+                <h3>{{ section.title }}</h3>
+              </div>
+              <div class="theme-color-grid">
+                <label class="color-field" *ngFor="let field of section.fields">
+                  <span>{{ field.label }}</span>
+                  <div class="color-input-row">
+                    <input type="color" [formControlName]="field.key" (input)="previewTheme()">
+                    <input type="text" [formControlName]="field.key" (input)="previewTheme()">
+                  </div>
+                </label>
+              </div>
+            </section>
+          </div>
+
+          <aside class="theme-preview">
+            <p class="eyebrow">Preview</p>
+            <div class="preview-browser" [style.background]="themeEdit.get('adminBackground')?.value">
+              <div class="preview-sidebar" [style.background]="themeEdit.get('sidebarBackground')?.value" [style.color]="themeEdit.get('sidebarText')?.value">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+              <div class="preview-content">
+                <div class="preview-hero" [style.background]="'linear-gradient(135deg, ' + themeEdit.get('pageBackgroundStart')?.value + ', ' + themeEdit.get('pageBackgroundEnd')?.value + ')'">
+                  <strong [style.color]="themeEdit.get('surface')?.value">Portfolio</strong>
+                </div>
+                <div class="preview-card" [style.background]="themeEdit.get('surface')?.value" [style.color]="themeEdit.get('text')?.value" [style.border-color]="themeEdit.get('border')?.value">
+                  <span [style.background]="themeEdit.get('primary')?.value"></span>
+                  <p>Texto principal</p>
+                  <small [style.color]="themeEdit.get('muted')?.value">Texto secundario</small>
+                </div>
+                <div class="preview-actions">
+                  <span [style.background]="themeEdit.get('primary')?.value"></span>
+                  <span [style.background]="themeEdit.get('secondary')?.value"></span>
+                  <span [style.background]="themeEdit.get('danger')?.value"></span>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </section>
+
+        <div class="form-actions">
+          <button class="save-action" type="submit">
+            <mat-icon>save</mat-icon>
+            Salvar tema
+          </button>
+        </div>
       </form>
     </section>
 

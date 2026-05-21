@@ -5,8 +5,7 @@
       <div class="topbar"></div>
     </div>
     <div class="txttop2">
-      <p>{{ item.txt1 }}</p>
-      <p>{{ item.txt2 }}</p>
+      <p *ngFor="let paragraph of getParagraphs(item)">{{ paragraph }}</p>
     </div>
     <h2>{{ item.subtitle }}</h2>
   </div>

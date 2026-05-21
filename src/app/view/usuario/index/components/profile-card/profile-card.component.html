@@ -25,17 +25,13 @@
         <div class="name">{{ githubProfile.name }}</div>
         <div class="liltext">{{ perfil.text }}</div>
         <div class="itenspic">
-          <a href="https://instagram.com/{{ perfil.instagram }}" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-            <img src="./assets/images/instagram.png" alt="Instagram" loading="lazy">
-          </a>
-          <a href="{{ perfil.facebook }}" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-            <img src="./assets/images/facebook.png" alt="Facebook" loading="lazy">
-          </a>
-          <a href="{{ perfil.linkedin }}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-            <img src="./assets/images/linkedin.png" alt="LinkedIn" loading="lazy">
-          </a>
-          <a href="https://github.com/{{ perfil.github }}" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-            <img src="./assets/images/github.png" alt="GitHub" loading="lazy">
+          <a
+            *ngFor="let social of getSocialLinks(perfil)"
+            [href]="getSocialUrl(social)"
+            target="_blank"
+            rel="noopener noreferrer"
+            [attr.aria-label]="social.label">
+            <img [src]="getSocialIcon(social.network)" [alt]="social.label" loading="lazy">
           </a>
         </div>
       </section>

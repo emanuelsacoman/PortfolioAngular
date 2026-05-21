@@ -40,6 +40,37 @@ export class ProjetoeditComponent {
 
   initProject() {
     this.projeto = history.state.projeto;
+
+    if (!this.projeto?.id) {
+      this.editar = this.formBuilder.group({
+        titulo: ['', [Validators.required]],
+        subtitulo: [''],
+        descricao: [''],
+        link: [''],
+        repositorio: [''],
+        caseStudy: [''],
+        periodo: [''],
+        tipo: [''],
+        funcao: [''],
+        cliente: [''],
+        tecnologiasText: [''],
+        destaquesText: [''],
+        galeriaText: [''],
+        ordem: [0],
+        ctaLabel: [''],
+        inProgress: [false],
+        star: [false],
+        imagem1: [null],
+        imagem2: [null],
+      });
+      this.toast.error({
+        detail: 'Erro!',
+        summary: 'Selecione um projeto pelo painel administrativo.',
+        duration: 5000
+      });
+      this.router.navigate(['/admin']);
+      return;
+    }
     console.log('Informacoes do projeto:', this.projeto);
     this.titulo = this.projeto?.titulo;
     this.link = this.projeto?.link;

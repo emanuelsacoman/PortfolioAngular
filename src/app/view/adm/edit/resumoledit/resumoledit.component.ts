@@ -36,6 +36,28 @@ export class ResumoleditComponent {
 
   initResumo() {
     this.resumol = history.state.resumol;
+
+    if (!this.resumol?.id) {
+      this.editar = this.formBuilder.group({
+        titlel: ['', [Validators.required]],
+        descl: ['', [Validators.required]],
+        locationl: [''],
+        organizationl: [''],
+        levell: [''],
+        linkl: [''],
+        tagsText: [''],
+        detaill: [''],
+        orderl: [0],
+        highlightl: [false],
+      });
+      this.toast.error({
+        detail: 'Erro!',
+        summary: 'Selecione uma formacao pelo painel administrativo.',
+        duration: 5000
+      });
+      this.router.navigate(['/admin']);
+      return;
+    }
     console.log('Informacoes da formacao:', this.resumol);
     this.titlel = this.resumol?.titlel;
     this.descl = this.resumol?.descl;

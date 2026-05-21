@@ -1,7 +1,9 @@
 body{
     min-height: 100dvh;
-    color: black;
-    background-color: #505050;
+    color: var(--color-text);
+    background:
+        radial-gradient(circle at 18% 16%, rgba(255, 255, 255, 0.16), transparent 28%),
+        linear-gradient(-70deg, var(--site-bg-start) 0%, var(--site-bg-middle) 72%, var(--site-bg-end) 100%);
     position: sticky;
     font-family: Arial, "Helvetica Neue", sans-serif;
 }
@@ -20,7 +22,7 @@ input{
 
 .titulo {
     font-size: clamp(24px, 5vw, 36px);
-    color: #2e86dd;
+    color: var(--color-primary);
 }
 
 .form {
@@ -32,7 +34,7 @@ input{
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    background-color: #f7f6f8;
+    background-color: var(--color-surface);
 }
 
 .item {
@@ -46,17 +48,17 @@ input{
     min-width: fit-content;
     height: auto;
     font-size: clamp(15px, 2vw, 24px);
-    background-color: #e2e2e2;
+    background-color: var(--color-surface-soft);
 }
 
 .sendButton:active{
-    background-color: #2e86dd;
+    background-color: var(--color-primary);
     color: #fff;
 }
 
 p, .alert {
-    color: red;
-    background-color: #e2e2e2;
+    color: var(--color-danger);
+    background-color: var(--color-danger-soft);
     height: 100%;
     display: flex;
     align-items: center;
@@ -79,7 +81,7 @@ p, .alert {
 .form-group{
     display: flex;
     align-items: center;
-    background-color: #343137;
+    background-color: var(--color-text);
     height: 100%;
 }
 

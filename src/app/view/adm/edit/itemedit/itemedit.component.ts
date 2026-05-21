@@ -34,6 +34,21 @@ export class ItemeditComponent implements OnInit {
 
   initSobreArea(){
     this.sobrearea = history.state.sobrearea;
+
+    if (!this.sobrearea?.id) {
+      this.editar = this.formBuilder.group({
+        ctitle: ['', [Validators.required]],
+        cdesc: ['', [Validators.required]],
+        imagem: [null],
+      });
+      this.toast.error({
+        detail: 'Erro!',
+        summary: 'Selecione um item pelo painel administrativo.',
+        duration: 5000
+      });
+      this.router.navigate(['/admin']);
+      return;
+    }
     console.log('Informações da área sobre:', this.sobrearea);
     this.ctitle = this.sobrearea?.ctitle;
     this.cdesc = this.sobrearea?.cdesc;
@@ -50,7 +65,8 @@ export class ItemeditComponent implements OnInit {
         const new_part: Sobrearea = {
             ...this.editar.value,
             id: this.sobrearea.id,
-            cImg: this.sobrearea.cImg
+            cImg: this.sobrearea.cImg,
+            ordem: this.sobrearea.ordem ?? 0
         };
 
         const handleUpdate = () => {

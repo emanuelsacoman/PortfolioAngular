@@ -19,6 +19,14 @@ export class ContactSectionComponent {
     return this.contato[0]?.titleContato ?? 'Contato';
   }
 
+  getParagraphs(item: Contato): string[] {
+    if (item.paragrafosContato?.length) {
+      return item.paragrafosContato.filter((paragraph) => Boolean(paragraph?.trim()));
+    }
+
+    return [item.descContato].filter((paragraph) => Boolean(paragraph?.trim()));
+  }
+
   isInvalidControl(controlName: string): boolean {
     const control = this.contactForm.get(controlName);
     return Boolean(control && control.invalid && (control.dirty || control.touched));

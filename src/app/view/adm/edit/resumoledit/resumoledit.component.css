@@ -1,9 +1,16 @@
 :host {
   display: block;
   min-height: 100vh;
-  background: #f4f6f8;
-  color: #1f2933;
+  overflow-x: hidden;
+  background: var(--admin-bg);
+  color: var(--color-text);
   font-family: "Open Sans", Arial, sans-serif;
+}
+
+:host *,
+:host *::before,
+:host *::after {
+  box-sizing: border-box;
 }
 
 button,
@@ -17,14 +24,17 @@ textarea {
   display: grid;
   place-items: center;
   padding: 24px;
+  overflow-x: hidden;
 }
 
 .edit-panel {
   width: min(860px, 100%);
-  border: 1px solid #dce3ea;
+  min-width: 0;
+  max-width: 100%;
+  border: 1px solid var(--color-border);
   border-radius: 8px;
   padding: 22px;
-  background: #fff;
+  background: var(--color-surface);
   box-shadow: 0 14px 36px rgba(21, 26, 33, 0.08);
 }
 
@@ -33,6 +43,7 @@ textarea {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
+  min-width: 0;
   margin-bottom: 22px;
 }
 
@@ -40,11 +51,12 @@ textarea {
   margin: 0;
   font-size: clamp(1.5rem, 3vw, 2.2rem);
   letter-spacing: 0;
+  overflow-wrap: anywhere;
 }
 
 .eyebrow {
   margin: 0 0 4px;
-  color: #6b7a90;
+  color: var(--color-muted);
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -55,12 +67,14 @@ textarea {
 label {
   display: grid;
   gap: 16px;
+  min-width: 0;
 }
 
 .form-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
   gap: 16px;
+  min-width: 0;
 }
 
 label {
@@ -68,7 +82,7 @@ label {
 }
 
 label span {
-  color: #405066;
+  color: var(--color-text-soft);
   font-size: 0.84rem;
   font-weight: 800;
 }
@@ -76,11 +90,12 @@ label span {
 input,
 textarea {
   width: 100%;
-  border: 1px solid #cfd8e3;
+  min-width: 0;
+  border: 1px solid var(--color-border);
   border-radius: 8px;
   padding: 12px;
-  background: #fff;
-  color: #1f2933;
+  background: var(--color-surface);
+  color: var(--color-text);
   outline: none;
 }
 
@@ -90,22 +105,22 @@ textarea {
 
 input:focus,
 textarea:focus {
-  border-color: #2e86dd;
-  box-shadow: 0 0 0 3px rgba(46, 134, 221, 0.12);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-soft);
 }
 
 small {
-  color: #ad3542;
+  color: var(--color-danger);
 }
 
 .check-card {
   display: flex;
   align-items: center;
   gap: 10px;
-  border: 1px solid #dce3ea;
+  border: 1px solid var(--color-border);
   border-radius: 8px;
   padding: 12px;
-  background: #f8fafc;
+  background: var(--color-surface-soft);
 }
 
 .check-card input {
@@ -136,18 +151,18 @@ small {
 }
 
 .ghost-action {
-  background: #edf2f7;
-  color: #263445;
+  background: var(--color-surface-soft);
+  color: var(--color-text);
 }
 
 .save-action {
-  background: #1d7a58;
+  background: var(--color-secondary);
   color: #fff;
 }
 
 .delete-action {
-  background: #ffe8eb;
-  color: #ad3542;
+  background: var(--color-danger-soft);
+  color: var(--color-danger);
 }
 
 @media (max-width: 700px) {

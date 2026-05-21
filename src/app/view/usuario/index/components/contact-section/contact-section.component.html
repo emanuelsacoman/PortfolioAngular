@@ -6,7 +6,7 @@
 
   <div class="formContact">
     <div class="formText" *ngFor="let item of contato">
-      <p>{{ item.descContato }}</p>
+      <p *ngFor="let paragraph of getParagraphs(item)">{{ paragraph }}</p>
     </div>
 
     <div class="onlyForm">

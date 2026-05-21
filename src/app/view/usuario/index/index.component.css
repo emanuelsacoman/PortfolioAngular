@@ -1,9 +1,9 @@
 body {
   min-height: 100dvh;
-  color: #17202a;
+  color: var(--color-text);
   background:
     radial-gradient(circle at 16% 12%, rgba(255, 255, 255, 0.16), transparent 28%),
-    linear-gradient(-70deg, #4d4f52 0%, #505050 72%, #9a9da1 100%);
+    linear-gradient(-70deg, var(--site-bg-start) 0%, var(--site-bg-middle) 72%, var(--site-bg-end) 100%);
   font-family: Arial, "Helvetica Neue", sans-serif;
 }
 
@@ -16,14 +16,14 @@ app-index {
   --profile-column: 320px;
   --nav-column: 86px;
   --page-edge: max(var(--page-pad), calc((100vw - var(--page-max)) / 2 + var(--page-pad)));
-  --accent: #2e86dd;
-  --accent-strong: #1f6fbc;
-  --surface: #f8f8fa;
-  --surface-soft: #ebeef2;
-  --surface-blue: rgba(46, 134, 221, 0.12);
-  --text: #17202a;
-  --muted: #627083;
-  --line: #d9dee6;
+  --accent: var(--color-primary);
+  --accent-strong: var(--color-primary-strong);
+  --surface: var(--color-surface);
+  --surface-soft: var(--color-surface-soft);
+  --surface-blue: var(--color-primary-soft);
+  --text: var(--color-text);
+  --muted: var(--color-muted);
+  --line: var(--color-border);
   --shadow: 0 18px 42px rgba(17, 24, 39, 0.18);
   --soft-shadow: 0 10px 24px rgba(17, 24, 39, 0.10);
   display: block;
@@ -58,7 +58,7 @@ app-index .all h1 {
 app-index .bloco {
   border: 1px solid rgba(255, 255, 255, 0.78);
   border-radius: 8px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(244, 246, 249, 0.98));
+  background: linear-gradient(180deg, var(--color-surface), var(--color-surface-soft));
   box-shadow: var(--soft-shadow);
 }
 
@@ -222,7 +222,7 @@ app-index .pictureBottom .liltext {
   border-radius: 8px;
   padding: 7px 10px;
   background: var(--surface-soft);
-  color: #344154;
+  color: var(--color-text-soft);
   font-size: clamp(0.82rem, 1.2vw, 0.98rem);
   line-height: 1.35;
   overflow-wrap: anywhere;
@@ -257,7 +257,7 @@ app-index .itenspic img {
 app-index .itenspic a:hover,
 app-index .itenspic a:focus-visible {
   background: var(--accent);
-  box-shadow: 0 8px 18px rgba(46, 134, 221, 0.28);
+  box-shadow: 0 8px 18px var(--color-primary-focus);
   transform: translateY(-2px);
   outline: none;
 }
@@ -310,7 +310,7 @@ app-index .local:hover,
 app-index .phone:focus-visible,
 app-index .email:focus-visible,
 app-index .local:focus-visible {
-  background: rgba(46, 134, 221, 0.10);
+  background: var(--color-primary-soft);
   transform: translateX(2px);
   outline: none;
 }
@@ -353,7 +353,7 @@ app-index .lildesc .title {
 
 app-index .lildesc .desc {
   margin: 0;
-  color: #253241;
+  color: var(--color-text);
   font-size: clamp(0.78rem, 1vw, 0.95rem);
   overflow-wrap: anywhere;
 }
@@ -381,7 +381,7 @@ app-index .cv a {
 app-index .cv:hover,
 app-index .cv:focus-within {
   border-color: var(--accent);
-  background: #fff;
+  background: var(--color-surface);
   color: var(--accent-strong);
   transform: translateY(-1px);
 }
@@ -536,7 +536,7 @@ app-index .txttop2 {
 app-index .txttop2 p,
 app-index .formText p {
   margin: 0;
-  color: #273545;
+  color: var(--color-text);
   font-size: clamp(0.95rem, 1.55vw, 1.18rem);
   line-height: 1.58;
   text-align: justify;
@@ -560,12 +560,12 @@ app-index .top .topbar {
   width: min(30%, 220px);
   height: 4px;
   border-radius: 999px;
-  background: linear-gradient(90deg, var(--accent), rgba(46, 134, 221, 0.18));
+  background: linear-gradient(90deg, var(--accent), var(--color-primary-hover));
 }
 
 app-index .wrap h2 {
   margin: 0;
-  color: #1f2c3a;
+  color: var(--color-text);
   font-size: clamp(1.1rem, 2.5vw, 1.8rem);
 }
 
@@ -579,7 +579,7 @@ app-index .area {
   display: flex;
   gap: 14px;
   min-width: 0;
-  border: 1px solid rgba(46, 134, 221, 0.16);
+  border: 1px solid var(--color-primary-hover);
   border-radius: 8px;
   padding: 14px;
   background: var(--surface-blue);
@@ -587,8 +587,8 @@ app-index .area {
 }
 
 app-index .area:hover {
-  border-color: rgba(46, 134, 221, 0.32);
-  background: rgba(46, 134, 221, 0.16);
+  border-color: var(--color-primary-focus);
+  background: var(--color-primary-hover);
   transform: translateY(-2px);
 }
 
@@ -612,14 +612,14 @@ app-index .content {
 }
 
 app-index .contenttitle {
-  color: #1d2a39;
+  color: var(--color-text);
   font-size: clamp(1rem, 1.25vw, 1.25rem);
   font-weight: 850;
   overflow-wrap: anywhere;
 }
 
 app-index .contentdesc {
-  color: #45546a;
+  color: var(--color-text-soft);
   font-size: clamp(0.88rem, 1.05vw, 1rem);
   line-height: 1.45;
   text-align: left;
@@ -628,7 +628,7 @@ app-index .contentdesc {
 app-index .carousel {
   width: 100%;
   overflow: hidden;
-  border: 1px solid rgba(46, 134, 221, 0.16);
+  border: 1px solid var(--color-primary-hover);
   border-radius: 8px;
   background: var(--surface-blue);
 }
@@ -727,23 +727,23 @@ app-index .timeline-list::before {
   left: 5px;
   width: 2px;
   border-radius: 999px;
-  background: linear-gradient(180deg, var(--accent), rgba(46, 134, 221, 0.12));
+  background: linear-gradient(180deg, var(--accent), var(--color-primary-soft));
 }
 
 app-index .timeline-card {
   position: relative;
   display: grid;
   gap: 8px;
-  border: 1px solid rgba(46, 134, 221, 0.16);
+  border: 1px solid var(--color-primary-hover);
   border-radius: 8px;
   padding: 14px;
-  background: rgba(46, 134, 221, 0.10);
+  background: var(--color-primary-soft);
   box-shadow: 0 8px 18px rgba(17, 24, 39, 0.05);
 }
 
 app-index .timeline-card.featured {
-  border-color: rgba(29, 122, 88, 0.32);
-  background: rgba(29, 122, 88, 0.10);
+  border-color: color-mix(in srgb, var(--color-secondary) 32%, transparent);
+  background: var(--color-secondary-soft);
 }
 
 app-index .timeline-dot {
@@ -759,15 +759,15 @@ app-index .timeline-dot {
 }
 
 app-index .timeline-card.featured .timeline-dot {
-  background: #1d7a58;
-  box-shadow: 0 0 0 2px rgba(29, 122, 88, 0.24);
+  background: var(--color-secondary);
+  box-shadow: 0 0 0 2px var(--color-secondary-soft);
 }
 
 app-index .timeline-period {
   justify-self: flex-start;
   border-radius: 999px;
   padding: 4px 9px;
-  background: #fff;
+  background: var(--color-surface);
   color: var(--accent-strong);
   font-size: 0.78rem;
   font-weight: 850;
@@ -780,7 +780,7 @@ app-index .timeline-card ul {
 }
 
 app-index .timeline-card h3 {
-  color: #1f2c3a;
+  color: var(--color-text);
   font-size: clamp(1rem, 1.35vw, 1.18rem);
   line-height: 1.28;
 }
@@ -793,7 +793,7 @@ app-index .timeline-meta {
 }
 
 app-index .timeline-detail {
-  color: #344154;
+  color: var(--color-text-soft);
   font-size: 0.94rem;
   line-height: 1.5;
 }
@@ -807,8 +807,8 @@ app-index .timeline-tags {
 app-index .timeline-tags span {
   border-radius: 999px;
   padding: 4px 9px;
-  background: rgba(255, 255, 255, 0.82);
-  color: #2f3b4a;
+  background: color-mix(in srgb, var(--color-surface) 82%, transparent);
+  color: var(--color-text);
   font-size: 0.78rem;
   font-weight: 850;
 }
@@ -824,7 +824,7 @@ app-index .timeline-card a {
 app-index .resumebox,
 app-index .chart,
 app-index .chips {
-  border: 1px solid rgba(46, 134, 221, 0.16);
+  border: 1px solid var(--color-primary-hover);
   border-radius: 8px;
   background: var(--surface-blue);
 }
@@ -847,7 +847,7 @@ app-index .resumebox .title {
 }
 
 app-index .resumebox .desc {
-  color: #263445;
+  color: var(--color-text);
   font-size: clamp(0.95rem, 1.25vw, 1.08rem);
   line-height: 1.4;
 }
@@ -879,7 +879,7 @@ app-index .skill-label {
   display: flex;
   justify-content: space-between;
   gap: 12px;
-  color: #263445;
+  color: var(--color-text);
   font-size: 0.94rem;
   font-weight: 800;
 }
@@ -899,7 +899,7 @@ app-index .skill-meter span {
   display: block;
   height: 100%;
   border-radius: inherit;
-  background: linear-gradient(90deg, var(--accent), #65b4ff);
+  background: linear-gradient(90deg, var(--accent), color-mix(in srgb, var(--accent) 54%, white));
 }
 
 app-index .chips {
@@ -918,15 +918,15 @@ app-index .cardchip {
   min-height: 34px;
   border-radius: 999px;
   padding: 6px 12px;
-  background: rgba(46, 134, 221, 0.14);
-  color: #1f4f7e;
+  background: var(--color-primary-soft);
+  color: var(--accent-strong);
   font-size: 0.92rem;
   font-weight: 800;
   transition: background 0.16s ease, transform 0.16s ease;
 }
 
 app-index .cardchip:hover {
-  background: rgba(46, 134, 221, 0.24);
+  background: var(--color-primary-hover);
   transform: translateY(-1px);
 }
 
@@ -936,56 +936,49 @@ app-index .cardchip p {
 }
 
 app-index .projects {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 14px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex-basis: auto;
+  gap: 1vh;
 }
 
 app-index .project {
-  container-type: inline-size;
   position: relative;
-  min-height: 230px;
-  border: 1px solid rgba(17, 24, 39, 0.16);
-  border-radius: 8px;
-  overflow: hidden;
+  flex: 1 1 33%;
+  height: 20vh;
+  min-height: 160px;
+  border: solid black 1px;
+  border-radius: 5px;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  box-shadow: 0 12px 26px rgba(17, 24, 39, 0.12);
-  transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
-}
-
-app-index .project::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(8, 13, 20, 0.10), rgba(8, 13, 20, 0.82));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 app-index .project-open {
-  position: relative;
-  z-index: 1;
   width: 100%;
   height: 100%;
-  min-height: 230px;
-  display: grid;
-  align-content: end;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: 0;
-  padding: 18px;
+  padding: 0;
   background: transparent;
-  color: inherit;
   cursor: pointer;
-  text-align: left;
 }
 
 app-index .project:hover {
-  box-shadow: 0 18px 34px rgba(17, 24, 39, 0.18);
-  filter: brightness(1.04);
-  transform: translateY(-3px);
+  flex: 2 1 33%;
+  filter: brightness(120%);
 }
 
 app-index .project-open:focus-visible {
-  outline: 3px solid rgba(46, 134, 221, 0.42);
+  outline: 3px solid var(--color-primary-focus);
   outline-offset: -3px;
 }
 
@@ -1023,42 +1016,34 @@ app-index .icon-right img {
 app-index .project-card-copy {
   position: relative;
   z-index: 3;
-  display: grid;
-  gap: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 app-index .project .title {
-  color: #fff;
-  font-size: clamp(1.1rem, 8cqi, 2.2rem);
-  font-weight: 900;
-  letter-spacing: 0;
-  line-height: 1.02;
-  text-wrap: balance;
-  overflow-wrap: anywhere;
-  hyphens: auto;
+  border-radius: 5px;
+  padding: 5px;
+  color: color-mix(in srgb, var(--project-title-color) 52%, transparent);
+  font-size: clamp(1rem, 5vw, 3rem);
+  font-weight: bold;
+  font-stretch: expanded;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-wrap: nowrap;
+  mix-blend-mode: color-dodge;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke-width: 2px;
+  transition: all 0.2s ease;
 }
 
-@supports not (font-size: 1cqi) {
-  app-index .project .title {
-    font-size: clamp(1.1rem, 3vw, 2.2rem);
-  }
+app-index .project:hover .title {
+  color: var(--project-title-color);
 }
 
 app-index .project-card-copy p,
 app-index .project-card-copy span {
-  margin: 0;
-  color: rgba(255, 255, 255, 0.86);
-  line-height: 1.38;
-}
-
-app-index .project-card-copy p {
-  font-size: 0.94rem;
-}
-
-app-index .project-card-copy span {
-  font-size: 0.8rem;
-  font-weight: 850;
-  text-transform: uppercase;
+  display: none;
 }
 
 app-index .project-modal-backdrop {
@@ -1079,8 +1064,8 @@ app-index .project-modal {
   display: grid;
   grid-template-rows: minmax(220px, 34vh) minmax(0, 1fr);
   border-radius: 8px;
-  background: #fff;
-  color: #17202a;
+  background: var(--color-surface);
+  color: var(--color-text);
   overflow: hidden;
   box-shadow: 0 24px 70px rgba(0, 0, 0, 0.34);
 }
@@ -1095,7 +1080,7 @@ app-index .project-modal-close {
   border: 0;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.92);
-  color: #17202a;
+  color: var(--color-text);
   cursor: pointer;
   font-size: 1.2rem;
   font-weight: 900;
@@ -1173,7 +1158,7 @@ app-index .project-modal-main {
 app-index .project-summary,
 app-index .project-description {
   margin: 0;
-  color: #263445;
+  color: var(--color-text);
   line-height: 1.6;
 }
 
@@ -1185,12 +1170,12 @@ app-index .project-summary {
 app-index .project-highlight-list {
   display: grid;
   gap: 8px;
-  border-left: 3px solid #1d7a58;
+  border-left: 3px solid var(--color-secondary);
   padding-left: 12px;
 }
 
 app-index .project-highlight-list strong {
-  color: #1f2c3a;
+  color: var(--color-text);
 }
 
 app-index .project-highlight-list ul {
@@ -1198,7 +1183,7 @@ app-index .project-highlight-list ul {
   gap: 6px;
   margin: 0;
   padding-left: 18px;
-  color: #344154;
+  color: var(--color-text-soft);
 }
 
 app-index .project-techs {
@@ -1210,8 +1195,8 @@ app-index .project-techs {
 app-index .project-techs span {
   border-radius: 999px;
   padding: 6px 10px;
-  background: rgba(46, 134, 221, 0.12);
-  color: #1f4f7e;
+  background: var(--color-primary-soft);
+  color: var(--accent-strong);
   font-size: 0.82rem;
   font-weight: 850;
 }
@@ -1220,7 +1205,7 @@ app-index .project-modal-aside {
   border: 1px solid var(--line);
   border-radius: 8px;
   padding: 14px;
-  background: #f8fafc;
+  background: var(--color-surface-soft);
 }
 
 app-index .project-modal-aside dl {
@@ -1238,7 +1223,7 @@ app-index .project-modal-aside dt {
 
 app-index .project-modal-aside dd {
   margin: 3px 0 0;
-  color: #263445;
+  color: var(--color-text);
   font-weight: 800;
 }
 
@@ -1255,7 +1240,7 @@ app-index .project-gallery img {
   border: 1px solid var(--line);
   border-radius: 8px;
   object-fit: cover;
-  background: #eef2f7;
+  background: var(--color-surface-soft);
 }
 
 app-index .project-actions {
@@ -1283,13 +1268,13 @@ app-index .project-actions a {
 }
 
 app-index .project-actions a + a {
-  background: #edf2f7;
-  color: #263445;
+  background: var(--color-surface-soft);
+  color: var(--color-text);
 }
 
 app-index .project-unavailable {
-  background: #fff4dd;
-  color: #8a5a00;
+  background: var(--color-warning-soft);
+  color: var(--color-warning);
 }
 
 app-index .formContact {
@@ -1314,7 +1299,7 @@ app-index .form-group {
 }
 
 app-index .form-group label {
-  color: #405066;
+  color: var(--color-text-soft);
   font-size: 0.86rem;
   font-weight: 850;
 }
@@ -1325,8 +1310,8 @@ app-index .form-group textarea {
   border: 1px solid var(--line);
   border-radius: 8px;
   padding: 12px 13px;
-  background: #fff;
-  color: #1f2933;
+  background: var(--color-surface);
+  color: var(--color-text);
   font-family: Arial, "Helvetica Neue", sans-serif;
   font-size: 1rem;
   outline: none;
@@ -1337,7 +1322,7 @@ app-index .form-group textarea {
 app-index .form-group input:focus,
 app-index .form-group textarea:focus {
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(46, 134, 221, 0.12);
+  box-shadow: 0 0 0 3px var(--color-primary-soft);
 }
 
 app-index .sendButton {
@@ -1345,7 +1330,7 @@ app-index .sendButton {
   border: 0;
   border-radius: 8px;
   padding: 12px 22px;
-  background: #2e9d62;
+  background: var(--color-secondary);
   color: #fff;
   font-size: 1rem;
   font-weight: 850;
@@ -1366,7 +1351,7 @@ app-index .sendButton:active {
 
 app-index .error {
   margin: 0;
-  color: #c53030;
+  color: var(--color-danger);
   font-size: 0.8rem;
 }
 
@@ -1433,7 +1418,7 @@ app-index .block2 {
   border-radius: 8px;
   padding: 7px 5px;
   background: var(--surface-soft);
-  color: #243244;
+  color: var(--color-text);
   cursor: pointer;
   transition: background 0.16s ease, color 0.16s ease, transform 0.16s ease;
 }
@@ -1488,7 +1473,7 @@ app-index .loading {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(70deg, #505050, #2e86dd 15%, #707070 50%);
+  background: linear-gradient(70deg, var(--site-bg-middle), var(--color-primary) 15%, var(--site-bg-end) 50%);
   background-size: 200% 200%;
   animation: wave 10s linear infinite;
 }

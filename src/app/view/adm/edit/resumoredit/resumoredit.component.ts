@@ -36,6 +36,28 @@ export class ResumoreditComponent {
 
   initResumo() {
     this.resumor = history.state.resumor;
+
+    if (!this.resumor?.id) {
+      this.editar = this.formBuilder.group({
+        titler: ['', [Validators.required]],
+        descr: ['', [Validators.required]],
+        locationr: [''],
+        companyr: [''],
+        roler: [''],
+        linkr: [''],
+        tagsText: [''],
+        detailr: [''],
+        orderr: [0],
+        highlightr: [false],
+      });
+      this.toast.error({
+        detail: 'Erro!',
+        summary: 'Selecione uma experiencia pelo painel administrativo.',
+        duration: 5000
+      });
+      this.router.navigate(['/admin']);
+      return;
+    }
     console.log('Informacoes da experiencia:', this.resumor);
     this.titler = this.resumor?.titler;
     this.descr = this.resumor?.descr;

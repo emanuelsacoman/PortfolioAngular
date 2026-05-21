@@ -13,4 +13,12 @@ export class AboutSectionComponent {
   @Input() sobre: Sobre[] = [];
   @Input() sobrearea: Sobrearea[] = [];
   @Input() slider: Slider[] = [];
+
+  getParagraphs(item: Sobre): string[] {
+    if (item.paragrafos?.length) {
+      return item.paragrafos.filter((paragraph) => Boolean(paragraph?.trim()));
+    }
+
+    return [item.txt1, item.txt2].filter((paragraph) => Boolean(paragraph?.trim()));
+  }
 }
