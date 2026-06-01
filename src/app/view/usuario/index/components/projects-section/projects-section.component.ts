@@ -43,6 +43,12 @@ export class ProjectsSectionComponent {
     return project.subtitulo || project.descricao || 'Detalhes do projeto disponiveis no portfolio.';
   }
 
+  shouldShowDescription(project: Projetos): boolean {
+    const description = String(project.descricao || '').trim();
+
+    return Boolean(description && description !== this.getProjectSummary(project));
+  }
+
   getProjectGallery(project: Projetos): string[] {
     const images = [project.projectImg, ...this.getList(project.galeria)]
       .map((image) => String(image || '').trim())

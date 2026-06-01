@@ -4,17 +4,19 @@ body {
   background:
     radial-gradient(circle at 16% 12%, rgba(255, 255, 255, 0.16), transparent 28%),
     linear-gradient(-70deg, var(--site-bg-start) 0%, var(--site-bg-middle) 72%, var(--site-bg-end) 100%);
-  font-family: Arial, "Helvetica Neue", sans-serif;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
 }
 
 app-index {
-  --page-max: 1480px;
-  --page-pad: clamp(16px, 3vw, 48px);
-  --page-top: clamp(56px, 9vh, 88px);
-  --page-bottom: 28px;
-  --page-gap: clamp(16px, 2vw, 30px);
-  --profile-column: 320px;
-  --nav-column: 86px;
+  --page-max: 1840px;
+  --page-pad: clamp(18px, 1.6vw, 30px);
+  --page-top: clamp(48px, 6vh, 72px);
+  --page-bottom: clamp(18px, 2.5vh, 28px);
+  --page-gap: clamp(18px, 1.35vw, 26px);
+  --profile-column: 340px;
+  --nav-column: 90px;
   --page-edge: max(var(--page-pad), calc((100vw - var(--page-max)) / 2 + var(--page-pad)));
   --accent: var(--color-primary);
   --accent-strong: var(--color-primary-strong);
@@ -24,8 +26,8 @@ app-index {
   --text: var(--color-text);
   --muted: var(--color-muted);
   --line: var(--color-border);
-  --shadow: 0 18px 42px rgba(17, 24, 39, 0.18);
-  --soft-shadow: 0 10px 24px rgba(17, 24, 39, 0.10);
+  --shadow: 0 22px 48px rgba(13, 19, 28, 0.20);
+  --soft-shadow: 0 14px 34px rgba(13, 19, 28, 0.12);
   display: block;
   min-height: 100dvh;
 }
@@ -56,10 +58,11 @@ app-index .all h1 {
 }
 
 app-index .bloco {
-  border: 1px solid rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.86);
   border-radius: 8px;
   background: linear-gradient(180deg, var(--color-surface), var(--color-surface-soft));
   box-shadow: var(--soft-shadow);
+  backdrop-filter: saturate(1.04);
 }
 
 app-index .profile,
@@ -70,10 +73,10 @@ app-index .desknav {
 }
 
 app-index .profile {
-  --profile-photo: clamp(156px, 26dvh, 244px);
-  --profile-lift: clamp(42px, 7dvh, 64px);
-  --profile-content-gap: clamp(7px, 1.35dvh, 14px);
-  --profile-panel-pad: clamp(8px, 1.45dvh, 12px);
+  --profile-photo: clamp(172px, 27dvh, 252px);
+  --profile-lift: clamp(44px, 5.6dvh, 58px);
+  --profile-content-gap: clamp(8px, 1.45dvh, 15px);
+  --profile-panel-pad: clamp(9px, 1.5dvh, 13px);
   --profile-row-pad: clamp(4px, 0.9dvh, 7px);
   --profile-social-size: clamp(32px, 5.2dvh, 38px);
   --profile-contact-icon: clamp(26px, 4.3dvh, 30px);
@@ -211,8 +214,9 @@ app-index .pictureBottom {
 app-index .pictureBottom .name {
   max-width: 100%;
   color: var(--text);
-  font-size: clamp(1.05rem, 2vw, 1.32rem);
-  font-weight: 800;
+  font-size: clamp(1.16rem, 1.75vw, 1.45rem);
+  font-weight: 900;
+  line-height: 1.08;
   overflow-wrap: anywhere;
 }
 
@@ -223,7 +227,8 @@ app-index .pictureBottom .liltext {
   padding: 7px 10px;
   background: var(--surface-soft);
   color: var(--color-text-soft);
-  font-size: clamp(0.82rem, 1.2vw, 0.98rem);
+  font-size: clamp(0.88rem, 0.9vw, 0.98rem);
+  font-weight: 500;
   line-height: 1.35;
   overflow-wrap: anywhere;
 }
@@ -346,7 +351,7 @@ app-index .lildesc {
 app-index .lildesc .title {
   margin: 0;
   color: var(--muted);
-  font-size: 0.68rem;
+  font-size: 0.7rem;
   font-weight: 800;
   text-transform: uppercase;
 }
@@ -354,7 +359,8 @@ app-index .lildesc .title {
 app-index .lildesc .desc {
   margin: 0;
   color: var(--color-text);
-  font-size: clamp(0.78rem, 1vw, 0.95rem);
+  font-size: clamp(0.84rem, 0.8vw, 0.98rem);
+  line-height: 1.28;
   overflow-wrap: anywhere;
 }
 
@@ -395,8 +401,8 @@ app-index .cvtext {
 
 app-index .cvtext p {
   margin: 0;
-  font-size: 1rem;
-  font-weight: 800;
+  font-size: 1.02rem;
+  font-weight: 900;
   letter-spacing: 0.06em;
 }
 
@@ -417,8 +423,8 @@ app-index .profile .pictureBottom {
 }
 
 app-index .profile .pictureBottom .name {
-  font-size: clamp(1rem, 2.65dvh, 1.32rem);
-  line-height: 1.15;
+  font-size: clamp(1.08rem, 2.9dvh, 1.42rem);
+  line-height: 1.1;
 }
 
 app-index .profile .pictureBottom .liltext {
@@ -510,7 +516,7 @@ app-index .middle {
   grid-column: 2;
   width: 100%;
   min-width: 0;
-  min-height: min(78vh, 920px);
+  min-height: calc(100dvh - var(--page-top) - var(--page-bottom));
   margin-bottom: 1vh;
   overflow: hidden;
 }
@@ -518,46 +524,50 @@ app-index .middle {
 app-index .wrap {
   display: flex;
   flex-direction: column;
-  gap: clamp(16px, 2vw, 24px);
-  padding: clamp(18px, 2.4vw, 32px);
+  gap: clamp(22px, 2vw, 34px);
+  padding: clamp(28px, 2.45vw, 48px);
 }
 
 app-index .txttop {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 20px;
 }
 
 app-index .txttop2 {
   display: grid;
-  gap: 12px;
+  gap: 16px;
+  max-width: 98ch;
 }
 
 app-index .txttop2 p,
 app-index .formText p {
   margin: 0;
   color: var(--color-text);
-  font-size: clamp(0.95rem, 1.55vw, 1.18rem);
-  line-height: 1.58;
-  text-align: justify;
-  text-indent: 1em;
+  font-size: clamp(1.04rem, 0.86vw, 1.15rem);
+  font-weight: 500;
+  line-height: 1.72;
+  text-align: left;
+  text-indent: 0;
 }
 
 app-index .top {
   display: flex;
   align-items: center;
   gap: clamp(12px, 2vw, 24px);
+  max-width: 100%;
 }
 
 app-index .top .toph1 {
   color: var(--text);
-  font-size: clamp(1.55rem, 4vw, 2.6rem);
+  font-size: clamp(2.2rem, 3vw, 3.45rem);
   font-weight: 900;
-  line-height: 1.1;
+  line-height: 1;
 }
 
 app-index .top .topbar {
-  width: min(30%, 220px);
+  flex: 0 1 min(34%, 320px);
+  width: auto;
   height: 4px;
   border-radius: 999px;
   background: linear-gradient(90deg, var(--accent), var(--color-primary-hover));
@@ -566,22 +576,25 @@ app-index .top .topbar {
 app-index .wrap h2 {
   margin: 0;
   color: var(--color-text);
-  font-size: clamp(1.1rem, 2.5vw, 1.8rem);
+  font-size: clamp(1.35rem, 1.8vw, 2rem);
+  font-weight: 900;
+  line-height: 1.14;
 }
 
 app-index .whatido {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(14px, 1.3vw, 18px);
 }
 
 app-index .area {
   display: flex;
-  gap: 14px;
+  gap: 16px;
   min-width: 0;
+  min-height: 124px;
   border: 1px solid var(--color-primary-hover);
   border-radius: 8px;
-  padding: 14px;
+  padding: clamp(15px, 1.35vw, 20px);
   background: var(--surface-blue);
   transition: transform 0.16s ease, background 0.16s ease, border-color 0.16s ease;
 }
@@ -593,14 +606,14 @@ app-index .area:hover {
 }
 
 app-index .whaipic {
-  flex: 0 0 46px;
+  flex: 0 0 50px;
   display: grid;
   place-items: start center;
 }
 
 app-index .whaipic img {
-  width: 42px;
-  height: 42px;
+  width: 46px;
+  height: 46px;
   object-fit: contain;
 }
 
@@ -613,15 +626,17 @@ app-index .content {
 
 app-index .contenttitle {
   color: var(--color-text);
-  font-size: clamp(1rem, 1.25vw, 1.25rem);
-  font-weight: 850;
+  font-size: clamp(1.05rem, 1vw, 1.22rem);
+  font-weight: 900;
+  line-height: 1.2;
   overflow-wrap: anywhere;
 }
 
 app-index .contentdesc {
   color: var(--color-text-soft);
-  font-size: clamp(0.88rem, 1.05vw, 1rem);
-  line-height: 1.45;
+  font-size: clamp(0.92rem, 0.82vw, 1rem);
+  font-weight: 500;
+  line-height: 1.5;
   text-align: left;
 }
 
@@ -631,6 +646,7 @@ app-index .carousel {
   border: 1px solid var(--color-primary-hover);
   border-radius: 8px;
   background: var(--surface-blue);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.44);
 }
 
 app-index .carousel-track {
@@ -638,8 +654,8 @@ app-index .carousel-track {
   min-width: 100%;
   display: flex;
   align-items: center;
-  gap: clamp(22px, 4vw, 44px);
-  padding: 12px clamp(18px, 4vw, 40px);
+  gap: clamp(28px, 4.4vw, 58px);
+  padding: 14px clamp(22px, 4.4vw, 48px);
   animation: carouselSlide 24s linear infinite;
   will-change: transform;
 }
@@ -650,17 +666,17 @@ app-index .carousel:focus-within .carousel-track {
 }
 
 app-index .carousel .language-item {
-  flex: 0 0 clamp(72px, 10vw, 112px);
+  flex: 0 0 clamp(76px, 7vw, 118px);
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 64px;
+  min-height: 74px;
   border-radius: 8px;
   background: transparent;
 }
 
 app-index .carousel img {
-  width: clamp(38px, 58%, 68px);
+  width: clamp(44px, 60%, 72px);
   height: auto;
   border-radius: 8px;
   object-fit: contain;
@@ -678,44 +694,48 @@ app-index .carousel img {
 app-index .resume {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
+  gap: clamp(18px, 1.5vw, 24px);
 }
 
 app-index .resumeitem {
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 16px;
 }
 
 app-index .resumetop {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 app-index .resumetop img {
-  width: 38px;
-  height: 38px;
+  width: 42px;
+  height: 42px;
   object-fit: contain;
+}
+
+app-index .resumetop h2 {
+  font-size: clamp(1.22rem, 1.35vw, 1.65rem);
 }
 
 app-index .resume-timeline {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
+  gap: clamp(18px, 1.7vw, 24px);
 }
 
 app-index .timeline-lane {
   min-width: 0;
   display: grid;
-  gap: 14px;
+  gap: 16px;
 }
 
 app-index .timeline-list {
   position: relative;
   display: grid;
-  gap: 14px;
+  gap: 16px;
   padding-left: 20px;
 }
 
@@ -733,10 +753,10 @@ app-index .timeline-list::before {
 app-index .timeline-card {
   position: relative;
   display: grid;
-  gap: 8px;
+  gap: 10px;
   border: 1px solid var(--color-primary-hover);
   border-radius: 8px;
-  padding: 14px;
+  padding: clamp(15px, 1.25vw, 18px);
   background: var(--color-primary-soft);
   box-shadow: 0 8px 18px rgba(17, 24, 39, 0.05);
 }
@@ -766,10 +786,10 @@ app-index .timeline-card.featured .timeline-dot {
 app-index .timeline-period {
   justify-self: flex-start;
   border-radius: 999px;
-  padding: 4px 9px;
+  padding: 5px 10px;
   background: var(--color-surface);
   color: var(--accent-strong);
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   font-weight: 850;
 }
 
@@ -781,21 +801,23 @@ app-index .timeline-card ul {
 
 app-index .timeline-card h3 {
   color: var(--color-text);
-  font-size: clamp(1rem, 1.35vw, 1.18rem);
+  font-size: clamp(1.04rem, 1vw, 1.2rem);
+  font-weight: 900;
   line-height: 1.28;
 }
 
 app-index .timeline-meta {
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: 0.94rem;
   font-weight: 800;
   line-height: 1.38;
 }
 
 app-index .timeline-detail {
   color: var(--color-text-soft);
-  font-size: 0.94rem;
-  line-height: 1.5;
+  font-size: 0.96rem;
+  font-weight: 500;
+  line-height: 1.55;
 }
 
 app-index .timeline-tags {
@@ -816,7 +838,7 @@ app-index .timeline-tags span {
 app-index .timeline-card a {
   justify-self: flex-start;
   color: var(--accent-strong);
-  font-size: 0.88rem;
+  font-size: 0.92rem;
   font-weight: 850;
   text-decoration: none;
 }
@@ -833,7 +855,7 @@ app-index .resumebox {
   display: flex;
   flex-direction: column;
   gap: 7px;
-  padding: 14px;
+  padding: 16px;
 }
 
 app-index .resumebox p {
@@ -842,14 +864,15 @@ app-index .resumebox p {
 
 app-index .resumebox .title {
   color: var(--accent-strong);
-  font-size: clamp(0.86rem, 1vw, 0.98rem);
+  font-size: clamp(0.9rem, 0.9vw, 1rem);
   font-weight: 850;
 }
 
 app-index .resumebox .desc {
   color: var(--color-text);
-  font-size: clamp(0.95rem, 1.25vw, 1.08rem);
-  line-height: 1.4;
+  font-size: clamp(1rem, 0.95vw, 1.12rem);
+  font-weight: 600;
+  line-height: 1.44;
 }
 
 app-index .resumebox .location {
@@ -860,14 +883,14 @@ app-index .resumebox .location {
 app-index .chart {
   display: flex;
   align-items: center;
-  min-height: 220px;
-  padding: 16px;
+  min-height: 250px;
+  padding: clamp(18px, 1.4vw, 22px);
 }
 
 app-index .skill-bars {
   width: 100%;
   display: grid;
-  gap: 14px;
+  gap: 16px;
 }
 
 app-index .skill-row {
@@ -880,7 +903,7 @@ app-index .skill-label {
   justify-content: space-between;
   gap: 12px;
   color: var(--color-text);
-  font-size: 0.94rem;
+  font-size: 0.98rem;
   font-weight: 800;
 }
 
@@ -889,7 +912,7 @@ app-index .skill-label strong {
 }
 
 app-index .skill-meter {
-  height: 12px;
+  height: 13px;
   border-radius: 999px;
   background: rgba(23, 32, 42, 0.10);
   overflow: hidden;
@@ -905,22 +928,22 @@ app-index .skill-meter span {
 app-index .chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 10px;
   align-content: flex-start;
-  min-height: 220px;
-  padding: 12px;
+  min-height: 250px;
+  padding: clamp(16px, 1.3vw, 20px);
 }
 
 app-index .cardchip {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 34px;
+  min-height: 38px;
   border-radius: 999px;
-  padding: 6px 12px;
+  padding: 8px 14px;
   background: var(--color-primary-soft);
   color: var(--accent-strong);
-  font-size: 0.92rem;
+  font-size: 0.95rem;
   font-weight: 800;
   transition: background 0.16s ease, transform 0.16s ease;
 }
@@ -939,42 +962,67 @@ app-index .projects {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  flex-basis: auto;
-  gap: 1vh;
+  gap: clamp(10px, 1vw, 16px);
 }
 
 app-index .project {
   position: relative;
-  flex: 1 1 33%;
-  height: 20vh;
-  min-height: 160px;
-  border: solid black 1px;
-  border-radius: 5px;
+  flex: 1 1 clamp(260px, 30%, 420px);
+  height: clamp(190px, 19vh, 270px);
+  min-height: 180px;
+  border: 1px solid rgba(17, 24, 39, 0.18);
+  border-radius: 8px;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
   cursor: pointer;
-  transition: all 0.2s ease;
+  box-shadow: 0 10px 22px rgba(17, 24, 39, 0.14);
+  transition: flex 0.24s ease, filter 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+}
+
+app-index .project::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    radial-gradient(circle at center, rgba(255, 255, 255, 0.08), transparent 46%),
+    linear-gradient(180deg, rgba(8, 13, 20, 0.08), rgba(8, 13, 20, 0.42));
+  pointer-events: none;
+  transition: background 0.18s ease, opacity 0.18s ease;
 }
 
 app-index .project-open {
+  position: relative;
+  z-index: 2;
   width: 100%;
   height: 100%;
+  min-height: inherit;
   display: flex;
   align-items: center;
   justify-content: center;
   border: 0;
-  padding: 0;
+  padding: clamp(14px, 1.6vw, 22px);
   background: transparent;
   cursor: pointer;
+  text-align: center;
 }
 
 app-index .project:hover {
-  flex: 2 1 33%;
-  filter: brightness(120%);
+  flex: 1.8 1 clamp(280px, 38%, 560px);
+  filter: brightness(1.08) saturate(1.06);
+  box-shadow: 0 16px 34px rgba(17, 24, 39, 0.22);
+  transform: translateY(-2px);
+}
+
+app-index .project:hover::after {
+  background:
+    radial-gradient(circle at center, rgba(255, 255, 255, 0.14), transparent 48%),
+    linear-gradient(180deg, rgba(8, 13, 20, 0.02), rgba(8, 13, 20, 0.34));
 }
 
 app-index .project-open:focus-visible {
@@ -987,29 +1035,29 @@ app-index .mark > img {
   right: 0;
   top: 0;
   z-index: 4;
-  width: 4rem;
+  width: clamp(3.7rem, 4vw, 4.6rem);
 }
 
 app-index .project .badge img {
   position: absolute;
-  top: 13px;
-  right: 18px;
-  width: 1.7rem;
-  height: 1.7rem;
+  top: clamp(13px, 1vw, 17px);
+  right: clamp(17px, 1.25vw, 22px);
+  width: clamp(1.55rem, 1.5vw, 1.85rem);
+  height: clamp(1.55rem, 1.5vw, 1.85rem);
   object-fit: contain;
 }
 
 app-index .icon-right {
   position: absolute;
-  top: 10px;
-  left: 10px;
+  top: 12px;
+  left: 12px;
   z-index: 4;
   display: flex;
   gap: 8px;
 }
 
 app-index .icon-right img {
-  width: 2rem;
+  width: clamp(1.8rem, 1.8vw, 2.2rem);
   height: auto;
 }
 
@@ -1019,26 +1067,30 @@ app-index .project-card-copy {
   display: flex;
   align-items: center;
   justify-content: center;
+  max-width: 100%;
 }
 
 app-index .project .title {
-  border-radius: 5px;
-  padding: 5px;
-  color: color-mix(in srgb, var(--project-title-color) 52%, transparent);
-  font-size: clamp(1rem, 5vw, 3rem);
-  font-weight: bold;
-  font-stretch: expanded;
-  letter-spacing: 2px;
+  border-radius: 8px;
+  padding: 5px 8px;
+  color: color-mix(in srgb, var(--project-title-color) 64%, transparent);
+  font-size: clamp(1.35rem, 4.6vw, 3rem);
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 0.95;
   text-transform: uppercase;
   text-wrap: nowrap;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.22);
   mix-blend-mode: color-dodge;
   -webkit-text-fill-color: transparent;
-  -webkit-text-stroke-width: 2px;
-  transition: all 0.2s ease;
+  -webkit-text-stroke: clamp(1.2px, 0.14vw, 2px) currentColor;
+  transition: color 0.18s ease, text-shadow 0.18s ease, transform 0.18s ease;
 }
 
 app-index .project:hover .title {
   color: var(--project-title-color);
+  text-shadow: 0 3px 18px rgba(0, 0, 0, 0.38);
+  transform: scale(1.02);
 }
 
 app-index .project-card-copy p,
@@ -1052,17 +1104,17 @@ app-index .project-modal-backdrop {
   z-index: 100;
   display: grid;
   place-items: center;
-  padding: clamp(14px, 3vw, 34px);
+  padding: clamp(14px, 3vw, 36px);
   background: rgba(9, 14, 20, 0.68);
   backdrop-filter: blur(4px);
 }
 
 app-index .project-modal {
   position: relative;
-  width: min(960px, 100%);
-  max-height: min(88vh, 860px);
+  width: min(1180px, 100%);
+  max-height: min(90vh, 900px);
   display: grid;
-  grid-template-rows: minmax(220px, 34vh) minmax(0, 1fr);
+  grid-template-rows: clamp(240px, 34vh, 330px) minmax(0, 1fr);
   border-radius: 8px;
   background: var(--color-surface);
   color: var(--color-text);
@@ -1072,25 +1124,33 @@ app-index .project-modal {
 
 app-index .project-modal-close {
   position: absolute;
-  top: 12px;
-  right: 12px;
-  z-index: 3;
-  width: 38px;
-  height: 38px;
+  top: 14px;
+  right: 14px;
+  z-index: 6;
+  width: 40px;
+  height: 40px;
   border: 0;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.94);
   color: var(--color-text);
   cursor: pointer;
   font-size: 1.2rem;
   font-weight: 900;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+  transition: transform 0.16s ease, background 0.16s ease;
+}
+
+app-index .project-modal-close:hover,
+app-index .project-modal-close:focus-visible {
+  background: #fff;
+  outline: none;
+  transform: translateY(-1px);
 }
 
 app-index .project-modal-hero {
   position: relative;
   display: flex;
-  align-items: flex-end;
-  padding: clamp(18px, 3vw, 30px);
+  align-items: stretch;
   background-size: cover;
   background-position: center;
 }
@@ -1099,91 +1159,174 @@ app-index .project-modal-hero::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(8, 13, 20, 0.18), rgba(8, 13, 20, 0.82));
+  background:
+    linear-gradient(90deg, rgba(8, 13, 20, 0.88), rgba(8, 13, 20, 0.52) 48%, rgba(8, 13, 20, 0.20)),
+    linear-gradient(180deg, rgba(8, 13, 20, 0.10), rgba(8, 13, 20, 0.78));
+}
+
+app-index .project-modal-hero-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 22px;
+  padding: clamp(24px, 3vw, 42px);
+}
+
+app-index .project-modal-status-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-right: 48px;
+}
+
+app-index .project-status-pill {
+  min-height: 30px;
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  border-radius: 999px;
+  padding: 0 11px;
+  background: rgba(21, 144, 93, 0.92);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+app-index .project-status-pill.draft {
+  background: rgba(170, 107, 0, 0.92);
+}
+
+app-index .project-status-pill.featured {
+  background: rgba(46, 134, 221, 0.92);
 }
 
 app-index .project-modal-title {
   position: relative;
   z-index: 1;
   display: flex;
-  align-items: center;
-  gap: 14px;
+  align-items: flex-end;
+  gap: clamp(14px, 2vw, 22px);
+  max-width: min(760px, 100%);
   color: #fff;
 }
 
 app-index .project-modal-title img {
-  width: 52px;
-  height: 52px;
+  flex: 0 0 auto;
+  width: clamp(58px, 6vw, 78px);
+  height: clamp(58px, 6vw, 78px);
   border-radius: 8px;
-  padding: 8px;
+  padding: 10px;
   background: rgba(255, 255, 255, 0.92);
   object-fit: contain;
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.22);
 }
 
 app-index .project-modal-title p,
-app-index .project-modal-title h2 {
+app-index .project-modal-title h2,
+app-index .project-modal-title span {
   margin: 0;
 }
 
 app-index .project-modal-title p {
   color: rgba(255, 255, 255, 0.82);
-  font-size: 0.78rem;
-  font-weight: 850;
+  font-size: 0.82rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
 app-index .project-modal-title h2 {
-  font-size: clamp(1.55rem, 4vw, 3rem);
-  line-height: 1;
+  margin-top: 6px;
+  font-size: clamp(2rem, 4.8vw, 4.35rem);
+  font-weight: 900;
+  line-height: 0.94;
+  text-wrap: balance;
+}
+
+app-index .project-modal-title span {
+  display: block;
+  max-width: 68ch;
+  margin-top: 10px;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: clamp(1rem, 1.1vw, 1.18rem);
+  font-weight: 650;
+  line-height: 1.45;
 }
 
 app-index .project-modal-body {
   min-height: 0;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(180px, 260px);
-  gap: 18px;
-  padding: clamp(18px, 3vw, 28px);
+  grid-template-columns: minmax(0, 1fr) minmax(250px, 320px);
+  gap: clamp(22px, 2.2vw, 34px);
+  padding: clamp(24px, 2.6vw, 36px);
   overflow: auto;
-}
-
-app-index .project-modal-body.without-meta {
-  grid-template-columns: 1fr;
 }
 
 app-index .project-modal-main {
   display: grid;
-  gap: 14px;
+  align-content: flex-start;
+  gap: clamp(20px, 2vw, 28px);
+  min-width: 0;
+}
+
+app-index .project-overview {
+  display: grid;
+  gap: 12px;
+  max-width: 86ch;
 }
 
 app-index .project-summary,
 app-index .project-description {
   margin: 0;
   color: var(--color-text);
-  line-height: 1.6;
+  line-height: 1.65;
 }
 
 app-index .project-summary {
-  font-size: clamp(1rem, 1.8vw, 1.22rem);
-  font-weight: 800;
+  font-size: clamp(1.08rem, 1.2vw, 1.28rem);
+  font-weight: 850;
+}
+
+app-index .project-description {
+  color: var(--color-text-soft);
+  font-size: clamp(0.98rem, 0.92vw, 1.08rem);
+  font-weight: 500;
+}
+
+app-index .project-highlight-list,
+app-index .project-tech-block,
+app-index .project-gallery {
+  display: grid;
+  gap: 12px;
 }
 
 app-index .project-highlight-list {
-  display: grid;
-  gap: 8px;
-  border-left: 3px solid var(--color-secondary);
-  padding-left: 12px;
+  border-left: 4px solid var(--color-secondary);
+  padding-left: 16px;
 }
 
-app-index .project-highlight-list strong {
+app-index .project-highlight-list h3,
+app-index .project-tech-block h3,
+app-index .project-gallery h3 {
+  margin: 0;
   color: var(--color-text);
+  font-size: clamp(1.02rem, 1vw, 1.16rem);
+  font-weight: 900;
 }
 
 app-index .project-highlight-list ul {
   display: grid;
-  gap: 6px;
+  gap: 9px;
   margin: 0;
-  padding-left: 18px;
+  padding-left: 19px;
   color: var(--color-text-soft);
+  font-size: 0.98rem;
+  font-weight: 500;
+  line-height: 1.5;
 }
 
 app-index .project-techs {
@@ -1194,49 +1337,69 @@ app-index .project-techs {
 
 app-index .project-techs span {
   border-radius: 999px;
-  padding: 6px 10px;
+  padding: 7px 11px;
   background: var(--color-primary-soft);
   color: var(--accent-strong);
-  font-size: 0.82rem;
-  font-weight: 850;
+  font-size: 0.86rem;
+  font-weight: 900;
 }
 
 app-index .project-modal-aside {
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  padding: 14px;
-  background: var(--color-surface-soft);
+  min-width: 0;
+  display: grid;
+  align-content: flex-start;
+  gap: 24px;
+  border-left: 1px solid var(--line);
+  padding-left: clamp(18px, 2vw, 28px);
 }
 
-app-index .project-modal-aside dl {
+app-index .project-facts {
   display: grid;
-  gap: 12px;
+  gap: 15px;
   margin: 0;
 }
 
-app-index .project-modal-aside dt {
+app-index .project-facts div {
+  display: grid;
+  gap: 4px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 13px;
+}
+
+app-index .project-facts div:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+app-index .project-facts dt {
   color: var(--muted);
   font-size: 0.72rem;
-  font-weight: 850;
+  font-weight: 900;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
 }
 
-app-index .project-modal-aside dd {
-  margin: 3px 0 0;
+app-index .project-facts dd {
+  margin: 0;
   color: var(--color-text);
-  font-weight: 800;
+  font-size: 0.98rem;
+  font-weight: 850;
+  line-height: 1.36;
 }
 
 app-index .project-gallery {
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 10px;
+  min-width: 0;
 }
 
-app-index .project-gallery img {
+app-index .project-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 12px;
+}
+
+app-index .project-gallery-grid img {
   width: 100%;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 16 / 9;
   border: 1px solid var(--line);
   border-radius: 8px;
   object-fit: cover;
@@ -1244,30 +1407,30 @@ app-index .project-gallery img {
 }
 
 app-index .project-actions {
-  grid-column: 1 / -1;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
   gap: 10px;
 }
 
 app-index .project-actions a,
 app-index .project-unavailable {
-  min-height: 40px;
+  min-height: 44px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   border-radius: 8px;
-  padding: 0 14px;
-  font-weight: 850;
+  padding: 0 15px;
+  font-size: 0.94rem;
+  font-weight: 900;
   text-decoration: none;
 }
 
-app-index .project-actions a {
+app-index .project-actions a.primary {
   background: var(--accent);
   color: #fff;
 }
 
-app-index .project-actions a + a {
+app-index .project-actions a:not(.primary) {
+  border: 1px solid var(--line);
   background: var(--color-surface-soft);
   color: var(--color-text);
 }
@@ -1280,27 +1443,36 @@ app-index .project-unavailable {
 app-index .formContact {
   display: flex;
   flex-direction: column;
-  gap: 22px;
+  gap: clamp(22px, 2vw, 30px);
+  width: min(100%, 1160px);
 }
 
 app-index .onlyForm {
   position: relative;
+  width: 100%;
 }
 
 app-index .formTrue {
   display: grid;
-  gap: 14px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(16px, 1.4vw, 20px);
+}
+
+app-index .formTrue .form-group:nth-of-type(3),
+app-index .formTrue .form-group:nth-of-type(4),
+app-index .formTrue .sendButton {
+  grid-column: 1 / -1;
 }
 
 app-index .form-group {
   display: grid;
-  gap: 7px;
+  gap: 8px;
   margin: 0;
 }
 
 app-index .form-group label {
   color: var(--color-text-soft);
-  font-size: 0.86rem;
+  font-size: 0.9rem;
   font-weight: 850;
 }
 
@@ -1309,11 +1481,12 @@ app-index .form-group textarea {
   width: 100%;
   border: 1px solid var(--line);
   border-radius: 8px;
-  padding: 12px 13px;
+  padding: 14px 15px;
   background: var(--color-surface);
   color: var(--color-text);
   font-family: Arial, "Helvetica Neue", sans-serif;
-  font-size: 1rem;
+  font-size: 1.04rem;
+  font-weight: 500;
   outline: none;
   resize: vertical;
   transition: border-color 0.16s ease, box-shadow 0.16s ease;
@@ -1329,11 +1502,12 @@ app-index .sendButton {
   justify-self: flex-start;
   border: 0;
   border-radius: 8px;
-  padding: 12px 22px;
+  min-height: 50px;
+  padding: 0 28px;
   background: var(--color-secondary);
   color: #fff;
-  font-size: 1rem;
-  font-weight: 850;
+  font-size: 1.02rem;
+  font-weight: 900;
   cursor: pointer;
   transition: filter 0.16s ease, transform 0.16s ease;
 }
@@ -1387,13 +1561,13 @@ app-index footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 18px 18px;
+  padding: 12px 18px 20px;
 }
 
 app-index footer p {
   margin: 0;
   color: var(--muted);
-  font-size: clamp(0.76rem, 1.3vw, 0.94rem);
+  font-size: clamp(0.82rem, 0.82vw, 0.96rem);
   text-align: center;
 }
 
@@ -1402,14 +1576,14 @@ app-index .desknav {
   width: var(--nav-column);
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding: 8px;
+  gap: 9px;
+  padding: 9px;
 }
 
 app-index .block,
 app-index .block2 {
   width: 100%;
-  min-height: 66px;
+  min-height: 74px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1436,8 +1610,8 @@ app-index .selected {
 
 app-index .block img,
 app-index .block2 img {
-  width: 24px;
-  height: 24px;
+  width: 27px;
+  height: 27px;
   object-fit: contain;
   transition: filter 0.16s ease;
 }
@@ -1454,8 +1628,8 @@ app-index .block p,
 app-index .block2 p {
   max-width: 100%;
   margin: 0;
-  font-size: 0.66rem;
-  font-weight: 850;
+  font-size: 0.72rem;
+  font-weight: 900;
   line-height: 1.1;
   text-align: center;
   overflow-wrap: anywhere;
@@ -1513,7 +1687,10 @@ app-index .response {
     width: var(--nav-column);
   }
 
-  app-index .whatido,
+  app-index .whatido {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   app-index .resume,
   app-index .resume-timeline {
     grid-template-columns: 1fr;
@@ -1534,16 +1711,16 @@ app-index .response {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    width: min(1480px, 100%);
+    width: 100%;
     min-height: 100dvh;
     padding: 42px clamp(12px, 4vw, 22px) 20px;
     gap: 16px;
   }
 
   app-index .profile2 {
-    width: min(100%, 430px);
+    width: min(100%, 520px);
     margin-top: 0;
-    padding: 16px 14px 18px;
+    padding: 18px 16px 20px;
     overflow: hidden;
   }
 
@@ -1614,8 +1791,21 @@ app-index .response {
     min-height: auto;
   }
 
+  app-index .projects {
+    gap: 12px;
+  }
+
+  app-index .project {
+    flex: 1 1 min(100%, 320px);
+  }
+
   app-index .wrap {
-    padding: 18px;
+    padding: clamp(18px, 5vw, 28px);
+  }
+
+  app-index .whatido,
+  app-index .formTrue {
+    grid-template-columns: 1fr;
   }
 
   app-index .txttop2 p,
@@ -1630,11 +1820,22 @@ app-index .response {
 
   app-index .project-modal {
     max-height: 92vh;
-    grid-template-rows: minmax(180px, 28vh) minmax(0, 1fr);
+    grid-template-rows: minmax(210px, 30vh) minmax(0, 1fr);
   }
 
   app-index .project-modal-body {
     grid-template-columns: 1fr;
+  }
+
+  app-index .project-modal-aside {
+    border-top: 1px solid var(--line);
+    border-left: 0;
+    padding-top: 20px;
+    padding-left: 0;
+  }
+
+  app-index .project-actions {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   }
 }
 
@@ -1643,6 +1844,10 @@ app-index .response {
     align-items: flex-start;
     flex-direction: column;
     gap: 8px;
+  }
+
+  app-index .top .toph1 {
+    font-size: clamp(1.75rem, 10vw, 2.35rem);
   }
 
   app-index .top .topbar {
@@ -1659,7 +1864,56 @@ app-index .response {
 
   app-index .project,
   app-index .project-open {
-    min-height: 170px;
+    min-height: 180px;
+  }
+
+  app-index .project {
+    flex-basis: 100%;
+    height: 190px;
+  }
+
+  app-index .project:hover {
+    flex-basis: 100%;
+  }
+
+  app-index .project-open {
+    padding: 18px;
+  }
+
+  app-index .project-modal-backdrop {
+    padding: 8px;
+  }
+
+  app-index .project-modal {
+    max-height: 96vh;
+    grid-template-rows: minmax(210px, 34vh) minmax(0, 1fr);
+  }
+
+  app-index .project-modal-hero-content {
+    padding: 20px;
+  }
+
+  app-index .project-modal-title {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  app-index .project-modal-title img {
+    width: 54px;
+    height: 54px;
+  }
+
+  app-index .project-modal-title h2 {
+    font-size: clamp(1.75rem, 11vw, 2.55rem);
+  }
+
+  app-index .project-modal-body {
+    padding: 20px;
+  }
+
+  app-index .project-actions {
+    grid-template-columns: 1fr;
   }
 
   app-index .desknavResponse {

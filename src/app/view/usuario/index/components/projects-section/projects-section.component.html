@@ -52,34 +52,82 @@
     <button type="button" class="project-modal-close" aria-label="Fechar detalhes" (click)="closeProject()">x</button>
 
     <div class="project-modal-hero" [style.background-image]="'url(' + project.projectImg + ')'">
-      <div class="project-modal-title">
-        <img *ngIf="project.badge" [src]="project.badge" alt="Badge">
-        <div>
-          <p>{{ project.tipo || 'Projeto' }}</p>
-          <h2>{{ project.titulo }}</h2>
+      <div class="project-modal-hero-content">
+        <div class="project-modal-status-row">
+          <span class="project-status-pill" [ngClass]="{ draft: !project.inProgress }">
+            {{ project.inProgress ? 'Publicado' : 'Em progresso' }}
+          </span>
+          <span class="project-status-pill featured" *ngIf="project.star">Destaque</span>
+        </div>
+
+        <div class="project-modal-title">
+          <img *ngIf="project.badge" [src]="project.badge" alt="Badge">
+          <div>
+            <p>{{ project.tipo || 'Projeto' }}</p>
+            <h2>{{ project.titulo }}</h2>
+            <span *ngIf="project.subtitulo">{{ project.subtitulo }}</span>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="project-modal-body" [ngClass]="{ 'without-meta': !hasProjectMeta(project) }">
-      <div class="project-modal-main">
-        <p class="project-summary">{{ getProjectSummary(project) }}</p>
-        <p class="project-description" *ngIf="project.descricao">{{ project.descricao }}</p>
+    <div class="project-modal-body">
+      <main class="project-modal-main">
+        <section class="project-overview">
+          <p class="project-summary">{{ getProjectSummary(project) }}</p>
+          <p class="project-description" *ngIf="shouldShowDescription(project)">{{ project.descricao }}</p>
+        </section>
 
-        <div class="project-highlight-list" *ngIf="getList(project.destaques).length">
-          <strong>Destaques</strong>
+        <section class="project-highlight-list" *ngIf="getList(project.destaques).length">
+          <h3>Destaques</h3>
           <ul>
             <li *ngFor="let item of getList(project.destaques)">{{ item }}</li>
           </ul>
+        </section>
+
+        <section class="project-tech-block" *ngIf="getList(project.tecnologias).length">
+          <h3>Tecnologias</h3>
+          <div class="project-techs">
+            <span *ngFor="let tech of getList(project.tecnologias)">{{ tech }}</span>
+          </div>
+        </section>
+
+        <section class="project-gallery" *ngIf="getProjectGallery(project).length">
+          <h3>Galeria</h3>
+          <div class="project-gallery-grid">
+            <img *ngFor="let image of getProjectGallery(project)" [src]="image" [alt]="project.titulo">
+          </div>
+        </section>
+      </main>
+
+      <aside class="project-modal-aside">
+        <div class="project-actions">
+          <a
+            class="primary"
+            *ngIf="getProjectLink(project) as projectLink"
+            [href]="projectLink"
+            target="_blank"
+            rel="noopener noreferrer">
+            {{ getPrimaryActionLabel(project) }}
+          </a>
+          <a
+            *ngIf="project.repositorio"
+            [href]="project.repositorio"
+            target="_blank"
+            rel="noopener noreferrer">
+            Repositorio
+          </a>
+          <a
+            *ngIf="project.caseStudy"
+            [href]="project.caseStudy"
+            target="_blank"
+            rel="noopener noreferrer">
+            Case
+          </a>
+          <span class="project-unavailable" *ngIf="!project.inProgress">Projeto em andamento</span>
         </div>
 
-        <div class="project-techs" *ngIf="getList(project.tecnologias).length">
-          <span *ngFor="let tech of getList(project.tecnologias)">{{ tech }}</span>
-        </div>
-      </div>
-
-      <aside class="project-modal-aside" *ngIf="hasProjectMeta(project)">
-        <dl>
+        <dl class="project-facts" *ngIf="hasProjectMeta(project)">
           <div *ngIf="project.periodo">
             <dt>Periodo</dt>
             <dd>{{ project.periodo }}</dd>
@@ -98,35 +146,6 @@
           </div>
         </dl>
       </aside>
-
-      <div class="project-gallery" *ngIf="getProjectGallery(project).length">
-        <img *ngFor="let image of getProjectGallery(project)" [src]="image" [alt]="project.titulo">
-      </div>
-
-      <div class="project-actions">
-        <a
-          *ngIf="getProjectLink(project) as projectLink"
-          [href]="projectLink"
-          target="_blank"
-          rel="noopener noreferrer">
-          {{ getPrimaryActionLabel(project) }}
-        </a>
-        <a
-          *ngIf="project.repositorio"
-          [href]="project.repositorio"
-          target="_blank"
-          rel="noopener noreferrer">
-          Repositorio
-        </a>
-        <a
-          *ngIf="project.caseStudy"
-          [href]="project.caseStudy"
-          target="_blank"
-          rel="noopener noreferrer">
-          Case
-        </a>
-        <span class="project-unavailable" *ngIf="!project.inProgress">Em progresso</span>
-      </div>
     </div>
   </section>
 </div>
