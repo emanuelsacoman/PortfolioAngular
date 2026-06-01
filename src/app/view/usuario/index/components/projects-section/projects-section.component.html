@@ -5,40 +5,42 @@
   </div>
 
   <div class="projects">
-    <article
-      class="project"
-      *ngFor="let project of projetos"
-      [style.background-image]="'url(' + project.projectImg + ')'">
-      <button
-        type="button"
-        class="project-open"
-        [attr.aria-label]="'Abrir detalhes de ' + project.titulo"
-        (click)="openProject(project)">
-        <div class="icon-right">
-          <div class="star" *ngIf="project.star">
-            <img loading="lazy" src="./assets/images/star.gif" alt="Star">
+    <div class="project-row" *ngFor="let row of projectRows; trackBy: trackProjectRow">
+      <article
+        class="project"
+        *ngFor="let project of row; trackBy: trackProject"
+        [style.background-image]="'url(' + project.projectImg + ')'">
+        <button
+          type="button"
+          class="project-open"
+          [attr.aria-label]="'Abrir detalhes de ' + project.titulo"
+          (click)="openProject(project)">
+          <div class="icon-right">
+            <div class="star" *ngIf="project.star">
+              <img loading="lazy" src="./assets/images/star.gif" alt="Star">
+            </div>
+            <div class="wip" *ngIf="!project.inProgress">
+              <img loading="lazy" src="./assets/images/wip.gif" alt="Work in Progress">
+            </div>
           </div>
-          <div class="wip" *ngIf="!project.inProgress">
-            <img loading="lazy" src="./assets/images/wip.gif" alt="Work in Progress">
-          </div>
-        </div>
 
-        <div class="mark">
-          <img loading="lazy" src="./assets/images/bookmark.png" alt="Mark">
-          <div class="badge">
-            <img loading="lazy" src="{{ project.badge }}" alt="Badge">
+          <div class="mark">
+            <img loading="lazy" src="./assets/images/bookmark.png" alt="Mark">
+            <div class="badge">
+              <img loading="lazy" src="{{ project.badge }}" alt="Icone da tecnologia">
+            </div>
           </div>
-        </div>
 
-        <div class="project-card-copy">
-          <div class="title">{{ project.titulo }}</div>
-          <p *ngIf="project.subtitulo">{{ project.subtitulo }}</p>
-          <span *ngIf="project.tipo || project.periodo">
-            {{ project.tipo }}<ng-container *ngIf="project.tipo && project.periodo"> / </ng-container>{{ project.periodo }}
-          </span>
-        </div>
-      </button>
-    </article>
+          <div class="project-card-copy">
+            <div class="title">{{ project.titulo }}</div>
+            <p *ngIf="project.subtitulo">{{ project.subtitulo }}</p>
+            <span *ngIf="project.tipo || project.periodo">
+              {{ project.tipo }}<ng-container *ngIf="project.tipo && project.periodo"> / </ng-container>{{ project.periodo }}
+            </span>
+          </div>
+        </button>
+      </article>
+    </div>
   </div>
 </div>
 

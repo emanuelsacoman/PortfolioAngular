@@ -13,9 +13,26 @@ export class ProjectsSectionComponent {
   @Input() projetos: Projetos[] = [];
 
   selectedProject: Projetos | null = null;
+  private projectRowsSource: Projetos[] | null = null;
+  private cachedProjectRows: Projetos[][] = [];
 
   get title(): string {
     return this.projeto[0]?.titleProjeto ?? 'Projetos';
+  }
+
+  get projectRows(): Projetos[][] {
+    if (this.projectRowsSource === this.projetos) {
+      return this.cachedProjectRows;
+    }
+
+    this.projectRowsSource = this.projetos;
+    this.cachedProjectRows = [];
+
+    for (let index = 0; index < this.projetos.length; index += 2) {
+      this.cachedProjectRows.push(this.projetos.slice(index, index + 2));
+    }
+
+    return this.cachedProjectRows;
   }
 
   @HostListener('document:keydown.escape')
@@ -76,5 +93,13 @@ export class ProjectsSectionComponent {
 
   hasProjectMeta(project: Projetos): boolean {
     return Boolean(project.tipo || project.periodo || project.funcao || project.cliente);
+  }
+
+  trackProjectRow(index: number, row: Projetos[]): string {
+    return row[0]?.id || String(index);
+  }
+
+  trackProject(index: number, project: Projetos): string {
+    return project.id || String(index);
   }
 }
