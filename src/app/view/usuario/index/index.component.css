@@ -516,8 +516,7 @@ app-index .middle {
   grid-column: 2;
   width: 100%;
   min-width: 0;
-  min-height: calc(100dvh - var(--page-top) - var(--page-bottom));
-  margin-bottom: 1vh;
+  min-height: 0;
   overflow: hidden;
 }
 
