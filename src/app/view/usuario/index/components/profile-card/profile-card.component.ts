@@ -33,6 +33,7 @@ export class ProfileCardComponent {
     facebook: 'Facebook',
     linkedin: 'LinkedIn',
     github: 'GitHub',
+    buymeacoffee: 'Buy Me a Coffee',
     youtube: 'YouTube',
     x: 'X / Twitter',
     site: 'Site',
@@ -75,6 +76,8 @@ export class ProfileCardComponent {
         return `https://instagram.com/${value.replace(/^@/, '')}`;
       case 'github':
         return `https://github.com/${value.replace(/^@/, '')}`;
+      case 'buymeacoffee':
+        return value.includes('buymeacoffee.com') ? `https://${value}` : `https://www.buymeacoffee.com/${value.replace(/^@/, '')}`;
       case 'linkedin':
         return value.includes('linkedin.com') ? `https://${value}` : `https://www.linkedin.com/in/${value.replace(/^@/, '')}`;
       case 'facebook':
@@ -98,6 +101,7 @@ export class ProfileCardComponent {
       facebook: './assets/images/facebook.png',
       linkedin: './assets/images/linkedin.png',
       github: './assets/images/github.png',
+      buymeacoffee: './assets/images/buy-me-a-coffee.svg',
       email: './assets/images/email.png',
       whatsapp: './assets/images/smartphone.png',
       site: './assets/images/pagespeed.png',
@@ -207,6 +211,9 @@ export class ProfileCardComponent {
       mail: 'email',
       whats: 'whatsapp',
       whatsapp: 'whatsapp',
+      bmc: 'buymeacoffee',
+      buymeacoffee: 'buymeacoffee',
+      'buymeacoffee.com': 'buymeacoffee',
     };
 
     return aliases[normalized] || normalized || 'site';
@@ -229,6 +236,10 @@ export class ProfileCardComponent {
 
     if (normalized.includes('github.com')) {
       return 'github';
+    }
+
+    if (normalized.includes('buymeacoffee.com')) {
+      return 'buymeacoffee';
     }
 
     if (normalized.includes('youtube.com') || normalized.includes('youtu.be')) {

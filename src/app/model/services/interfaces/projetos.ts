@@ -19,6 +19,7 @@ export class Projetos {
     private _destaques!: string[];
     private _ordem!: number;
     private _ctaLabel!: string;
+    private _clickCount!: number;
 
     constructor(
         id: string,
@@ -40,7 +41,8 @@ export class Projetos {
         cliente = '',
         destaques: string[] = [],
         ordem = 0,
-        ctaLabel = ''
+        ctaLabel = '',
+        clickCount = 0
     ) {
         this._id = id;
         this._titulo = titulo;
@@ -62,6 +64,7 @@ export class Projetos {
         this._destaques = destaques;
         this._ordem = ordem;
         this._ctaLabel = ctaLabel;
+        this._clickCount = clickCount;
     }
 
     public get id(): string {
@@ -222,5 +225,13 @@ export class Projetos {
 
     public set ctaLabel(value: string) {
         this._ctaLabel = value;
+    }
+
+    public get clickCount(): number {
+        return this._clickCount;
+    }
+
+    public set clickCount(value: number) {
+        this._clickCount = value;
     }
 }

@@ -58,7 +58,8 @@
     <app-projects-section
       *ngIf="isSelected('projetos')"
       [projeto]="projeto"
-      [projetos]="projetos">
+      [projetos]="projetos"
+      (projectClicked)="registerProjectClick($event)">
     </app-projects-section>
 
     <app-contact-section

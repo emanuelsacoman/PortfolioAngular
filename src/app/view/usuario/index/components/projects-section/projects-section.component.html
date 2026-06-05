@@ -60,6 +60,7 @@
             {{ project.inProgress ? 'Publicado' : 'Em progresso' }}
           </span>
           <span class="project-status-pill featured" *ngIf="project.star">Destaque</span>
+          <span class="project-status-pill analytics">{{ getProjectClickLabel(selectedProjectClickCount) }}</span>
         </div>
 
         <div class="project-modal-title">

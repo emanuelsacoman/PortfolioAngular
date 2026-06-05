@@ -281,6 +281,7 @@ export class FirebaseService {
           destaques: projetos.destaques,
           ordem: projetos.ordem,
           ctaLabel: projetos.ctaLabel,
+          clickCount: projetos.clickCount,
         }));
       }
 
@@ -313,7 +314,15 @@ export class FirebaseService {
           destaques: projetos.destaques,
           ordem: projetos.ordem,
           ctaLabel: projetos.ctaLabel,
+          clickCount: projetos.clickCount ?? 0,
         }));
+      }
+
+      registrarCliqueProjeto(id: string) {
+        return this.firestore.collection(this.PATH6).doc(id).update({
+          clickCount: firebase.firestore.FieldValue.increment(1),
+          lastClickAt: firebase.firestore.FieldValue.serverTimestamp(),
+        });
       }
 
       uploadImageProjeto1(imagem: any, itens: Projetos){

@@ -92,7 +92,7 @@
           <span class="metric-icon blue"><mat-icon>folder_open</mat-icon></span>
           <p>Projetos</p>
           <strong>{{ projetos.length }}</strong>
-          <small>{{ publishedProjectsCount }} publicados, {{ draftProjectsCount }} em progresso</small>
+          <small>{{ publishedProjectsCount }} publicados, {{ totalProjectClicks }} cliques</small>
         </article>
 
         <article class="metric-card">
@@ -442,6 +442,7 @@
               <span class="status-pill" *ngIf="item.star"><mat-icon>star</mat-icon>Destaque</span>
               <span class="status-pill muted" *ngIf="!item.inProgress"><mat-icon>construction</mat-icon>Em progresso</span>
               <span class="status-pill active" *ngIf="item.inProgress"><mat-icon>public</mat-icon>Publicado</span>
+              <span class="status-pill analytics"><mat-icon>ads_click</mat-icon>{{ getProjectClickCount(item) }} cliques</span>
             </span>
           </span>
         </button>
@@ -492,16 +493,31 @@
           <input type="text" id="text" placeholder="Insira o texto" formControlName="text" required>
         </label>
 
-        <div class="social-manager" formArrayName="socialLinks">
+        <div
+          class="social-manager"
+          formArrayName="socialLinks"
+          cdkDropList
+          [cdkDropListData]="socialLinks.controls"
+          (cdkDropListDropped)="dropSocialLink($event)">
           <div class="panel-title compact">
             <div>
               <p class="eyebrow">Redes sociais</p>
               <h3>Links exibidos no card</h3>
             </div>
-            <button class="icon-action" type="button" (click)="addSocialLink()"><mat-icon>add</mat-icon></button>
+            <div class="social-manager-actions">
+              <button class="icon-action" type="button" aria-label="Adicionar rede social" (click)="addSocialLink()">
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
           </div>
 
-          <div class="social-link-row" *ngFor="let social of socialLinks.controls; let i = index" [formGroupName]="i">
+          <div class="social-link-row" *ngFor="let social of socialLinks.controls; let i = index" [formGroupName]="i" cdkDrag>
+            <button class="drag-inline-action" type="button" aria-label="Reordenar rede social" cdkDragHandle>
+              <mat-icon>drag_indicator</mat-icon>
+            </button>
+            <div class="social-network-marker" aria-hidden="true">
+              <mat-icon>{{ getSocialNetworkOption(i).icon }}</mat-icon>
+            </div>
             <label>
               <span>Rede</span>
               <select formControlName="network" (change)="onSocialNetworkChange(i)">
@@ -514,8 +530,18 @@
             </label>
             <label>
               <span>Link ou usuario</span>
-              <input type="text" placeholder="https://... ou usuario" formControlName="value" required>
+              <input type="text" [placeholder]="getSocialValuePlaceholder(i)" formControlName="value" required>
+              <small>{{ getSocialValueHint(i) }}</small>
             </label>
+            <a
+              class="social-preview-action"
+              *ngIf="getSocialPreviewUrl(i)"
+              [href]="getSocialPreviewUrl(i)"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Abrir link da rede social">
+              <mat-icon>open_in_new</mat-icon>
+            </a>
             <button class="remove-inline-action social-remove" type="button" aria-label="Remover rede social" (click)="removeSocialLink(i)">
               <mat-icon>delete</mat-icon>
             </button>

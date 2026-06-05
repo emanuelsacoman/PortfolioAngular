@@ -228,6 +228,16 @@ export class IndexComponent implements OnInit, OnDestroy {
     window.open(`https://www.google.com/maps/search/${encodeURIComponent(local)}`, '_blank', 'noopener,noreferrer');
   }
 
+  registerProjectClick(project: Projetos): void {
+    if (!project.id) {
+      return;
+    }
+
+    this.firebaseService.registrarCliqueProjeto(project.id).catch((error) => {
+      console.error('Erro ao registrar clique no projeto:', error);
+    });
+  }
+
   private loadPortfolioData(): void {
     this.loadCollection(this.firebaseService.obterTodosSobre(), (items: Sobre[]) => this.sobre = items, () => this.sobreLoaded = true);
     this.loadCollection(this.firebaseService.obterTodosSobreArea(), (items: Sobrearea[]) => this.sobrearea = this.sortSobreArea(items), () => this.sobreAreaLoaded = true);

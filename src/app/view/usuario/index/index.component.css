@@ -1218,6 +1218,10 @@ app-index .project-status-pill.featured {
   background: rgba(46, 134, 221, 0.92);
 }
 
+app-index .project-status-pill.analytics {
+  background: rgba(78, 92, 120, 0.92);
+}
+
 app-index .project-modal-title {
   position: relative;
   z-index: 1;

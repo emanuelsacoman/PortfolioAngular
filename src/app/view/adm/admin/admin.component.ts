@@ -24,6 +24,14 @@ import { MaterialIconsLoaderService } from 'src/app/model/shared/material-icons-
 import { ThemeService } from 'src/app/model/services/theme.service';
 import Swal from 'sweetalert2';
 
+interface SocialNetworkOption {
+  value: string;
+  label: string;
+  icon: string;
+  placeholder: string;
+  hint: string;
+}
+
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -171,16 +179,77 @@ export class AdminComponent {
       ],
     },
   ];
-  readonly socialNetworkOptions = [
-    { value: 'instagram', label: 'Instagram' },
-    { value: 'facebook', label: 'Facebook' },
-    { value: 'linkedin', label: 'LinkedIn' },
-    { value: 'github', label: 'GitHub' },
-    { value: 'youtube', label: 'YouTube' },
-    { value: 'x', label: 'X / Twitter' },
-    { value: 'site', label: 'Site' },
-    { value: 'email', label: 'E-mail' },
-    { value: 'whatsapp', label: 'WhatsApp' },
+  readonly socialNetworkOptions: SocialNetworkOption[] = [
+    {
+      value: 'instagram',
+      label: 'Instagram',
+      icon: 'alternate_email',
+      placeholder: '@usuario ou https://instagram.com/usuario',
+      hint: 'Aceita usuario ou URL completa.',
+    },
+    {
+      value: 'facebook',
+      label: 'Facebook',
+      icon: 'thumb_up',
+      placeholder: 'usuario ou https://facebook.com/usuario',
+      hint: 'Aceita usuario, pagina ou URL completa.',
+    },
+    {
+      value: 'linkedin',
+      label: 'LinkedIn',
+      icon: 'business_center',
+      placeholder: 'usuario ou https://linkedin.com/in/usuario',
+      hint: 'Use o identificador do perfil ou a URL.',
+    },
+    {
+      value: 'github',
+      label: 'GitHub',
+      icon: 'code',
+      placeholder: 'usuario ou https://github.com/usuario',
+      hint: 'Aceita usuario ou URL completa.',
+    },
+    {
+      value: 'buymeacoffee',
+      label: 'Buy Me a Coffee',
+      icon: 'local_cafe',
+      placeholder: 'usuario ou https://www.buymeacoffee.com/usuario',
+      hint: 'Use o nome do perfil no Buy Me a Coffee.',
+    },
+    {
+      value: 'youtube',
+      label: 'YouTube',
+      icon: 'smart_display',
+      placeholder: '@canal ou https://youtube.com/@canal',
+      hint: 'Aceita canal, arroba ou URL completa.',
+    },
+    {
+      value: 'x',
+      label: 'X / Twitter',
+      icon: 'tag',
+      placeholder: '@usuario ou https://x.com/usuario',
+      hint: 'Aceita usuario ou URL completa.',
+    },
+    {
+      value: 'site',
+      label: 'Site',
+      icon: 'language',
+      placeholder: 'https://seudominio.com',
+      hint: 'Use a URL completa quando possivel.',
+    },
+    {
+      value: 'email',
+      label: 'E-mail',
+      icon: 'mail',
+      placeholder: 'nome@email.com',
+      hint: 'Sera aberto como link de e-mail.',
+    },
+    {
+      value: 'whatsapp',
+      label: 'WhatsApp',
+      icon: 'call',
+      placeholder: '5511999999999',
+      hint: 'Informe DDI, DDD e numero.',
+    },
   ];
   public profileVisitStats: ProfileVisitStat[] = [];
   public visitChartData: any;
@@ -857,6 +926,14 @@ export class AdminComponent {
     return this.projetos.filter((item) => item.star).length;
   }
 
+  get totalProjectClicks(): number {
+    return this.projetos.reduce((total, item) => total + this.getProjectClickCount(item), 0);
+  }
+
+  getProjectClickCount(project: Projetos): number {
+    return Number(project.clickCount) || 0;
+  }
+
   get homeBlocksCount(): number {
     return this.sobreareaArray.length + this.slider.length;
   }
@@ -1227,21 +1304,30 @@ export class AdminComponent {
     return this.profileEdit.get('socialLinks') as FormArray<FormGroup>;
   }
 
-  addSocialLink(): void {
-    this.socialLinks.push(this.createSocialLinkGroup());
+  addSocialLink(network = this.getNextSocialNetwork()): void {
+    this.socialLinks.push(this.createSocialLinkGroup({ network }));
+  }
+
+  addBuyMeACoffeeLink(): void {
+    this.addSocialLink('buymeacoffee');
   }
 
   removeSocialLink(index: number): void {
-    if (this.socialLinks.length <= 1) {
-      this.socialLinks.at(0).reset({
-        network: 'instagram',
-        label: 'Instagram',
-        value: '',
-      });
+    this.socialLinks.removeAt(index);
+    this.socialLinks.markAsDirty();
+    this.socialLinks.updateValueAndValidity();
+  }
+
+  dropSocialLink(event: CdkDragDrop<FormGroup[]>): void {
+    if (event.previousIndex === event.currentIndex) {
       return;
     }
 
-    this.socialLinks.removeAt(index);
+    const movedControl = this.socialLinks.at(event.previousIndex);
+    this.socialLinks.removeAt(event.previousIndex);
+    this.socialLinks.insert(event.currentIndex, movedControl);
+    this.socialLinks.markAsDirty();
+    this.socialLinks.updateValueAndValidity();
   }
 
   onSocialNetworkChange(index: number): void {
@@ -1256,17 +1342,69 @@ export class AdminComponent {
     }
   }
 
+  getSocialNetworkOption(index: number): SocialNetworkOption {
+    const network = String(this.socialLinks.at(index).get('network')?.value || '');
+    return this.getSocialOption(network);
+  }
+
+  getSocialValuePlaceholder(index: number): string {
+    return this.getSocialNetworkOption(index).placeholder;
+  }
+
+  getSocialValueHint(index: number): string {
+    return this.getSocialNetworkOption(index).hint;
+  }
+
+  getSocialPreviewUrl(index: number): string {
+    const group = this.socialLinks.at(index);
+    const network = String(group.get('network')?.value || '').trim();
+    const value = String(group.get('value')?.value || '').trim();
+
+    if (!value) {
+      return '';
+    }
+
+    if (value.startsWith('http://') || value.startsWith('https://') || value.startsWith('mailto:')) {
+      return value;
+    }
+
+    const username = value.replace(/^@/, '');
+
+    switch (network) {
+      case 'instagram':
+        return `https://instagram.com/${username}`;
+      case 'facebook':
+        return `https://facebook.com/${username}`;
+      case 'linkedin':
+        return `https://www.linkedin.com/in/${username}`;
+      case 'github':
+        return `https://github.com/${username}`;
+      case 'buymeacoffee':
+        return `https://www.buymeacoffee.com/${username}`;
+      case 'youtube':
+        return `https://youtube.com/${value}`;
+      case 'x':
+        return `https://x.com/${username}`;
+      case 'email':
+        return `mailto:${value}`;
+      case 'whatsapp':
+        return `https://wa.me/${value.replace(/\D/g, '')}`;
+      default:
+        return value.startsWith('www.') ? `https://${value}` : value;
+    }
+  }
+
   private createSocialLinksArray(values: ProfileSocialLink[]): FormArray<FormGroup> {
     const links = values.length ? values : [{ network: 'instagram', label: 'Instagram', value: '' }];
     return this.formBuilder.array(links.map((link) => this.createSocialLinkGroup(link)));
   }
 
   private createSocialLinkGroup(link: Partial<ProfileSocialLink> = {}): FormGroup {
-    const option = this.socialNetworkOptions.find((item) => item.value === link.network);
+    const option = this.getSocialOption(link.network || 'instagram');
 
     return this.formBuilder.group({
-      network: [link.network || 'instagram', Validators.required],
-      label: [link.label || option?.label || 'Instagram', Validators.required],
+      network: [link.network || option.value, Validators.required],
+      label: [link.label || option.label, Validators.required],
       value: [link.value || '', Validators.required],
     });
   }
@@ -1296,6 +1434,15 @@ export class AdminComponent {
 
   private getLegacySocialValue(links: ProfileSocialLink[], network: string): string {
     return links.find((link) => link.network === network)?.value ?? '';
+  }
+
+  private getSocialOption(network: string): SocialNetworkOption {
+    return this.socialNetworkOptions.find((item) => item.value === network) ?? this.socialNetworkOptions[0];
+  }
+
+  private getNextSocialNetwork(): string {
+    const usedNetworks = new Set(this.socialLinks.controls.map((control) => String(control.get('network')?.value || '')));
+    return this.socialNetworkOptions.find((option) => !usedNetworks.has(option.value))?.value ?? 'site';
   }
   
   // Função para atualizar o perfil após o upload de todas as imagens

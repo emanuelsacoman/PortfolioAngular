@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostListener, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { Projeto } from 'src/app/model/services/interfaces/projeto';
 import { Projetos } from 'src/app/model/services/interfaces/projetos';
 
@@ -12,7 +12,10 @@ export class ProjectsSectionComponent {
   @Input() projeto: Projeto[] = [];
   @Input() projetos: Projetos[] = [];
 
+  @Output() projectClicked = new EventEmitter<Projetos>();
+
   selectedProject: Projetos | null = null;
+  selectedProjectClickCount = 0;
   private projectRowsSource: Projetos[] | null = null;
   private cachedProjectRows: Projetos[][] = [];
 
@@ -42,10 +45,13 @@ export class ProjectsSectionComponent {
 
   openProject(project: Projetos): void {
     this.selectedProject = project;
+    this.selectedProjectClickCount = this.getProjectClickCount(project) + 1;
+    this.projectClicked.emit(project);
   }
 
   closeProject(): void {
     this.selectedProject = null;
+    this.selectedProjectClickCount = 0;
   }
 
   getProjectLink(project: Projetos): string | null {
@@ -93,6 +99,14 @@ export class ProjectsSectionComponent {
 
   hasProjectMeta(project: Projetos): boolean {
     return Boolean(project.tipo || project.periodo || project.funcao || project.cliente);
+  }
+
+  getProjectClickCount(project: Projetos): number {
+    return Number(project.clickCount) || 0;
+  }
+
+  getProjectClickLabel(count: number): string {
+    return count === 1 ? '1 clique' : `${count} cliques`;
   }
 
   trackProjectRow(index: number, row: Projetos[]): string {

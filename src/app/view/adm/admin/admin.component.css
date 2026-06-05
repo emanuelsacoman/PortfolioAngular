@@ -529,6 +529,7 @@ button {
 
 .primary-action,
 .save-action,
+.soft-action,
 .icon-action,
 .quick-actions button {
   display: inline-flex;
@@ -551,6 +552,14 @@ button {
 .save-action {
   justify-self: flex-start;
   background: var(--color-secondary);
+}
+
+.soft-action {
+  min-height: 38px;
+  padding: 0 12px;
+  background: var(--color-surface-soft);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
 }
 
 .icon-action {
@@ -631,6 +640,12 @@ button {
   resize: vertical;
 }
 
+.admin-form small {
+  color: var(--color-muted);
+  font-size: 0.76rem;
+  line-height: 1.35;
+}
+
 .paragraph-manager {
   display: grid;
   gap: 12px;
@@ -641,15 +656,70 @@ button {
   gap: 12px;
 }
 
+.social-manager-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
 .social-link-row {
   display: grid;
-  grid-template-columns: minmax(150px, 0.6fr) minmax(150px, 0.8fr) minmax(220px, 1.4fr) 42px;
+  grid-template-columns: 38px 44px minmax(150px, 0.6fr) minmax(150px, 0.8fr) minmax(220px, 1.4fr) 38px 38px;
   align-items: end;
   gap: 12px;
   border: 1px solid var(--color-border);
   border-radius: 8px;
   padding: 12px;
   background: var(--color-surface-soft);
+}
+
+.drag-inline-action,
+.social-network-marker,
+.social-preview-action {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+}
+
+.drag-inline-action {
+  align-self: end;
+  background: transparent;
+  color: var(--color-muted);
+  cursor: grab;
+}
+
+.drag-inline-action:active {
+  cursor: grabbing;
+}
+
+.social-network-marker {
+  align-self: end;
+  background: color-mix(in srgb, var(--color-primary) 12%, var(--color-surface));
+  color: var(--color-primary);
+}
+
+.social-preview-action {
+  align-self: end;
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  text-decoration: none;
+}
+
+.social-preview-action:hover {
+  color: var(--color-primary);
+}
+
+.drag-inline-action mat-icon,
+.social-network-marker mat-icon,
+.social-preview-action mat-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
 }
 
 .social-remove {
@@ -1086,6 +1156,11 @@ button {
   color: #14714c;
 }
 
+.status-pill.analytics {
+  background: #edf2ff;
+  color: #2f4d94;
+}
+
 .status-pill mat-icon {
   font-size: 15px;
   width: 15px;
@@ -1380,6 +1455,7 @@ button {
 .danger-action:hover,
 .primary-action:hover,
 .save-action:hover,
+.soft-action:hover,
 .icon-action:hover,
 .quick-actions button:hover,
 .status-card:hover,
