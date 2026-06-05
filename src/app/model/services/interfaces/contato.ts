@@ -2,11 +2,13 @@ export class Contato{
     private _id!: string;
     private _titleContato!: string;
     private _descContato!: string;
+    private _paragrafosContato!: string[];
 
-    constructor(id: string, titleContato: string, descContato: string){
+    constructor(id: string, titleContato: string, descContato: string, paragrafosContato: string[] = []){
         this._titleContato = titleContato;
         this._descContato = descContato;
         this._id = id;
+        this._paragrafosContato = paragrafosContato;
     }
 
     public get id(): string {
@@ -31,6 +33,14 @@ export class Contato{
 
     public set descContato(value: string) {
         this._descContato = value;
+    }
+
+    public get paragrafosContato(): string[] {
+        return this._paragrafosContato;
+    }
+
+    public set paragrafosContato(value: string[]) {
+        this._paragrafosContato = value;
     }
 
 }

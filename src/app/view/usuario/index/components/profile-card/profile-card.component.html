@@ -1,0 +1,130 @@
+<section
+  *ngFor="let perfil of profiles"
+  class="bloco"
+  [class.profile]="isDesktop"
+  [class.noResponse]="isDesktop"
+  [class.profile2]="!isDesktop"
+  [class.response]="!isDesktop">
+  <div class="alltop">
+    <div class="picture">
+      <div *ngIf="isDesktop; else mobileProfileImage" class="picarea">
+        <img [src]="profileImageUrl" alt="Foto de perfil" loading="lazy">
+        <ng-container *ngTemplateOutlet="seasonalFrame"></ng-container>
+        <div class="picback"></div>
+      </div>
+
+      <ng-template #mobileProfileImage>
+        <div class="imgSpace">
+          <img [src]="profileImageUrl" class="profile2img" alt="Foto de perfil" loading="lazy">
+          <ng-container *ngTemplateOutlet="seasonalFrame"></ng-container>
+          <div class="picback"></div>
+        </div>
+      </ng-template>
+
+      <section class="pictureBottom">
+        <div class="name">{{ githubProfile.name }}</div>
+        <div class="liltext">{{ perfil.text }}</div>
+        <div class="itenspic">
+          <a
+            *ngFor="let social of getSocialLinks(perfil)"
+            [href]="getSocialUrl(social)"
+            target="_blank"
+            rel="noopener noreferrer"
+            [attr.aria-label]="social.label">
+            <img [src]="getSocialIcon(social.network)" [alt]="social.label" loading="lazy">
+          </a>
+        </div>
+      </section>
+
+      <section class="info">
+        <div class="infoitem">
+          <div
+            class="itens phone"
+            (click)="whatsappRequested.emit(perfil.phone)"
+            (keydown.enter)="whatsappRequested.emit(perfil.phone)"
+            (keydown.space)="$event.preventDefault(); whatsappRequested.emit(perfil.phone)"
+            role="button"
+            tabindex="0"
+            aria-label="Abrir WhatsApp">
+            <div class="img">
+              <img src="{{ perfil.phoneImg }}" alt="Telefone">
+            </div>
+            <div class="lildesc">
+              <p class="title">{{ perfil.phoneTXT }}</p>
+              <p class="desc">{{ perfil.phone }}</p>
+            </div>
+          </div>
+          <div class="bar"></div>
+
+          <div
+            class="itens email"
+            (click)="emailRequested.emit(perfil.email)"
+            (keydown.enter)="emailRequested.emit(perfil.email)"
+            (keydown.space)="$event.preventDefault(); emailRequested.emit(perfil.email)"
+            role="button"
+            tabindex="0"
+            aria-label="Enviar e-mail">
+            <div class="img">
+              <img src="{{ perfil.emailImg }}" alt="E-mail">
+            </div>
+            <div class="lildesc">
+              <p class="title">{{ perfil.emailTXT }}</p>
+              <p class="desc">{{ perfil.email }}</p>
+            </div>
+          </div>
+          <div class="bar"></div>
+
+          <div
+            class="itens local"
+            (click)="localRequested.emit(perfil.local)"
+            (keydown.enter)="localRequested.emit(perfil.local)"
+            (keydown.space)="$event.preventDefault(); localRequested.emit(perfil.local)"
+            role="button"
+            tabindex="0"
+            aria-label="Abrir localizacao">
+            <div class="img">
+              <img src="{{ perfil.localImg }}" alt="Localizacao">
+            </div>
+            <div class="lildesc">
+              <p class="title">{{ perfil.localTXT }}</p>
+              <p class="desc">{{ perfil.local }}</p>
+            </div>
+          </div>
+          <div class="bar"></div>
+
+          <div class="itens birth" [style.background-image]="birthdayBackground">
+            <div class="img">
+              <img src="{{ perfil.birthImg }}" alt="Aniversario">
+            </div>
+            <div class="lildesc">
+              <p class="title">{{ perfil.birthTXT }}</p>
+              <p class="desc">{{ perfil.birth }}</p>
+            </div>
+          </div>
+          <div class="bar"></div>
+        </div>
+      </section>
+
+      <div class="cv">
+        <a href="{{ perfil.cv }}" target="_blank" rel="noopener noreferrer">
+          <div class="cvimg">
+            <img src="./assets/images/baixar.png" alt="Download" loading="lazy">
+          </div>
+          <div class="cvtext">
+            <p>CURR&Iacute;CULO</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ng-template #seasonalFrame>
+  <div class="frame">
+    <img *ngIf="holidays.christmas" src="./assets/images/christmas.png" alt="" aria-hidden="true">
+    <img *ngIf="holidays.halloween" src="./assets/images/halloween.png" alt="" aria-hidden="true">
+    <img *ngIf="holidays.newYear" src="./assets/images/newyear.png" alt="" aria-hidden="true">
+    <img *ngIf="holidays.easter" src="./assets/images/easter.png" alt="" aria-hidden="true">
+    <img *ngIf="holidays.birthday" src="./assets/images/birthdayFrame.png" alt="" aria-hidden="true">
+  </div>
+</ng-template>

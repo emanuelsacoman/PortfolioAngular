@@ -4,13 +4,15 @@ export class Sobre{
     private _txt1!: string;
     private _txt2!: string;
     private _subtitle!: string;
+    private _paragrafos!: string[];
 
-    constructor(id: string, title: string, txt1: string, txt2: string, subtitle: string){
+    constructor(id: string, title: string, txt1: string, txt2: string, subtitle: string, paragrafos: string[] = []){
         this._title = title;
         this._txt1 = txt1;
         this._txt2 = txt2;
         this._subtitle = subtitle;
         this._id = id;
+        this._paragrafos = paragrafos;
     }
 
     public get id(): string {
@@ -51,6 +53,14 @@ export class Sobre{
 
     public set subtitle(value: string) {
         this._subtitle = value;
+    }
+
+    public get paragrafos(): string[] {
+        return this._paragrafos;
+    }
+
+    public set paragrafos(value: string[]) {
+        this._paragrafos = value;
     }
 
 }

@@ -3,12 +3,14 @@ export class Sobrearea{
     private _ctitle!: string;
     private _cdesc!: string;
     private _cImg!: any;
+    private _ordem!: number;
 
-    constructor(id: string, ctitle: string, cdesc: string, cImg: any){
+    constructor(id: string, ctitle: string, cdesc: string, cImg: any, ordem = 0){
         this._ctitle = ctitle;
         this._cdesc = cdesc;
         this._id = id;
         this._cImg = cImg;
+        this._ordem = ordem;
     }
 
     public get id(): string {
@@ -41,6 +43,14 @@ export class Sobrearea{
 
     set cImg(cImg: any) {
         this._cImg = cImg;
+    }
+
+    get ordem(): number {
+        return this._ordem;
+    }
+
+    set ordem(ordem: number) {
+        this._ordem = ordem;
     }
 
 }

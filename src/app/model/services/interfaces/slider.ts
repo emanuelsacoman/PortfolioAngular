@@ -1,10 +1,12 @@
 export class Slider{
     private _id!: string;
     private _Carouselimg!: any;
+    private _ordem!: number;
 
-    constructor(id: string, Carouselimg: any){
+    constructor(id: string, Carouselimg: any, ordem = 0){
         this._id = id;
         this._Carouselimg = Carouselimg;
+        this._ordem = ordem;
     }
 
     public get id(): string {
@@ -23,5 +25,12 @@ export class Slider{
         this._Carouselimg = Carouselimg;
     }
 
+    get ordem(): number {
+        return this._ordem;
+    }
+
+    set ordem(ordem: number) {
+        this._ordem = ordem;
+    }
 
 }

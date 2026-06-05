@@ -1,8 +1,44 @@
-/* You can add global styles to this file, and also import other style files */
-@layer normalize, primeng;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
 
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: content-box;
+:root {
+  --site-bg-start: #4d4f52;
+  --site-bg-middle: #505050;
+  --site-bg-end: #9a9da1;
+  --admin-bg: #f4f6f8;
+  --admin-sidebar-bg: #151a21;
+  --admin-sidebar-text: #f7fafc;
+  --color-primary: #2e86dd;
+  --color-primary-strong: #1f6fbc;
+  --color-secondary: #1d7a58;
+  --color-success: #15905d;
+  --color-warning: #aa6b00;
+  --color-danger: #ad3542;
+  --color-surface: #ffffff;
+  --color-surface-soft: #f8fafc;
+  --color-text: #1f2933;
+  --color-text-soft: #405066;
+  --color-muted: #718096;
+  --color-border: #dce3ea;
+  --project-title-color: #e2e2e2;
+  --color-primary-soft: rgba(46, 134, 221, 0.12);
+  --color-primary-hover: rgba(46, 134, 221, 0.18);
+  --color-primary-focus: rgba(46, 134, 221, 0.28);
+  --color-secondary-soft: rgba(29, 122, 88, 0.12);
+  --color-success-soft: rgba(21, 144, 93, 0.12);
+  --color-warning-soft: rgba(170, 107, 0, 0.14);
+  --color-danger-soft: rgba(173, 53, 66, 0.12);
+}
+
+html {
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--admin-bg);
+  color: var(--color-text);
 }

@@ -1,3 +1,9 @@
+export interface ProfileSocialLink {
+    network: string;
+    label: string;
+    value: string;
+}
+
 export class Profile {
     private _id!: string;
     private _instagram!: string;
@@ -18,6 +24,7 @@ export class Profile {
     private _birth!: string;
     private _cv!: string;
     private _text!: string;
+    private _socialLinks!: ProfileSocialLink[];
 
     constructor(
         id: string,
@@ -39,6 +46,7 @@ export class Profile {
         birth: string,
         cv: string,
         text: string,
+        socialLinks: ProfileSocialLink[] = [],
     ) {
         this._id = id;
         this._instagram = instagram;
@@ -59,6 +67,7 @@ export class Profile {
         this._birth = birth;
         this._cv = cv;
         this._text = text;
+        this._socialLinks = socialLinks;
     }
 
     public get id(): string {
@@ -229,5 +238,13 @@ export class Profile {
 
     public set text(value: string) {
         this._text = value;
+    }
+
+    public get socialLinks(): ProfileSocialLink[] {
+        return this._socialLinks;
+    }
+
+    public set socialLinks(value: ProfileSocialLink[]) {
+        this._socialLinks = value;
     }
 }

@@ -1,378 +1,699 @@
-<body>
-    <main>
-        <aside class="options">
-          <div class="option return" (click)="goBack()">
-            <img src="./assets/images/return.png" alt="Voltar">
+<main class="admin-shell">
+  <aside class="admin-sidebar">
+    <div class="brand-block">
+      <div class="brand-mark">ES</div>
+      <div>
+        <p class="eyebrow">Portfolio</p>
+        <h1>Admin</h1>
+      </div>
+    </div>
+
+    <nav class="admin-nav" aria-label="Navegacao administrativa">
+      <button type="button" class="nav-item" (click)="selectOption('dashboard')" [ngClass]="{ selected: isSelected('dashboard') }">
+        <mat-icon>dashboard</mat-icon>
+        <span>Dashboard</span>
+      </button>
+      <button type="button" class="nav-item" (click)="selectOption('sobre')" [ngClass]="{ selected: isSelected('sobre') }">
+        <mat-icon>article</mat-icon>
+        <span>Sobre</span>
+      </button>
+      <button type="button" class="nav-item" (click)="selectOption('resumo')" [ngClass]="{ selected: isSelected('resumo') }">
+        <mat-icon>work_history</mat-icon>
+        <span>Resumo</span>
+      </button>
+      <button type="button" class="nav-item" (click)="selectOption('projetos')" [ngClass]="{ selected: isSelected('projetos') }">
+        <mat-icon>inventory_2</mat-icon>
+        <span>Projetos</span>
+      </button>
+      <button type="button" class="nav-item" (click)="selectOption('contato')" [ngClass]="{ selected: isSelected('contato') }">
+        <mat-icon>contact_mail</mat-icon>
+        <span>Contato</span>
+      </button>
+      <button type="button" class="nav-item" (click)="selectOption('profile')" [ngClass]="{ selected: isSelected('profile') }">
+        <mat-icon>account_circle</mat-icon>
+        <span>Perfil</span>
+      </button>
+      <button type="button" class="nav-item" (click)="selectOption('theme')" [ngClass]="{ selected: isSelected('theme') }">
+        <mat-icon>palette</mat-icon>
+        <span>Aparencia</span>
+      </button>
+      <button type="button" class="nav-item" (click)="selectOption('email')" [ngClass]="{ selected: isSelected('email') }">
+        <mat-icon>mail</mat-icon>
+        <span>Mensagens</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-actions">
+      <button type="button" class="ghost-action" (click)="goBack()">
+        <mat-icon>arrow_back</mat-icon>
+        <span>Ver site</span>
+      </button>
+      <button type="button" class="danger-action" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Sair</span>
+      </button>
+    </div>
+  </aside>
+
+  <section class="admin-workspace">
+    <header class="workspace-header">
+      <div>
+        <p class="eyebrow">Area administrativa</p>
+        <h2 *ngIf="isSelected('dashboard')">Painel geral</h2>
+        <h2 *ngIf="isSelected('sobre')">Conteudo da pagina Sobre</h2>
+        <h2 *ngIf="isSelected('resumo')">Resumo profissional</h2>
+        <h2 *ngIf="isSelected('projetos')">Catalogo de projetos</h2>
+        <h2 *ngIf="isSelected('contato')">Area de contato</h2>
+        <h2 *ngIf="isSelected('profile')">Perfil publico</h2>
+        <h2 *ngIf="isSelected('theme')">Aparencia do site</h2>
+        <h2 *ngIf="isSelected('email')">Caixa de mensagens</h2>
+      </div>
+      <div class="header-meta">
+        <span>{{ projetos.length }} projetos</span>
+        <span>{{ sobreareaArray.length }} servicos</span>
+      </div>
+    </header>
+
+    <section class="dashboard-shell" *ngIf="isSelected('dashboard') && (items | async) as dashboardMessages" aria-label="Resumo do admin">
+      <section class="dashboard-hero panel-card">
+        <div>
+          <p class="eyebrow">Visao geral</p>
+          <h3>{{ profileDataTitle }}</h3>
+          <p>Conteudo publicado, mensagens recebidas e pontos de atencao do portfolio.</p>
+        </div>
+        <div class="dashboard-score" [attr.aria-label]="'Saude do conteudo ' + contentHealthScore + '%'">
+          <strong>{{ contentHealthScore }}%</strong>
+          <span>Saude do conteudo</span>
+        </div>
+      </section>
+
+      <section class="dashboard-metrics">
+        <article class="metric-card">
+          <span class="metric-icon blue"><mat-icon>folder_open</mat-icon></span>
+          <p>Projetos</p>
+          <strong>{{ projetos.length }}</strong>
+          <small>{{ publishedProjectsCount }} publicados, {{ draftProjectsCount }} em progresso</small>
+        </article>
+
+        <article class="metric-card">
+          <span class="metric-icon green"><mat-icon>home_repair_service</mat-icon></span>
+          <p>Home</p>
+          <strong>{{ homeBlocksCount }}</strong>
+          <small>{{ sobreParagraphCount }} paragrafos e {{ slider.length }} imagens</small>
+        </article>
+
+        <article class="metric-card">
+          <span class="metric-icon amber"><mat-icon>psychology</mat-icon></span>
+          <p>Curriculo</p>
+          <strong>{{ resumol.length + resumor.length }}</strong>
+          <small>{{ chipArray.length }} conhecimentos cadastrados</small>
+        </article>
+
+        <article class="metric-card urgent" (click)="selectOption('email')" tabindex="0" role="button">
+          <span class="metric-icon red"><mat-icon>mark_email_unread</mat-icon></span>
+          <p>Mensagens</p>
+          <strong>{{ unreadMessagesCount(dashboardMessages) }}</strong>
+          <small>{{ dashboardMessages.length }} no total</small>
+        </article>
+      </section>
+
+      <article class="panel-card dashboard-chart-panel">
+        <div class="panel-title">
+          <div>
+            <p class="eyebrow">Audiencia</p>
+            <h3>Visitantes do perfil</h3>
           </div>
-            <div class="option" (click)="selectOption('sobre')" [ngClass]="{selected: isSelected('sobre')}">SOBRE</div>
-            <div class="option" (click)="selectOption('resumo')" [ngClass]="{selected: isSelected('resumo')}">RESUMO</div>
-            <div class="option" (click)="selectOption('projetos')" [ngClass]="{selected: isSelected('projetos')}"><P>PROJETOS</P></div>
-            <div class="option" (click)="selectOption('contato')" [ngClass]="{selected: isSelected('contato')}">CONTATO</div>
-            <div class="option" (click)="selectOption('profile')" [ngClass]="{selected: isSelected('profile')}">PROFILE</div>
-            <div class="option" (click)="selectOption('email')" [ngClass]="{selected: isSelected('email')}">EMAIL</div>
-            <div class="option logout" (click)="logout()">LOGOUT</div>
-        </aside>
-        <section class="formsection">
-            <div class="formall" *ngIf="isSelected('sobre')">
-              <form class="formSobre" (ngSubmit)="editSobre()" [formGroup]="sobreEdit" #formDir="ngForm">
-                <div class="input-group">
-                  <div class="input">
-                    <label for="title">Título</label>
-                    <input type="text" id="title" placeholder="Insira o título" formControlName="title" required />
-                  </div>
-                  <div class="input">
-                    <label for="subtitle">Subtítulo</label>
-                    <input type="text" id="subtitle" placeholder="Insira o subtítulo" formControlName="subtitle" required />
-                  </div>
-                  <div class="input">
-                    <label for="txt1">Texto 1</label>
-                    <textarea id="txt1" placeholder="Insira o primeiro texto" formControlName="txt1" required rows="5" cols="30"></textarea>
-                  </div>
-                  <div class="input">
-                    <label for="txt2">Texto 2</label>
-                    <textarea id="txt2" placeholder="Insira o segundo texto" formControlName="txt2" required rows="5" cols="30"></textarea>
-                  </div>
-                </div>
-                <button class="sendButton" type="submit">Enviar</button>
-              </form>
+          <div class="chart-summary">
+            <span><strong>{{ todayProfileVisitors }}</strong> hoje</span>
+            <span><strong>{{ totalProfileVisitors }}</strong> nos ultimos dias</span>
+          </div>
+        </div>
+        <div class="visit-chart" *ngIf="profileVisitStats.length; else emptyVisits">
+          <p-chart type="line" [data]="visitChartData" [options]="visitChartOptions"></p-chart>
+        </div>
+        <ng-template #emptyVisits>
+          <p class="empty-state">As visitas comecam a aparecer depois que alguem acessar a home.</p>
+        </ng-template>
+      </article>
 
-              <section class="addArea">
-                <div class="cadastro">
-                  <img (click)="cadastrar()" src="./assets/images/plus.png" alt="Cadastro">
-                </div>
-                <div *ngFor="let area of sobreareaArray; let i = index">
-                  <div class="formSobreArea" (click)="editar(area)">
-                    <div class="item">
-                      <div class="area">
-                        <div class="input">
-                          <h2>{{area.ctitle}}</h2>
-                        </div>
-                        <div class="input">
-                          <p>{{area.cdesc}}</p>
-                        </div>
-                        <div class="input preImage">
-                          <img src="{{area.cImg}}" alt="{{area.ctitle}}">
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section> 
-
-              <section class="carouselarea">
-                <div class="left">
-                  <form class="formCarousel" (ngSubmit)="cadastrarSlider()" [formGroup]="carouselCriar" #formDir="ngForm">
-                    <div class="inputs-groups">
-                      <div class="input-group">
-                        <div class="input">
-                          <label for="Carouselimg">Imagem do Carrossel</label>
-                          <input type="file" id="Carouselimg" accept="image/*" required formControlName="Carouselimg" (change)="uploadFileCarousel($event)" />
-                        </div>
-                      </div>
-                      <button class="addbuton" type="submit">Adicionar</button>
-                    </div>
-                  </form>                   
-                </div>
-                <div class="rightcarousel">
-                  <div class="carouselitens" *ngFor="let sliders of slider">
-                    <div class="carouselitem" (click)="deletarCarousel(sliders)">
-                      <img src="{{sliders.Carouselimg}}">
-                    </div>
-                  </div>
-                </div>                  
-              </section>
-
+      <section class="dashboard-panels">
+        <article class="panel-card dashboard-main-panel">
+          <div class="panel-title">
+            <div>
+              <p class="eyebrow">Atalhos</p>
+              <h3>Editar conteudo principal</h3>
             </div>
-            <div class="formall" *ngIf="isSelected('resumo')">
-              <form class="formResumo" (ngSubmit)="editResumo()" [formGroup]="resumoEdit" #formDir="ngForm">
-                <div class="inputs-groups">
-                  
-                  <div class="input-group">
-                    <div class="input">
-                      <label for="titleArea">Título</label>
-                      <input type="text" id="titleArea" placeholder="Insira o título" formControlName="titleArea" required />
-                    </div>
-                  </div>
-                  
-                  <div class="input-group">
-                    <div class="input">
-                      <label for="lsub">Legenda Esquerda</label>
-                      <input type="text" id="lsub" placeholder="Insira a legenda esquerda" formControlName="lsub" required />
-                    </div>
-                    <div class="input">
-                      <label for="rsub">Legenda Direita</label>
-                      <input type="text" id="rsub" placeholder="Insira a legenda direita" formControlName="rsub" required />
-                    </div>
-                  </div>
-              
-                  <div class="input-group">
-                    <div class="input">
-                      <label for="chart">Título do Gráfico</label>
-                      <input type="text" id="chart" placeholder="Insira o título do gráfico" formControlName="chart" required />
-                    </div>
-                    <div class="input">
-                      <label for="chip">Título do Chip</label>
-                      <input type="text" id="chip" placeholder="Insira o título do chip" formControlName="chip" required />
-                    </div>
-                  </div>
-                  
-                  <button class="sendButton" type="submit">Enviar</button>
-                </div>
-              </form>               
+          </div>
+          <div class="quick-actions">
+            <button type="button" (click)="selectOption('sobre')"><mat-icon>article</mat-icon>Sobre</button>
+            <button type="button" (click)="selectOption('resumo')"><mat-icon>work_history</mat-icon>Resumo</button>
+            <button type="button" (click)="selectOption('projetos')"><mat-icon>inventory_2</mat-icon>Projetos</button>
+            <button type="button" (click)="selectOption('profile')"><mat-icon>account_circle</mat-icon>Perfil</button>
+          </div>
 
-                <section class="itensdisplay">
-                  <div class="displayarea">
-                    <div class="display" *ngFor="let resumol of resumol; let i = index" (click)="editarl(resumol)">
-                      <p>{{resumol.titlel}}</p>
-                      <p>{{resumol.descl}}</p>
-                      <p>{{resumol.locationl}}</p>
-                    </div>
-                    <div class="addbuton" (click)="addresumol()">
-                      ADD
-                    </div>
-                  </div>
-                  <div class="displayarea">
-                    <div class="display" *ngFor="let resumor of resumor; let i = index" (click)="editarr(resumor)">
-                      <p>{{resumor.titler}}</p>
-                      <p>{{resumor.descr}}</p>
-                      <p>{{resumor.locationr}}</p>
-                    </div>
-                    <div class="addbuton" (click)="addresumor()">
-                      ADD
-                    </div>
-                  </div>
-                </section>
+          <div class="dashboard-status-grid">
+            <button type="button" class="status-card" (click)="selectOption('projetos')">
+              <span><mat-icon>star</mat-icon>Projetos em destaque</span>
+              <strong>{{ featuredProjectsCount }}</strong>
+            </button>
+            <button type="button" class="status-card" (click)="selectOption('sobre')">
+              <span><mat-icon>design_services</mat-icon>Servicos na home</span>
+              <strong>{{ sobreareaArray.length }}</strong>
+            </button>
+            <button type="button" class="status-card" (click)="selectOption('contato')">
+              <span><mat-icon>alternate_email</mat-icon>Paragrafos de contato</span>
+              <strong>{{ contactParagraphCount }}</strong>
+            </button>
+          </div>
+        </article>
 
-                <section class="chiparea">
-                  <div class="left">
-                    <form class="formChip" (ngSubmit)="chipCreateForm()" [formGroup]="chipCreate" #formDir="ngForm">
-                      <div class="inputs-groups">
-                        <div class="input-group">
-                          <div class="input">
-                            <label for="chipname">Nome do Chip</label>
-                            <input type="text" id="chipname" placeholder="Insira o nome do chip" formControlName="chipname" required />
-                          </div>
-                        </div>
-                        <button class="addbuton" type="submit">Adicionar</button>
-                      </div>
-                    </form>                     
-                  </div>
-                  <div class="right">
-                    <div class="chips" *ngFor="let chip of chipArray">
-                      <div class="cardchip" (click)="deleteChip(chip.id)">
-                        <p>{{ chip.chipname }}</p>
-                      </div>
-                    </div>
-                  </div>                  
-                </section>
-
+        <article class="panel-card">
+          <div class="panel-title">
+            <div>
+              <p class="eyebrow">Inbox</p>
+              <h3>Mensagens recentes</h3>
             </div>
-            
-            <div class="formall projetosSection" *ngIf="isSelected('projetos')">
-              <section class="projeto">
-                <form class="formProjeto" (ngSubmit)="editProjeto()" [formGroup]="projetoEdit" #formDir="ngForm">
-                  <div class="inputs-groups">
-                    <div class="input-group">
-                      <div class="input">
-                        <label for="titleProjeto">Título do Projeto</label>
-                        <input type="text" id="titleProjeto" placeholder="Insira o título do projeto" formControlName="titleProjeto" required />
-                      </div>
-                    </div>
-                    <button class="sendButton" type="submit">Enviar</button>
+            <button class="icon-action" type="button" (click)="selectOption('email')"><mat-icon>open_in_new</mat-icon></button>
+          </div>
+          <div class="message-mini-list" *ngIf="recentMessages(dashboardMessages).length; else emptyInbox">
+            <button type="button" *ngFor="let item of recentMessages(dashboardMessages)" (click)="selectOption('email')">
+              <mat-icon>{{ item.visualizado ? 'drafts' : 'mail' }}</mat-icon>
+              <span>
+                <strong>{{ item.nome || 'Sem nome' }}</strong>
+                <small>{{ item.titulo || 'Sem assunto' }}</small>
+              </span>
+              <time>{{ convertTimestampToDate(item.timestamp) | date: 'dd/MM' }}</time>
+            </button>
+          </div>
+          <ng-template #emptyInbox>
+            <p class="empty-state">Nenhuma mensagem recebida ainda.</p>
+          </ng-template>
+        </article>
+      </section>
+
+      <section class="dashboard-panels secondary">
+        <article class="panel-card">
+          <div class="panel-title">
+            <div>
+              <p class="eyebrow">Portfolio</p>
+              <h3>Projetos prioritarios</h3>
+            </div>
+          </div>
+          <div class="project-health-list">
+            <button type="button" *ngFor="let item of priorityProjects" (click)="editarProjeto(item)">
+              <span>
+                <strong>{{ item.titulo || 'Projeto sem titulo' }}</strong>
+                <small>{{ item.tipo || 'Sem tipo' }}<ng-container *ngIf="item.periodo"> / {{ item.periodo }}</ng-container></small>
+              </span>
+              <em [ngClass]="{ active: item.inProgress }">{{ item.inProgress ? 'Publicado' : 'Em progresso' }}</em>
+            </button>
+          </div>
+        </article>
+
+        <article class="panel-card">
+          <div class="panel-title">
+            <div>
+              <p class="eyebrow">Checklist</p>
+              <h3>Pontos importantes</h3>
+            </div>
+          </div>
+          <div class="checklist">
+            <span [ngClass]="{ done: projetos.length > 0 }"><mat-icon>{{ projetos.length > 0 ? 'check_circle' : 'radio_button_unchecked' }}</mat-icon>Projetos cadastrados</span>
+            <span [ngClass]="{ done: featuredProjectsCount > 0 }"><mat-icon>{{ featuredProjectsCount > 0 ? 'check_circle' : 'radio_button_unchecked' }}</mat-icon>Destaques definidos</span>
+            <span [ngClass]="{ done: sobreParagraphCount > 0 }"><mat-icon>{{ sobreParagraphCount > 0 ? 'check_circle' : 'radio_button_unchecked' }}</mat-icon>Texto Sobre preenchido</span>
+            <span [ngClass]="{ done: contactParagraphCount > 0 }"><mat-icon>{{ contactParagraphCount > 0 ? 'check_circle' : 'radio_button_unchecked' }}</mat-icon>Contato com texto publico</span>
+            <span [ngClass]="{ done: chipArray.length >= 4 }"><mat-icon>{{ chipArray.length >= 4 ? 'check_circle' : 'radio_button_unchecked' }}</mat-icon>Conhecimentos suficientes</span>
+          </div>
+        </article>
+      </section>
+    </section>
+
+    <section class="panel-card" *ngIf="isSelected('sobre')">
+      <div class="panel-title">
+        <div>
+          <p class="eyebrow">Home</p>
+          <h3>Textos da secao Sobre</h3>
+        </div>
+        <button class="primary-action" type="button" (click)="cadastrar()">
+          <mat-icon>add</mat-icon>
+          Nova area
+        </button>
+      </div>
+
+      <form class="admin-form" (ngSubmit)="editSobre()" [formGroup]="sobreEdit" #formDir="ngForm">
+        <div class="form-grid two">
+          <label>
+            <span>Titulo</span>
+            <input type="text" id="title" placeholder="Insira o titulo" formControlName="title" required>
+          </label>
+          <label>
+            <span>Subtitulo</span>
+            <input type="text" id="subtitle" placeholder="Insira o subtitulo" formControlName="subtitle" required>
+          </label>
+        </div>
+        <div class="paragraph-manager" formArrayName="paragrafos">
+          <div class="panel-title compact">
+            <h3>Paragrafos</h3>
+            <button class="icon-action" type="button" (click)="addSobreParagraph()"><mat-icon>add</mat-icon></button>
+          </div>
+          <label *ngFor="let paragraph of sobreParagraphs.controls; let i = index">
+            <span>Paragrafo {{ i + 1 }}</span>
+            <textarea [id]="'sobre-paragrafo-' + i" placeholder="Insira o texto" [formControlName]="i" required rows="5"></textarea>
+            <button class="remove-inline-action" type="button" aria-label="Remover paragrafo" (click)="removeSobreParagraph(i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </label>
+        </div>
+        <button class="save-action" type="submit"><mat-icon>save</mat-icon>Salvar sobre</button>
+      </form>
+
+      <div class="section-divider"></div>
+
+      <div class="panel-title compact">
+        <div>
+          <p class="eyebrow">Servicos</p>
+          <h3>Areas exibidas na home</h3>
+        </div>
+      </div>
+      <div class="service-grid" cdkDropList cdkDropListOrientation="mixed" [cdkDropListData]="sobreareaArray" (cdkDropListDropped)="dropSobreArea($event)">
+        <button type="button" class="service-card" *ngFor="let area of sobreareaArray" cdkDrag (click)="editar(area)">
+          <mat-icon class="drag-handle" cdkDragHandle (click)="$event.stopPropagation()">drag_indicator</mat-icon>
+          <img src="{{ area.cImg }}" alt="{{ area.ctitle }}">
+          <span>{{ area.ctitle || 'Area sem titulo' }}</span>
+          <small>{{ area.cdesc }}</small>
+        </button>
+      </div>
+
+      <div class="section-divider"></div>
+
+      <div class="panel-title compact">
+        <div>
+          <p class="eyebrow">Carrossel</p>
+          <h3>Tecnologias e imagens</h3>
+        </div>
+      </div>
+      <section class="media-manager">
+        <form class="inline-upload" (ngSubmit)="cadastrarSlider()" [formGroup]="carouselCriar" #formDir="ngForm">
+          <label>
+            <span>Adicionar imagem</span>
+            <input type="file" id="Carouselimg" accept="image/*" required formControlName="Carouselimg" (change)="uploadFileCarousel($event)">
+          </label>
+          <button class="primary-action" type="submit"><mat-icon>add_photo_alternate</mat-icon>Adicionar</button>
+        </form>
+        <div class="media-strip" cdkDropList cdkDropListOrientation="mixed" [cdkDropListData]="slider" (cdkDropListDropped)="dropSlider($event)">
+          <button type="button" *ngFor="let sliders of slider" cdkDrag (click)="deletarCarousel(sliders)">
+            <mat-icon class="drag-handle" cdkDragHandle (click)="$event.stopPropagation()">drag_indicator</mat-icon>
+            <img src="{{ sliders.Carouselimg }}" alt="Imagem do carrossel">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </section>
+    </section>
+
+    <section class="panel-card" *ngIf="isSelected('resumo')">
+      <div class="panel-title">
+        <div>
+          <p class="eyebrow">Curriculo</p>
+          <h3>Resumo e competencias</h3>
+        </div>
+      </div>
+
+      <form class="admin-form" (ngSubmit)="editResumo()" [formGroup]="resumoEdit" #formDir="ngForm">
+        <label>
+          <span>Titulo</span>
+          <input type="text" id="titleArea" placeholder="Insira o titulo" formControlName="titleArea" required>
+        </label>
+        <div class="form-grid two">
+          <label>
+            <span>Legenda esquerda</span>
+            <input type="text" id="lsub" placeholder="Insira a legenda esquerda" formControlName="lsub" required>
+          </label>
+          <label>
+            <span>Legenda direita</span>
+            <input type="text" id="rsub" placeholder="Insira a legenda direita" formControlName="rsub" required>
+          </label>
+          <label>
+            <span>Titulo do grafico</span>
+            <input type="text" id="chart" placeholder="Insira o titulo do grafico" formControlName="chart" required>
+          </label>
+          <label>
+            <span>Titulo dos chips</span>
+            <input type="text" id="chip" placeholder="Insira o titulo dos chips" formControlName="chip" required>
+          </label>
+        </div>
+        <button class="save-action" type="submit"><mat-icon>save</mat-icon>Salvar resumo</button>
+      </form>
+
+      <div class="section-divider"></div>
+
+      <section class="timeline-board">
+        <div class="timeline-column" cdkDropList [cdkDropListData]="resumol" (cdkDropListDropped)="dropResumoL($event)">
+          <div class="panel-title compact">
+            <h3>Formacao</h3>
+            <button class="icon-action" type="button" (click)="addresumol()"><mat-icon>add</mat-icon></button>
+          </div>
+          <button class="timeline-item" type="button" *ngFor="let item of resumol" cdkDrag (click)="editarl(item)">
+            <mat-icon class="drag-handle" cdkDragHandle (click)="$event.stopPropagation()">drag_indicator</mat-icon>
+            <strong>{{ item.descl || 'Formacao sem titulo' }}</strong>
+            <span>{{ item.titlel }}<ng-container *ngIf="item.organizationl"> · {{ item.organizationl }}</ng-container></span>
+            <small>{{ item.locationl }}<ng-container *ngIf="item.levell"> · {{ item.levell }}</ng-container></small>
+            <em *ngIf="item.highlightl">Destaque</em>
+          </button>
+        </div>
+        <div class="timeline-column" cdkDropList [cdkDropListData]="resumor" (cdkDropListDropped)="dropResumoR($event)">
+          <div class="panel-title compact">
+            <h3>Experiencia</h3>
+            <button class="icon-action" type="button" (click)="addresumor()"><mat-icon>add</mat-icon></button>
+          </div>
+          <button class="timeline-item" type="button" *ngFor="let item of resumor" cdkDrag (click)="editarr(item)">
+            <mat-icon class="drag-handle" cdkDragHandle (click)="$event.stopPropagation()">drag_indicator</mat-icon>
+            <strong>{{ item.descr || 'Experiencia sem titulo' }}</strong>
+            <span>{{ item.titler }}<ng-container *ngIf="item.companyr"> · {{ item.companyr }}</ng-container></span>
+            <small>{{ item.locationr }}<ng-container *ngIf="item.roler"> · {{ item.roler }}</ng-container></small>
+            <em *ngIf="item.highlightr">Destaque</em>
+          </button>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <section class="chip-manager">
+        <form class="inline-upload" (ngSubmit)="chipCreateForm()" [formGroup]="chipCreate" #formDir="ngForm">
+          <label>
+            <span>Novo conhecimento</span>
+            <input type="text" id="chipname" placeholder="Ex: Angular" formControlName="chipname" required>
+          </label>
+          <button class="primary-action" type="submit"><mat-icon>add</mat-icon>Adicionar</button>
+        </form>
+        <div class="chip-list" cdkDropList cdkDropListOrientation="mixed" [cdkDropListData]="chipArray" (cdkDropListDropped)="dropChip($event)">
+          <span class="chip-item" *ngFor="let chip of chipArray" cdkDrag>
+            <mat-icon class="drag-handle" cdkDragHandle>drag_indicator</mat-icon>
+            {{ chip.chipname }}
+            <button type="button" aria-label="Excluir conhecimento" (click)="deleteChip(chip.id)">
+              <mat-icon>close</mat-icon>
+            </button>
+          </span>
+        </div>
+      </section>
+    </section>
+
+    <section class="panel-card" *ngIf="isSelected('projetos')">
+      <div class="panel-title">
+        <div>
+          <p class="eyebrow">Portfolio</p>
+          <h3>Projetos publicados</h3>
+        </div>
+        <button class="primary-action" type="button" (click)="cadastrarProjeto()">
+          <mat-icon>add</mat-icon>
+          Novo projeto
+        </button>
+      </div>
+
+      <form class="admin-form compact-form" (ngSubmit)="editProjeto()" [formGroup]="projetoEdit" #formDir="ngForm">
+        <label>
+          <span>Titulo da secao</span>
+          <input type="text" id="titleProjeto" placeholder="Insira o titulo do projeto" formControlName="titleProjeto" required>
+        </label>
+        <button class="save-action" type="submit"><mat-icon>save</mat-icon>Salvar titulo</button>
+      </form>
+
+      <div class="projects-admin-grid" cdkDropList cdkDropListOrientation="mixed" [cdkDropListData]="projetos" (cdkDropListDropped)="dropProjetos($event)">
+        <button
+          type="button"
+          class="project-admin-card"
+          *ngFor="let item of projetos"
+          cdkDrag
+          (click)="editarProjeto(item)">
+          <mat-icon class="drag-handle" cdkDragHandle (click)="$event.stopPropagation()">drag_indicator</mat-icon>
+          <span class="project-admin-thumb">
+            <img [src]="item.projectImg" alt="">
+          </span>
+          <span class="project-admin-copy">
+            <span class="project-admin-title-row">
+              <strong>{{ item.titulo || 'Projeto sem titulo' }}</strong>
+              <img class="project-badge" src="{{ item.badge }}" alt="Badge">
+            </span>
+            <small *ngIf="item.subtitulo">{{ item.subtitulo }}</small>
+            <span class="project-admin-meta">
+              <em *ngIf="item.tipo">{{ item.tipo }}</em>
+              <em *ngIf="item.periodo">{{ item.periodo }}</em>
+            </span>
+            <span class="project-admin-status">
+              <span class="status-pill" *ngIf="item.star"><mat-icon>star</mat-icon>Destaque</span>
+              <span class="status-pill muted" *ngIf="!item.inProgress"><mat-icon>construction</mat-icon>Em progresso</span>
+              <span class="status-pill active" *ngIf="item.inProgress"><mat-icon>public</mat-icon>Publicado</span>
+            </span>
+          </span>
+        </button>
+      </div>
+    </section>
+
+    <section class="panel-card" *ngIf="isSelected('contato')">
+      <div class="panel-title">
+        <div>
+          <p class="eyebrow">Formulario publico</p>
+          <h3>Texto de contato</h3>
+        </div>
+      </div>
+
+      <form class="admin-form" (ngSubmit)="editContato()" [formGroup]="contatoEdit" #formDir="ngForm">
+        <label>
+          <span>Titulo</span>
+          <input type="text" id="titleContato" placeholder="Insira o titulo" formControlName="titleContato" required>
+        </label>
+        <div class="paragraph-manager" formArrayName="paragrafosContato">
+          <div class="panel-title compact">
+            <h3>Paragrafos</h3>
+            <button class="icon-action" type="button" (click)="addContatoParagraph()"><mat-icon>add</mat-icon></button>
+          </div>
+          <label *ngFor="let paragraph of contatoParagraphs.controls; let i = index">
+            <span>Paragrafo {{ i + 1 }}</span>
+            <textarea [id]="'contato-paragrafo-' + i" placeholder="Insira a descricao" [formControlName]="i" required rows="5"></textarea>
+            <button class="remove-inline-action" type="button" aria-label="Remover paragrafo" (click)="removeContatoParagraph(i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </label>
+        </div>
+        <button class="save-action" type="submit"><mat-icon>save</mat-icon>Salvar contato</button>
+      </form>
+    </section>
+
+    <section class="panel-card" *ngIf="isSelected('profile')">
+      <div class="panel-title">
+        <div>
+          <p class="eyebrow">Identidade</p>
+          <h3>Perfil publico e links</h3>
+        </div>
+      </div>
+
+      <form class="admin-form" (ngSubmit)="editProfile()" [formGroup]="profileEdit" #formDir="ngForm">
+        <label>
+          <span>Texto de perfil</span>
+          <input type="text" id="text" placeholder="Insira o texto" formControlName="text" required>
+        </label>
+
+        <div class="social-manager" formArrayName="socialLinks">
+          <div class="panel-title compact">
+            <div>
+              <p class="eyebrow">Redes sociais</p>
+              <h3>Links exibidos no card</h3>
+            </div>
+            <button class="icon-action" type="button" (click)="addSocialLink()"><mat-icon>add</mat-icon></button>
+          </div>
+
+          <div class="social-link-row" *ngFor="let social of socialLinks.controls; let i = index" [formGroupName]="i">
+            <label>
+              <span>Rede</span>
+              <select formControlName="network" (change)="onSocialNetworkChange(i)">
+                <option *ngFor="let option of socialNetworkOptions" [value]="option.value">{{ option.label }}</option>
+              </select>
+            </label>
+            <label>
+              <span>Nome exibido</span>
+              <input type="text" placeholder="Ex: GitHub" formControlName="label" required>
+            </label>
+            <label>
+              <span>Link ou usuario</span>
+              <input type="text" placeholder="https://... ou usuario" formControlName="value" required>
+            </label>
+            <button class="remove-inline-action social-remove" type="button" aria-label="Remover rede social" (click)="removeSocialLink(i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="form-grid four">
+          <label>
+            <span>Telefone</span>
+            <input type="text" id="phone" placeholder="Insira o telefone" formControlName="phone" required>
+          </label>
+          <label>
+            <span>E-mail</span>
+            <input type="email" id="email" placeholder="Insira o e-mail" formControlName="email" required>
+          </label>
+          <label>
+            <span>Localizacao</span>
+            <input type="text" id="local" placeholder="Insira o local" formControlName="local" required>
+          </label>
+          <label>
+            <span>Nascimento</span>
+            <input type="text" id="birth" placeholder="dd/mm/aaaa" formControlName="birth" required>
+          </label>
+        </div>
+
+        <div class="form-grid four">
+          <label>
+            <span>Texto do telefone</span>
+            <input type="text" id="phoneTXT" placeholder="Insira o texto" formControlName="phoneTXT" required>
+          </label>
+          <label>
+            <span>Texto do e-mail</span>
+            <input type="text" id="emailTXT" placeholder="Insira o texto" formControlName="emailTXT" required>
+          </label>
+          <label>
+            <span>Texto do local</span>
+            <input type="text" id="localTXT" placeholder="Insira o texto" formControlName="localTXT" required>
+          </label>
+          <label>
+            <span>Texto do nascimento</span>
+            <input type="text" id="birthTXT" placeholder="Insira o texto" formControlName="birthTXT" required>
+          </label>
+        </div>
+
+        <div class="asset-grid">
+          <label class="asset-upload">
+            <span>Icone telefone</span>
+            <input type="file" id="phoneImg" formControlName="imagem1" (change)="handlePhoneImageUpload($event)" accept="image/*">
+            <img *ngIf="!imagem1" [src]="profile && profile.phoneImg" alt="Icone telefone">
+          </label>
+          <label class="asset-upload">
+            <span>Icone e-mail</span>
+            <input type="file" id="emailImg" formControlName="imagem2" (change)="handleEmailImageUpload($event)" accept="image/*">
+            <img *ngIf="!imagem2" [src]="profile && profile.emailImg" alt="Icone e-mail">
+          </label>
+          <label class="asset-upload">
+            <span>Icone local</span>
+            <input type="file" id="localImg" formControlName="imagem3" (change)="handleLocalImageUpload($event)" accept="image/*">
+            <img *ngIf="!imagem3" [src]="profile && profile.localImg" alt="Icone local">
+          </label>
+          <label class="asset-upload">
+            <span>Icone nascimento</span>
+            <input type="file" id="birthImg" formControlName="imagem4" (change)="handleBirthImageUpload($event)" accept="image/*">
+            <img *ngIf="!imagem4" [src]="profile && profile.birthImg" alt="Icone nascimento">
+          </label>
+        </div>
+
+        <label>
+          <span>Link do curriculo</span>
+          <input type="text" id="cv" placeholder="Insira o link do CV" formControlName="cv" required>
+        </label>
+
+        <button class="save-action" type="submit"><mat-icon>save</mat-icon>Salvar perfil</button>
+      </form>
+    </section>
+
+    <section class="panel-card theme-panel" *ngIf="isSelected('theme') && themeEdit">
+      <div class="panel-title">
+        <div>
+          <p class="eyebrow">Design system</p>
+          <h3>Cores globais do site</h3>
+        </div>
+        <button class="ghost-action" type="button" (click)="resetTheme()">
+          <mat-icon>restart_alt</mat-icon>
+          Restaurar padrao
+        </button>
+      </div>
+
+      <form class="admin-form theme-form" [formGroup]="themeEdit" (ngSubmit)="editTheme()">
+        <label>
+          <span>Nome do tema</span>
+          <input type="text" formControlName="name" placeholder="Ex: Azul profissional">
+        </label>
+
+        <section class="theme-editor-layout">
+          <div class="theme-sections">
+            <section class="theme-color-group" *ngFor="let section of themeSections">
+              <div class="panel-title compact">
+                <h3>{{ section.title }}</h3>
+              </div>
+              <div class="theme-color-grid">
+                <label class="color-field" *ngFor="let field of section.fields">
+                  <span>{{ field.label }}</span>
+                  <div class="color-input-row">
+                    <input type="color" [formControlName]="field.key" (input)="previewTheme()">
+                    <input type="text" [formControlName]="field.key" (input)="previewTheme()">
                   </div>
-                </form>                  
-              </section>
-              
-              <div class="projects">
-                <div class="project" style="background-image: url('{{projeto.projectImg}}');" *ngFor="let projeto of projetos" (click)="editarProjeto(projeto)">
-                  <div class="mark">
-                    <img src="./assets/images/bookmark.png" alt="Mark">
-                    <div class="badge">
-                      <img src="{{projeto.badge}}" alt="Badge">
-                    </div>
-                  </div>
-                  <div class="title">{{projeto.titulo}}</div>
+                </label>
+              </div>
+            </section>
+          </div>
+
+          <aside class="theme-preview">
+            <p class="eyebrow">Preview</p>
+            <div class="preview-browser" [style.background]="themeEdit.get('adminBackground')?.value">
+              <div class="preview-sidebar" [style.background]="themeEdit.get('sidebarBackground')?.value" [style.color]="themeEdit.get('sidebarText')?.value">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+              <div class="preview-content">
+                <div class="preview-hero" [style.background]="'linear-gradient(135deg, ' + themeEdit.get('pageBackgroundStart')?.value + ', ' + themeEdit.get('pageBackgroundEnd')?.value + ')'">
+                  <strong [style.color]="themeEdit.get('surface')?.value">Portfolio</strong>
+                </div>
+                <div class="preview-card" [style.background]="themeEdit.get('surface')?.value" [style.color]="themeEdit.get('text')?.value" [style.border-color]="themeEdit.get('border')?.value">
+                  <span [style.background]="themeEdit.get('primary')?.value"></span>
+                  <p>Texto principal</p>
+                  <small [style.color]="themeEdit.get('muted')?.value">Texto secundario</small>
+                </div>
+                <div class="preview-actions">
+                  <span [style.background]="themeEdit.get('primary')?.value"></span>
+                  <span [style.background]="themeEdit.get('secondary')?.value"></span>
+                  <span [style.background]="themeEdit.get('danger')?.value"></span>
                 </div>
               </div>
-              <div class="botaoarea">
-                <div class="cadastroProject">
-                  <img (click)="cadastrarProjeto()" src="./assets/images/plus.png" alt="Cadastro">
-                </div>
-              </div>
             </div>
-            <div class="formall" *ngIf="isSelected('contato')">
-              <section class="contato">
-                <form class="formContato" (ngSubmit)="editContato()" [formGroup]="contatoEdit" #formDir="ngForm">
-                  <div class="inputs-groups">
-                    
-                    <div class="input-group">
-                      <div class="input">
-                        <label for="titleContato">Título do Contato</label>
-                        <input type="text" id="titleContato" placeholder="Insira o título" formControlName="titleContato" required />
-                      </div>
-                    </div>
-                    
-                    <div class="input-group">
-                      <div class="input">
-                        <label for="descContato">Descrição do Contato</label>
-                        <textarea id="descContato" placeholder="Insira a descrição" formControlName="descContato" required rows="5" cols="30"></textarea>
-                      </div>
-                    </div>
-                
-                    <button class="sendButton" type="submit">Enviar</button>
-                    
-                  </div>
-                </form>                
-                
-              </section>  
-            </div>
-            <div class="formall profileForm" *ngIf="isSelected('profile')">
-              <section class="profile">
-                <form class="formProfile" (ngSubmit)="editProfile()" [formGroup]="profileEdit" #formDir="ngForm">
-                  <div class="inputs-groups">
-                
-                    <div class="input-group">
-                      <div class="input">
-                        <label for="text">Texto de Perfil</label>
-                        <input type="text" id="text" placeholder="Insira o texto" formControlName="text" required />
-                      </div>
-                    </div>
-                
-                    <!-- Redes Sociais -->
-                    <div class="input-group">
-                      <div class="input">
-                        <label for="instagram">Instagram</label>
-                        <input type="text" id="instagram" placeholder="Insira o Instagram" formControlName="instagram" required />
-                      </div>
-                      <div class="input">
-                        <label for="facebook">Facebook</label>
-                        <input type="text" id="facebook" placeholder="Insira o Facebook" formControlName="facebook" required />
-                      </div>
-                      <div class="input">
-                        <label for="linkedin">LinkedIn</label>
-                        <input type="text" id="linkedin" placeholder="Insira o LinkedIn" formControlName="linkedin" required />
-                      </div>
-                      <div class="input">
-                        <label for="github">GitHub</label>
-                        <input type="text" id="github" placeholder="Insira o GitHub" formControlName="github" required />
-                      </div>
-                    </div>
-                
-                    <!-- Contato -->
-                    <div class="input-group">
-                      <div class="input">
-                        <label for="phone">Telefone</label>
-                        <input type="text" id="phone" placeholder="Insira o telefone" formControlName="phone" required />
-                      </div>
-                      <div class="input">
-                        <label for="email">E-mail</label>
-                        <input type="email" id="email" placeholder="Insira o e-mail" formControlName="email" required />
-                      </div>
-                      <div class="input">
-                        <label for="local">Localização</label>
-                        <input type="text" id="local" placeholder="Insira o local" formControlName="local" required />
-                      </div>
-                      <div class="input">
-                        <label for="birth">Data de Nascimento</label>
-                        <input type="text" id="birth" placeholder="Insira a data de nascimento" formControlName="birth" required />
-                      </div>
-                    </div>
-                
-                    <!-- Texto de informações -->
-                    <div class="input-group">
-                      <div class="input">
-                        <label for="phoneTXT">Texto do Telefone</label>
-                        <input type="text" id="phoneTXT" placeholder="Insira o texto do telefone" formControlName="phoneTXT" required />
-                      </div>
-                      <div class="input">
-                        <label for="emailTXT">Texto do E-mail</label>
-                        <input type="text" id="emailTXT" placeholder="Insira o texto do e-mail" formControlName="emailTXT" required />
-                      </div>
-                      <div class="input">
-                        <label for="localTXT">Texto do Local</label>
-                        <input type="text" id="localTXT" placeholder="Insira o texto do local" formControlName="localTXT" required />
-                      </div>
-                      <div class="input">
-                        <label for="birthTXT">Texto do Nascimento</label>
-                        <input type="text" id="birthTXT" placeholder="Insira o texto do nascimento" formControlName="birthTXT" required />
-                      </div>
-                    </div>
-                
-                    <!-- Upload de imagens -->
-                    <div class="input-group">
-                      <div class="input">
-                        <label for="phoneImg">Imagem do Telefone</label>
-                        <input type="file" id="phoneImg" formControlName="imagem1" (change)="handlePhoneImageUpload($event)" accept="image/*" />
-                        <div *ngIf="!imagem1">
-                          <img class="preImage2" [src]="this.profile.phoneImg" />
-                        </div>
-                      </div>
-                
-                      <div class="input">
-                        <label for="emailImg">Imagem do E-mail</label>
-                        <input type="file" id="emailImg" formControlName="imagem2" (change)="handleEmailImageUpload($event)" accept="image/*" />
-                        <div *ngIf="!imagem2">
-                          <img class="preImage2" [src]="this.profile.emailImg" />
-                        </div>
-                      </div>
-                
-                      <div class="input">
-                        <label for="localImg">Imagem do Local</label>
-                        <input type="file" id="localImg" formControlName="imagem3" (change)="handleLocalImageUpload($event)" accept="image/*" />
-                        <div *ngIf="!imagem3">
-                          <img class="preImage2" [src]="this.profile.localImg" />
-                        </div>
-                      </div>
-                
-                      <div class="input">
-                        <label for="birthImg">Imagem do Nascimento</label>
-                        <input type="file" id="birthImg" formControlName="imagem4" (change)="handleBirthImageUpload($event)" accept="image/*" />
-                        <div *ngIf="!imagem4">
-                          <img class="preImage2" [src]="this.profile.birthImg" />
-                        </div>
-                      </div>
-                    </div>
-                
-                    <!-- Link do CV -->
-                    <div class="input-group">
-                      <div class="input">
-                        <label for="cv">Link do Currículo</label>
-                        <input type="text" id="cv" placeholder="Insira o link do CV" formControlName="cv" required />
-                      </div>
-                    </div>
-                
-                    <!-- Botão Enviar -->
-                    <button class="sendButton" type="submit">Enviar</button>
-                
-                  </div>
-                </form>                
-              </section>
-          </div>
-          
-            <div class="formall" *ngIf="isSelected('email')">
-              <section class="lista" *ngFor="let item of items | async; let i = index">
-                <div class="mensagem" (click)="showDescription(item)">
-                  <mat-icon>{{ item.visualizado ? 'drafts' : 'mail' }}</mat-icon>
-                  <p class="nome">{{ item.nome }}</p>
-                  <p class="motivo">{{item.titulo}}</p>
-                  <p class="time">{{ convertTimestampToDate(item.timestamp) | date: 'dd/MM/yyyy HH:mm:ss' }}</p>
-                  <img src="./assets/images/delete.png" alt="Excluir" (click)="deleteEmail(item.mensagem)">
-                </div>
-                <div class="expand fadeInDown" *ngIf="item.showDescription">
-                  <div class="areaMensagem">
-                    <div class="topMensagem">
-                      <p class="emailMensagem">{{item.email}}</p>
-                    </div>
-                    <div class="allMensagem">
-                      <p class="motivoShow">{{item.titulo}}</p>
-                      <p class="mensagemShow">{{item.mensagem}}</p>
-                      <p class="time">{{ convertTimestampToDate(item.timestamp) | date: 'dd/MM/yyyy HH:mm:ss' }}</p>
-                    </div>
-                  </div>
-                </div>
+          </aside>
+        </section>
 
-              </section>              
+        <div class="form-actions">
+          <button class="save-action" type="submit">
+            <mat-icon>save</mat-icon>
+            Salvar tema
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <section class="panel-card" *ngIf="isSelected('email')">
+      <div class="panel-title">
+        <div>
+          <p class="eyebrow">Inbox</p>
+          <h3>Mensagens recebidas</h3>
+        </div>
+      </div>
+
+      <div class="inbox" *ngIf="items | async as messages">
+        <section class="message-card" *ngFor="let item of messages">
+          <button type="button" class="message-row" (click)="showDescription(item)">
+            <mat-icon>{{ item.visualizado ? 'drafts' : 'mail' }}</mat-icon>
+            <span class="message-name">{{ item.nome }}</span>
+            <span class="message-subject">{{ item.titulo }}</span>
+            <time>{{ convertTimestampToDate(item.timestamp) | date: 'dd/MM/yyyy HH:mm:ss' }}</time>
+          </button>
+          <button type="button" class="delete-message" aria-label="Excluir mensagem" (click)="deleteEmail(item.mensagem)">
+            <mat-icon>delete</mat-icon>
+          </button>
+
+          <div class="message-detail fadeInDown" *ngIf="item.showDescription">
+            <div>
+              <p class="eyebrow">{{ item.email }}</p>
+              <h4>{{ item.titulo }}</h4>
             </div>
-          </section>
-        </main>
-</body>
+            <p>{{ item.mensagem }}</p>
+            <time>{{ convertTimestampToDate(item.timestamp) | date: 'dd/MM/yyyy HH:mm:ss' }}</time>
+          </div>
+        </section>
+      </div>
+    </section>
+  </section>
+</main>
