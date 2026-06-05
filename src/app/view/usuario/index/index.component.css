@@ -640,6 +640,8 @@ app-index .contentdesc {
 }
 
 app-index .carousel {
+  position: relative;
+  isolation: isolate;
   width: 100%;
   overflow: hidden;
   border: 1px solid var(--color-primary-hover);
@@ -649,6 +651,8 @@ app-index .carousel {
 }
 
 app-index .carousel-track {
+  position: relative;
+  z-index: 1;
   width: max-content;
   min-width: 100%;
   display: flex;
@@ -665,6 +669,8 @@ app-index .carousel:focus-within .carousel-track {
 }
 
 app-index .carousel .language-item {
+  position: relative;
+  z-index: 1;
   flex: 0 0 clamp(76px, 7vw, 118px);
   display: flex;
   align-items: center;
@@ -675,6 +681,8 @@ app-index .carousel .language-item {
 }
 
 app-index .carousel img {
+  position: relative;
+  z-index: 2;
   width: clamp(44px, 60%, 72px);
   height: auto;
   border-radius: 8px;
@@ -1047,6 +1055,7 @@ app-index .project .badge img {
   position: absolute;
   top: clamp(13px, 1vw, 17px);
   right: clamp(17px, 1.25vw, 22px);
+  z-index: 5;
   width: clamp(1.55rem, 1.5vw, 1.85rem);
   height: clamp(1.55rem, 1.5vw, 1.85rem);
   object-fit: contain;
