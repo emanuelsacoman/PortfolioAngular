@@ -1306,6 +1306,10 @@ app-index .project-description {
   color: var(--color-text);
   line-height: 1.65;
   white-space: pre-line;
+  overflow-wrap: anywhere;
+  word-break: normal;
+  text-wrap: pretty;
+  hyphens: auto;
 }
 
 app-index .project-summary {
