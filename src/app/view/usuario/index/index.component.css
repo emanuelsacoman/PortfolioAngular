@@ -713,8 +713,9 @@ app-index .resumeitem {
 
 app-index .resumetop {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 12px;
+  height: fit-content;
 }
 
 app-index .resumetop img {
@@ -725,12 +726,14 @@ app-index .resumetop img {
 
 app-index .resumetop h2 {
   font-size: clamp(1.22rem, 1.35vw, 1.65rem);
+  align-items: center;
 }
 
 app-index .resume-timeline {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(18px, 1.7vw, 24px);
+  align-items: start;
 }
 
 app-index .timeline-lane {
