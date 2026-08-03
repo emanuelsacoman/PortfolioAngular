@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { Projeto } from 'src/app/model/services/interfaces/projeto';
 import { Projetos } from 'src/app/model/services/interfaces/projetos';
+import { resolveTechnologyIcon } from 'src/app/model/shared/technology-catalog';
 
 @Component({
   selector: 'app-projects-section',
@@ -78,6 +79,10 @@ export class ProjectsSectionComponent {
       .filter(Boolean);
 
     return [...new Set(images)];
+  }
+
+  getProjectTechnologyIcon(project: Projetos): string {
+    return resolveTechnologyIcon(project.technologyIconId, project.badge);
   }
 
   getList(value?: string[] | string): string[] {

@@ -27,7 +27,7 @@
           <div class="mark">
             <img loading="lazy" src="./assets/images/bookmark.png" alt="Mark">
             <div class="badge">
-              <img loading="lazy" src="{{ project.badge }}" alt="Icone da tecnologia">
+              <img loading="lazy" [src]="getProjectTechnologyIcon(project)" alt="Icone da tecnologia">
             </div>
           </div>
 
@@ -64,7 +64,7 @@
         </div>
 
         <div class="project-modal-title">
-          <img *ngIf="project.badge" [src]="project.badge" alt="Badge">
+          <img [src]="getProjectTechnologyIcon(project)" alt="Icone da tecnologia">
           <div>
             <p>{{ project.tipo || 'Projeto' }}</p>
             <h2>{{ project.titulo }}</h2>

@@ -96,6 +96,106 @@
             <textarea id="destaquesText" placeholder="Autenticacao&#10;Painel administrativo&#10;SEO tecnico" formControlName="destaquesText" rows="5"></textarea>
           </label>
         </div>
+
+        <fieldset class="technology-picker">
+          <legend>Icone principal da tecnologia</legend>
+
+          <div class="technology-picker-heading">
+            <div>
+              <strong>Escolha um icone padronizado</strong>
+              <p>O catalogo central mantem o mesmo visual no painel e na pagina publica.</p>
+            </div>
+
+            <div class="technology-search">
+              <label for="technologySearch">Buscar tecnologia</label>
+              <span class="technology-search-field">
+                <mat-icon>search</mat-icon>
+                <input
+                  id="technologySearch"
+                  type="search"
+                  [formControl]="technologySearch"
+                  placeholder="Ex.: Angular, banco de dados..."
+                  autocomplete="off">
+                <button
+                  *ngIf="technologySearch.value"
+                  type="button"
+                  aria-label="Limpar busca"
+                  (click)="clearTechnologySearch()">
+                  <mat-icon>close</mat-icon>
+                </button>
+              </span>
+            </div>
+          </div>
+
+          <div class="technology-current" *ngIf="selectedTechnology as technology">
+            <span
+              class="technology-icon-preview selected-preview"
+              [style.--technology-color]="technology.brandColor">
+              <img [src]="technology.iconPath" [alt]="'Icone ' + technology.label">
+            </span>
+            <span>
+              <small>Icone selecionado</small>
+              <strong>{{ technology.label }}</strong>
+            </span>
+            <mat-icon aria-hidden="true">verified</mat-icon>
+          </div>
+
+          <div
+            class="technology-legacy"
+            *ngIf="hasLegacyTechnologyIcon"
+            [class.active]="isUsingLegacyTechnologyIcon">
+            <img [src]="projeto.badge" alt="Icone personalizado atual">
+            <span>
+              <strong>Icone personalizado anterior</strong>
+              <small *ngIf="isUsingLegacyTechnologyIcon">Este icone sera preservado enquanto nenhuma opcao do catalogo for escolhida.</small>
+              <small *ngIf="!isUsingLegacyTechnologyIcon">Voce pode restaura-lo antes de salvar as alteracoes.</small>
+            </span>
+            <button
+              type="button"
+              [disabled]="isUsingLegacyTechnologyIcon"
+              (click)="restoreLegacyTechnologyIcon()">
+              <mat-icon>{{ isUsingLegacyTechnologyIcon ? 'check_circle' : 'restore' }}</mat-icon>
+              {{ isUsingLegacyTechnologyIcon ? 'Em uso' : 'Restaurar' }}
+            </button>
+          </div>
+
+          <p class="technology-results" aria-live="polite">
+            {{ filteredTechnologies.length }} opcoes encontradas.
+            <ng-container *ngIf="selectedTechnology as technology">Icone selecionado: {{ technology.label }}.</ng-container>
+          </p>
+
+          <div class="technology-options" role="radiogroup" aria-label="Icones de tecnologias">
+            <label
+              class="technology-option"
+              *ngFor="let technology of filteredTechnologies; trackBy: trackTechnology"
+              [class.selected]="editar.get('technologyIconId')?.value === technology.id"
+              [style.--technology-color]="technology.brandColor">
+              <input
+                type="radio"
+                name="technologyIconId"
+                formControlName="technologyIconId"
+                [value]="technology.id">
+              <span class="technology-icon-preview">
+                <img loading="lazy" [src]="technology.iconPath" [alt]="''">
+              </span>
+              <span class="technology-option-copy">
+                <strong>{{ technology.label }}</strong>
+                <small>{{ getTechnologyCategory(technology.category) }}</small>
+              </span>
+              <mat-icon *ngIf="editar.get('technologyIconId')?.value === technology.id" aria-hidden="true">
+                check_circle
+              </mat-icon>
+            </label>
+          </div>
+
+          <div class="technology-empty" *ngIf="!filteredTechnologies.length">
+            <mat-icon>search_off</mat-icon>
+            <span>
+              <strong>Nenhuma tecnologia encontrada</strong>
+              <small>Tente buscar pelo nome, categoria ou outra palavra-chave.</small>
+            </span>
+          </div>
+        </fieldset>
       </section>
 
       <section class="form-section">
@@ -138,12 +238,6 @@
             <span>Imagem do projeto</span>
             <input type="file" id="imagem1" formControlName="imagem1" accept="image/*" (change)="uploadFile1($event)">
             <img *ngIf="!imagem1" [src]="projeto && projeto.projectImg" alt="Imagem do projeto">
-          </label>
-
-          <label class="asset-upload">
-            <span>Icone da tecnologia</span>
-            <input type="file" id="imagem2" formControlName="imagem2" accept="image/*" (change)="uploadFile2($event)">
-            <img *ngIf="!imagem2" [src]="projeto && projeto.badge" alt="Icone da tecnologia">
           </label>
         </section>
 

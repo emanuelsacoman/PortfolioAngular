@@ -2,7 +2,8 @@ export class Projetos {
     private _id!: string;
     private _titulo!: string;
     private _projectImg!: any;
-    private _badge!: any;
+    private _badge!: string;
+    private _technologyIconId!: string;
     private _link!: string;
     private _inProgress!: boolean;
     private _star!: boolean;
@@ -25,7 +26,7 @@ export class Projetos {
         id: string,
         titulo: string,
         projectImg: any,
-        badge: any,
+        badge: string,
         link: string,
         inProgress: boolean,
         star: boolean,
@@ -42,12 +43,14 @@ export class Projetos {
         destaques: string[] = [],
         ordem = 0,
         ctaLabel = '',
-        clickCount = 0
+        clickCount = 0,
+        technologyIconId = ''
     ) {
         this._id = id;
         this._titulo = titulo;
         this._projectImg = projectImg;
         this._badge = badge;
+        this._technologyIconId = technologyIconId;
         this._link = link;
         this._inProgress = inProgress;
         this._star = star;
@@ -91,12 +94,20 @@ export class Projetos {
         this._projectImg = value;
     }
 
-    public get badge(): any {
+    public get badge(): string {
         return this._badge;
     }
 
-    public set badge(value: any) {
+    public set badge(value: string) {
         this._badge = value;
+    }
+
+    public get technologyIconId(): string {
+        return this._technologyIconId;
+    }
+
+    public set technologyIconId(value: string) {
+        this._technologyIconId = value;
     }
 
     public get link(): any {

@@ -431,7 +431,7 @@
           <span class="project-admin-copy">
             <span class="project-admin-title-row">
               <strong>{{ item.titulo || 'Projeto sem titulo' }}</strong>
-              <img class="project-badge" src="{{ item.badge }}" alt="Badge">
+              <img class="project-badge" [src]="getProjectTechnologyIcon(item)" alt="Icone da tecnologia">
             </span>
             <small *ngIf="item.subtitulo">{{ item.subtitulo }}</small>
             <span class="project-admin-meta">

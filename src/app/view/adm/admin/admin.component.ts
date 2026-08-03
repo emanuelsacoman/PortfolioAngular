@@ -21,6 +21,7 @@ import { Slider } from 'src/app/model/services/interfaces/slider';
 import { Sobre } from 'src/app/model/services/interfaces/sobre';
 import { Sobrearea } from 'src/app/model/services/interfaces/sobrearea';
 import { MaterialIconsLoaderService } from 'src/app/model/shared/material-icons-loader.service';
+import { resolveTechnologyIcon } from 'src/app/model/shared/technology-catalog';
 import { ThemeService } from 'src/app/model/services/theme.service';
 import Swal from 'sweetalert2';
 
@@ -932,6 +933,10 @@ export class AdminComponent {
 
   getProjectClickCount(project: Projetos): number {
     return Number(project.clickCount) || 0;
+  }
+
+  getProjectTechnologyIcon(project: Projetos): string {
+    return resolveTechnologyIcon(project.technologyIconId, project.badge);
   }
 
   get homeBlocksCount(): number {
