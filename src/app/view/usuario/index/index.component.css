@@ -413,9 +413,17 @@ app-index .cvimg img {
   transition: filter 0.16s ease;
 }
 
-app-index .cv:hover img,
-app-index .cv:focus-within img {
-  filter: none;
+app-index .cv:hover .cvimg img,
+app-index .cv:focus-within .cvimg img {
+  filter:
+    brightness(0)
+    saturate(100%)
+    invert(24%)
+    sepia(44%)
+    saturate(736%)
+    hue-rotate(168deg)
+    brightness(157%)
+    contrast(118%);
 }
 
 app-index .profile .pictureBottom {
